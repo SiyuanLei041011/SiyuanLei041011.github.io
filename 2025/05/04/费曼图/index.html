@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="前言 我会从真空的自由场论出发,一步一步引入源函数与相互作用,并展示这些概念在每一步中的作用及其物理意义,我相信这能解答初学者们面临的一些困惑,包括路径积分量子化对真空的令人不安的处理,以及为什么自由场论不能实现介子散射(按照我们的逻辑,这是显然的),这也与相互作用场论这一名称以及标量场的费曼规则(Feynman Rules)自洽.重要的是,所有的细节都将清楚地呈现,因为大部分量子场论教科书都">
+    <meta name="description" content="前言 我会从真空的自由场论出发,一步一步引入源函数与相互作用,并展示这些概念在每一步中的作用及其物理意义,我相信这能解答初学者们面临的一些困惑,包括路径积分量子化对真空的令人不安的处理,以及为什么自由场论不能实现介子散射(按照我们的逻辑,这是显然的),这也与相互作用场论这一名称以及标量场的\(\rm{Feynman}\)规则自洽.重要的是,所有的细节都将清楚地呈现,因为大部分量子场论教科书都没有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Phy">
 <meta property="og:url" content="http://example.com/2025/05/04/%E8%B4%B9%E6%9B%BC%E5%9B%BE/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="前言 我会从真空的自由场论出发,一步一步引入源函数与相互作用,并展示这些概念在每一步中的作用及其物理意义,我相信这能解答初学者们面临的一些困惑,包括路径积分量子化对真空的令人不安的处理,以及为什么自由场论不能实现介子散射(按照我们的逻辑,这是显然的),这也与相互作用场论这一名称以及标量场的费曼规则(Feynman Rules)自洽.重要的是,所有的细节都将清楚地呈现,因为大部分量子场论教科书都">
+<meta property="og:description" content="前言 我会从真空的自由场论出发,一步一步引入源函数与相互作用,并展示这些概念在每一步中的作用及其物理意义,我相信这能解答初学者们面临的一些困惑,包括路径积分量子化对真空的令人不安的处理,以及为什么自由场论不能实现介子散射(按照我们的逻辑,这是显然的),这也与相互作用场论这一名称以及标量场的\(\rm{Feynman}\)规则自洽.重要的是,所有的细节都将清楚地呈现,因为大部分量子场论教科书都没有">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-10T13:22:56.819Z">
+<meta property="article:modified_time" content="2025-05-10T15:26:03.649Z">
 <meta property="article:author" content="SiyuanLei">
 <meta property="article:tag" content="费曼图">
 <meta property="article:tag" content="散射振幅">
@@ -135,7 +135,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E7%A7%AF%E5%88%86"><span class="nav-number">2.</span> <span class="nav-text">路径积分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E9%87%8F%E5%AD%90%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">正则量子化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">相互作用</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E7%A7%AF%E5%88%86%E4%B8%8B%E7%9A%84%E4%BC%A0%E6%92%AD%E5%AD%90%E5%92%8C%E5%85%B3%E8%81%94%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">路径积分下的传播子和关联函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E9%87%8F%E5%AD%90%E5%8C%96%E4%B8%8B%E7%9A%84%E4%BC%A0%E6%92%AD%E5%AD%90%E5%92%8C%E5%85%B3%E8%81%94%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">正则量子化下的传播子和关联函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8%E4%B8%AD%E7%9A%84green%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">相互作用中的Green函数</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -168,16 +168,13 @@
 </div>
   <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://twitter.com/yourname" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yourname" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://youtube.com/yourname" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;yourname" rel="noopener me" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
       </span>
   </div>
 
@@ -186,6 +183,24 @@
     </div>
 
     
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
   </aside>
 
 
@@ -238,7 +253,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-05-10 21:22:56" itemprop="dateModified" datetime="2025-05-10T21:22:56+08:00">2025-05-10</time>
+      <time title="Modified: 2025-05-10 23:26:03" itemprop="dateModified" datetime="2025-05-10T23:26:03+08:00">2025-05-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -264,18 +279,16 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="前言">前言</h2>
-<p>我会从真空的自由场论出发,一步一步引入源函数与相互作用,并展示这些概念在每一步中的作用及其物理意义,我相信这能解答初学者们面临的一些困惑,包括路径积分量子化对真空的令人不安的处理,以及为什么自由场论不能实现介子散射(按照我们的逻辑,这是显然的),这也与相互作用场论这一名称以及标量场的费曼规则(Feynman
-Rules)自洽.重要的是,所有的细节都将清楚地呈现,因为大部分量子场论教科书都没有做到这一点.</p>
-<p>初学量子场论时,我时常因为这些概念苦恼：一方面,这些概念在量子力学中的含义和它们在量子场论中的含义似乎是不同的——这导致我在很长时间内搞混了传播子和散射振幅(希望没有因此闹笑话,但恐怕不太可能吧);另一方面,大部分量子场论教科书在相关的推导上总是含糊不清,我相信也有不少人(像我一样)因为搞不清费曼图(Feynman
-Diagram)计算的细节而止步不前.</p>
-<p>另外,如果你选择从量子力学的路径积分表述出发学习量子场论(例如,遵循徐一鸿的《简明量子场论》),你可能会在一开始就产生一些疑惑.这些疑惑的根源来自于,量子场论中的路径积分和量子力学中的路径积分并不完全是一回事!路径积分从形式上完成了量子化,但它的内涵与量子力学中的路径积分已经大有不同了(这部分的内容在文章的最后,所以如果你讨厌看计算的话,请直接跳到最后).</p>
+<p>我会从真空的自由场论出发,一步一步引入源函数与相互作用,并展示这些概念在每一步中的作用及其物理意义,我相信这能解答初学者们面临的一些困惑,包括路径积分量子化对真空的令人不安的处理,以及为什么自由场论不能实现介子散射(按照我们的逻辑,这是显然的),这也与相互作用场论这一名称以及标量场的<span
+class="math inline">\(\rm{Feynman}\)</span>规则自洽.重要的是,所有的细节都将清楚地呈现,因为大部分量子场论教科书都没有做到这一点.</p>
 <p>当然,我会在这篇文章中兼顾路径积分量子化和正则量子化,即便你只学过其中一种,也不会造成太大的阅读障碍.</p>
-<h2 id="路径积分">路径积分</h2>
+<h2 id="路径积分下的传播子和关联函数">路径积分下的传播子和关联函数</h2>
 <p>量子场论(以标量场理论为例)中的传播子被定义为</p>
 <p><span
 class="math display">\[D(x_1-x_2)=\int\frac{\mathrm{d}^4k}{(2\pi)^4}\frac{e^{ik(x_1-x_2)}}{k^2-m^2+i\varepsilon}\]</span></p>
-<p>这个奇怪的表达式是如何出现在我们的理论中的？我将从路径积分的角度展示它的来源,并告诉你它只不过是一个微分方程的解而已.</p>
-<p>在量子场论中,路径积分计算的是一个态在经历时间演化后到另一个态的跃迁振幅.记时间演化算符为
+<p>这个奇怪的表达式是如何出现在我们的理论中的?</p>
+<p>我将从路径积分的角度展示它的来源,并告诉你它只不过是一个微分方程的解而已.</p>
+<p>在量子场论中,<strong>路径积分计算的是一个态在经历时间演化后到另一个态的跃迁振幅</strong>.记时间演化算符为
   <span class="math inline">\(\mathscr{U}\)</span>
 ,那么真空到真空的跃迁振幅就是 <span class="math inline">\(\langle
 0|\mathscr{U}|0\rangle\)</span>
@@ -288,10 +301,11 @@ i\int\mathrm{d}^4x\left[
 i\int\mathrm{d}^4x\left[ -\frac{1}{2}\phi\left(\partial^2+m^2\right)\phi
 \right]\right\}
 \end{aligned}\]</span></p>
-<p>称它为自由标量场的生成泛函(它有点像你在统计力学中遇到的配分函数).</p>
+<p>称它为自由标量场的<strong>生成泛函</strong>.</p>
 <p>到目前为止,全部讨论都基于真空的自由场论(拉格朗日量为 <span
-class="math inline">\(\mathscr{L}=\frac{1}{2}(\partial\phi)^2-\frac{1}{2}m^2\phi^2\)</span>),我们现在要加入真空的扰动——源函数
-<span class="math inline">\(J(x)\)</span> ,以及相互作用——以 <span
+class="math inline">\(\mathscr{L}=\frac{1}{2}(\partial\phi)^2-\frac{1}{2}m^2\phi^2\)</span>),我们现在要加入真空的扰动——<strong>源函数</strong>
+<span class="math inline">\(J(x)\)</span>
+,以及<strong>相互作用</strong>——以 <span
 class="math inline">\(\phi^4\)</span> 理论为例.</p>
 <p>第一步,加入源函数<span
 class="math inline">\(J(x)\)</span>,它使我们要计算的泛函变成了</p>
@@ -307,7 +321,7 @@ class="math inline">\(Z(J,0)\)</span> ),用 $|I$ 与 <span
 class="math inline">\(|F\rangle\)</span> 表征初态与末态,它们由源函数
 <span class="math inline">\(J(x)\)</span> 的形式设定.</p>
 <p>计算 <span class="math inline">\(Z(J,0)\)</span>
-,得到(略去数学细节,它们在附录里)</p>
+,得到(数学细节在附录里)</p>
 <p> <span
 class="math display">\[\begin{aligned}Z(J,0)&amp;=\int\mathscr{D}[
 \phi(x)]\exp\left\{ i\int\mathrm{d}^4x\left[
@@ -315,7 +329,7 @@ class="math display">\[\begin{aligned}Z(J,0)&amp;=\int\mathscr{D}[
 <p>其中 <span class="math inline">\(D(x_1-x_2)\)</span> 满足微分方程</p>
 <p><span
 class="math display">\[-(\partial^2+m^2)D(x_1-x_2)=\delta(x_1-x_2)\]</span></p>
-<p>我们认出它正是传播子(检验它)!</p>
+<p>我们发现这正是传播子!</p>
 <p>将 <span class="math inline">\(Z(J,0)\)</span> 中的指数展开,得到</p>
 <p><span
 class="math display">\[\begin{aligned}\frac{Z(J,0)}{Z(0,0)}&amp;=\sum_{s=0}^{\infty}{\frac{i^s}{s!}}\left[-\frac{1}{2}\int\int\mathrm{d}^4x_1\mathrm{d}^4x_2J(x_1)D(x_1-x_2)J(x_2)\right]^s\\&amp;=\sum_{n=0}^{\infty}{\frac{i^n}{n!}}\int\cdots\int\mathrm{d}^4x_1\cdots\mathrm{d}^4x_nJ(x_1)\cdots
@@ -325,7 +339,7 @@ class="math inline">\(n\)</span>
 点关联函数,例如,我们有两点关联函数和四点关联函数(显然,只在 <span
 class="math inline">\(n\)</span> 是偶数时 <span
 class="math inline">\(G_0(x_1,\cdots,x_n)\)</span> 才不为零)</p>
-<p><span class="math display">\[G_0(x_1,x_2)=iD(x_1-x_2)\]</span></p>
+<p> <span class="math display">\[G_0(x_1,x_2)=iD(x_1-x_2)\]</span></p>
 <p><span
 class="math display">\[G_0(x_1,x_2,x_3,x_4)=-3D(x_1-x_2)D(x_3-x_4)\]</span></p>
 <p>但是,我们希望平等对待所有的 <span class="math inline">\(x_s\)</span>
@@ -353,10 +367,11 @@ x_n)=\frac{1}{Z(0,0)}\int\mathscr{D}[
 \phi(x)]\exp\left\{i\int\mathrm{d}^4x\left[\frac{1}{2}(\partial\phi)^2-\frac{1}{2}m^2\phi^2\right]\right\}\phi(x_1)\cdots\phi(x_n)\]</span></p>
 <p><span class="math inline">\(n\)</span>
 点关联函数的两个定义当然是各自独立且自洽的.</p>
-<h2 id="正则量子化">正则量子化</h2>
+<h2
+id="正则量子化下的传播子和关联函数">正则量子化下的传播子和关联函数</h2>
 <p>现在回忆我们在正则形式的量子场论中计算出的两点关联函数</p>
 <p><span
-class="math display">\[\langle0|T\left[\phi(x_1)\phi(x_2)\right]|0\rangle=\int\frac{\mathrm{d}^3k}{(2\pi)^32\omega_{\bm{k}}}\left[\theta(t)e^{-i(\omega_{\bm{k}}t-\bm{k}\cdot\bm{r})}+\theta(-t)e^{i(\omega_{\bm{k}}t-\bm{k}\cdot\bm{r})}
+class="math display">\[\langle0|T\left[\phi(x_1)\phi(x_2)\right]|0\rangle=\int\frac{\mathrm{d}^3k}{(2\pi)^32\omega_{\boldsymbol{k}}}\left[\theta(t)e^{-i(\omega_{\boldsymbol{k}}t-\boldsymbol{k}\cdot\boldsymbol{r})}+\theta(-t)e^{i(\omega_{\boldsymbol{k}}t-\boldsymbol{k}\cdot\boldsymbol{r})}
 \right]\]</span></p>
 <p>不难证明</p>
 <p><span
@@ -368,7 +383,7 @@ class="math display">\[\langle0|T\left[\phi(x_1)\phi(x_2)\phi(x_3)\phi(x_4)\righ
 <p><span
 class="math display">\[\langle0|T\left[\phi(x_1)\cdots\phi(x_n)\right]|0\rangle=G_0(x_1,\cdots
 x_n)\]</span></p>
-<h2 id="相互作用">相互作用</h2>
+<h2 id="相互作用中的green函数">相互作用中的Green函数</h2>
 <p>现在可以把相互作用项 <span
 class="math inline">\(-\frac{\lambda}{4!}\phi^4\)</span> 加入进来了.</p>
 <p>把加入相互作用后的 <span class="math inline">\(\langle
@@ -378,8 +393,8 @@ class="math inline">\(J\)</span> 做级数展开</p>
 <p><span
 class="math display">\[\frac{Z(J,\lambda)}{Z(0,\lambda)}=\sum_{n=0}^{\infty}{\frac{i^n}{n!}}\int\cdots\int\mathrm{d}^4x_1\cdots\mathrm{d}^4x_nJ(x_1)\cdots
 J(x_n)G_\lambda(x_1,\cdots x_n)\]</span></p>
-<p><span class="math inline">\(n\)</span> 点格林函数(Green’s
-Function)仍然被定义为</p>
+<p><span class="math inline">\(n\)</span> 点<span
+class="math inline">\(\rm{Green}\)</span>函数仍然被定义为</p>
 <p><span class="math display">\[G_\lambda(x_1,\cdots
 x_n)=S\left\{\frac{\partial}{\partial\left[i
 J(x_1)\right]}\cdots\frac{\partial}{\partial\left[i
@@ -409,15 +424,16 @@ class="math inline">\(x_3\)</span> 和 <span
 class="math inline">\(x_4\)</span>
 之间传播(以及另外两种可能的置换).为了更清楚地看到这一点,我们来计算 <span
 class="math inline">\(G_\lambda(x_1,x_2,x_3,x_4)\)</span> .取 <span
-class="math inline">\(\lambda\)</span> 的一阶项$
-G_^{(1)}(x_1,x_2,x_3,x_4)$ ,得到</p>
+class="math inline">\(\lambda\)</span> 的一阶项 <span
+class="math inline">\(G_\lambda^{(1)}(x_1,x_2,x_3,x_4)\)</span>
+,得到</p>
 <p><span
 class="math display">\[\frac{1}{Z(0,\lambda)}\left(-i\frac{\lambda}{4!}\right)\int\mathrm{d}^4w\int\mathscr{D}[
 \phi(x)]\exp\left\{i\int\mathrm{d}^4x\left[\frac{1}{2}(\partial\phi)^2-\frac{1}{2}m^2\phi^2\right]\right\}\phi(x_1)\cdots\phi(x_4)\phi^4(w)\]</span></p>
 <p>计算的结果是</p>
 <p><span
 class="math display">\[-i\lambda\int\mathrm{d}^4w\left[iD(x_1-w)\right]\left[iD(x_2-w)\right]\left[iD(w-x_3)\right]\left[iD(w-x_4)\right]\]</span></p>
-<p>你应该能理解这个结果的物理意义——两个介子从 <span
+<p>这个结果的物理意义——两个介子从 <span
 class="math inline">\(x_1\)</span> 和 <span
 class="math inline">\(x_2\)</span> 传播到 <span
 class="math inline">\(w\)</span> ,再从 <span
@@ -426,11 +442,11 @@ class="math inline">\(x_3\)</span> 和 <span
 class="math inline">\(x_4\)</span>
 ,这正是四介子散射(严格来说,四介子散射还应该包括一个粒子衰变为三个粒子,或者三个粒子结合为一个粒子的过程,不过我们暂时只考虑两个粒子散射为两个粒子)!更令人兴奋的是,这一切与相互作用场论这一名称都是符合的,
 <span class="math inline">\(\lambda=0\)</span>
-的自由场论没有“相互作用”,所以没有散射,只有传播,这时你也回忆起了为什么我们在画费曼图时将每一个顶点与因子
+的自由场论没有“相互作用”,所以没有散射,只有传播,这也就是为什么我们在画费曼图时将每一个顶点与因子
 <span class="math inline">\(-i\lambda\)</span>
 耦合,因为相互作用带来散射!</p>
-<p>散射振幅被定义为关联函数的傅里叶变换(Fourier
-Transform),换句话说,散射振幅就是动量空间中的关联函数,我们来计算四介子散射的散射振幅</p>
+<p>散射振幅被定义为关联函数的<span
+class="math inline">\(\rm{Fourier}\)</span>变换,换句话说,散射振幅就是动量空间中的关联函数,我们来计算四介子散射的散射振幅</p>
 <p><span
 class="math display">\[M^{(1)}(k_1,\cdots,k_4)=\int\mathrm{d}^4x_1\cdots\int\mathrm{d}^4x_4e^{-ik_1x_1-ik_2x_2+ik_3x_3+ik_4x_4}G_\lambda^{(1)}(x_1,x_2,x_3,x_4)\]</span></p>
 <p>注意到 <span class="math inline">\(k_3\)</span> 与 <span
@@ -456,33 +472,37 @@ class="math inline">\(\displaystyle\int\mathrm{d}^4k&#39;\)</span>
 配对积分——而这只是把 <span class="math inline">\(k&#39;\)</span>
 替换为了 <span class="math inline">\(k\)</span>
 .你看,这并不难!我们接下来还要在正则形式下计算散射振幅,你可以试试看,先用这个技巧口算一遍,再与我给出的结果进行比对——如果你的结果是正确的(忽略一些无关紧要的系数),那么恭喜你,你已经合格了(但不妨再仔细地计算一遍来检验那些系数).</p>
-<p>费曼规则告诉我们可以化简这些表达式,所以我们最终写下</p>
+<p><span
+class="math inline">\(\rm{Feynman}\)</span>规则告诉我们可以化简这些表达式,所以我们最终写下</p>
 <p><span class="math display">\[\mathscr{M}=-i\lambda\]</span></p>
-<p>其中 <span class="math inline">\(\mathscr{M}\)</span>
-是费曼振幅(Feynman Amplitude).上式的含义是,在 <span
-class="math inline">\(\phi^4\)</span> 理论中,四介子散射的费曼振幅(精确到
-<span class="math inline">\(\lambda\)</span> 的一阶项)是 <span
+<p>其中 <span class="math inline">\(\mathscr{M}\)</span> 是<span
+class="math inline">\(\rm{Feynman}\)</span>振幅.上式的含义是,在 <span
+class="math inline">\(\phi^4\)</span> 理论中,四介子散射的<span
+class="math inline">\(\rm{Feynman}\)</span>振幅(精确到 <span
+class="math inline">\(\lambda\)</span> 的一阶项)是 <span
 class="math inline">\(-i\lambda\)</span> .</p>
 <p>让我们再用正则形式计算一遍四介子散射的散射振幅.</p>
 <p>在正则形式的量子场论中,我们可以写下</p>
 <p><span class="math display">\[\langle
-F|\mathscr{U}|I\rangle=\langle\bm{k}_3\bm{k}_4|\mathscr{U}|\bm{k}_1\bm{k}_2\rangle\]</span></p>
+F|\mathscr{U}|I\rangle=\langle\boldsymbol{k}_3\boldsymbol{k}_4|\mathscr{U}|\boldsymbol{k}_1\boldsymbol{k}_2\rangle\]</span></p>
 <p>其中 <span
-class="math inline">\(|\bm{k}_1\bm{k}_2\rangle=\sqrt{2\omega_{\bm{k}_1}}\sqrt{2\omega_{\bm{k}_2}}a^\dagger(\bm{k}_1)a^\dagger(\bm{k}_2)|0\rangle\)</span>
-,并要求 <span class="math inline">\(\bm{k}_s\)</span> 各不相同.</p>
+class="math inline">\(|\boldsymbol{k}_1\boldsymbol{k}_2\rangle=\sqrt{2\omega_{\boldsymbol{k}_1}}\sqrt{2\omega_{\boldsymbol{k}_2}}a^\dagger(\boldsymbol{k}_1)a^\dagger(\boldsymbol{k}_2)|0\rangle\)</span>
+,并要求 <span class="math inline">\(\boldsymbol{k}_s\)</span>
+各不相同.</p>
 <p>产生与湮灭算符的定义来自</p>
 <p><span
-class="math display">\[\phi(\bm{r},t)=\int\frac{\mathrm{d}^3k}{(2\pi)^3\sqrt{2\omega_{\bm{k}}}}\left[a(\bm{k})e^{-i(\omega_{\bm{k}}t-\bm{k}\cdot\bm{r})}+a^\dagger(\bm{k})e^{i(\omega_{\bm{k}}t-\bm{k}\cdot\bm{r})}\right]\]</span></p>
+class="math display">\[\phi(\boldsymbol{r},t)=\int\frac{\mathrm{d}^3k}{(2\pi)^3\sqrt{2\omega_{\boldsymbol{k}}}}\left[a(\boldsymbol{k})e^{-i(\omega_{\boldsymbol{k}}t-\boldsymbol{k}\cdot\boldsymbol{r})}+a^\dagger(\boldsymbol{k})e^{i(\omega_{\boldsymbol{k}}t-\boldsymbol{k}\cdot\boldsymbol{r})}\right]\]</span></p>
 <p>它们满足</p>
 <p><span
-class="math display">\[\left[a(\bm{k}),a(\bm{k}&#39;)\right]=0\]</span></p>
+class="math display">\[\left[a(\boldsymbol{k}),a(\boldsymbol{k}&#39;)\right]=0\]</span></p>
 <p><span
-class="math display">\[\left[a(\bm{k}),a^\dagger(\bm{k}&#39;)\right]=(2\pi)^3\delta(\bm{k}-\bm{k}&#39;)\]</span></p>
+class="math display">\[\left[a(\boldsymbol{k}),a^\dagger(\boldsymbol{k}&#39;)\right]=(2\pi)^3\delta(\boldsymbol{k}-\boldsymbol{k}&#39;)\]</span></p>
 <p>以使得 <span class="math inline">\(\phi\)</span> 与 <span
 class="math inline">\(\displaystyle\pi=\frac{\partial\mathscr{L}}{\partial(\partial_t\phi)}\)</span>
 满足等时正则对易关系</p>
-<p><span class="math display">\[\left[ \phi(\bm{r}),\pi(\bm{r}&#39;)
-\right]=i\delta(\bm{r}-\bm{r}&#39;)\]</span></p>
+<p><span class="math display">\[\left[
+\phi(\boldsymbol{r}),\pi(\boldsymbol{r}&#39;)
+\right]=i\delta(\boldsymbol{r}-\boldsymbol{r}&#39;)\]</span></p>
 <p>把时间演化算符写成显式</p>
 <p><span
 class="math display">\[\mathscr{U}=T\left(e^{-i\int\mathrm{d}tV}\right)\]</span></p>
@@ -504,30 +524,30 @@ class="math display">\[H_0=\int\mathrm{d}^3x\left[\frac{1}{2}(\partial_t\phi)^2+
 class="math display">\[\mathscr{U}(t,t_0)=e^{iH_0t}e^{-iH(t-t_0)}e^{-iH_0t_0}\]</span></p>
 <p>从这个表达式出发,含时微扰论可以快速给出时间演化算符的依赖相互作用的上述形式.</p>
 <p>现在, <span
-class="math inline">\(\langle\bm{k}_3\bm{k}_4|\mathscr{U}|\bm{k}_1\bm{k}_2\rangle\)</span>
+class="math inline">\(\langle\boldsymbol{k}_3\boldsymbol{k}_4|\mathscr{U}|\boldsymbol{k}_1\boldsymbol{k}_2\rangle\)</span>
 中 <span class="math inline">\(\lambda\)</span>
 的一阶项是(幸运的是,到一阶项为止,我们还不需要和编时乘积打交道)</p>
 <p><span
-class="math display">\[\left(-i\frac{\lambda}{4!}\right)\int\mathrm{d}^4w\langle\bm{k}_3\bm{k}_4|\phi^4(w)|\bm{k}_1\bm{k}_2\rangle\]</span></p>
+class="math display">\[\left(-i\frac{\lambda}{4!}\right)\int\mathrm{d}^4w\langle\boldsymbol{k}_3\boldsymbol{k}_4|\phi^4(w)|\boldsymbol{k}_1\boldsymbol{k}_2\rangle\]</span></p>
 <p>我们关心的是 <span class="math inline">\(\phi^4(w)\)</span> 中形如
 <span
-class="math inline">\(a^\dagger(\bm{k}&#39;_3)a^\dagger(\bm{k}&#39;_4)a(\bm{k}&#39;_1)a(\bm{k}&#39;_2)\)</span>
+class="math inline">\(a^\dagger(\boldsymbol{k}&#39;_3)a^\dagger(\boldsymbol{k}&#39;_4)a(\boldsymbol{k}&#39;_1)a(\boldsymbol{k}&#39;_2)\)</span>
 的项,它实现了四介子散射(湮灭入射动量 <span
-class="math inline">\(\bm{k}&#39;_1\)</span> 和 <span
-class="math inline">\(\bm{k}&#39;_2\)</span> ,产生出射动量 <span
-class="math inline">\(\bm{k}&#39;_3\)</span> 和 <span
-class="math inline">\(\bm{k}&#39;_4\)</span> ),所以只需计算</p>
+class="math inline">\(\boldsymbol{k}&#39;_1\)</span> 和 <span
+class="math inline">\(\boldsymbol{k}&#39;_2\)</span> ,产生出射动量 <span
+class="math inline">\(\boldsymbol{k}&#39;_3\)</span> 和 <span
+class="math inline">\(\boldsymbol{k}&#39;_4\)</span> ),所以只需计算</p>
 <p><span
-class="math display">\[\begin{split}&amp;\left(-i\frac{\lambda}{4!}\right)\int\mathrm{d}^4w\prod_{s=1}^{4}\int\frac{\mathrm{d}^3k&#39;_s}{(2\pi)^3\sqrt{2\omega_{\bm{k}&#39;_s}}}\sqrt{2\omega_{\bm{k}_s}}\\\times&amp;\langle
-0|a(\bm{k}_3)a(\bm{k}_4)a^\dagger(\bm{k}&#39;_3)a^\dagger(\bm{k}&#39;_4)a(\bm{k}&#39;_1)a(\bm{k}&#39;_2)a^\dagger(\bm{k}_1)a^\dagger(\bm{k}_2)|0\rangle
+class="math display">\[\begin{split}&amp;\left(-i\frac{\lambda}{4!}\right)\int\mathrm{d}^4w\prod_{s=1}^{4}\int\frac{\mathrm{d}^3k&#39;_s}{(2\pi)^3\sqrt{2\omega_{\boldsymbol{k}&#39;_s}}}\sqrt{2\omega_{\boldsymbol{k}_s}}\\\times&amp;\langle
+0|a(\boldsymbol{k}_3)a(\boldsymbol{k}_4)a^\dagger(\boldsymbol{k}&#39;_3)a^\dagger(\boldsymbol{k}&#39;_4)a(\boldsymbol{k}&#39;_1)a(\boldsymbol{k}&#39;_2)a^\dagger(\boldsymbol{k}_1)a^\dagger(\boldsymbol{k}_2)|0\rangle
 e^{i(k&#39;_3+k&#39;_4-k&#39;_1-k&#39;_2)w}\end{split}\]</span></p>
 <p>其中, <span class="math inline">\(\langle
-0|a(\bm{k}_3)a(\bm{k}_4)a^\dagger(\bm{k}&#39;_3)a^\dagger(\bm{k}&#39;_4)a(\bm{k}&#39;_1)a(\bm{k}&#39;_2)a^\dagger(\bm{k}_1)a^\dagger(\bm{k}_2)|0\rangle\)</span>
+0|a(\boldsymbol{k}_3)a(\boldsymbol{k}_4)a^\dagger(\boldsymbol{k}&#39;_3)a^\dagger(\boldsymbol{k}&#39;_4)a(\boldsymbol{k}&#39;_1)a(\boldsymbol{k}&#39;_2)a^\dagger(\boldsymbol{k}_1)a^\dagger(\boldsymbol{k}_2)|0\rangle\)</span>
 给出了</p>
 <p><span
 class="math display">\[\delta_{11&#39;}\delta_{22&#39;}\delta_{33&#39;}\delta_{44&#39;}+\delta_{12&#39;}\delta_{21&#39;}\delta_{33&#39;}\delta_{44&#39;}+\delta_{11&#39;}\delta_{22&#39;}\delta_{34&#39;}\delta_{43&#39;}+\delta_{12&#39;}\delta_{21&#39;}\delta_{34&#39;}\delta_{43&#39;}\]</span></p>
 <p>请检验这个结果!我们把 <span
-class="math inline">\((2\pi)^3\delta(\bm{k}_a-\bm{k}&#39;_b)\)</span>
+class="math inline">\((2\pi)^3\delta(\boldsymbol{k}_a-\boldsymbol{k}&#39;_b)\)</span>
 简记为了 <span class="math inline">\(\delta_{ab&#39;}\)</span> .</p>
 <p>现在我们得到了</p>
 <p><span
@@ -539,9 +559,9 @@ class="math inline">\(3!\)</span> .</p>
 class="math display">\[\left(-i\frac{\lambda}{3!}\right)(2\pi)^4\delta(k_1+k_2-k_3-k_4)\]</span></p>
 <p>如果你还记得,我们关心的是 <span
 class="math inline">\(\phi^4(w)\)</span> 中形如 <span
-class="math inline">\(a^\dagger(\bm{k}&#39;_3)a^\dagger(\bm{k}&#39;_4)a(\bm{k}&#39;_1)a(\bm{k}&#39;_2)\)</span>
+class="math inline">\(a^\dagger(\boldsymbol{k}&#39;_3)a^\dagger(\boldsymbol{k}&#39;_4)a(\boldsymbol{k}&#39;_1)a(\boldsymbol{k}&#39;_2)\)</span>
 的项,那么就同样应该考虑项 <span
-class="math inline">\(a^\dagger(\bm{k}&#39;_1)a^\dagger(\bm{k}&#39;_2)a(\bm{k}&#39;_3)a(\bm{k}&#39;_4)\)</span>
+class="math inline">\(a^\dagger(\boldsymbol{k}&#39;_1)a^\dagger(\boldsymbol{k}&#39;_2)a(\boldsymbol{k}&#39;_3)a(\boldsymbol{k}&#39;_4)\)</span>
 ,实际上,这样的项有 <span class="math inline">\(C_4^2=3!\)</span>
 个,所以最终结果是</p>
 <p><span
@@ -578,9 +598,10 @@ class="math inline">\(x_1\)</span> 传播到 <span
 class="math inline">\(x_2\)</span> ,而这与 <span
 class="math inline">\(\langle\boldsymbol{r&#39;}|\mathscr{U}(t,t_0)|\boldsymbol{r}\rangle\)</span>
 的定义是完全一致的——一个粒子从 <span
-class="math inline">\(\left(\bm{r},t_0\right)\)</span> 传播到了 <span
-class="math inline">\(\left(\bm{r}&#39;,t\right)\)</span> .现在,计算
-<span class="math inline">\(\langle F|\mathscr{U}|I\rangle\)</span>
+class="math inline">\(\left(\boldsymbol{r},t_0\right)\)</span> 传播到了
+<span class="math inline">\(\left(\boldsymbol{r}&#39;,t\right)\)</span>
+.现在,计算 <span class="math inline">\(\langle
+F|\mathscr{U}|I\rangle\)</span>
 到第二阶意味着,可能发生的过程还包括两个粒子散射为两个粒子,一个粒子衰变为三个粒子,或者三个粒子结合为一个粒子,如果没有相互作用,那么第二阶只贡献了两个粒子各自传播到它们的终点(不发生散射),没有后面两个过程.你看,为了发展多粒子到多粒子的跃迁振幅,从量子力学到量子场论的努力是必要的.</p>
 <p>你可能已经注意到了,这里有一个我们一直在回避的问题, <span
 class="math inline">\(S-\)</span>矩阵中的 <span
@@ -625,7 +646,8 @@ class="math inline">\(a^\mu\)</span> 和 <span
 class="math inline">\(b^\mu\)</span> 是四维矢量, <span
 class="math inline">\(ab\)</span> 当然应该被理解为 <span
 class="math inline">\(a^\mu b_\mu\)</span> ,三维矢量的标积仍然被记为
-<span class="math inline">\(\bm{a}\cdot\bm{b}\)</span> .</p>
+<span class="math inline">\(\boldsymbol{a}\cdot\boldsymbol{b}\)</span>
+.</p>
 <ol start="2" type="1">
 <li><p>积分测度 <span
 class="math inline">\(\displaystyle\int\mathrm{d}^4a\)</span> 和 <span
@@ -709,8 +731,8 @@ class="math inline">\(Z(J,0)\)</span>
             <div class="post-nav-item">
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/S-%E7%9F%A9%E9%98%B5/" rel="next" title="S-Matrix">
-                  S-Matrix <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/hello-world/" rel="next" title="Hello World">
+                  Hello World <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
