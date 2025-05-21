@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="数值 整数及其表示 0 ————&gt;低电平，逻辑假 1 ————&gt;高电平，逻辑真 x&#x2F;X————&gt;不确定或未知逻辑态 z&#x2F;Z————&gt;高阻态 b或B————&gt;二进制,0、1、x&#x2F;X、z&#x2F;Z&#x2F;?、; o或O————&gt;八进制,0~7、x&#x2F;X、z&#x2F;Z&#x2F;?、; d或D————&gt;十进制,0~9、; h或H————&gt;十六进制,09、a&#x2F;Af&#x2F;F、x&#x2F;X">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章:Verilog HDL基础知识">
+<meta property="og:url" content="http://example.com/2025/05/04/Verilog%E7%AC%AC%E4%BA%8C%E7%AB%A0/index.html">
+<meta property="og:site_name" content="SiyuanLei&#39;s Blog">
+<meta property="og:description" content="数值 整数及其表示 0 ————&gt;低电平，逻辑假 1 ————&gt;高电平，逻辑真 x&#x2F;X————&gt;不确定或未知逻辑态 z&#x2F;Z————&gt;高阻态 b或B————&gt;二进制,0、1、x&#x2F;X、z&#x2F;Z&#x2F;?、; o或O————&gt;八进制,0~7、x&#x2F;X、z&#x2F;Z&#x2F;?、; d或D————&gt;十进制,0~9、; h或H————&gt;十六进制,09、a&#x2F;Af&#x2F;F、x&#x2F;X">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-15T08:09:08.847Z">
+<meta property="article:author" content="SiyuanLei">
+<meta property="article:tag" content="Verilog">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/Verilog%E7%AC%AC%E4%BA%8C%E7%AB%A0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/04/Verilog%E7%AC%AC%E4%BA%8C%E7%AB%A0/","path":"2025/05/04/Verilog第二章/","title":"第二章:Verilog HDL基础知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>第二章:Verilog HDL基础知识 | SiyuanLei's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SiyuanLei's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%80%BC"><span class="nav-number">1.</span> <span class="nav-text">数值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.1.</span> <span class="nav-text">整数及其表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">表示形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.1.2.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%95%B0%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.</span> <span class="nav-text">实数及其表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">物理数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BA%BF%E5%9E%8B%E5%92%8C%E5%AF%84%E5%AD%98%E5%99%A8%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="nav-number">2.1.1.</span> <span class="nav-text">连线型和寄存器型数据类型的声明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E7%BA%BF%E5%9E%8B"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">连线型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%9E%8B"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">寄存器型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E5%9E%8Bmemory"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">存储器型(memory)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">抽象数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.2.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.4.</span> <span class="nav-text">按位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.5.</span> <span class="nav-text">移位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.6.</span> <span class="nav-text">条件运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.7.</span> <span class="nav-text">复制和连接运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">4.1.</span> <span class="nav-text">模块的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">模块的引用</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SiyuanLei"
+      src="/images/femboy.jpg">
+  <p class="site-author-name" itemprop="name">SiyuanLei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/Verilog%E7%AC%AC%E4%BA%8C%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="第二章:Verilog HDL基础知识 | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第二章:Verilog HDL基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-05-15 16:09:08" itemprop="dateModified" datetime="2025-05-15T16:09:08+08:00">2025-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/EE/" itemprop="url" rel="index"><span itemprop="name">EE</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/EE/%E6%95%B0%E5%AD%97%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">数字设计</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/EE/%E6%95%B0%E5%AD%97%E8%AE%BE%E8%AE%A1/Verilog/" itemprop="url" rel="index"><span itemprop="name">Verilog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="数值">数值</h2>
+<h3 id="整数及其表示">整数及其表示</h3>
+<p>0 ————&gt;低电平，逻辑假 1 ————&gt;高电平，逻辑真
+x/X————&gt;不确定或未知逻辑态 z/Z————&gt;高阻态</p>
+<p>b或B————&gt;二进制,0、1、x/X、z/Z/?、<em>;
+o或O————&gt;八进制,0~7、x/X、z/Z/?、</em>; d或D————&gt;十进制,0~9、<em>;
+h或H————&gt;十六进制,0<sub>9、a/A</sub>f/F、x/X、z/Z/?、</em>;</p>
+<h4 id="表示形式">表示形式</h4>
+<p>整数的表示形式如下:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+/-&lt;size&gt;&#x27;&lt;base&gt;&lt;number&gt;</span><br></pre></td></tr></table></figure>
+<p>其中+/-放在最前面；</p>
+<p>size是将数字<strong>换算成二进制数之后</strong>的位数,注意这里要转换成二进制！！！；</p>
+<p>’不能省略</p>
+<p>base可选二进制b，八进制o，十进制d，十六进制h；</p>
+<p>number用所选取的进制数表示；</p>
+<h4 id="注意事项">注意事项</h4>
+<ul>
+<li>较长的数字可以用下划线分开，例如</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">16&#x27;b1110_1011_0011_1010</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>没有说明数字位宽时,默认为32位</p></li>
+<li><p>x或z在二进制中只代表一位的x或z,在八进制中代表三位的x或z,在十六进制中代表四位的x或z,例如</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8&#x27;b1011xxxx</span>=<span class="number">8&#x27;hBx</span></span><br><span class="line"><span class="number">8&#x27;b1001zzzz</span>=<span class="number">8&#x27;h9z</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>如果没有定义一个整数的位宽,那么其宽度就是相应值中定义的位数,例如
+’o642是9位八进制数 ’hBD是8位十六进制数</p></li>
+<li><p>若定义的位宽比实际的数要大，则在左边用0补齐，例如</p></li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10&#x27;b101</span>=<span class="number">10&#x27;b0000000101</span></span><br><span class="line"><span class="number">8&#x27;bz0x1</span>=<span class="number">8&#x27;bzzzzz0x1</span></span><br></pre></td></tr></table></figure>
+<p>若定义的位宽比实际的数要小，那么左边的位要被截断</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4&#x27;b10111011</span>=<span class="number">4&#x27;b1011</span></span><br><span class="line"><span class="number">6&#x27;HFFFB</span>=<span class="number">6&#x27;H3B</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>?和z/Z都表示高组态,例如</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>&#x27;b??=<span class="number">2&#x27;bzz</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>整数可以带正负号,并且正负号应该写在最左边.负数表示为二进制补码,例如</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">4</span>=<span class="number">4&#x27;b1100</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果位宽和进制都省略,那么就表示十进制数</li>
+</ul>
+<h3 id="实数及其表示">实数及其表示</h3>
+<ul>
+<li><p>十进制表示法:小数点两边必须都要有数字,例如0.8、4.68、9.9等</p></li>
+<li><p>科学计数法:8.7e2=870.0、3E-3=0.003等</p></li>
+</ul>
+<h2 id="数据类型">数据类型</h2>
+<p>Verilog
+HDL的数据类型可以分成两大类,第一类为物理数据类型(包括连线型和寄存器型),第二类为抽象数据类型(包括整型,时间型,实型,参数型)</p>
+<h3 id="物理数据类型">物理数据类型</h3>
+<ol type="1">
+<li><p>连线型</p></li>
+<li><p>寄存器型</p></li>
+</ol>
+<h4
+id="连线型和寄存器型数据类型的声明">连线型和寄存器型数据类型的声明</h4>
+<h5 id="连线型">连线型</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;net_declaration&gt;&lt;drive_strength&gt;&lt;range&gt;&lt;delay&gt;[list_of_variables];</span><br></pre></td></tr></table></figure>
+<p>net_declaration:可以选择wire,tri,tri0,tri1等等</p>
+<p>drive_strength:连线变量的驱动强度</p>
+<p>range:指定数据为标量或者矢量,默认为1位的标量</p>
+<p>delay:指定仿真延迟时间</p>
+<p>list_of_variables:变量名称,可以一次定义多个,中间用逗号隔开</p>
+<h5 id="寄存器型">寄存器型</h5>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span>&lt;range&gt;[list_of_register_variables]</span><br></pre></td></tr></table></figure>
+<p>range:指定寄存器的位宽,默认为1位</p>
+<p>list_of_register_variables:变量名称,可以一次定义多个,中间用逗号隔开</p>
+<h5 id="存储器型memory">存储器型(memory)</h5>
+<p>存储器型本质上是寄存器型变量阵列,这是因为Verilog
+HDL中没有多维数组,所以就用一些reg类型变量组成寄存器组来实现存储器的功能,也就是
+扩展的reg型数据地址范围.存储器型变量可以描述RAM型、ROM型存储器和reg文件.数组中的每一个单元通过一个数组索引进行寻址.</p>
+<p>存储器型变量的声明如下:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span>&lt;range1&gt;&lt;list_of_register&gt;&lt;range2&gt;</span><br></pre></td></tr></table></figure>
+<p>range1:存储器中的每个寄存器的位宽,格式为[msb:lsb]</p>
+<p>range2:寄存器的个数,格式为[msb:lsb]</p>
+<p>list_of_register:变量名称,可以一次定义多个,中间用逗号隔开</p>
+<p>例如</p>
+<p>reg[7:0] mem1[255:0];
+这是一个有256个8位寄存器的存储器mem1,地址范围是0~255</p>
+<p>reg[15:0] mem1[127:0],reg1,reg2;
+这是一个有128个16位寄存器的存储器mem1,地址范围是0~128,除此之外还有两个16位的寄存器reg1,reg2</p>
+<p>reg[15:0] a=16’b1011_0101_1001_0001;
+这是一个16位寄存器,可以直接对这一个寄存器赋值</p>
+<p>reg mem1[15:0];
+这是一个有1个16位寄存器的存储器mem1,不能对整个寄存器赋值,注意和上面的寄存器进行区分</p>
+<p>mem1[2]=1’b0; 给mem1存储器中的第三个寄存器赋值</p>
+<h3 id="抽象数据类型">抽象数据类型</h3>
+<p>1.整型 声明格式为 integer &lt;name&gt;</p>
+<p>2.时间型</p>
+<p>3.实型</p>
+<p>4.参数型</p>
+<p>声明格式为 parameter 参数名1=表达式1，参数名2=表达式2，…</p>
+<h2 id="运算符">运算符</h2>
+<h3 id="算术运算符">算术运算符</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> arith_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]a ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>]b ;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">4&#x27;b1111</span>;<span class="comment">//15</span></span><br><span class="line">    b=<span class="number">4&#x27;b011</span>;<span class="comment">//3</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a*b);<span class="comment">//结果是45，但是结果必须是4位二进制数，高位被舍去</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a/b);<span class="comment">//结果是5，4&#x27;b0101</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a+b);<span class="comment">//结果是18，高位被舍去</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a-b);<span class="comment">//结果是12</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a%b);<span class="comment">//结果是0</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//算数运算代码例</span></span><br></pre></td></tr></table></figure>
+<h3 id="关系运算符">关系运算符</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> rela_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]a,b,c,d;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">3</span>;</span><br><span class="line">    b=<span class="number">6</span>;</span><br><span class="line">    c=<span class="number">1</span>;</span><br><span class="line">    d=<span class="number">4&#x27;hx</span>;</span><br><span class="line">    <span class="built_in">$display</span>(a&lt;b);<span class="comment">//结果为真，输出1</span></span><br><span class="line">    <span class="built_in">$display</span>(a&gt;b);<span class="comment">//结果为假，输出0</span></span><br><span class="line">    <span class="built_in">$display</span>(a&lt;=c);<span class="comment">//结果为假，输出0</span></span><br><span class="line">    <span class="built_in">$display</span>(d&lt;=a);<span class="comment">//结果不确定，输出x</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//关系运算代码例</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> equal_tb;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]a,b,c,d;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">4&#x27;b0xx1</span>;</span><br><span class="line">    b=<span class="number">4&#x27;b0xx1</span>;</span><br><span class="line">    c=<span class="number">4&#x27;b0011</span>;</span><br><span class="line">    d=<span class="number">2&#x27;b11</span>;</span><br><span class="line">    <span class="built_in">$display</span>(a==b);<span class="comment">//结果不确定，输出x</span></span><br><span class="line">    <span class="built_in">$display</span>(c==d);<span class="comment">//结果相等，输出1</span></span><br><span class="line">    <span class="built_in">$display</span>(a===b);<span class="comment">//结果全等，输出1</span></span><br><span class="line">    <span class="built_in">$display</span>(c===d);<span class="comment">//结果不全等，输出0</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//相等关系代码例</span></span><br></pre></td></tr></table></figure>
+<h3 id="逻辑运算符">逻辑运算符</h3>
+<p>对于一个操作数，如果它的<strong>每一位都是0</strong>，那么其逻辑就是0；但凡出现一个1，那么其逻辑就为1；</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> logic_tb;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] a,b,c;</span><br><span class="line"><span class="keyword">reg</span> d,f;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">4&#x27;b0000</span>;<span class="comment">//逻辑0</span></span><br><span class="line">    b=<span class="number">4&#x27;b1011</span>;<span class="comment">//逻辑1</span></span><br><span class="line">    c=<span class="number">4&#x27;b1001</span>;<span class="comment">//逻辑1</span></span><br><span class="line">    d=<span class="number">1&#x27;b0</span>;<span class="comment">//逻辑0</span></span><br><span class="line">    f=<span class="number">1&#x27;b1</span>;<span class="comment">//逻辑1</span></span><br><span class="line">    <span class="built_in">$display</span>(!a);<span class="comment">//输出1&#x27;b1</span></span><br><span class="line">    <span class="built_in">$display</span>(!b);<span class="comment">//输出1&#x27;b0</span></span><br><span class="line">    <span class="built_in">$display</span>(!d);<span class="comment">//输出1&#x27;b1</span></span><br><span class="line">    <span class="built_in">$display</span>(!f);<span class="comment">//输出1&#x27;b0</span></span><br><span class="line">    <span class="built_in">$display</span>(a&amp;&amp;b);<span class="comment">//逻辑与运算，输出1&#x27;b0</span></span><br><span class="line">    <span class="built_in">$display</span>(b&amp;&amp;c);<span class="comment">//逻辑与运算，输出1&#x27;b1</span></span><br><span class="line">    <span class="built_in">$display</span>(c||d);<span class="comment">//逻辑或运算，输出1&#x27;b1</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3 id="按位运算符">按位运算符</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> bit_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>]a ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>]b ;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">5&#x27;b101</span>;<span class="comment">//运算的时候补成5&#x27;b00101</span></span><br><span class="line">    b=<span class="number">5&#x27;b11101</span>;</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,~a);<span class="comment">//按位取反，结果是5&#x27;b11010</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,~b);<span class="comment">//按位取反，结果是5&#x27;b00010</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a&amp;b);<span class="comment">//按位与，结果是5&#x27;b00101</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a|b);<span class="comment">//按位或，结果是5&#x27;b11101</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a^b);<span class="comment">//按位异或，结果是5&#x27;b11000</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//按位运算代码例</span></span><br></pre></td></tr></table></figure>
+<h3 id="移位运算符">移位运算符</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> shift_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">5</span>:<span class="number">0</span>]a,b,c,d ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>]e ;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">6&#x27;b101101</span>;</span><br><span class="line">    b=a&lt;&lt;<span class="number">2</span>;<span class="comment">//把a左移两位，再用0补上空位</span></span><br><span class="line">    c=a&gt;&gt;<span class="number">3</span>;<span class="comment">//把a右移三位，再用0补上空位</span></span><br><span class="line">    d=a&lt;&lt;<span class="number">7</span>;<span class="comment">//把a左移七位，再用0补上空位</span></span><br><span class="line">    e=a&lt;&lt;<span class="number">2</span>;<span class="comment">//把a左移两位，再用0补上空位</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,b);<span class="comment">//结果为6&#x27;b110100</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,c);<span class="comment">//结果为6&#x27;b000101</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,d);<span class="comment">//结果为6&#x27;b000000</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,e);<span class="comment">//结果为8&#x27;b10110100</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//移位运算代码例</span></span><br></pre></td></tr></table></figure>
+<h3 id="条件运算符">条件运算符</h3>
+<p>唯一的三目运算符</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> mux2 (in1,in2,sel,out);</span><br><span class="line">    <span class="keyword">input</span>  [<span class="number">3</span>:<span class="number">0</span>]in1,in2;</span><br><span class="line">    <span class="keyword">input</span>  sel;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>]out;</span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>]out;</span><br><span class="line">    <span class="keyword">assign</span> out=(!sel)?in1:in2;  <span class="comment">//当sel=0时，out=in1；当sel=1时，out=in2</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//verilog里面唯一的三目条件运算符代码例</span></span><br></pre></td></tr></table></figure>
+<h3 id="复制和连接运算符">复制和连接运算符</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> con_rep_tb;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>]a ;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]b ;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>]c ;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">4</span>:<span class="number">0</span>]d ;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">5</span>:<span class="number">0</span>]e ;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">3&#x27;b101</span>;</span><br><span class="line">    b=<span class="number">4&#x27;b1110</span>;</span><br><span class="line">    c=&#123;a,b&#125;;            <span class="comment">//连接a和b</span></span><br><span class="line">    d=&#123;a[<span class="number">2</span>:<span class="number">1</span>],b[<span class="number">2</span>:<span class="number">0</span>]&#125;;  <span class="comment">//连接a[2:1]和b[2:0]</span></span><br><span class="line">    e=&#123;<span class="number">2</span>&#123;a&#125;&#125;;           <span class="comment">//把a复制两次</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,c);<span class="comment">//结果为8&#x27;b01011110</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,d);<span class="comment">//结果为5&#x27;b10110</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,e);<span class="comment">//结果为6&#x27;b101101</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//连接和复制运算符代码例</span></span><br></pre></td></tr></table></figure>
+<h2 id="模块">模块</h2>
+<h3 id="模块的内容">模块的内容</h3>
+<p>模块包含四个部分</p>
+<ol type="1">
+<li>模块的开始和结束:
+module开始，endmodule结束，开始的部分包括模块名和端口列表（各个端口名用逗号隔开）；</li>
+<li>模块端口定义：input，output，inout，以及位宽；</li>
+<li>模块的数据类型：input默认为wire，output可以是wire，也可以是reg（当在always或者initial语句块中被赋值）；</li>
+<li>模块的逻辑功能描述。</li>
+</ol>
+<h3 id="模块的引用">模块的引用</h3>
+<p>将信号线和被引用模块的端口连接，有两种方式：</p>
+<ol type="1">
+<li>按照源模块定义时的端口顺序连接</li>
+</ol>
+<p>模块名(连接端口1信号线名,连接端口2信号线名,…)</p>
+<ol start="2" type="1">
+<li>在引用时用小数点表明源模块定义时的端口名</li>
+</ol>
+<p>模块名(.端口1名(连接端口1信号线名),.端口2名(连接端口2信号线名),…)</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> dff (din,clk,q);</span><br><span class="line"><span class="keyword">input</span> din,clk;</span><br><span class="line"><span class="keyword">output</span> q;</span><br><span class="line"><span class="keyword">reg</span> q;</span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    q&lt;=din;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//D触发器</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Verilog/" rel="tag"># Verilog</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%BA%94%E7%AB%A0/" rel="prev" title="第五章:仿真验证和Testbench编写">
+                  <i class="fa fa-angle-left"></i> 第五章:仿真验证和Testbench编写
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%B8%89%E7%AB%A0/" rel="next" title="第三章:Verilog HDL程序设计语句和描述方式">
+                  第三章:Verilog HDL程序设计语句和描述方式 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">SiyuanLei</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
