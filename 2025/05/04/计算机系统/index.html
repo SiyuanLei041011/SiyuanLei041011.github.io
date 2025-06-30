@@ -27,7 +27,7 @@
 <meta property="og:description" content="第一部分:基本概念 计算机系统概述 从问题描述到电子运转的转换层次如下 问题–&gt;算法–&gt;语言–&gt;机器结构(ISA)–&gt;微结构–&gt;电路–&gt;器件  用自然语言提出一个问题 将问题转化成具体的算法,算法有三大特点  确定性:每个操作的步骤是清晰的,可定义的 可计算性:每一步都可以被计算机执行 有限性:过程是会终止的  将算法用程序语言实现,而程">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-21T09:13:53.270Z">
+<meta property="article:modified_time" content="2025-05-27T09:35:30.677Z">
 <meta property="article:author" content="SiyuanLei">
 <meta property="article:tag" content="LC-3">
 <meta property="article:tag" content="C语言">
@@ -135,7 +135,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">第一部分:基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">计算机系统概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bit%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">bit,数据类型及其运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98"><span class="nav-number">1.3.</span> <span class="nav-text">内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86lc-3%E5%8F%8A%E5%85%B6%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">第二部分:LC-3及其汇编语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">冯诺依曼模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">2.1.1.</span> <span class="nav-text">组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E5%AD%98-1"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%8D%95%E5%85%83"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">处理单元</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%8D%95%E5%85%83"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">输入和输出单元</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">控制单元</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E5%A4%84%E7%90%86"><span class="nav-number">2.1.2.</span> <span class="nav-text">指令处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">指令周期</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%96%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.2.2.1.</span> <span class="nav-text">取指令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%91%E7%A0%81"><span class="nav-number">2.1.2.2.2.</span> <span class="nav-text">译码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97"><span class="nav-number">2.1.2.2.3.</span> <span class="nav-text">地址计算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%96%E6%93%8D%E4%BD%9C%E6%95%B0"><span class="nav-number">2.1.2.2.4.</span> <span class="nav-text">取操作数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">2.1.2.2.5.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AD%98%E6%94%BE%E7%BB%93%E6%9E%9C"><span class="nav-number">2.1.2.2.6.</span> <span class="nav-text">存放结果</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">改变执行顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%81%9C%E6%9C%BA%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">停机操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lc-3%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">LC-3结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lc-3-isa%E6%A6%82%E8%BF%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">LC-3 ISA概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%BB%84%E7%BB%87"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">内存组织</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">指令集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%A0%81"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">操作码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%BB%E5%9D%80%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.2.1.6.</span> <span class="nav-text">寻址模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="nav-number">2.2.1.7.</span> <span class="nav-text">条件码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.2.</span> <span class="nav-text">运算指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%90%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.3.</span> <span class="nav-text">数据搬移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#pc%E7%9B%B8%E5%AF%B9%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">PC相对寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%97%B4%E6%8E%A5%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">间接寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E5%9D%80%E5%81%8F%E7%A7%BB%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">基址偏移寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E6%95%B0%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">立即数寻址</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.4.</span> <span class="nav-text">控制指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E5%92%8C%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">条件跳转和无条件跳转</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jmp"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">JMP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#trap"><span class="nav-number">2.2.4.3.</span> <span class="nav-text">TRAP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lc-3-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="nav-number">2.3.</span> <span class="nav-text">LC-3 汇编语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%A0%81%E5%92%8C%E6%93%8D%E4%BD%9C%E6%95%B0"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">操作码和操作数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%8F%B7"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">标号</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%AA%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.2.</span> <span class="nav-text">伪操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.3.</span> <span class="nav-text">汇编过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%A4%E9%81%8D%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">两遍扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%81%8D%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.3.1.1.</span> <span class="nav-text">第一遍扫描</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%81%8D%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.3.1.2.</span> <span class="nav-text">第二遍扫描</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.3.4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%98%A0%E5%83%8F"><span class="nav-number">2.3.4.1.</span> <span class="nav-text">可执行映像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.4.2.</span> <span class="nav-text">多目标文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">2.4.</span> <span class="nav-text">输入&#x2F;输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A6%82%E8%BF%B0"><span class="nav-number">2.4.1.</span> <span class="nav-text">输入&#x2F;输出概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">设备寄存器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84io%E4%B8%8E%E4%B8%93%E7%94%A8io%E6%8C%87%E4%BB%A4"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">内存映射I&#x2F;O与专用I&#x2F;O指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5io%E4%B8%8E%E5%90%8C%E6%AD%A5io"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">异步I&#x2F;O与同步I&#x2F;O</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E9%A9%B1%E5%8A%A8%E5%92%8C%E8%BD%AE%E8%AF%A2"><span class="nav-number">2.4.1.4.</span> <span class="nav-text">中断驱动和轮询</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5"><span class="nav-number">2.4.2.</span> <span class="nav-text">键盘输入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86c%E8%AF%AD%E8%A8%80"><span class="nav-number">3.</span> <span class="nav-text">第三部分:C语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95-lc-3%E6%8C%87%E4%BB%A4%E9%9B%86%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">附录 LC-3指令集结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lc-3%E6%8C%87%E4%BB%A4%E9%9B%86%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text">LC-3指令集详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add"><span class="nav-number">4.2.1.</span> <span class="nav-text">ADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#and"><span class="nav-number">4.2.2.</span> <span class="nav-text">AND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#br"><span class="nav-number">4.2.3.</span> <span class="nav-text">BR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jmp%E5%92%8Cret"><span class="nav-number">4.2.4.</span> <span class="nav-text">JMP和RET</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsr%E5%92%8Cjsrr"><span class="nav-number">4.3.</span> <span class="nav-text">JSR和JSRR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#load%E7%B3%BB%E5%88%97%E6%8C%87%E4%BB%A4"><span class="nav-number">4.4.</span> <span class="nav-text">Load系列指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ld"><span class="nav-number">4.4.1.</span> <span class="nav-text">LD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ldi"><span class="nav-number">4.4.2.</span> <span class="nav-text">LDI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ldr"><span class="nav-number">4.4.3.</span> <span class="nav-text">LDR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lea"><span class="nav-number">4.4.4.</span> <span class="nav-text">LEA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#not"><span class="nav-number">4.5.</span> <span class="nav-text">NOT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rti"><span class="nav-number">4.6.</span> <span class="nav-text">RTI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#store%E7%B3%BB%E5%88%97%E6%8C%87%E4%BB%A4"><span class="nav-number">4.7.</span> <span class="nav-text">Store系列指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#st"><span class="nav-number">4.7.1.</span> <span class="nav-text">ST</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sti"><span class="nav-number">4.7.2.</span> <span class="nav-text">STI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#str"><span class="nav-number">4.7.3.</span> <span class="nav-text">STR</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap-1"><span class="nav-number">4.8.</span> <span class="nav-text">TRAP</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">第一部分:基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">计算机系统概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bit%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">bit,数据类型及其运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98"><span class="nav-number">1.3.</span> <span class="nav-text">内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86lc-3%E5%8F%8A%E5%85%B6%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">第二部分:LC-3及其汇编语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">冯诺依曼模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">2.1.1.</span> <span class="nav-text">组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E5%AD%98-1"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%8D%95%E5%85%83"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">处理单元</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%8D%95%E5%85%83"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">输入和输出单元</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">控制单元</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E5%A4%84%E7%90%86"><span class="nav-number">2.1.2.</span> <span class="nav-text">指令处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">指令周期</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%96%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.2.2.1.</span> <span class="nav-text">取指令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%91%E7%A0%81"><span class="nav-number">2.1.2.2.2.</span> <span class="nav-text">译码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97"><span class="nav-number">2.1.2.2.3.</span> <span class="nav-text">地址计算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%96%E6%93%8D%E4%BD%9C%E6%95%B0"><span class="nav-number">2.1.2.2.4.</span> <span class="nav-text">取操作数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">2.1.2.2.5.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AD%98%E6%94%BE%E7%BB%93%E6%9E%9C"><span class="nav-number">2.1.2.2.6.</span> <span class="nav-text">存放结果</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">改变执行顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%81%9C%E6%9C%BA%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">停机操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lc-3%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">LC-3结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lc-3-isa%E6%A6%82%E8%BF%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">LC-3 ISA概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%BB%84%E7%BB%87"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">内存组织</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">指令集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%A0%81"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">操作码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%BB%E5%9D%80%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.2.1.6.</span> <span class="nav-text">寻址模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="nav-number">2.2.1.7.</span> <span class="nav-text">条件码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.2.</span> <span class="nav-text">运算指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%90%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.3.</span> <span class="nav-text">数据搬移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#pc%E7%9B%B8%E5%AF%B9%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">PC相对寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%97%B4%E6%8E%A5%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">间接寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E5%9D%80%E5%81%8F%E7%A7%BB%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">基址偏移寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E6%95%B0%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">立即数寻址</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.4.</span> <span class="nav-text">控制指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E5%92%8C%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">条件跳转和无条件跳转</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jmp"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">JMP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#trap"><span class="nav-number">2.2.4.3.</span> <span class="nav-text">TRAP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lc-3-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="nav-number">2.3.</span> <span class="nav-text">LC-3 汇编语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%A0%81%E5%92%8C%E6%93%8D%E4%BD%9C%E6%95%B0"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">操作码和操作数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%8F%B7"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">标号</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%AA%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.2.</span> <span class="nav-text">伪操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.3.</span> <span class="nav-text">汇编过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%A4%E9%81%8D%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">两遍扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%81%8D%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.3.1.1.</span> <span class="nav-text">第一遍扫描</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%81%8D%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.3.1.2.</span> <span class="nav-text">第二遍扫描</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.3.4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%98%A0%E5%83%8F"><span class="nav-number">2.3.4.1.</span> <span class="nav-text">可执行映像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.4.2.</span> <span class="nav-text">多目标文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">2.4.</span> <span class="nav-text">输入&#x2F;输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A6%82%E8%BF%B0"><span class="nav-number">2.4.1.</span> <span class="nav-text">输入&#x2F;输出概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">设备寄存器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84io%E4%B8%8E%E4%B8%93%E7%94%A8io%E6%8C%87%E4%BB%A4"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">内存映射I&#x2F;O与专用I&#x2F;O指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5io%E4%B8%8E%E5%90%8C%E6%AD%A5io"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">异步I&#x2F;O与同步I&#x2F;O</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E9%A9%B1%E5%8A%A8%E5%92%8C%E8%BD%AE%E8%AF%A2"><span class="nav-number">2.4.1.4.</span> <span class="nav-text">中断驱动和轮询</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5"><span class="nav-number">2.4.2.</span> <span class="nav-text">键盘输入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%99%A8%E8%BE%93%E5%87%BA"><span class="nav-number">2.4.3.</span> <span class="nav-text">显示器输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E9%A9%B1%E5%8A%A8io"><span class="nav-number">2.4.4.</span> <span class="nav-text">中断驱动I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A5%E8%87%AA%E8%AE%BE%E5%A4%87%E7%9A%84%E4%B8%AD%E6%96%AD%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.4.4.1.</span> <span class="nav-text">来自设备的中断信号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">2.4.4.2.</span> <span class="nav-text">中断优先级</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E6%A3%80%E6%B5%8B"><span class="nav-number">2.4.4.3.</span> <span class="nav-text">中断检测</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap%E7%A8%8B%E5%BA%8F%E5%8F%8A%E5%85%B6%E5%AD%90%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.5.</span> <span class="nav-text">TRAP程序及其子程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#trap%E6%9C%BA%E5%88%B6"><span class="nav-number">2.5.1.</span> <span class="nav-text">TRAP机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trap%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.2.</span> <span class="nav-text">TRAP指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%9C%BA%E5%88%B6"><span class="nav-number">2.5.3.</span> <span class="nav-text">完整机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#halt%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.5.4.</span> <span class="nav-text">HALT中断程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.5.5.</span> <span class="nav-text">子程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E8%BF%94%E5%9B%9E%E6%9C%BA%E5%88%B6"><span class="nav-number">2.5.5.1.</span> <span class="nav-text">调用&#x2F;返回机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jsrjsrr%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.5.2.</span> <span class="nav-text">JSR&#x2F;JSRR指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">2.6.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">2.6.1.</span> <span class="nav-text">栈的基本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%8B%E5%85%A5"><span class="nav-number">2.6.1.1.</span> <span class="nav-text">压入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%B9%E5%87%BA"><span class="nav-number">2.6.1.2.</span> <span class="nav-text">弹出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8B%E6%BA%A2%E5%87%BA"><span class="nav-number">2.6.1.3.</span> <span class="nav-text">下溢出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8A%E6%BA%A2%E5%87%BA"><span class="nav-number">2.6.1.4.</span> <span class="nav-text">上溢出</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86c%E8%AF%AD%E8%A8%80"><span class="nav-number">3.</span> <span class="nav-text">第三部分:C语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80%E7%BF%BB%E8%AF%91"><span class="nav-number">3.1.</span> <span class="nav-text">高级语言翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C"><span class="nav-number">3.1.1.</span> <span class="nav-text">解释执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E6%89%A7%E8%A1%8C"><span class="nav-number">3.1.2.</span> <span class="nav-text">编译执行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80"><span class="nav-number">3.2.</span> <span class="nav-text">C编程语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c%E7%BC%96%E8%AF%91%E5%99%A8"><span class="nav-number">3.2.1.</span> <span class="nav-text">C编译器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.</span> <span class="nav-text">变量和运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">3.3.1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bintchardouble"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">三种基本数据类型:int,char,double</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">局部变量和全局变量</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.2.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">算数运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.2.5.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%92%E5%A2%9E%E9%80%92%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.2.6.</span> <span class="nav-text">递增&#x2F;递减运算符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E5%A4%84%E7%90%86"><span class="nav-number">3.3.3.</span> <span class="nav-text">编译器处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A1%A8"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">符号表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D"><span class="nav-number">3.3.3.2.</span> <span class="nav-text">变量的空间分配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.</span> <span class="nav-text">控制结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.1.</span> <span class="nav-text">条件结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.2.</span> <span class="nav-text">循环结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#while%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.4.2.1.</span> <span class="nav-text">while语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#for%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.4.2.2.</span> <span class="nav-text">for语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#do-while%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.4.2.3.</span> <span class="nav-text">do-while循环</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.3.</span> <span class="nav-text">其他控制结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#switch%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.4.3.1.</span> <span class="nav-text">switch语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#break%E5%92%8Ccontinue%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.4.3.2.</span> <span class="nav-text">break和continue语句</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">3.5.1.</span> <span class="nav-text">C语言中的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E"><span class="nav-number">3.5.1.1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B0%83%E7%94%A8"><span class="nav-number">3.5.1.2.</span> <span class="nav-text">调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">3.5.1.3.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E"><span class="nav-number">3.5.1.4.</span> <span class="nav-text">返回</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.5.2.</span> <span class="nav-text">C语言函数的实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95-lc-3%E6%8C%87%E4%BB%A4%E9%9B%86%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">附录 LC-3指令集结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lc-3%E6%8C%87%E4%BB%A4%E9%9B%86%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text">LC-3指令集详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add"><span class="nav-number">4.2.1.</span> <span class="nav-text">ADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#and"><span class="nav-number">4.2.2.</span> <span class="nav-text">AND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#br"><span class="nav-number">4.2.3.</span> <span class="nav-text">BR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jmp%E5%92%8Cret"><span class="nav-number">4.2.4.</span> <span class="nav-text">JMP和RET</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsr%E5%92%8Cjsrr"><span class="nav-number">4.3.</span> <span class="nav-text">JSR和JSRR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#load%E7%B3%BB%E5%88%97%E6%8C%87%E4%BB%A4"><span class="nav-number">4.4.</span> <span class="nav-text">Load系列指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ld"><span class="nav-number">4.4.1.</span> <span class="nav-text">LD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ldi"><span class="nav-number">4.4.2.</span> <span class="nav-text">LDI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ldr"><span class="nav-number">4.4.3.</span> <span class="nav-text">LDR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lea"><span class="nav-number">4.4.4.</span> <span class="nav-text">LEA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#not"><span class="nav-number">4.5.</span> <span class="nav-text">NOT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rti"><span class="nav-number">4.6.</span> <span class="nav-text">RTI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#store%E7%B3%BB%E5%88%97%E6%8C%87%E4%BB%A4"><span class="nav-number">4.7.</span> <span class="nav-text">Store系列指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#st"><span class="nav-number">4.7.1.</span> <span class="nav-text">ST</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sti"><span class="nav-number">4.7.2.</span> <span class="nav-text">STI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#str"><span class="nav-number">4.7.3.</span> <span class="nav-text">STR</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap-1"><span class="nav-number">4.8.</span> <span class="nav-text">TRAP</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -150,18 +150,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -253,7 +253,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-05-21 17:13:53" itemprop="dateModified" datetime="2025-05-21T17:13:53+08:00">2025-05-21</time>
+      <time title="Modified: 2025-05-27 17:35:30" itemprop="dateModified" datetime="2025-05-27T17:35:30+08:00">2025-05-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1196,7 +1196,541 @@ class="math inline">\(0\)</span>,表示没有新的字符输入,处理器不再�
 <p>I/O设备和处理器交互的方式有两种:中断驱动和轮询.它们之间的根本区别在于谁控制这个交互.</p>
 <p>以键盘和CPU之间的交互为例,如果由键盘控制交互过程,那么处理器只需要做自己的事情,当键盘数据准备好时,它会主动通知寄存器进行读取,这种就是”中断驱动”.而如果交互过程是由处理器控制,那么处理器必须不断读取,测试状态寄存器的内容,直到Ready位被置位(说明有新的字符输入),于是从寄存器中读取数据,这种就是”轮询”.</p>
 <h4 id="键盘输入">键盘输入</h4>
+<p>将字符从键盘输入需要两个条件:</p>
+<ol type="1">
+<li>数据寄存器:用来存放键盘输入字符的ASCII值,这可以通过键盘数据寄存器(KBDR,地址是0xFE02)实现,KBDR的第0~7位用来储存输入字符的ASCII码.</li>
+<li>同步机制:用告诉处理器数据已经准备好的方法,这可以通过键盘状态寄存器(KBSR,地址是0xFE00)实现,KBSR的第15位用以储存同步信息(Ready位).</li>
+</ol>
+<p>KBSR[15]的作用是控制处理器(快速)和键盘(慢速)之间的同步.当某个按键被按下,该键对应的ASCII码被存入KBDR[7:0]的同时,键盘硬件电路自动将KBSR[15]置为1;当LC-3读取KBDR时,键盘自动清除KBSR[15].KBSR[15]=0意味着键盘可以继续输入,而KBSR[15]=1意味着上次输入的字符还没有被取走,即键盘无法继续输入其他字符.在轮询(处理器控制的I/O)方式下,程序将反复读取并测试KBSR[15]位.</p>
+<p>如下程序的功能是将键盘KBDR寄存器中的ASCII值读取到本地寄存器R0中,然后跳转至下一个任务:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">START    LDI   R1,A</span><br><span class="line">         BRzp  START</span><br><span class="line">         LDI   R0,B</span><br><span class="line">         BRnzp NEXT_TASK</span><br><span class="line">A        .FILL xFE00</span><br><span class="line">B        .FILL xFE02</span><br></pre></td></tr></table></figure>
+<p>解释:第一二行构成KBSR[15]的循环测试,LDI指令将地址0xFE00(0xFE00是KBSR寄存器的内存映射地址)处的值载入R1,如果KBSR[15]=0,则程序跳回START处继续循环,如果有键盘输入的话,那么该键的ASCII码被装入KBDR,同时KBSR[15]被置位,这意味着程序进入第三行代码,LDI指令将地址0xFE02(0xFE02是KBDR寄存器的内存映射地址)处的值载入R0.于是读取键盘输入过程完毕,程序无条件跳转至NEXT_TASK.</p>
+<h4 id="显示器输出">显示器输出</h4>
+<p>在显示器工作时:</p>
+<ol type="1">
+<li>输出数据寄存器是DDR,内存映射地址是0xFE06,DDR的第7~0位用来存放数据</li>
+<li>状态寄存器是DSR,内存映射地址是0xFE04,DSR的第15位是Ready位</li>
+</ol>
+<p>DSR[15]用来同步处理器(快速)和显示器(慢速).在LC-3将单个字符的ASCII码输入到DDR[7:0]的同时,显示器硬件电路自动把DSR[15]清零(表示显示器”忙”,当前正在处理字符),然后开始DDR[7:0]的数据的处理;当显示器完成字符到屏幕的输出后,电路自动将DSR[15]置位,这表示显示器已经完成工作,处理器可以继续下一个字符的输出.</p>
+<h4 id="中断驱动io">中断驱动I/O</h4>
+<p>中断驱动I/O的本质是,I/O设备可以实现下列功能:</p>
+<ol type="1">
+<li>强行中止当前程序的运行</li>
+<li>使得处理器执行I/O设备的请求</li>
+<li>最后恢复中断程序的执行,并且让它感觉好像什么事情都没发生过一样</li>
+</ol>
+<p>中断驱动的一个优点就是,如果I/O设备采用轮询方式,处理器将会花费大量时间检测Ready位,但是采用中断方式,如果中断没有发生,处理器可以执行其他程序,当中断发生时,处理器才暂停当前程序,并自动调用相应的I/O处理程序.</p>
+<p>中断驱动I/O包括两部分内容:</p>
+<ol type="1">
+<li>中断使能机制,即I/O设备是如何通知处理器的(当设备有输入数据,或者输出部件准备就绪时)</li>
+<li>传输机制,即I/O数据是如何在处理器和设备之间传输</li>
+</ol>
+<p>这两部分可以简单描述为:</p>
+<ol type="1">
+<li>产生中断信号,中止当前执行程序</li>
+<li>处理该中断请求</li>
+</ol>
+<p>我们这里先介绍第一部分的内容,设备是否必须,且能否中断处理器(也即第一部分内容),必须具备以下几个条件:</p>
+<ol type="1">
+<li>I/O设备自身确实需要服务</li>
+<li>设备有请求服务的权限</li>
+<li>设备中断请求的优先级高于当前处理器所运行程序的优先级</li>
+</ol>
+<p>如果以上三个要求都满足,则处理器才会中止当前程序,并相应设备的中断请求.</p>
+<h5 id="来自设备的中断信号">来自设备的中断信号</h5>
+<p>对于条件1(I/O设备自身确实需要服务),就是KBSR和DSR的寄存器Ready位,I/O设备通过设置Ready位来表示”请求服务”.</p>
+<p>对于条件2(设备有请求服务的权限),是指”中断使能标志”,处理器通过设置该标志位,控制I/O设备是否有上报中断的权限.如果该标志位为1,表示处理器允许设备发送中断信号,否则,表示处理器禁止接收来自该设备的中断信号.通常状态寄存器中会包含”中断允许标志(IE)“.KBSR和DSR的第14位即为中断允许标志,来自I/O设备的中断请求信号是IE和Ready位的逻辑与(AND)结果.</p>
+<h5 id="中断优先级">中断优先级</h5>
+<p>对于条件3(设备中断请求的优先级高于当前处理器所运行程序的优先级),LC-3定义了<span
+class="math inline">\(8\)</span>个优先级别(PL0~PL7),数值越大,对应的优先级越高.一个程序的PL通常与请求运行该程序的PL(即紧迫度)相同.如果程序当前正在运行一个特点的PL,而此时来了一个更高级别的PL计算机访问请求,那么当前这个优先级较低的程序将被挂起,直到更高级的程序完成那个请求之后,被挂起的程序才能恢复执行.中断优先级是通过优先级编码器(一个组合逻辑电路)实现的,它可以从中断信号中选出优先级最高的一个,且如果被选出的优先级比当前程序优先级高,那么则会成功生成INT中断信号,并中止当前程序.</p>
+<h5 id="中断检测">中断检测</h5>
+<p>指令的执行过程包括六个节拍:</p>
+<p>取指令–&gt;译码–&gt;地址计算–&gt;取操作数–&gt;执行–&gt;存放结果</p>
+<p>在增加了中断信号检测逻辑之后,原先的最后一步操作,即从存放结果到取指令的操作将出现变化:在存放结果的同时还会进行中断信号INT的测试.如果INT未被设置,那么一切照旧,控制单元将会直接返回取指令节拍;如果INT信号有效,则控制单元在返回取指令节拍之前,必须完成两件事情,一是保持足够的信息,以备以后可以正常恢复被中断程序的执行环境,二是将即将服务于该设备请求的程序入口地址装入PC寄存器.</p>
+<h3 id="trap程序及其子程序">TRAP程序及其子程序</h3>
+<h4 id="trap机制">TRAP机制</h4>
+<p>TRAP机制包含以下要素:</p>
+<ol type="1">
+<li>服务程序集合:由操作系统提供,但以用户身份执行.这些服务程序是操作系统的组成部分,起始于各自固定的内存地址.LC-3最多可以支持256个服务程序.</li>
+<li>起始地址表:包含256个服务程序的起始地址.该表位于内存地址x0000~x00FF.在不同的操作系统中,该表的名称也不一样,有的称为”系统控制块”,有的称为”陷入矢量表”.</li>
+<li>TRAP指令:用户程序如果希望操作系统以用户程序身份执行某个特定的服务程序,并在执行结束后将控制权返回,则可以使用TRAP指令</li>
+<li>链接:通过链接返回用户程序.它意味着操作系统所提供的从服务程序返回用户程序的机制</li>
+</ol>
+<h4 id="trap指令">TRAP指令</h4>
+<p>在执行服务程序之前,TRAP指令需要先完成两件事:</p>
+<ol type="1">
+<li>根据陷入矢量表项的内容,将PC值修改为对应于服务程序的起始地址</li>
+<li>提供一种机制,返回到调用TRAP指令的子程序.我们称该返回机制为链接</li>
+</ol>
+<p>TRAP指令由两部分组成:操作码1111和陷入矢量编号<span
+class="math inline">\(\rm{bit}[7:0]\)</span>.位<span
+class="math inline">\([11:8]\)</span>全部为<span
+class="math inline">\(0\)</span>.陷入矢量标识了用户程序希望操作系统执行的服务程序,例如下面的陷入矢量为x23.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">15 14 13 12</th>
+<th style="text-align: center;">11 10 9 8</th>
+<th style="text-align: center;">7 6 5 4 3 2 1 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1 1 1 1</td>
+<td style="text-align: center;">0 0 0 0</td>
+<td style="text-align: center;">0 0 1 0 0 0 1 1</td>
+</tr>
+</tbody>
+</table>
+<p>TRAP指令在执行时,需要完成<span
+class="math inline">\(4\)</span>项任务:</p>
+<ol type="1">
+<li>将<span
+class="math inline">\(8-\rm{bit}\)</span>的陷入矢量零扩展为<span
+class="math inline">\(16-\rm{bit}\)</span>地址,并装入MAR,例如x23扩展为x0023.</li>
+<li>陷入矢量表位于内存x0000~x00FF,表项x0023的内容(假设为x04A0)装入MDR</li>
+<li>将当前PC值存入寄存器R7,以实现返回用户程序的链接机制</li>
+<li>将MDR的内容装入PC,至此完成TRAP指令</li>
+</ol>
+<p>现在,PC的内容变成了x04A0,因而程序从地址x04A0开始执行.x04A0指向的是操作系统”键盘读入”程序的起始.我们说该陷入矢量指向该TRAP程序的起始.所以TRAP
+x23指令的作用是激活操作系统”键盘读入”的服务程序.</p>
+<p>TRAP程序能够返回用户程序的下一条指令(服务程序结束之后)的前提是,必须存在机制以保存下条指令的地址.所以TRAP指令会在服务程序加载到PC之前,先将原来的PC值存入R7.换句话说,TRAP指令为服务程序返回用户程序提供了所有必要的信息.由于在TRAP指令的预取阶段,PC已经更新,指向下一条指令,所以在TRAP服务程序<strong>开始执行时</strong>,R7中包含的是<strong>TRAP指令的下一条指令地址</strong>.</p>
+<h4 id="完整机制">完整机制</h4>
+<p>我们知道,若要改变程序控制流程,就要在当前指令的”执行”阶段修改PC值,之后的下一个周期,CPU将会从新地址处读取指令.</p>
+<p>因而,如果要请求字符输入服务,我们只需要在用户程序中,调用TRAP指令的第x23号矢量即可.TRAP指令将从内存地址x0023读取其内容x04A0,并将其加载到PC中,同时将下一条指令的地址装入R7.在下一个指令周期的”取指令”节拍,将从x04A0开始执行,即请求键盘输入的操作系统服务程序.该TRAP服务程序的结尾是”JMP
+R7”指令,其作用是将R7的内容装入PC.如果R7的内容在服务程序的执行过程中没有改变,那么该值就是用户程序中TRAP指令的下一条指令的地址.</p>
+<p>在TRAP服务程序中,“JMP
+R7”指令非常有用,为此LC-3汇编语言中专门为这个操作定义了一个专用指令字RET,如下:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">15 14 13 12</th>
+<th style="text-align: center;">11 10 9</th>
+<th style="text-align: center;">8 7 6</th>
+<th style="text-align: center;">5 4 3 2 1 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1100</td>
+<td style="text-align: center;">000</td>
+<td style="text-align: center;">111</td>
+<td style="text-align: center;">000000</td>
+</tr>
+</tbody>
+</table>
+<h4 id="halt中断程序">HALT中断程序</h4>
+<p>在现代计算机中,用TRAP指令方式来清除RUN门.在LC-3中,RUN门的内容对应机器控制寄存器(映射内存地址xFFFE)的第15位.</p>
+<h4 id="子程序">子程序</h4>
+<p>我们称可以重复利用的代码为”子程序”或者”过程”,而C语言的属于则称之为”函数”.它们的使用机制则被称为”调用/返回机制”.</p>
+<h5 id="调用返回机制">调用/返回机制</h5>
+<p>调用机制的过程是,首先计算子程序的开始地址,然后装入PC,然后保持调用返回地址(下一条指令地址).在返回机制中,将把返回地址再装入Pc.</p>
+<p>调用/返回机制和TRAP指令的执行过程非常相似,两种情况下,都是先保存返回调用程序的链接地址,然后将程序流跳转至代码段(服务程序或者子程序).其中,PC装入的都是代码段的起始地址,R7装入的都是返回调用者的链接地址;代码段的最后一条语句,无论是在中断服务程序还是子程序中,都是JMP
+R7指令,也就是将R7的内容装入PC,从而将控制权返回到调用者.</p>
+<p>子程序和服务程序之间的主要区别在于TRAP指令,在TRAP方式下,服务程序调用了操作系统资源,因而具备访问计算机底层硬件的特权.它们通常由系统程序员编写,相比之下,子程序和调用程序可以由同一个程序员编写.</p>
+<h5 id="jsrjsrr指令">JSR/JSRR指令</h5>
+<p>在LC-3中,子程序调用的指令的操作码是0100.该指令的寻址模式(计算子程序的起始地址)有两种:PC相对地址寻址和基地址寻址.在LC-3汇编语言中,两种模式的操作码相同,但是助记符不同.该指令完成两件事:首先将返回地址存入R7,然后将计算子程序起始地址并装入PC,返回的地址就是跳转前已经增量的PC地址,它指向调用程序中紧随JSR/JSRR指令之后的那一条指令.</p>
+<p>JSR/JSRR指令由三部分组成</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">15 14 13 12</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">10 9 8 7 6 5 4 3 2 1 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0100</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">address evaluation bits</td>
+</tr>
+</tbody>
+</table>
+<p>其中: <span class="math inline">\(\rm{bit}[15:12]=0100\)</span>
+为操作码 <span class="math inline">\(\rm{bit}[11]\)</span>
+表示寻址模式,<span
+class="math inline">\(1\)</span>代表PC相对寻址模式,<span
+class="math inline">\(0\)</span>代表基地址寻址 <span
+class="math inline">\(\rm{bit}[10:0]\)</span>
+用于子程序的起始地址计算</p>
+<p>JSR指令如下:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">15 14 13 12</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">10 9 8 7 6 5 4 3 2 1 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0100</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">PCoffet11</td>
+</tr>
+</tbody>
+</table>
+<p>地址计算方法是,将递增后的PC值和符号位扩展后的<span
+class="math inline">\(\rm{bit}[10:0]\)</span>相加.</p>
+<p>JSRR指令如下:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">15 14 13 12</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">10 9</th>
+<th style="text-align: center;">8 7 6</th>
+<th style="text-align: center;">5 4 3 2 1 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0100</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">00</td>
+<td style="text-align: center;">BaseR</td>
+<td style="text-align: center;">000000</td>
+</tr>
+</tbody>
+</table>
+<p>地址计算方法是,将递增后的PC值和基址寄存器的内容相加.</p>
+<h3 id="栈">栈</h3>
+<h4 id="栈的基本结构">栈的基本结构</h4>
+<p>“栈”的概念,是指它的访问规则.”栈”的定义是,最后存入的东西,总是被第一个取走的,我们称这种特点为”后入先出”或”LIFO,Last
+In First
+Out”.按照计算机的术语来说,栈是一种<strong>抽象数据类型</strong>,抽象数据类型指的是其存储机制的操作方式(而不是实现方法).</p>
+<p>下面是栈在内存中的实现</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">地址</th>
+<th style="text-align: center;">内容</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">地址</th>
+<th style="text-align: center;">内容</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">地址</th>
+<th style="text-align: center;">内容</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">地址</th>
+<th style="text-align: center;">内容</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">x3FFB</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFB</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFB</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFB</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">x3FFC</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFC</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFC</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">&lt;-top</td>
+<td style="text-align: center;">x3FFC</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">x3FFD</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFD</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFD</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFD</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">x3FFE</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFE</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFE</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFE</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">&lt;-top</td>
+</tr>
+<tr>
+<td style="text-align: center;">x3FFF</td>
+<td style="text-align: center;">//////</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFF</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">&lt;-top</td>
+<td style="text-align: center;">x3FFF</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x3FFF</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">&lt;-top</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">R6</td>
+<td style="text-align: center;">x4000</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">R6</td>
+<td style="text-align: center;">x3FFF</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">R6</td>
+<td style="text-align: center;">x3FFC</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">R6</td>
+<td style="text-align: center;">x3FFE</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">初始状态</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">压入一次</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">压入三次</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">弹出两次</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>栈是由一段连续内存空间和一个寄存器(栈指针)组成.所谓”栈指针”就是一个寄存器,里面的内容是一个地址值,<strong>始终指向栈的顶部(即最近被压入的元素)</strong>.上面的第一列代表最初的空栈,第二列压入了值<span
+class="math inline">\(18\)</span>,第三列依次压入了<span
+class="math inline">\(31\)</span>,<span
+class="math inline">\(5\)</span>和<span
+class="math inline">\(12\)</span>,最后依次弹出值<span
+class="math inline">\(12\)</span>和<span
+class="math inline">\(5\)</span>,其内容依旧存留在内存位置x3FFD和x3FFC处,但是这两个值不能再被访问,因为这一段内存只能通过栈机制来访问.</p>
+<h5 id="压入">压入</h5>
+<p>对于上面的栈的第一列,R6的内容是x4000,即基地址(x3FFF)之前的一个位置,这表明此时栈是空的.当压入<span
+class="math inline">\(18\)</span>时,栈指针指向了最后压入的值,即x3FFF(储存<span
+class="math inline">\(18\)</span>的位置).每压入一个值,栈指针先递减,然后将数值存入它所指向的地址位置,对应的汇编指令如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POP      ADD   R6,R6,#-1</span><br><span class="line">         STR   R0,R6,#0</span><br></pre></td></tr></table></figure>
+<h5 id="弹出">弹出</h5>
+<p>如果想要从栈里面弹出一个元素,要先通过指针提供的地址读取该数值,然后递增指针,对应的汇编指令如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POP      LDR   R0,R6,#0</span><br><span class="line">         ADD   R6,R6,#1</span><br></pre></td></tr></table></figure>
+<p>其中栈顶的元素被弹出,装入R0.</p>
+<h5 id="下溢出">下溢出</h5>
+<p>如果试图对一个空栈执行弹出操作,将造成”下溢”问题.为了检查是否发生”下溢”,常用的做法是,子程序将执行成功或者失败的信息记录在某个寄存器中.在POP程序的流程中,将成功或者失败的信息记录在R5中.那么,POP程序返回后,调用程序通过R5就可以获知执行是否成功(如果成功,R5=0,否则R5=1).注意,由于POP程序使用R5记录执行情况,这就要求调用程序在JSR指令之前,保持R5的内容.对应的POP汇编指令如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POP      LD    R1,EMPTY</span><br><span class="line">         ADD   R2,R6,R1</span><br><span class="line">         BRz   Failure</span><br><span class="line">         LDR   R0,R6,#0</span><br><span class="line">         ADD   R6,R6,#1</span><br><span class="line">         AND   R5,R5,#0</span><br><span class="line">         RET</span><br><span class="line">Failure  AND   R5,R5,#0</span><br><span class="line">         ADD   R5,R5,#1</span><br><span class="line">         RET</span><br><span class="line">EMPTY    .FILL xC000</span><br></pre></td></tr></table></figure>
+<p>注意RET之前的那一条指令可以影响条件码,所以调用程序也可以进行条件位Z的测试,判断POP程序是否执行成功.</p>
+<h5 id="上溢出">上溢出</h5>
+<p>如果在栈空间全部被占用的情况下,再往栈中压入元素,那么就会发生”上溢”问题.和”下溢”相似,通过比较栈指针内容和栈底的地址,可以判断是否发生”上溢”.如果两个值相等,则意味着栈空间已经满了.要求PUSH程序在执行成功之时,把数值<span
+class="math inline">\(0\)</span>存入R5,失败时将数值<span
+class="math inline">\(1\)</span>存入R5.于是,PUSH程序返回后,调用程序通过检查R5的内容,即可判断PUSH的执行是否成功.PUSH汇编指令如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">PUSH     LD    R1,MAX</span><br><span class="line">         ADD   R2,R6,R1</span><br><span class="line">         BRz   Failure</span><br><span class="line">         ADD   R6,R6,#-1</span><br><span class="line">         STR   R0,R6,#0</span><br><span class="line">         AND   R5,R5,#0</span><br><span class="line">         RET</span><br><span class="line">Failure  AND   R5,R5,#0</span><br><span class="line">         ADD   R5,R5,#1</span><br><span class="line">         RET</span><br><span class="line">MAX      .FILL xC005</span><br></pre></td></tr></table></figure>
 <h2 id="第三部分c语言">第三部分:C语言</h2>
+<h3 id="高级语言翻译">高级语言翻译</h3>
+<p>高级语言有两种翻译方法:</p>
+<ol type="1">
+<li>解释执行,负责翻译的程序称为”解释器”,它读入高级语言程序,然后按照高级程序的语义执行相应的操作.真正的执行者不是高级语言代码本身,而是解释器程序</li>
+<li>编译执行,负责翻译的程序称为”编译器”,它将高级语言程序读入,然后翻译成机器代码,又称为可执行映像,该映像是可以直接在机器上执行的.</li>
+</ol>
+<p>无论是解释器还是编译器,其本身也是一个程序.</p>
+<h4 id="解释执行">解释执行</h4>
+<p>解释器逐个读入每条命令,然后按照语言规范的语义完成命令.高级语言程序只是向解释器提供一组”数据”,而不能直接被硬件执行.换句话说,解释器如同一个虚拟机,高级语言只是在虚拟机上被执行的程序.</p>
+<h4 id="编译执行">编译执行</h4>
+<p>在编译执行方式中,整个高级语言被全部翻译成机器码,然后在机器上执行.为了保证程序翻译的有效性,在翻译之前,编译器会在更大的范围内做分析(通常是整个源文件).通常程序只需要编译一次,然后就可以多次执行.编译器是这样一个系统,它能处理一个或者多个包含高级语言程序的文件,生成一个”可执行映像”,编译器本身不执行程序,它只负责翻译任务,即将高级语言翻译成机器语言.</p>
+<h3 id="c编程语言">C编程语言</h3>
+<p>这里采用的C语言遵循ANSI C标准,只要编译器是ANSI
+C兼容的,那么就可以编译这里的C语言代码.</p>
+<h4 id="c编译器">C编译器</h4>
+<p>C编译器能够将C源程序翻译为一个可执行映像.可执行映像是一个用机器语言表示的,具备内存装载信息的可执行程序.整个编译过程将涉及预处理器,编译器和链接器等组件.通常我们把它们统称为”编译器”.编译器在处理过程中,将自动调用预处理器和链接器等组件.</p>
+<ol type="1">
+<li>预处理器:C预处理器扫描所有的C源文件,寻找并执行其中的预处理指令.</li>
+<li>编译器:经过预处理之后的程序,由编译器继续翻译成”目标模块”.目标模块是程序的一个组成部分,是机器语言代码形式.编译过程包括两个阶段.一是”分析”或”语法分析”,即将源程序分解为更小的组成单元;二是”合成”,即生成机器语言代码.分析阶段的任务是读入,分析源代码,并构建编译器内部格式的数据结构;而合成阶段的任务则是生成机器码,以及根据编译指令优化机器代码.符号表是编译器中一个重要的内部数据结构,它记录了程序中使用过的所有符号.</li>
+<li>链接器:所有的目标代码生成后,将由链接器完成后续处理.链接器的任务是将各个目标模块组装成一个可执行映像.可执行映像是一种具有特定格式的机器语言程序,具有可装载性和可直接执行这两个特性.C程序对于库函数的依赖非常强.库函数中包含了最常用的一些操作函数,它们以库函数的方式存在.这些库函数通常由系统软件(如操作系统,编译器)的开发者编写.在用户程序中,如果调用了库函数,则链接器将负责查找该函数在库文件中的位置,并拷贝对应目标代码,然后”链接”入可执行映像.</li>
+</ol>
+<h3 id="变量和运算符">变量和运算符</h3>
+<h4 id="变量">变量</h4>
+<h5
+id="三种基本数据类型intchardouble">三种基本数据类型:int,char,double</h5>
+<ol type="1">
+<li>int:标识符int声明的是一个有符号整数变量.整数类型的内部表示及其数值大小的范围,取决于不同的ISA以及所使用的编译器.一般情况下,C语言的int和底层的ISA的字长相对应.</li>
+<li>char:标识符int声明的是一个字符类型的数据.</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> key=<span class="string">&#x27;Q&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>这里变量<code>key</code>的初始值是大写字母<code>Q</code>的ASCII码值.注意<code>Q</code>被单引号包围,表明这是一个ASCII字符值.</p>
+<ol start="3" type="1">
+<li>double: 标识符double声明的是一个浮点类型变量.</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> a = <span class="number">2.1E2</span>; <span class="comment">/*这是210.0*/</span></span><br><span class="line"><span class="type">double</span> b = <span class="number">-2E-1</span>; <span class="comment">/*这是-0.2*/</span></span><br></pre></td></tr></table></figure>
+<h5 id="局部变量和全局变量">局部变量和全局变量</h5>
+<p>在C语言中,程序中的变量声明是向编译器传递以下三类信息:变量的标识符,类型,作用域.对于前两者,编译器可以直接从变量声明语句中获取,但是有关作用域,编译器则要通过声明语句所在位置判断.</p>
+<ol type="1">
+<li>局部变量:有些变量是在它们所在代码块的开始处声明,我们称为局部变量.这里所说的代码块指的是用一对大括号包括起来的代码.局部变量只能在当前代码块中被访问.</li>
+<li>全局变量:全局变量在整个程序的生命周期内都占有独立的空间及其内容,可以在程序的任意地方被访问.</li>
+</ol>
+<h4 id="运算符">运算符</h4>
+<h5 id="赋值运算符">赋值运算符</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = b + c;</span><br><span class="line">x = x + <span class="number">4</span>;</span><br><span class="line">x = x + <span class="number">4.0</span>;  </span><br></pre></td></tr></table></figure>
+<h5 id="算数运算符">算数运算符</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x + y;</span><br><span class="line">x - y;</span><br><span class="line">x * y;</span><br><span class="line">x / y;</span><br><span class="line">x % y; <span class="comment">/*取余数*/</span></span><br></pre></td></tr></table></figure>
+<h5 id="位运算符">位运算符</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x1234</span> &amp; <span class="number">0x5678</span>;  <span class="comment">/*按位与，等于0x567C*/</span></span><br><span class="line"><span class="number">0x1234</span> | <span class="number">0x5678</span>;  <span class="comment">/*按位或，等于0x1230*/</span></span><br><span class="line"><span class="number">0x1234</span> ^ <span class="number">0x5678</span>;  <span class="comment">/*按位异或，等于0x444C*/</span></span><br><span class="line">~<span class="number">0x1234</span>;          <span class="comment">/*按位取反，等于0xEDCB*/</span></span><br><span class="line"><span class="number">1234</span> &amp; <span class="number">5678</span>;      <span class="comment">/*按位与，等于1026*/</span></span><br><span class="line"><span class="number">0x1234</span> &lt;&lt; <span class="number">3</span>;      <span class="comment">/*左移3位，右边补0，等于0x91A0*/</span></span><br><span class="line"><span class="number">0x1234</span> &gt;&gt; <span class="number">2</span>;      <span class="comment">/*右移2位，左边符号扩展，等于0x048D*/</span></span><br><span class="line"><span class="number">1234</span> &lt;&lt; <span class="number">3</span>;        <span class="comment">/*等于9872*/</span></span><br><span class="line"><span class="number">1234</span> &gt;&gt; <span class="number">2</span>;        <span class="comment">/*等于308*/</span></span><br></pre></td></tr></table></figure>
+<h5 id="关系运算符">关系运算符</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;,&lt;,&lt;=,&gt;=,==,!=;</span><br></pre></td></tr></table></figure>
+<h5 id="逻辑运算符">逻辑运算符</h5>
+<p>在C语言中,任何非零值都是逻辑真,数值零被认为逻辑假.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!        <span class="comment">/*逻辑非*/</span></span><br><span class="line">&amp;&amp;       <span class="comment">/*逻辑与*/</span></span><br><span class="line">||       <span class="comment">/*逻辑或*/</span></span><br></pre></td></tr></table></figure>
+<h5 id="递增递减运算符">递增/递减运算符</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = x++;    <span class="comment">/*先把x赋给y，然后自增*/</span></span><br><span class="line">y = ++x;    <span class="comment">/*x先自增，然后把新的值赋给y*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="编译器处理">编译器处理</h4>
+<p>编译器在完成翻译工作的时候,需要借助于两个机制:</p>
+<ol type="1">
+<li>符号表:编译器在编译过程中,将与变量相关的信息记录在”符号表”中.</li>
+<li>内存的系统分配:根据变量特性分配内存.编译器将从整个系统层面,为不同类别的对象划分不同的内存区域.</li>
+</ol>
+<p>我们看一个例子:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> amount;</span><br><span class="line">   <span class="type">int</span> rate;</span><br><span class="line">   <span class="type">int</span> time;</span><br><span class="line"></span><br><span class="line">   <span class="type">int</span> hours;</span><br><span class="line">   <span class="type">int</span> minutes;</span><br><span class="line">   <span class="type">int</span> seconds;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;How many bytes of data to be transferred?&quot;</span>);</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;amount);</span><br><span class="line"></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;What is the transfer rate?&quot;</span>)</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;rate)</span><br><span class="line"></span><br><span class="line">   time = amount / rate;</span><br><span class="line"></span><br><span class="line">   hours = time / <span class="number">3600</span>;</span><br><span class="line">   minutes = (time % <span class="number">3600</span>) /<span class="number">60</span>;</span><br><span class="line">   seconds = ((time % <span class="number">3600</span>) % <span class="number">60</span>);</span><br><span class="line"></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;Time: %dh %dm %ds\n&quot;</span>, hours, minutes, seconds);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="符号表">符号表</h5>
+<p>编译器在扫描程序代码时,每遇到一个变量声明语句,就在符号表中创造一个新的表项.表项结构中包含很多字段信息,这些字段信息与变量的存储空间管理以及变量操作代码生成等都有关.这些字段包括:名字,类型,已分配的内存地址,变量声明域或作用域等信息.</p>
+<p>下面的符号表对应上面的代码.注意,编译器采用偏移方式记录变量在内存中的位置.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">标识</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">位置(偏移量)</th>
+<th style="text-align: center;">范围</th>
+<th style="text-align: center;">其他信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">amount</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">main</td>
+<td style="text-align: center;">…</td>
+</tr>
+<tr>
+<td style="text-align: center;">hours</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">-3</td>
+<td style="text-align: center;">main</td>
+<td style="text-align: center;">…</td>
+</tr>
+<tr>
+<td style="text-align: center;">minutes</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">-4</td>
+<td style="text-align: center;">main</td>
+<td style="text-align: center;">…</td>
+</tr>
+<tr>
+<td style="text-align: center;">rate</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">-1</td>
+<td style="text-align: center;">main</td>
+<td style="text-align: center;">…</td>
+</tr>
+<tr>
+<td style="text-align: center;">seconds</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">-5</td>
+<td style="text-align: center;">main</td>
+<td style="text-align: center;">…</td>
+</tr>
+<tr>
+<td style="text-align: center;">time</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">-2</td>
+<td style="text-align: center;">main</td>
+<td style="text-align: center;">…</td>
+</tr>
+</tbody>
+</table>
+<h5 id="变量的空间分配">变量的空间分配</h5>
+<p>在C语言中,存放变量内容的内存空间(变量的分配空间)有两种区段:<strong>全局数据段</strong>和<strong>运行时栈</strong>.全局数据段是内存中存放全局变量的区段,运行时栈是局部变量所在的地方.符号表中的偏移字段提供了有关变量在内存中的更精确的位置信息,它代表的是变量存储地址距离内存段基地址的偏移(或距离).</p>
+<p>在编译器生成的机器代码中,R4是一个专用寄存器,它存放的是全局数据段的基地址(或起始地址),所以R4可以被视为是全局指针.而一个函数中所有的局部变量都存放在一个被称为<strong>活动记录</strong>或者<strong>堆栈帧</strong>的内存模板中.所谓的活动记录,就是一段连续的内存空间,它包含了当前函数中所有的局部变量.每个函数都有自己的活动记录.当我们调用一个函数时,该函数活动记录的最大地址将存放在寄存器R5中,因此R5又被称为<strong>帧指针</strong>.</p>
+<p>当我们调用一个函数时,该函数的活动记录被压入当前栈.同时R5的内容被调整,指向当前栈顶(即记录的基地址).这表明可以通过栈指针访问函数内的局部变量.当该函数结束,即将把控制权交还给调用者时,活动记录将被弹出当前栈.同样,指针R5的内容也会被修改,指向调用者活动记录所在位置.整个过程中,寄存器R6始终指向运行时栈顶,我们称R6为<strong>栈指针</strong>.</p>
+<h3 id="控制结构">控制结构</h3>
+<p>一个大问题被分解成多个子任务,然后对每个子任务独立编程.各种子任务的基本编程结构可以分为顺序,条件和循环.</p>
+<h4 id="条件结构">条件结构</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x &lt;= <span class="number">10</span>)</span><br><span class="line">   y= x^<span class="number">2</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (x &lt;= <span class="number">10</span>)&#123;</span><br><span class="line">   y= x^<span class="number">2</span> + <span class="number">5</span>;</span><br><span class="line">   z= <span class="number">2</span>*y - <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (x)&#123;</span><br><span class="line">   y++;</span><br><span class="line">   z--;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">   y--;</span><br><span class="line">   z++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> month;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;Enter the number of the month:&quot;</span>);</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;month);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span>(month==<span class="number">4</span> || month==<span class="number">6</span> || month==<span class="number">9</span> || month==<span class="number">11</span>)</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;The month has 30 days\n&quot;</span>);</span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">if</span>(month==<span class="number">1</span> || month==<span class="number">3</span> || month==<span class="number">5</span> || month==<span class="number">7</span> || month==<span class="number">8</span> || month==<span class="number">10</span> || month==<span class="number">12</span>)</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;The month has 31 days\n&quot;</span>);</span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">if</span>(month==<span class="number">2</span>)</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;The month has either 29 days or 28 days\n&quot;</span>);</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Don&#x27;t know that month.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="循环结构">循环结构</h4>
+<h5 id="while语句">while语句</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">while</span> (x &lt; <span class="number">10</span>)&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">      x = x + <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="for语句">for语句</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> multiplicand;</span><br><span class="line">   <span class="type">int</span> multiplier;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span>(multiplicant=<span class="number">0</span>; multiplicant&lt;<span class="number">10</span>; multiplicant++)&#123;</span><br><span class="line">      <span class="keyword">for</span>(multiplier=<span class="number">0</span>; multiplier&lt;<span class="number">10</span>; multiplier++)&#123;</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;%d\t&quot;</span>, multiplier*multiplicant);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="do-while循环">do-while循环</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d \n&quot;</span>, x);</span><br><span class="line">   x = x + <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">while</span> (x &lt; <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="其他控制结构">其他控制结构</h4>
+<h5 id="switch语句">switch语句</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> keypress;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(keypress)&#123;</span><br><span class="line">   <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">   <span class="comment">/*statement A*/</span></span><br><span class="line">   <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">case</span> <span class="string">&#x27;b&#x27;</span>:</span><br><span class="line">   <span class="comment">/*statement B*/</span></span><br><span class="line">   <span class="keyword">break</span>;   </span><br><span class="line"></span><br><span class="line">   <span class="keyword">case</span> <span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">   <span class="comment">/*statement C*/</span></span><br><span class="line">   <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">case</span> <span class="string">&#x27;d&#x27;</span>:</span><br><span class="line">   <span class="comment">/*statement D*/</span></span><br><span class="line">   <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="break和continue语句">break和continue语句</h5>
+<p><code>break</code>的作用是立即结束其所在的循环体.<code>continue</code>的作用是,立即跳转至下一次循环.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">   <span class="keyword">if</span>(i==<span class="number">5</span>)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, i);</span><br><span class="line">&#125;<span class="comment">/*output:0 1 2 3 4*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">   <span class="keyword">if</span>(i==<span class="number">5</span>)</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, i);</span><br><span class="line">&#125;<span class="comment">/*output:0 1 2 3 4 6 7 8 9*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="函数">函数</h3>
+<h4 id="c语言中的函数">C语言中的函数</h4>
+<h5 id="声明">声明</h5>
+<p>函数声明告诉编译器函数的一些相关属性,我们又称之为”函数原型”.函数声明的内容包括:函数名,返回值类型以及输入参数列表.函数声明语句以分号结尾.</p>
+<ol type="1">
+<li>函数返回值类型是声明语句的第一个字段.该类型可以说int,char,double等,它描述了函数将产生的输出结果(唯一的).但是不是所有函数都有返回值,如果没有返回值,那么就称它的返回类型是void.</li>
+<li>第二个字段是函数名.</li>
+<li>第三个字段描述了函数所需的输入参数的类型和顺序,它们是该函数期望从调用者获取的参数类型和传入顺序.</li>
+</ol>
+<h5 id="调用">调用</h5>
+<p>调用是只需提供函数名和对应的输入参数,注意输入参数的类型要与声明中的类型相匹配.</p>
+<h5 id="定义">定义</h5>
+<p>函数定义和函数声明几乎一样,除了前者后面不需要分号.函数名后面是函数的正则化参数列表,所谓正则化参数列表就是一组变量的声明,每个变量的内容都被初始化为调用者提供的对应数值.调用者传递的形式参数必须和正则化参数列表中定义的参数类型和顺序相匹配.</p>
+<h5 id="返回">返回</h5>
+<p>如果函数要返回一个值,那么关键词<code>return</code>必须跟随一个表达式,且该表达式的类型必须与函数声明的返回值类型相匹配.而没有返回值的函数(声明为<code>void</code>的函数),不需要<code>return</code>语句.</p>
+<h4 id="c语言函数的实现">C语言函数的实现</h4>
 <h2 id="附录-lc-3指令集结构">附录 LC-3指令集结构</h2>
 <h3 id="概述">概述</h3>
 <ul>
@@ -1715,13 +2249,10 @@ class="math inline">\(16~\rm{bit}\)</span>地址,然后读取该地址单元的�
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/%E8%B4%B9%E6%9B%BC%E5%9B%BE/" rel="prev" title="Phy">
-                  <i class="fa fa-angle-left"></i> Phy
-                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/hello-world/" rel="next" title="Hello World">
-                  Hello World <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/%E8%B4%B9%E6%9B%BC%E5%9B%BE/" rel="next" title="Phy">
+                  Phy <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

@@ -27,7 +27,7 @@
 <meta property="og:description" content="数值 整数及其表示 0 ————&gt;低电平，逻辑假 1 ————&gt;高电平，逻辑真 x&#x2F;X————&gt;不确定或未知逻辑态 z&#x2F;Z————&gt;高阻态 b或B————&gt;二进制,0、1、x&#x2F;X、z&#x2F;Z&#x2F;?、; o或O————&gt;八进制,0~7、x&#x2F;X、z&#x2F;Z&#x2F;?、; d或D————&gt;十进制,0~9、; h或H————&gt;十六进制,09、a&#x2F;Af&#x2F;F、x&#x2F;X">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-15T08:09:08.847Z">
+<meta property="article:modified_time" content="2025-06-30T07:48:47.557Z">
 <meta property="article:author" content="SiyuanLei">
 <meta property="article:tag" content="Verilog">
 <meta name="twitter:card" content="summary">
@@ -149,18 +149,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -252,7 +252,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-05-15 16:09:08" itemprop="dateModified" datetime="2025-05-15T16:09:08+08:00">2025-05-15</time>
+      <time title="Modified: 2025-06-30 15:48:47" itemprop="dateModified" datetime="2025-06-30T15:48:47+08:00">2025-06-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -332,11 +332,11 @@ h或H————&gt;十六进制,0<sub>9、a/A</sub>f/F、x/X、z/Z/?、</em>;<
 </ul>
 <h2 id="数据类型">数据类型</h2>
 <p>Verilog
-HDL的数据类型可以分成两大类,第一类为物理数据类型(包括连线型和寄存器型),第二类为抽象数据类型(包括整型,时间型,实型,参数型)</p>
+HDL的数据类型可以分成两大类,第一类为<strong>物理数据类型(包括连线型和寄存器型)</strong>,第二类为<strong>抽象数据类型(包括整型,时间型,实型,参数型)</strong>.</p>
 <h3 id="物理数据类型">物理数据类型</h3>
 <ol type="1">
-<li><p>连线型</p></li>
-<li><p>寄存器型</p></li>
+<li><p>连线型(wire):连线表示逻辑单元的物理连接,可以对应电路中的物理信号连线,这种变量类型不能保持电荷(trireg除外).连线型变量必须要有驱动源,一种是连接到一个门或者模块的输出端,另一种是用assign连续赋值语句对它进行赋值.若没有驱动源,则保持高阻态z.</p></li>
+<li><p>寄存器型(reg):reg型变量是最常见也是最重要的寄存器型数据类型,它是数据储存单元的抽象类型,其对应的硬件电路元件具有状态保持作用,能够储存数据,如触发器,锁存器等.reg型变量常用于行为级描述,由过程赋值语句对其进行赋值.</p></li>
 </ol>
 <h4
 id="连线型和寄存器型数据类型的声明">连线型和寄存器型数据类型的声明</h4>
@@ -431,13 +431,13 @@ module开始，endmodule结束，开始的部分包括模块名和端口列表�
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%BA%94%E7%AB%A0/" rel="prev" title="第五章:仿真验证和Testbench编写">
-                  <i class="fa fa-angle-left"></i> 第五章:仿真验证和Testbench编写
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%B8%89%E7%AB%A0/" rel="prev" title="第三章:Verilog HDL程序设计语句和描述方式">
+                  <i class="fa fa-angle-left"></i> 第三章:Verilog HDL程序设计语句和描述方式
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%B8%89%E7%AB%A0/" rel="next" title="第三章:Verilog HDL程序设计语句和描述方式">
-                  第三章:Verilog HDL程序设计语句和描述方式 <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%B8%80%E7%AB%A0/" rel="next" title="第一章:Verilog HDL数字集成电路设计方法概述">
+                  第一章:Verilog HDL数字集成电路设计方法概述 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
