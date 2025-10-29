@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="HSpice的安装及破解 下载好安装包解压之后, 有两个文件夹HSpice 2009.09和Testbench(我把它改成HSpiceTestbench了). 以管理员身份运行HSpice 2009.09文件夹下的hspice_vC-2009.09_Win_setup.exe和sx_C-2009_09_windows.exe这两个文件, 一路next, 注意安装路径, 就可以完成安装, 接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HSpice的安装及其基本使用方法">
+<meta property="og:url" content="http://example.com/2025/05/04/HSpice%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="SiyuanLei&#39;s Blog">
+<meta property="og:description" content="HSpice的安装及破解 下载好安装包解压之后, 有两个文件夹HSpice 2009.09和Testbench(我把它改成HSpiceTestbench了). 以管理员身份运行HSpice 2009.09文件夹下的hspice_vC-2009.09_Win_setup.exe和sx_C-2009_09_windows.exe这两个文件, 一路next, 注意安装路径, 就可以完成安装, 接">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-29T02:44:52.328Z">
+<meta property="article:author" content="SiyuanLei">
+<meta property="article:tag" content="EE">
+<meta property="article:tag" content="仿真">
+<meta property="article:tag" content="HSpice">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/HSpice%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/04/HSpice%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/","path":"2025/05/04/HSpice基本操作/","title":"HSpice的安装及其基本使用方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HSpice的安装及其基本使用方法 | SiyuanLei's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SiyuanLei's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hspice%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">HSpice的安装及破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hspice%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">HSpice的基本使用方法</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SiyuanLei"
+      src="/images/femboy.jpg">
+  <p class="site-author-name" itemprop="name">SiyuanLei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/HSpice%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HSpice的安装及其基本使用方法 | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HSpice的安装及其基本使用方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-10-29 10:44:52" itemprop="dateModified" datetime="2025-10-29T10:44:52+08:00">2025-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/EE/" itemprop="url" rel="index"><span itemprop="name">EE</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/EE/EDA/" itemprop="url" rel="index"><span itemprop="name">EDA</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="hspice的安装及破解">HSpice的安装及破解</h2>
+<p>下载好安装包解压之后,
+有两个文件夹<code>HSpice 2009.09</code>和<code>Testbench</code>(我把它改成<code>HSpiceTestbench</code>了).</p>
+<p>以管理员身份运行<code>HSpice 2009.09</code>文件夹下的<code>hspice_vC-2009.09_Win_setup.exe</code>和<code>sx_C-2009_09_windows.exe</code>这两个文件,
+一路next, 注意安装路径, 就可以完成安装, 接下来是破解方法.</p>
+<ol type="1">
+<li>产生 License 档桉 (Hspice and Spiceexplorer)到 “keygen”
+的目录下执行LicGen.exe 1.1 按 “Open” 开启 “Synopsys.lpd”档桉 1.2
+在”Select Host ID” 选择 “Any” 勾选 “Use Daemon”并在 “Select Daemon ID”
+选择”Disk” 1.3 按 “Generate” 后会出现一个视窗 “Generated
+License”，按Save，将档名储存为 “license.dat” 1.4 复製此 “license.dat”
+到目录 “C:_C-2009.09" 下</li>
+<li>复製 “lm” 到目录 “C:Files" 下，进入”lm” 目录执行 “lmtools.exe” 2.1
+选 “Config Services” 在”Service Name” 输入 “SPICE_Explorer_Server”
+在”Path to the lmgrd.exe file” 按 “Browse” 选择 “lm” 目录下的
+“lmgrd.exe” 在”Path to the license file” 按 “Browse” 选择步骤 2.3
+所产生的 license.dat (将档桉类型选为 “*.dat”才可以选择) 在”Path to the
+debug log file” 按 “Browse” 输入 “debug” 后按开启 勾选 “Use Services” 和
+“Start Server at Power Up” 然后按 “Save Service” 2.2 在 “Service/License
+File” 勾选 “Configuration using Services” 并选择 SPICE_Explorer_Server
+2.3 选 “Start/Stop/Reread” ， 按 “Stop Server” 再按 “Start Server”</li>
+<li>环境变数设定 (Hspice and Spiceexplorer) 到桌面选”我的电脑”按右键
+=&gt; 内容 =&gt; 进阶 =&gt; 环境变数 在”xxx的使用者变数” 按
+“新增”，变数名称 = LM_LICENSE_FILE 变数值 =
+27000@localhost;C:_C-2009.09.dat 若已经有 LM_LICENSE_FILE ，请以分号 “;”
+隔开加入 27000@localhost 和 C:_C-2009.09.dat 到变数值</li>
+<li>复製 “Meta.cfg” 和 “Hspice.ini” 到 “C:_C-2009.09" 目录下</li>
+</ol>
+<h2 id="hspice的基本使用方法">HSpice的基本使用方法</h2>
+<p>在目录<code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\HSPICE C-2009.09</code>下打开Hspui
+C-2009.09, 出现界面, 点击open,
+打开<code>HSpiceTestbench</code>下的任意一个网表文件(后缀是.sp),
+这里以inv.sp为例, 以文本文件打开inv.sp, 可以看到其关联的工艺库,
+这里把工艺库的路径改成<code>.lib E:\HspiceTestbench\TSMC65\toplevel.l mc_lib</code>,
+这个工艺库可以在这个目录下的对应文件中找到细节.</p>
+<p>然后点击最上面一栏的configuration-&gt;versions,
+在cscope中关联波形观测器,
+也就是把<code>C:\Program Files (x86)\Synopsys\CustomExplorer C-2009.09\sx.exe</code>复制到这一栏中,
+然后点击OK. 然后在最上面一栏中的File-&gt;Save Configuration保存设置.</p>
+<p>接下来进行仿真, 点击Simulate, 仿真完成后再点击Edit LL,
+如果出现<code>***** job concluded 1****** HSPICE -- C-2009.09 32-BIT (Aug 24 2009) winnt ******</code>
+的字样, 则说明仿真成功.
+这时我们可以发现在HSpiceTestbench文件夹下面多出了几个文件,
+其中一个就是inv.tr0, 这个就是波形文件.</p>
+<p>下面查看仿真波形, 点击CScope, 打开波形观察窗口,
+在上面第二栏中选择Import Waveform File, 选择刚刚生成的inv.tr0,
+在左边一栏出现D0:inv.tr0, 点击这个东西左边的+号， 有一个toplevel,
+点击就可以发现出现了三个选项, 分别是v(vdd), v(in), v(out),
+分别点击这三个选项就可以在右边的窗口看见仿真波形了.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/EE/" rel="tag"># EE</a>
+              <a href="/tags/%E4%BB%BF%E7%9C%9F/" rel="tag"># 仿真</a>
+              <a href="/tags/HSpice/" rel="tag"># HSpice</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/Python%E5%9F%BA%E7%A1%80/" rel="prev" title="Python基础">
+                  <i class="fa fa-angle-left"></i> Python基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/Hexo%E5%BB%BA%E7%AB%8B%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="Hexo+GitHub搭建博客教程">
+                  Hexo+GitHub搭建博客教程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">SiyuanLei</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="数学函数 在数学中我们用过\(sin\)和\(ln\)这样的函数，例如\(sin(π&#x2F;2)&#x3D;1\)，\(ln1&#x3D;0\)等等，在C语言中也可以使用这些函数（ln函数在C标准库中叫做log）： 例 在C语言中使用数学函数 123456789#include &lt;math.h&gt;#include &lt;stdio.h&gt;int main(void)&#123;    double p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言:简单函数">
+<meta property="og:url" content="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%89%E7%AB%A0/index.html">
+<meta property="og:site_name" content="SiyuanLei&#39;s Blog">
+<meta property="og:description" content="数学函数 在数学中我们用过\(sin\)和\(ln\)这样的函数，例如\(sin(π&#x2F;2)&#x3D;1\)，\(ln1&#x3D;0\)等等，在C语言中也可以使用这些函数（ln函数在C标准库中叫做log）： 例 在C语言中使用数学函数 123456789#include &lt;math.h&gt;#include &lt;stdio.h&gt;int main(void)&#123;    double p">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-06T10:07:47.151Z">
+<meta property="article:author" content="SiyuanLei">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%89%E7%AB%A0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%89%E7%AB%A0/","path":"2025/05/04/C语言第三章/","title":"C语言:简单函数"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C语言:简单函数 | SiyuanLei's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SiyuanLei's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">数学函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">自定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%A2%E5%8F%82%E5%92%8C%E5%AE%9E%E5%8F%82"><span class="nav-number">3.</span> <span class="nav-text">形参和实参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">全局变量,局部变量和作用域</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SiyuanLei"
+      src="/images/femboy.jpg">
+  <p class="site-author-name" itemprop="name">SiyuanLei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%89%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C语言:简单函数 | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言:简单函数
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-06 18:07:47" itemprop="dateModified" datetime="2025-08-06T18:07:47+08:00">2025-08-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="数学函数">数学函数</h2>
+<p>在数学中我们用过<span class="math inline">\(sin\)</span>和<span
+class="math inline">\(ln\)</span>这样的函数，例如<span
+class="math inline">\(sin(π/2)=1\)</span>，<span
+class="math inline">\(ln1=0\)</span>等等，在C语言中也可以使用这些函数（ln函数在C标准库中叫做log）：</p>
+<p>例 在C语言中使用数学函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> pi = <span class="number">3.1416</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sin(pi/2)=%f\nln1=%f\n&quot;</span>, <span class="built_in">sin</span>(pi/<span class="number">2</span>), <span class="built_in">log</span>(<span class="number">1.0</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译运行这个程序，结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.c -lm</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./a.out</span></span><br><span class="line">sin(pi/2)=1.000000</span><br><span class="line">ln1=0.000000</span><br></pre></td></tr></table></figure>
+<p>在数学中写一个函数有时候可以省略括号，而C语言要求一定要加上括号，例如<code>log(1.0)</code>。在C语言的术语中，<code>1.0</code>是参数（Argument），<code>log</code>是函数（Function），<code>log(1.0)</code>是函数调用（Function
+Call）。<code>sin(pi/2)</code>和<code>log(1.0)</code>这两个函数调用在我们的<code>printf</code>语句中处于什么位置呢？在上一章讲过，这应该是写表达式的位置。因此函数调用也是一种表达式，这个表达式由函数调用运算符（<code>()</code>括号）和两个操作数组成，操作数<code>log</code>是一个函数名（Function
+Designator），它的类型是一种函数类型（Function
+Type），操作数<code>1.0</code>是double型的。<code>log(1.0)</code>这个表达式的值就是对数运算的结果，也是<code>double</code>型的，在C语言中函数调用表达式的值称为函数的返回值（Return
+Value）。总结一下我们新学的语法规则：</p>
+<p>表达式 → 函数名 表达式 → 表达式(参数列表) 参数列表 → 表达式, 表达式,
+…</p>
+<p>现在我们可以完全理解<code>printf</code>语句了：原来<code>printf</code>也是一个函数，上例中的<code>printf("sin(pi/2)=%f\nln1=%f\n", sin(pi/2), log(1.0))</code>是带三个参数的函数调用，而函数调用也是一种表达式，因此<code>printf</code>语句也是表达式语句的一种。但是<code>printf</code>感觉不像一个数学函数，为什么呢？因为像<code>log</code>这种函数，我们传进去一个参数会得到一个返回值，我们调用<code>log</code>函数就是为了得到它的返回值，至于<code>printf</code>，我们并不关心它的返回值（事实上它也有返回值，表示实际打印的字符数），我们调用<code>printf</code>不是为了得到它的返回值，而是为了利用它所产生的副作用（Side
+Effect）－－打印。C语言的函数可以有Side
+Effect，这一点是它和数学函数在概念上的根本区别。</p>
+<p>Side
+Effect这个概念也适用于运算符组成的表达式。比如<code>a + b</code>这个表达式也可以看成一个函数调用，把运算符<code>+</code>看作函数，它的两个参数是<code>a</code>和<code>b</code>，返回值是两个参数的和，传入两个参数，得到一个返回值，并没有产生任何Side
+Effect。而赋值运算符是有Side
+Effect的，如果把<code>a = b</code>这个表达式看成函数调用，返回值就是所赋的值，既是<code>b</code>的值也是<code>a</code>的值，但除此之外还产生了Side
+Effect，就是变量<code>a</code>被改变了，改变计算机存储单元里的数据或者做输入输出操作都算Side
+Effect。</p>
+<p>回想一下我们的学习过程，一开始我们说赋值是一种语句，后来学了表达式，我们说赋值语句是表达式语句的一种；一开始我们说<code>printf</code>是一种语句，现在学了函数，我们又说<code>printf</code>也是表达式语句的一种。随着我们一步步的学习，把原来看似不同类型的语句统一成一种语句了。学习的过程总是这样，初学者一开始接触的很多概念从严格意义上说是错的，但是很容易理解，随着一步步学习，在理解原有概念的基础上不断纠正，不断泛化（Generalize）。比如一年级老师说小数不能减大数，其实这个概念是错的，后来引入了负数就可以减了，后来引入了分数，原来的正数和负数的概念就泛化为整数，上初中学了无理数，原来的整数和分数的概念就泛化为有理数，再上高中学了复数，有理数和无理数的概念就泛化为实数。坦白说，到目前为止本书的很多说法都是不完全正确的，但这是学习理解的必经阶段，到后面的章节都会逐步纠正的。</p>
+<p>程序第一行的<code>#</code>号（Pound Sign，Number Sign或Hash
+Sign）和<code>include</code>表示包含一个头文件（Header
+File），后面尖括号（Angel
+Bracket）中就是文件名（这些头文件通常位于/usr/include目录下）。头文件中声明了我们程序中使用的库函数，根据先声明后使用的原则，要使用<code>printf</code>函数必须包含<code>stdio.h</code>，要使用数学函数必须包含<code>math.h</code>，如果什么库函数都不使用就不必包含任何头文件，例如写一个程序<code>int main(void)&#123;int a;a=2;return 0;&#125;</code>，不需要包含头文件就可以编译通过，当然这个程序什么也做不了。</p>
+<p>使用<code>math.h</code>中声明的库函数还有一点特殊之处，gcc命令行必须加<code>-lm</code>选项，因为数学函数位于libm.so库文件中（这些库文件通常位于/lib目录下），<code>-lm</code>选项告诉编译器，我们程序中用到的数学函数要到这个库文件里找。本书用到的大部分库函数（例如<code>printf</code>）位于libc.so库文件中，使用libc.so中的库函数在编译时不需要加<code>-lc</code>选项，当然加了也不算错，因为这个选项是gcc的默认选项。关于头文件和库函数目前理解这么多就可以了，到第
+20 章 链接详解再详细解释。</p>
+<p>C标准库和glibc:</p>
+<p>C标准主要由两部分组成，一部分描述C的语法，另一部分描述C标准库。C标准库定义了一组标准头文件，每个头文件中包含一些相关的函数、变量、类型声明和宏定义。要在一个平台上支持C语言，不仅要实现C编译器，还要实现C标准库，这样的实现才算符合C标准。不符合C标准的实现也是存在的，例如很多单片机的C语言开发工具中只有C编译器而没有完整的C标准库。</p>
+<p>在Linux平台上最广泛使用的C函数库是glibc，其中包括C标准库的实现，也包括本书第三部分介绍的所有系统函数。几乎所有C程序都要调用glibc的库函数，所以glibc是Linux平台C程序运行的基础。glibc提供一组头文件和一组库文件，最基本、最常用的C标准库函数和系统函数在libc.so库文件中，几乎所有C程序的运行都依赖于libc.so，有些做数学计算的C程序依赖于libm.so，以后我们还会看到多线程的C程序依赖于libpthread.so。以后我说libc时专指libc.so这个库文件，而说glibc时指的是glibc提供的所有库文件。</p>
+<p>glibc并不是Linux平台唯一的基础C函数库，也有人在开发别的C函数库，比如适用于嵌入式系统的uClibc。</p>
+<h2 id="自定义函数">自定义函数</h2>
+<p>我们不仅可以调用C标准库提供的函数，也可以定义自己的函数，事实上我们已经这么做了：我们定义了<code>main</code>函数。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> hour = <span class="number">11</span>;</span><br><span class="line">    <span class="type">int</span> minute = <span class="number">59</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d and %d hours\n&quot;</span>, hour, minute / <span class="number">60</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>main</code>函数的特殊之处在于执行程序时它自动被操作系统调用，操作系统就认准了<code>main</code>这个名字，除了名字特殊之外，<code>main</code>函数和别的函数没有区别。我们对照着<code>main</code>函数的定义来看语法规则：</p>
+<p>函数定义 → 返回值类型 函数名(参数列表) 函数体 函数体 → { 语句列表 }
+语句列表 → 语句列表项 语句列表项 … 语句列表项 → 语句 语句列表项 →
+变量声明、类型声明或非定义的函数声明 非定义的函数声明 → 返回值类型
+函数名(参数列表);</p>
+<p>我们稍后再详细解释“函数定义”和“非定义的函数声明”的区别。从第 7 章
+结构体开始我们才会看到类型声明，所以现在暂不讨论。</p>
+<p>给函数命名也要遵循上一章讲过的标识符命名规则。由于我们定义的<code>main</code>函数不带任何参数，参数列表应写成<code>void</code>。函数体可以由若干条语句和声明组成，C89要求所有声明写在所有语句之前（本书的示例代码都遵循这一规定），而C99的新特性允许语句和声明按任意顺序排列，只要每个标识符都遵循先声明后使用的原则就行。<code>main</code>函数的返回值是<code>int</code>型的，<code>return 0</code>;这个语句表示返回值是<code>0</code>，<code>main</code>函数的返回值是返回给操作系统看的，因为<code>main</code>函数是被操作系统调用的，通常程序执行成功就返回<code>0</code>，在执行过程中出错就返回一个非零值。比如我们将<code>main</code>函数中的<code>return</code>语句改为<code>return 4</code>;再执行它，执行结束后可以在Shell中看到它的退出状态（Exit
+Status）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./a.out</span> </span><br><span class="line">11 and 0 hours</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $?</span></span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<p><code>$?</code>是Shell中的一个特殊变量，表示上一条命令的退出状态。关于<code>main</code>函数需要注意两点：</p>
+<p>[K&amp;R]书上的<code>main</code>函数定义写成<code>main()&#123;...&#125;</code>的形式，不写返回值类型也不写参数列表，这是Old
+Style C的风格。Old Style
+C规定不写返回值类型就表示返回<code>int</code>型，不写参数列表就表示参数类型和个数没有明确指出。这种宽松的规定使编译器无法检查程序中可能存在的Bug，增加了调试难度，不幸的是现在的C标准为了兼容旧的代码仍然保留了这种语法，但读者绝不应该继续使用这种语法。</p>
+<p>其实操作系统在调用<code>main</code>函数时是传参数的，<code>main</code>函数最标准的形式应该是<code>int main(int argc, char *argv[])</code>，在第
+6 节
+“指向指针的指针与指针数组”详细介绍。C标准也允许<code>int main(void)</code>这种写法，如果不使用系统传进来的两个参数也可以写成这种形式。但除了这两种形式之外，定义<code>main</code>函数的其它写法都是错误的或不可移植的。</p>
+<p>关于返回值和<code>return</code>语句我们将在第 1 节
+“return语句”详细讨论，我们先从不带参数也没有返回值的函数开始学习定义和使用函数：</p>
+<p>例 最简单的自定义函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">newline</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;First Line.\n&quot;</span>);</span><br><span class="line">    newline();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Second Line.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">First Line.</span><br><span class="line"></span><br><span class="line">Second Line.</span><br></pre></td></tr></table></figure>
+<p>我们定义了一个<code>newline</code>函数给<code>main</code>函数调用，它的作用是打印一个换行，所以执行结果中间多了一个空行。<code>newline</code>函数不仅不带参数，也没有返回值，返回值类型为<code>void</code>表示没有返回值，这说明我们调用这个函数完全是为了利用它的Side
+Effect。如果我们想要多次插入空行就可以多次调用<code>newline</code>函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;First Line.\n&quot;</span>);</span><br><span class="line">    newline();</span><br><span class="line">    newline();</span><br><span class="line">    newline();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Second Line.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果我们总需要三个三个地插入空行，我们可以再定义一个<code>threeline</code>函数每次插入三个空行：</p>
+<p>例 较简单的自定义函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">newline</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">threeline</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    newline();</span><br><span class="line">    newline();</span><br><span class="line">    newline();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Three lines:\n&quot;</span>);</span><br><span class="line">    threeline();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Another three lines.\n&quot;</span>);</span><br><span class="line">    threeline();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过这个简单的例子可以体会到：</p>
+<p>同一个函数可以被多次调用。</p>
+<p>可以用一个函数调用另一个函数，后者再去调第三个函数。</p>
+<p>通过自定义函数可以给一组复杂的操作起一个简单的名字，例如<code>threeline</code>。对于<code>main</code>函数来说，只需要通过<code>threeline</code>这个简单的名字来调用就行了，不必知道打印三个空行具体怎么做，所有的复杂操作都被隐藏在<code>threeline</code>这个名字后面。</p>
+<p>使用自定义函数可以使代码更简洁，<code>main</code>函数在任何地方想打印三个空行只需调用一个简单的<code>threeline()</code>，而不必每次都写三个<code>printf("\n")</code>。</p>
+<p>读代码和读文章不一样，按从上到下从左到右的顺序读代码未必是最好的。比如上面的例子，按源文件的顺序应该是先看<code>newline</code>再看<code>threeline</code>再看<code>main</code>。如果你换一个角度，按代码的执行顺序来读也许会更好：首先执行的是<code>main</code>函数中的语句，在一条<code>printf</code>之后调用了<code>threeline</code>，这时再去看<code>threeline</code>的定义，其中又调用了<code>newline</code>，这时再去看<code>newline</code>的定义，<code>newline</code>里面有一条<code>printf</code>，执行完成后返回<code>threeline</code>，这里还剩下两次<code>newline</code>调用，效果也都一样，执行完之后返回<code>main</code>，接下来又是一条<code>printf</code>和一条<code>threeline</code>。</p>
+<p>读代码的过程就是模仿计算机执行程序的过程，我们不仅要记住当前读到了哪一行代码，还要记住现在读的代码是被哪个函数调用的，这段代码返回后应该从上一个函数的什么地方接着往下读。</p>
+<p>现在澄清一下函数声明、函数定义、函数原型（Prototype）这几个概念。比如<code>void threeline(void)</code>这一行，声明了一个函数的名字、参数类型和个数、返回值类型，这称为函数原型。在代码中可以单独写一个函数原型，后面加<code>;</code>号结束，而不写函数体，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">threeline</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>这种写法只能叫函数声明而不能叫函数定义，只有带函数体的声明才叫定义。上一章讲过，只有分配存储空间的变量声明才叫变量定义，其实函数也是一样，编译器只有见到函数定义才会生成指令，而指令在程序运行时当然也要占存储空间。那么没有函数体的函数声明有什么用呢？它为编译器提供了有用的信息，编译器在翻译代码的过程中，只有见到函数原型（不管带不带函数体）之后才知道这个函数的名字、参数类型和返回值，这样碰到函数调用时才知道怎么生成相应的指令，所以函数原型必须出现在函数调用之前，这也是遵循“先声明后使用”的原则。</p>
+<p>在上面的例子中，<code>main</code>调用<code>threeline</code>，<code>threeline</code>再调用<code>newline</code>，要保证每个函数的原型出现在调用之前，就只能按先<code>newline</code>再<code>threeline</code>再<code>main</code>的顺序定义了。如果使用不带函数体的声明，则可以改变函数的定义顺序：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">newline</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">threeline</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">newline</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">threeline</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样仍然遵循了先声明后使用的原则。</p>
+<p>由于有Old Style
+C语法的存在，并非所有函数声明都包含完整的函数原型，例如<code>void threeline();</code>这个声明并没有明确指出参数类型和个数，所以不算函数原型，这个声明提供给编译器的信息只有函数名和返回值类型。如果在这样的声明之后调用函数，编译器不知道参数的类型和个数，就不会做语法检查，所以很容易引入Bug。读者需要了解这个知识点以便维护别人用Old
+Style C风格写的代码，但绝不应该按这种风格写新的代码。</p>
+<p>如果在调用函数之前没有声明会怎么样呢？有的读者也许碰到过这种情况，我可以解释一下，但绝不推荐这种写法。比如按上面的顺序定义这三个函数，但是把开头的两行声明去掉：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Three lines:\n&quot;</span>);</span><br><span class="line">    threeline();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Another three lines.\n&quot;</span>);</span><br><span class="line">    threeline();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">newline</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">threeline</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    newline();</span><br><span class="line">    newline();</span><br><span class="line">    newline();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译时会报警告：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.c</span></span><br><span class="line">main.c:17: warning: conflicting types for ‘threeline’</span><br><span class="line">main.c:6: warning: previous implicit declaration of ‘threeline’ was here</span><br></pre></td></tr></table></figure>
+<p>但仍然能编译通过，运行结果也对。这里涉及到的规则称为函数的隐式声明（Implicit
+Declaration），在<code>main</code>函数中调用<code>threeline</code>时并没有声明它，编译器认为此处隐式声明了<code>int threeline(void);</code>，隐式声明的函数返回值类型都是<code>int</code>，由于我们调用这个函数时没有传任何参数，所以编译器认为这个隐式声明的参数类型是<code>void</code>，这样函数的参数和返回值类型都确定下来了，编译器根据这些信息为函数调用生成相应的指令。然后编译器接着往下看，看到<code>threeline</code>函数的原型是<code>void threeline(void)</code>，和先前的隐式声明的返回值类型不符，所以报警告。好在我们也没用到这个函数的返回值，所以执行结果仍然正确。</p>
+<h2 id="形参和实参">形参和实参</h2>
+<p>下面我们定义一个带参数的函数，我们需要在函数定义中指明参数的个数和每个参数的类型，定义参数就像定义变量一样，需要为每个参数指明类型，参数的命名也要遵循标识符命名规则。例如：</p>
+<p>例 带参数的自定义函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print_time</span><span class="params">(<span class="type">int</span> hour, <span class="type">int</span> minute)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d:%d\n&quot;</span>, hour, minute);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    print_time(<span class="number">23</span>, <span class="number">59</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，定义变量时可以把相同类型的变量列在一起，而定义参数却不可以，例如下面这样的定义是错的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">print_time</span><span class="params">(<span class="type">int</span> hour, minute)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d:%d\n&quot;</span>, hour, minute);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>学习C语言的人肯定都乐意看到这句话：“变量是这样定义的，参数也是这样定义的，一模一样”，这意味着不用专门去记住参数应该怎么定义了。谁也不愿意看到这句话：“定义变量可以这样写，而定义参数却不可以”。C语言的设计者也不希望自己设计的语法规则里到处都是例外，一个容易被用户接受的设计应该遵循最少例外原则（Rule
+of Least
+Surprise）。其实关于参数的这条规定也不算十分例外，也是可以理解的，请读者想想为什么要这么规定。学习编程语言不应该死记各种语法规定，如果能够想清楚设计者这么规定的原因（Rationale），不仅有助于记忆，而且会有更多收获。本书在必要的地方会解释一些Rationale，或者启发读者自己去思考，例如上一节在脚注中解释了<code>void</code>关键字的Rationale。[C99
+Rationale]是随C99标准一起发布的，值得参考。</p>
+<p>总的来说，C语言的设计是非常优美的，只要理解了少数基本概念和基本原则就可以根据组合规则写出任意复杂的程序，很少有例外的规定说这样组合是不允许的，或者那样类推是错误的。相反，C++的设计就非常复杂，充满了例外，全世界没几个人能把C++的所有规则都牢记于心，因而C++的设计一直饱受争议，这个观点在[UNIX编程艺术]中有详细阐述。</p>
+<p>在本书中，凡是提醒读者注意的地方都是多少有些Surprise的地方，初学者如果按常理来想很可能要想错，所以需要特别提醒一下。而初学者容易犯的另外一些错误，完全是因为没有掌握好基本概念和基本原理，或者根本无视组合规则而全凭自己主观臆断所致，对这一类问题本书不会做特别的提醒，例如有的初学者看完第
+2 章 常量、变量和表达式之后会这样打印π的值：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> pi=<span class="number">3.1416</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;pi\n&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>之所以会犯这种错误，一是不理解Literal的含义，二是自己想当然地把变量名组合到字符串里去，而事实上根本没有这条语法规则。如果连这样的错误都需要在书上专门提醒，就好比提醒小孩吃饭一定要吃到嘴里，不要吃到鼻子里，更不要吃到耳朵里一样。</p>
+<p>回到正题。我们调用<code>print_time(23, 59)</code>时，函数中的参数<code>hour</code>就代表<code>23</code>，参数<code>minute</code>就代表<code>59</code>。确切地说，当我们讨论函数中的<code>hour</code>这个参数时，我们所说的“参数”是指形参（Parameter），当我们讨论传一个参数<code>23</code>给函数时，我们所说的“参数”是指实参（Argument），但我习惯都叫参数而不习惯总把形参、实参这两个文绉绉的词挂在嘴边（事实上大多数人都不习惯），读者可以根据上下文判断我说的到底是形参还是实参。记住这条基本原理：形参相当于函数中定义的变量，调用函数传递参数的过程相当于定义形参变量并且用实参的值来初始化。例如这样调用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">print_time</span><span class="params">(<span class="type">int</span> hour, <span class="type">int</span> minute)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d:%d\n&quot;</span>, hour, minute);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> h = <span class="number">23</span>, m = <span class="number">59</span>;</span><br><span class="line">    print_time(h, m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相当于在函数<code>print_time</code>中执行了这样一些语句：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> hour = h;</span><br><span class="line"><span class="type">int</span> minute = m;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d:%d\n&quot;</span>, hour, minute);</span><br></pre></td></tr></table></figure>
+<p><code>main</code>函数的变量<code>h</code>和<code>print_time</code>函数的参数<code>hour</code>是两个不同的变量，只不过它们的存储空间中都保存了相同的值<code>23</code>，因为变量<code>h</code>的值赋给了参数<code>hour</code>。同理，变量<code>m</code>的值赋给了参数<code>minute</code>。C语言的这种传递参数的方式称为Call
+by
+Value。在调用函数时，每个参数都需要得到一个值，函数定义中有几个形参，在调用时就要传几个实参，不能多也不能少，每个参数的类型也必须对应上。</p>
+<p>肯定有读者注意到了，为什么我们每次调用<code>printf</code>传的实参个数都不一样呢？因为C语言规定了一种特殊的参数列表格式，用命令<code>man 3 printf</code>可以查看到<code>printf</code>函数的原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">printf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br></pre></td></tr></table></figure>
+<p>第一个参数是<code>const char *</code>类型的，后面的<code>...</code>可以代表<code>0</code>个或任意多个参数，这些参数的类型也是不确定的，这称为可变参数（Variable
+Argument），第 6 节
+“可变参数”将会详细讨论这种格式。总之，每个函数的原型都明确规定了返回值类型以及参数的类型和个数，即使像printf这样规定为“不确定”也是一种明确的规定，调用函数时要严格遵守这些规定，有时候我们把函数叫做接口（Interface），调用函数就是使用这个接口，使用接口的前提是必须和接口保持一致。</p>
+<p>Man Page:</p>
+<p>Man
+Page是Linux开发最常用的参考手册，由很多页面组成，每个页面描述一个主题，这些页面被组织成若干个Section。FHS（Filesystem
+Hierarchy Standard）标准规定了Man Page各Section的含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>用户命令，例如ls(1)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>系统调用，例如_exit(2)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>库函数，例如printf(3)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>特殊文件，例如null(4)描述了设备文件/dev/null、/dev/zero的作用</td>
+</tr>
+<tr>
+<td>5</td>
+<td>系统配置文件的格式，例如passwd(5)描述了系统配置文件/etc/passwd的格式</td>
+</tr>
+<tr>
+<td>6</td>
+<td>游戏</td>
+</tr>
+<tr>
+<td>7</td>
+<td>其它杂项，例如bash-builtins(7)描述了bash的各种内建命令</td>
+</tr>
+<tr>
+<td>8</td>
+<td>系统管理命令，例如ifconfig(8)</td>
+</tr>
+</tbody>
+</table>
+<p>注意区分用户命令和系统管理命令，用户命令通常位于/bin和/usr/bin目录，系统管理命令通常位于/sbin和/usr/sbin目录，一般用户可以执行用户命令，而执行系统管理命令经常需要root权限。系统调用和库函数的区别将在第
+2 节 “main函数和启动例程”说明。</p>
+<p>Man
+Page中有些页面有重名，比如敲<code>man printf</code>命令看到的并不是C函数<code>printf</code>，而是位于第1个Section的系统命令<code>printf</code>，要查看位于第3个Section的<code>printf</code>函数应该敲<code>man 3 printf</code>，也可以敲<code>man -k printf</code>命令搜索哪些页面的主题包含<code>printf</code>关键字。本书会经常出现类似<code>printf(3)</code>这样的写法，括号中的<code>3</code>表示Man
+Page的第3个Section，或者表示“我这里想说的是<code>printf</code>库函数而不是<code>printf</code>命令”。</p>
+<h2 id="全局变量局部变量和作用域">全局变量,局部变量和作用域</h2>
+<p>我们把函数中定义的变量称为局部变量（Local
+Variable），由于形参相当于函数中定义的变量，所以形参也是一种局部变量。在这里“局部”有两层含义：</p>
+<p>1、一个函数中定义的变量不能被另一个函数使用。例如<code>print_time</code>中的<code>hour</code>和<code>minute</code>在<code>main</code>函数中没有定义，不能使用，同样<code>main</code>函数中的局部变量也不能被<code>print_time</code>函数使用。如果这样定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">print_time</span><span class="params">(<span class="type">int</span> hour, <span class="type">int</span> minute)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d:%d\n&quot;</span>, hour, minute);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> hour = <span class="number">23</span>, minute = <span class="number">59</span>;</span><br><span class="line">    print_time(hour, minute);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>main</code>函数中定义了局部变量<code>hour</code>，<code>print_time</code>函数中也有参数<code>hour</code>，虽然它们名称相同，但仍然是两个不同的变量，代表不同的存储单元。<code>main</code>函数的局部变量<code>minute</code>和<code>print_time</code>函数的参数<code>minute</code>也是如此。</p>
+<p>2、每次调用函数时局部变量都表示不同的存储空间。局部变量在每次函数调用时分配存储空间，在每次函数返回时释放存储空间，例如调用<code>print_time(23, 59)</code>时分配<code>hour</code>和<code>minute</code>两个变量的存储空间，在里面分别存上<code>23</code>和<code>59</code>，函数返回时释放它们的存储空间，下次再调用<code>print_time(12, 20)</code>时又分配<code>hour</code>和<code>minute</code>的存储空间，在里面分别存上<code>12</code>和<code>20</code>。</p>
+<p>与局部变量的概念相对的是全局变量（Global
+Variable），全局变量定义在所有的函数体之外，它们在程序开始运行时分配存储空间，在程序结束时释放存储空间，在任何函数中都可以访问全局变量，例如：</p>
+<p>例 全局变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> hour = <span class="number">23</span>, minute = <span class="number">59</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print_time</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d:%d in print_time\n&quot;</span>, hour, minute);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    print_time();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d:%d in main\n&quot;</span>, hour, minute);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正因为全局变量在任何函数中都可以访问，所以在程序运行过程中全局变量被读写的顺序从源代码中是看不出来的，源代码的书写顺序并不能反映函数的调用顺序。程序出现了Bug往往就是因为在某个不起眼的地方对全局变量的读写顺序不正确，如果代码规模很大，这种错误是很难找到的。而对局部变量的访问不仅局限在一个函数内部，而且局限在一次函数调用之中，从函数的源代码很容易看出访问的先后顺序是怎样的，所以比较容易找到Bug。因此，虽然全局变量用起来很方便，但一定要慎用，能用函数传参代替的就不要用全局变量。</p>
+<p>如果全局变量和局部变量重名了会怎么样呢？我们把代码改为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> hour = <span class="number">23</span>, minute = <span class="number">59</span>;</span><br><span class="line"><span class="type">int</span> x=<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print_time</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d:%d in print_time\n&quot;</span>, hour, minute);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> hour = <span class="number">0</span>, minute = <span class="number">30</span>;</span><br><span class="line">    print_time();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d:%d in main\n&quot;</span>, hour, minute);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x=%d\n&quot;</span>, x);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>则第一次调用<code>print_time</code>打印的是全局变量的值，第二次直接调用<code>printf</code>打印的则是<code>main</code>函数局部变量的值。在C语言中每个标识符都有特定的作用域，全局变量是定义在所有函数体之外的标识符，它的作用域从定义的位置开始直到源文件结束，而<code>main</code>函数局部变量的作用域仅限于<code>main</code>函数之中。如上图所示，设想整个源文件是一张大纸，也就是全局变量的作用域，而<code>main</code>函数是盖在这张大纸上的一张小纸，也就是<code>main</code>函数局部变量的作用域。在小纸上用到标识符<code>hour</code>和<code>minute</code>时应该参考小纸上的定义，因为大纸（全局变量的作用域）被盖住了，如果在小纸上用到某个标识符却没有找到它的定义，那么再去翻看下面的大纸上有没有定义，例如上图中的变量<code>x</code>。</p>
+<p>到目前为止我们在初始化一个变量时都是用常量做Initializer，其实也可以用表达式做Initializer，但要注意一点：局部变量可以用类型相符的任意表达式来初始化，而全局变量只能用常量表达式（Constant
+Expression）初始化。例如，全局变量<code>pi</code>这样初始化是合法的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> pi = <span class="number">3.14</span> + <span class="number">0.0016</span>;</span><br></pre></td></tr></table></figure>
+<p>但这样初始化是不合法的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> pi = <span class="built_in">acos</span>(<span class="number">-1.0</span>);</span><br></pre></td></tr></table></figure>
+<p>然而局部变量这样初始化却是可以的。程序开始运行时要用适当的值来初始化全局变量，所以初始值必须保存在编译生成的可执行文件中，因此初始值在编译时就要计算出来，然而上面第二种Initializer的值必须在程序运行时调用acos函数才能得到，所以不能用来初始化全局变量。请注意区分编译时和运行时这两个概念。为了简化编译器的实现，C语言从语法上规定全局变量只能用常量表达式来初始化，因此下面这种全局变量初始化是不合法的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> minute = <span class="number">360</span>;</span><br><span class="line"><span class="type">int</span> hour = minute / <span class="number">60</span>;</span><br></pre></td></tr></table></figure>
+<p>虽然在编译时计算出<code>hour</code>的初始值是可能的，但是<code>minute / 60</code>不是常量表达式，不符合语法规定，所以编译器不必想办法去算这个初始值。</p>
+<p>如果全局变量在定义时不初始化则初始值是<code>0</code>，如果局部变量在定义时不初始化则初始值是不确定的。所以，局部变量在使用之前一定要先赋值，如果基于一个不确定的值做后续计算肯定会引入Bug。</p>
+<p>如何证明“局部变量的存储空间在每次函数调用时分配，在函数返回时释放”？当我们想要确认某些语法规则时，可以查教材，也可以查C99，但最快捷的办法就是编个小程序验证一下：</p>
+<p>例 验证局部变量存储空间的分配和释放</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">    i = <span class="number">777</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    foo();</span><br><span class="line">    foo();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一次调用<code>foo</code>函数，分配变量<code>i</code>的存储空间，然后打印<code>i</code>的值，由于<code>i</code>未初始化，打印的应该是一个不确定的值，然后把<code>i</code>赋值为<code>777</code>，函数返回，释放<code>i</code>的存储空间。第二次调用<code>foo</code>函数，分配变量<code>i</code>的存储空间，然后打印<code>i</code>的值，由于<code>i</code>未初始化，如果打印的又是一个不确定的值，就证明了“局部变量的存储空间在每次函数调用时分配，在函数返回时释放”。分析完了，我们运行程序看看是不是像我们分析的这样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">134518128</span><br><span class="line">777</span><br></pre></td></tr></table></figure>
+<p>结果出乎意料，第二次调用打印的<code>i</code>值正是第一次调用末尾赋给<code>i</code>的值777。有一种初学者是这样，原本就没有把这条语法规则记牢，或者对自己的记忆力没信心，看到这个结果就会想：哦那肯定是我记错了，改过来记吧，应该是“函数中的局部变量具有一直存在的固定的存储空间，每次函数调用时使用它，返回时也不释放，再次调用函数时它应该还能保持上次的值”。还有一种初学者是怀疑论者或不可知论者，看到这个结果就会想：教材上明明说“局部变量的存储空间在每次函数调用时分配，在函数返回时释放”，那一定是教材写错了，教材也是人写的，是人写的就难免出错，哦，连C99也这么写的啊，C99也是人写的，也难免出错，或者C99也许没错，但是反正运行结果就是错了，计算机这东西真靠不住，太容易受电磁干扰和宇宙射线影响了，我的程序写得再正确也有可能被干扰得不能正确运行。</p>
+<p>这是初学者最常见的两种心态。不从客观事实和逻辑推理出发分析问题的真正原因，而仅凭主观臆断胡乱给问题定性，“说你有罪你就有罪”。先不要胡乱怀疑，我们再做一次实验，在两次<code>foo</code>函数调用之间插一个别的函数调用，结果就大不相同了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    foo();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>);</span><br><span class="line">    foo();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">134518200</span><br><span class="line">hello</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<p>这一回，第二次调用<code>foo</code>打印的<code>i</code>值又不是<code>777</code>了而是<code>0</code>，“局部变量的存储空间在每次函数调用时分配，在函数返回时释放”这个结论似乎对了，但另一个结论又不对了：全局变量不初始化才是<code>0</code>啊，不是说“局部变量不初始化则初值不确定”吗？</p>
+<p>关键的一点是，我说“初值不确定”，有没有说这个不确定值不能是<code>0</code>？有没有说这个不确定值不能是上次调用赋的值？在这里“不确定”的准确含义是：每次调用这个函数时局部变量的初值可能不一样，运行环境不同，函数的调用次序不同，都会影响到局部变量的初值。在运用逻辑推理时一定要注意，不要把必要条件（Necessary
+Condition）当充分条件（Sufficient
+Condition），这一点在Debug时尤其重要，看到错误现象不要轻易断定原因是什么，一定要考虑再三，找出它的真正原因。例如，不要看到第二次调用打印777就下结论“函数中的局部变量具有一直存在的固定的存储空间，每次函数调用时使用它，返回时也不释放，再次调用函数时它应该还能保持上次的值”，这个结论倒是能推出777这个结果，但反过来由777这个结果却不能推出这样的结论。所以说777这个结果是该结论的必要条件，但不是充分条件。也不要看到第二次调用打印0就断定“局部变量未初始化则初值为0”，0这个结果是该结论的必要条件，但也不是充分条件。至于为什么会有这些现象，为什么这个不确定的值刚好是777，或者刚好是0，等学到例
+19.1 “研究函数的调用过程”就能解释这些现象了。</p>
+<p>从第 2 节
+“自定义函数”介绍的语法规则可以看出，非定义的函数声明也可以写在局部作用域中，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">print_time</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span>;</span><br><span class="line">    print_time(<span class="number">23</span>, <span class="number">59</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样声明的标识符<code>print_time</code>具有局部作域，只在<code>main</code>函数中是有效的函数名，出了<code>main</code>函数就不存在<code>print_time</code>这个标识符了。</p>
+<p>写非定义的函数声明时参数可以只写类型而不起名，例如上面代码中的<code>void print_time(int, int);</code>，只要告诉编译器参数类型是什么，编译器就能为<code>print_time(23, 59)</code>函数调用生成正确的指令。另外注意，虽然在一个函数体中可以声明另一个函数，但不能定义另一个函数，C语言不允许嵌套定义函数[5]。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B9%9D%E7%AB%A0/" rel="prev" title="C语言:编码风格">
+                  <i class="fa fa-angle-left"></i> C语言:编码风格
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%83%E7%AB%A0/" rel="next" title="C语言:结构体">
+                  C语言:结构体 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">SiyuanLei</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

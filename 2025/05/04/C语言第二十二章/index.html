@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="基本规则 除了Hello World这种极简单的程序之外，一般的程序都是由多个源文件编译链接而成的，这些源文件的处理步骤通常用Makefile来管理。Makefile起什么作用呢？我们先看一个例子，这个例子由例 12.3 “用深度优先搜索解迷宫问题”改写而成： 12345678910111213141516171819202122232425262728293031323334353637">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言:Makefile基础">
+<meta property="og:url" content="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E7%AB%A0/index.html">
+<meta property="og:site_name" content="SiyuanLei&#39;s Blog">
+<meta property="og:description" content="基本规则 除了Hello World这种极简单的程序之外，一般的程序都是由多个源文件编译链接而成的，这些源文件的处理步骤通常用Makefile来管理。Makefile起什么作用呢？我们先看一个例子，这个例子由例 12.3 “用深度优先搜索解迷宫问题”改写而成： 12345678910111213141516171819202122232425262728293031323334353637">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:\blog\Blog\images\C\make.graph.png">
+<meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-08T11:53:50.255Z">
+<meta property="article:author" content="SiyuanLei">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\blog\Blog\images\C\make.graph.png">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E7%AB%A0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E7%AB%A0/","path":"2025/05/04/C语言第二十二章/","title":"C语言:Makefile基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C语言:Makefile基础 | SiyuanLei's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SiyuanLei's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">基本规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E5%90%AB%E8%A7%84%E5%88%99%E5%92%8C%E6%A8%A1%E5%BC%8F%E8%A7%84%E5%88%99"><span class="nav-number">2.</span> <span class="nav-text">隐含规则和模式规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%A4%84%E7%90%86%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-number">4.</span> <span class="nav-text">自动处理头文件的依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84make%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text">常用的make命令行选项</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SiyuanLei"
+      src="/images/femboy.jpg">
+  <p class="site-author-name" itemprop="name">SiyuanLei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C语言:Makefile基础 | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言:Makefile基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-08 19:53:50" itemprop="dateModified" datetime="2025-08-08T19:53:50+08:00">2025-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="基本规则">基本规则</h2>
+<p>除了Hello
+World这种极简单的程序之外，一般的程序都是由多个源文件编译链接而成的，这些源文件的处理步骤通常用Makefile来管理。Makefile起什么作用呢？我们先看一个例子，这个例子由例
+12.3 “用深度优先搜索解迷宫问题”改写而成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* main.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;main.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stack.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;maze.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">point</span> <span class="title">predecessor</span>[<span class="title">MAX_ROW</span>][<span class="title">MAX_COL</span>] =</span> &#123;</span><br><span class="line">    &#123;&#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">    &#123;&#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">    &#123;&#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">    &#123;&#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">    &#123;&#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">visit</span><span class="params">(<span class="type">int</span> row, <span class="type">int</span> col, <span class="keyword">struct</span> point pre)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">point</span> <span class="title">visit_point</span> =</span> &#123; row, col &#125;;</span><br><span class="line">    maze[row][col] = <span class="number">2</span>;</span><br><span class="line">    predecessor[row][col] = pre;</span><br><span class="line">    push(visit_point);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">point</span> <span class="title">p</span> =</span> &#123; <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    maze[p.row][p.col] = <span class="number">2</span>;</span><br><span class="line">    push(p);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!is_empty()) &#123;</span><br><span class="line">        p = pop();</span><br><span class="line">        <span class="keyword">if</span> (p.row == MAX_ROW - <span class="number">1</span>  <span class="comment">/* goal */</span></span><br><span class="line">            &amp;&amp; p.col == MAX_COL - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (p.col+<span class="number">1</span> &lt; MAX_COL     <span class="comment">/* right */</span></span><br><span class="line">            &amp;&amp; maze[p.row][p.col+<span class="number">1</span>] == <span class="number">0</span>)</span><br><span class="line">            visit(p.row, p.col+<span class="number">1</span>, p);</span><br><span class="line">        <span class="keyword">if</span> (p.row+<span class="number">1</span> &lt; MAX_ROW     <span class="comment">/* down */</span></span><br><span class="line">            &amp;&amp; maze[p.row+<span class="number">1</span>][p.col] == <span class="number">0</span>)</span><br><span class="line">            visit(p.row+<span class="number">1</span>, p.col, p);</span><br><span class="line">        <span class="keyword">if</span> (p.col<span class="number">-1</span> &gt;= <span class="number">0</span>          <span class="comment">/* left */</span></span><br><span class="line">            &amp;&amp; maze[p.row][p.col<span class="number">-1</span>] == <span class="number">0</span>)</span><br><span class="line">            visit(p.row, p.col<span class="number">-1</span>, p);</span><br><span class="line">        <span class="keyword">if</span> (p.row<span class="number">-1</span> &gt;= <span class="number">0</span>          <span class="comment">/* up */</span></span><br><span class="line">            &amp;&amp; maze[p.row<span class="number">-1</span>][p.col] == <span class="number">0</span>)</span><br><span class="line">            visit(p.row<span class="number">-1</span>, p.col, p);</span><br><span class="line">        print_maze();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (p.row == MAX_ROW - <span class="number">1</span> &amp;&amp; p.col == MAX_COL - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;(%d, %d)\n&quot;</span>, p.row, p.col);</span><br><span class="line">        <span class="keyword">while</span> (predecessor[p.row][p.col].row != <span class="number">-1</span>) &#123;</span><br><span class="line">            p = predecessor[p.row][p.col];</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;(%d, %d)\n&quot;</span>, p.row, p.col);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No path!\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们把堆栈和迷宫的代码分别转移到模块<code>stack.c</code>和<code>maze.c</code>中，<code>main.c</code>包含它们提供的头文件<code>stack.h</code>和<code>maze.h</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* main.h */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MAIN_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAIN_H</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">point</span> &#123;</span> <span class="type">int</span> row, col; &#125; <span class="type">item_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_ROW 5</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_COL 5</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>在<code>main.h</code>中定义了一个类型和两个常量，<code>main.c</code>、<code>stack.c</code>和<code>maze.c</code>都要用到这些定义，都要包含这个头文件。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* stack.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stack.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">item_t</span> <span class="built_in">stack</span>[<span class="number">512</span>];</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> top = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">push</span><span class="params">(<span class="type">item_t</span> p)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">stack</span>[top++] = p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">item_t</span> <span class="title function_">pop</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">stack</span>[--top];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">is_empty</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> top == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* stack.h */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> STACK_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> STACK_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;main.h&quot;</span> <span class="comment">/* provides definition for item_t */</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">push</span><span class="params">(<span class="type">item_t</span>)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">item_t</span> <span class="title function_">pop</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">is_empty</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>例 12.3
+“用深度优先搜索解迷宫问题”中的堆栈规定死了只能放<code>char</code>型数据，现在我们做进一步抽象，堆栈中放<code>item_t</code>类型的数据，<code>item_t</code>可以定义为任意类型，只要它能够通过函数的参数和返回值传递并且支持赋值操作就行。这也是一种避免硬编码的策略，<code>stack.c</code>中多次使用<code>item_t</code>类型，要改变它的定义只需改变<code>main.h</code>中的一行代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* maze.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;maze.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> maze[MAX_ROW][MAX_COL] = &#123;</span><br><span class="line">    <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">    <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>,</span><br><span class="line">    <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">    <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>,</span><br><span class="line">    <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print_maze</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; MAX_ROW; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; MAX_COL; j++)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, maze[i][j]);</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*********\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* maze.h */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MAZE_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAZE_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;main.h&quot;</span> <span class="comment">/* provides defintion for MAX_ROW and MAX_COL */</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> maze[MAX_ROW][MAX_COL];</span><br><span class="line"><span class="type">void</span> <span class="title function_">print_maze</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p><code>maze.c</code>中定义了一个<code>maze</code>数组和一个<code>print_maze</code>函数，需要在头文件<code>maze.h</code>中声明，以便提供给<code>main.c</code>使用，注意<code>print_maze</code>的声明可以不加<code>extern</code>，而<code>maze</code>的声明必须加<code>extern</code>。</p>
+<p>这些源文件可以这样编译：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">gcc main.c stack.c maze.c -o main</span></span><br></pre></td></tr></table></figure>
+<p>但这不是个好办法，如果编译之后又对<code>maze.c</code>做了修改，又要把所有源文件编译一遍，即使<code>main.c</code>、<code>stack.c</code>和那些头文件都没有修改也要跟着重新编译。一个大型的软件项目往往由上千个源文件组成，全部编译一遍需要几个小时，只改一个源文件就要求全部重新编译肯定是不合理的。</p>
+<p>这样编译也许更好一些：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">gcc -c main.c</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">gcc -c stack.c</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">gcc -c maze.c</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">gcc main.o stack.o maze.o -o main</span></span><br></pre></td></tr></table></figure>
+<p>如果编译之后又对<code>maze.c</code>做了修改，要重新编译只需要做两步：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">gcc -c maze.c</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">gcc main.o stack.o maze.o -o main</span></span><br></pre></td></tr></table></figure>
+<p>这样又有一个问题，每次编译敲的命令都不一样，很容易出错，比如我修改了三个源文件，可能有一个忘了重新编译，结果编译完了修改没生效，运行时出了Bug还满世界找原因呢。更复杂的问题是，假如我改了<code>main.h</code>怎么办？所有包含<code>main.h</code>的源文件都需要重新编译，我得挨个找哪些源文件包含了<code>main.h</code>，有的还很不明显，例如<code>stack.c</code>包含了<code>stack.h</code>，而后者包含了<code>main.h</code>。可见手动处理这些问题非常容易出错，那有没有自动的解决办法呢？有，就是写一个Makefile文件和源代码放在同一个目录下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc main.o stack.o maze.o -o main</span><br><span class="line"></span><br><span class="line">main.o: main.c main.h stack.h maze.h</span><br><span class="line">    gcc -c main.c</span><br><span class="line"></span><br><span class="line">stack.o: stack.c stack.h main.h</span><br><span class="line">    gcc -c stack.c</span><br><span class="line"></span><br><span class="line">maze.o: maze.c maze.h main.h</span><br><span class="line">    gcc -c maze.c</span><br></pre></td></tr></table></figure>
+<p>然后在这个目录下运行<code>make</code>编译：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">gcc -c main.c</span><br><span class="line">gcc -c stack.c</span><br><span class="line">gcc -c maze.c</span><br><span class="line">gcc main.o stack.o maze.o -o main</span><br></pre></td></tr></table></figure>
+<p><code>make</code>命令会自动读取当前目录下的Makefile文件[33]，完成相应的编译步骤。Makefile由一组规则（Rule）组成，每条规则的格式是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target ... : prerequisites ... </span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc main.o stack.o maze.o -o main</span><br></pre></td></tr></table></figure>
+<p><code>main</code>是这条规则的目标（Target），<code>main.o</code>、<code>stack.o</code>和<code>maze.o</code>是这条规则的条件（Prerequisite）。目标和条件之间的关系是：欲更新目标，必须首先更新它的所有条件；所有条件中只要有一个条件被更新了，目标也必须随之被更新。所谓“更新”就是执行一遍规则中的命令列表，命令列表中的每条命令必须以一个<code>Tab</code>开头，注意不能是空格，Makefile的格式不像C语言的缩进那么随意，对于Makefile中的每个以<code>Tab</code>开头的命令，<code>make</code>会创建一个Shell进程去执行它。</p>
+<p>对于上面这个例子，<code>make</code>执行如下步骤：</p>
+<p>尝试更新Makefile中第一条规则的目标<code>main</code>，第一条规则的目标称为缺省目标，只要缺省目标更新了就算完成任务了，其它工作都是为这个目的而做的。由于我们是第一次编译，<code>main</code>文件还没生成，显然需要更新，但规则说必须先更新了<code>main.o</code>、<code>stack.o</code>和<code>maze.o</code>这三个条件，然后才能更新<code>main</code>。</p>
+<p>所以<code>make</code>会进一步查找以这三个条件为目标的规则，这些目标文件也没有生成，也需要更新，所以执行相应的命令（<code>gcc -c main.c</code>、<code>gcc -c stack.c</code>和<code>gcc -c maze.c</code>）更新它们。</p>
+<p>最后执行<code>gcc main.o stack.o maze.o -o main</code>更新<code>main</code>。</p>
+<p>如果没有做任何改动，再次运行<code>make</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">make: `main&#x27; is up to date.</span><br></pre></td></tr></table></figure>
+<p><code>make</code>会提示缺省目标已经是最新的了，不需要执行任何命令更新它。再做个实验，如果修改了<code>maze.h</code>（比如加个无关痛痒的空格）再运行<code>make</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">gcc -c main.c</span><br><span class="line">gcc -c maze.c</span><br><span class="line">gcc main.o stack.o maze.o -o main</span><br></pre></td></tr></table></figure>
+<p><code>make</code>会自动选择那些受影响的源文件重新编译，不受影响的源文件则不重新编译，这是怎么做到的呢？</p>
+<p><code>make</code>仍然尝试更新缺省目标，首先检查目标<code>main</code>是否需要更新，这就要检查三个条件<code>main.o</code>、<code>stack.o</code>和<code>maze.o</code>是否需要更新。</p>
+<p><code>make</code>会进一步查找以这三个条件为目标的规则，然后发现<code>main.o</code>和<code>maze.o</code>需要更新，因为它们都有一个条件是<code>maze.h</code>，而这个文件的修改时间比<code>main.o</code>和<code>maze.o</code>晚，所以执行相应的命令更新<code>main.o</code>和<code>maze.o</code>。</p>
+<p>既然<code>main</code>的三个条件中有两个被更新过了，那么<code>main</code>也需要更新，所以执行命令<code>gcc main.o stack.o maze.o -o main</code>更新<code>main</code>。</p>
+<p>现在总结一下Makefile的规则，请读者结合上面的例子理解。如果一条规则的目标属于以下情况之一，就称为需要更新：</p>
+<p>目标没有生成。</p>
+<p>某个条件需要更新。</p>
+<p>某个条件的修改时间比目标晚。</p>
+<p>在一条规则被执行之前，规则的条件可能处于以下三种状态之一：</p>
+<p>需要更新。能够找到以该条件为目标的规则，并且该规则中目标需要更新。</p>
+<p>不需要更新。能够找到以该条件为目标的规则，但是该规则中目标不需要更新；或者不能找到以该条件为目标的规则，并且该条件已经生成。</p>
+<p>错误。不能找到以该条件为目标的规则，并且该条件没有生成。</p>
+<p>执行一条规则A的步骤如下：</p>
+<p>检查它的每个条件P：</p>
+<p>如果P需要更新，就执行以P为目标的规则B。之后，无论是否生成文件P，都认为P已被更新。</p>
+<p>如果找不到规则B，并且文件P已存在，表示P不需要更新。</p>
+<p>如果找不到规则B，并且文件P不存在，则报错退出。</p>
+<p>在检查完规则A的所有条件后，检查它的目标T，如果属于以下情况之一，就执行它的命令列表：</p>
+<p>文件T不存在。</p>
+<p>文件T存在，但是某个条件的修改时间比它晚。</p>
+<p>某个条件P已被更新（并不一定生成文件P）。</p>
+<p>通常Makefile都会有一个<code>clean</code>规则，用于清除编译过程中产生的二进制文件，保留源文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">clean:</span><br><span class="line">    @echo &quot;cleanning project&quot;</span><br><span class="line">    -rm main *.o</span><br><span class="line">    @echo &quot;clean completed&quot;</span><br></pre></td></tr></table></figure>
+<p>把这条规则添加到我们的Makefile末尾，然后执行这条规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make clean</span> </span><br><span class="line">cleanning project</span><br><span class="line">rm main *.o</span><br><span class="line">clean completed</span><br></pre></td></tr></table></figure>
+<p>如果在<code>make</code>的命令行中指定一个目标（例如<code>clean</code>），则更新这个目标，如果不指定目标则更新Makefile中第一条规则的目标（缺省目标）。</p>
+<p>和前面介绍的规则不同，<code>clean</code>目标不依赖于任何条件，并且执行它的命令列表不会生成<code>clean</code>这个文件，刚才说过，只要执行了命令列表就算更新了目标，即使目标并没有生成也算。在这个例子还演示了命令前面加<code>@</code>和<code>-</code>字符的效果：如果<code>make</code>执行的命令前面加了<code>@</code>字符，则不显示命令本身而只显示它的结果；通常<code>make</code>执行的命令如果出错（该命令的退出状态非0）就立刻终止，不再执行后续命令，但如果命令前面加了<code>-</code>号，即使这条命令出错，<code>make</code>也会继续执行后续命令。通常<code>rm</code>命令和<code>mkdir</code>命令前面要加<code>-</code>号，因为<code>rm</code>要删除的文件可能不存在，<code>mkdir</code>要创建的目录可能已存在，这两个命令都有可能出错，但这种错误是应该忽略的。例如上面已经执行过一遍<code>make clean</code>，再执行一遍就没有文件可删了，这时<code>rm</code>会报错，但<code>make</code>忽略这一错误，继续执行后面的<code>echo</code>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make clean</span> </span><br><span class="line">cleanning project</span><br><span class="line">rm main *.o</span><br><span class="line">rm: cannot remove `main&#x27;: No such file or directory</span><br><span class="line">rm: cannot remove `*.o&#x27;: No such file or directory</span><br><span class="line">make: [clean] Error 1 (ignored)</span><br><span class="line">clean completed</span><br></pre></td></tr></table></figure>
+<p>读者可以把命令前面的<code>@</code>和<code>-</code>去掉再试试，对比一下结果有何不同。这里还有一个问题，如果当前目录下存在一个文件叫<code>clean</code>会怎么样呢？</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">touch</span> clean</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make clean</span></span><br><span class="line">make: `clean&#x27; is up to date.</span><br></pre></td></tr></table></figure>
+<p>如果存在<code>clean</code>这个文件，<code>clean</code>目标又不依赖于任何条件，<code>make</code>就认为它不需要更新了。而我们希望把<code>clean</code>当作一个特殊的名字使用，不管它存在不存在都要更新，可以添一条特殊规则，把<code>clean</code>声明为一个伪目标：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: clean</span><br></pre></td></tr></table></figure>
+<p>这条规则没有命令列表。类似<code>.PHONY</code>这种<code>make</code>内建的特殊目标还有很多，各有不同的用途，详见[GNUmake]。在C语言中要求变量和函数先声明后使用，而Makefile不太一样，这条规则写在<code>clean</code>:规则的后面也行，也能起到声明<code>clean</code>是伪目标的作用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">clean:</span><br><span class="line">    @echo &quot;cleanning project&quot;</span><br><span class="line">    -rm main *.o</span><br><span class="line">    @echo &quot;clean completed&quot;</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br></pre></td></tr></table></figure>
+<p>当然写在前面也行。gcc处理一个C程序分为预处理和编译两个阶段，类似地，<code>make</code>处理Makefile的过程也分为两个阶段：</p>
+<p>首先从前到后读取所有规则，建立起一个完整的依赖关系图，例如：</p>
+<figure>
+<img src="C:\blog\Blog\images\C\make.graph.png"
+alt="Makefile的依赖关系图" />
+<figcaption aria-hidden="true">Makefile的依赖关系图</figcaption>
+</figure>
+<p>然后从缺省目标或者命令行指定的目标开始，根据依赖关系图选择适当的规则执行，执行Makefile中的规则和执行C代码不一样，并不是从前到后按顺序执行，也不是所有规则都要执行一遍，例如<code>make</code>缺省目标时不会更新<code>clean</code>目标，因为从上图可以看出，它跟缺省目标没有任何依赖关系。</p>
+<p><code>clean</code>目标是一个约定俗成的名字，在所有软件项目的Makefile中都表示清除编译生成的文件，类似这样的约定俗成的目标名字有：</p>
+<p><code>all</code>，执行主要的编译工作，通常用作缺省目标。</p>
+<p><code>install</code>，执行编译后的安装工作，把可执行文件、配置文件、文档等分别拷到不同的安装目录。</p>
+<p><code>clean</code>，删除编译生成的二进制文件。</p>
+<p><code>distclean</code>，不仅删除编译生成的二进制文件，也删除其它生成的文件，例如配置文件和格式转换后的文档，执行<code>make distclean</code>之后应该清除所有这些文件，只留下源文件。</p>
+<h2 id="隐含规则和模式规则">隐含规则和模式规则</h2>
+<p>上一节的Makefile写得中规中矩，比较繁琐，是为了讲清楚基本概念，其实Makefile有很多灵活的写法，可以写得更简洁，同时减少出错的可能。本节我们来看看这样一个例子还有哪些改进的余地。</p>
+<p>一个目标依赖的所有条件不一定非得写在一条规则中，也可以拆开写，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main.o: main.h stack.h maze.h</span><br><span class="line"></span><br><span class="line">main.o: main.c</span><br><span class="line">    gcc -c main.c</span><br></pre></td></tr></table></figure>
+<p>就相当于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">main.o: main.c main.h stack.h maze.h</span><br><span class="line">    gcc -c main.c</span><br></pre></td></tr></table></figure>
+<p>如果一个目标拆开写多条规则，其中只有一条规则允许有命令列表，其它规则应该没有命令列表，否则<code>make</code>会报警告并且采用最后一条规则的命令列表。</p>
+<p>这样我们的例子可以改写成：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc main.o stack.o maze.o -o main</span><br><span class="line"></span><br><span class="line">main.o: main.h stack.h maze.h</span><br><span class="line">stack.o: stack.h main.h</span><br><span class="line">maze.o: maze.h main.h</span><br><span class="line"></span><br><span class="line">main.o: main.c</span><br><span class="line">    gcc -c main.c</span><br><span class="line"></span><br><span class="line">stack.o: stack.c</span><br><span class="line">    gcc -c stack.c</span><br><span class="line"></span><br><span class="line">maze.o: maze.c</span><br><span class="line">    gcc -c maze.c</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    -rm main *.o</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br></pre></td></tr></table></figure>
+<p>这不是比原来更繁琐了吗？现在可以把提出来的三条规则删去，写成：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc main.o stack.o maze.o -o main</span><br><span class="line"></span><br><span class="line">main.o: main.h stack.h maze.h</span><br><span class="line">stack.o: stack.h main.h</span><br><span class="line">maze.o: maze.h main.h</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    -rm main *.o</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br></pre></td></tr></table></figure>
+<p>这就比原来简单多了。可是现在<code>main.o</code>、<code>stack.o</code>和<code>maze.o</code>这三个目标连编译命令都没有了，怎么编译的呢？试试看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">cc    -c -o main.o main.c</span><br><span class="line">cc    -c -o stack.o stack.c</span><br><span class="line">cc    -c -o maze.o maze.c</span><br><span class="line">gcc main.o stack.o maze.o -o main</span><br></pre></td></tr></table></figure>
+<p>现在解释一下前三条编译命令是怎么来。如果一个目标在Makefile中的所有规则都没有命令列表，<code>make</code>会尝试在内建的隐含规则（Implicit
+Rule）数据库中查找适用的规则。<code>make</code>的隐含规则数据库可以用<code>make -p</code>命令打印，打印出来的格式也是Makefile的格式，包括很多变量和规则，其中和我们这个例子有关的隐含规则有：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">default</span></span><br><span class="line">OUTPUT_OPTION = -o $@</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">default</span></span><br><span class="line">CC = cc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">default</span></span><br><span class="line">COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">.o: %.c</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> commands to execute (built-in):</span></span><br><span class="line">        $(COMPILE.c) $(OUTPUT_OPTION) $&lt;</span><br></pre></td></tr></table></figure>
+<p><code>#</code>号在Makefile中表示单行注释，就像C语言的<code>//</code>注释一样。<code>CC</code>是一个Makefile变量，用<code>CC = cc</code>定义和赋值，用<code>$(CC)</code>取它的值，其值应该是<code>cc</code>。Makefile变量像C的宏定义一样，代表一串字符，在取值的地方展开。<code>cc</code>是一个符号链接，通常指向gcc，在有些UNIX系统上可能指向另外一种C编译器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">which</span> cc</span></span><br><span class="line">/usr/bin/cc</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -l /usr/bin/cc</span></span><br><span class="line">lrwxrwxrwx 1 root root 20 2008-07-04 05:59 /usr/bin/cc -&gt; /etc/alternatives/cc</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -l /etc/alternatives/cc</span></span><br><span class="line">lrwxrwxrwx 1 root root 12 2008-11-01 09:10 /etc/alternatives/cc -&gt; /usr/bin/gcc</span><br></pre></td></tr></table></figure>
+<p><code>CFLAGS</code>这个变量没有定义，<code>$(CFLAGS)</code>展开是空，<code>CPPFLAGS</code>和<code>TARGET_ARCH</code>也是如此。这样<code>$(COMPILE.c)</code>展开应该是<code>cc␣空␣空␣空␣-c</code>，去掉所有的“<code>空</code>”得到<code>cc␣␣␣␣-c</code>，注意中间留下4个空格，所以<code>%.o: %.c</code>规则的命令<code>$(COMPILE.c)␣$(OUTPUT_OPTION)␣$&lt;</code>展开之后是<code>cc␣␣␣␣-c␣-o␣$@␣$&lt;</code>，和上面的编译命令已经很接近了。</p>
+<p><code>$@</code>和<code>$&lt;</code>是两个特殊的变量，<code>$@</code>的取值为规则中的目标，<code>$&lt;</code>的取值为规则中的第一个条件。<code>%.o: %.c</code>是一种特殊的规则，称为模式规则（Pattern
+Rule）。现在回顾一下整个过程，在我们的Makefile中以<code>main.o</code>为目标的规则都没有命令列表，所以<code>make</code>会查找隐含规则，发现隐含规则中有这样一条模式规则适用，<code>main.o</code>符合<code>%.o</code>的模式，现在<code>%</code>就代表<code>main</code>（称为<code>main.o</code>这个名字的Stem），再替换到<code>%.c</code>中就是<code>main.c</code>。所以这条模式规则相当于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">main.o: main.c</span><br><span class="line">    cc    -c -o main.o main.c</span><br></pre></td></tr></table></figure>
+<p>随后，在处理<code>stack.o</code>目标时又用到这条模式规则，这时又相当于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stack.o: stack.c</span><br><span class="line">    cc    -c -o stack.o stack.c</span><br></pre></td></tr></table></figure>
+<p><code>maze.o</code>也同样处理。这三条规则可以由<code>make</code>的隐含规则推导出来，所以不必写在Makefile中。</p>
+<p>先前我们写Makefile都是以目标为中心，一个目标依赖于若干条件，现在换个角度，以条件为中心，Makefile还可以这么写：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc main.o stack.o maze.o -o main</span><br><span class="line"></span><br><span class="line">main.o stack.o maze.o: main.h</span><br><span class="line">main.o maze.o: maze.h</span><br><span class="line">main.o stack.o: stack.h</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    -rm main *.o</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br></pre></td></tr></table></figure>
+<p>我们知道，写规则的目的是让<code>make</code>建立依赖关系图，不管怎么写，只要把所有的依赖关系都描述清楚了就行。对于多目标的规则，<code>make</code>会拆成几条单目标的规则来处理，例如</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target1 target2: prerequisite1 prerequisite2</span><br><span class="line">    command $&lt; -o $@</span><br></pre></td></tr></table></figure>
+<p>这样一条规则相当于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">target1: prerequisite1 prerequisite2</span><br><span class="line">    command prerequisite1 -o target1</span><br><span class="line"></span><br><span class="line">target2: prerequisite1 prerequisite2</span><br><span class="line">    command prerequisite1 -o target2</span><br></pre></td></tr></table></figure>
+<p>注意两条规则的命令列表是一样的，但<code>$@</code>的取值不同。</p>
+<h2 id="变量">变量</h2>
+<p>这一节我们详细看看Makefile中关于变量的语法规则。先看一个简单的例子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo = $(bar) </span><br><span class="line">bar = Huh? </span><br><span class="line"></span><br><span class="line">all: </span><br><span class="line">    @echo $(foo)</span><br></pre></td></tr></table></figure>
+<p>我们执行<code>make</code>将会打出<code>Huh?</code>。当<code>make</code>读到<code>foo = $(bar)</code>时，确定<code>foo</code>的值是<code>$(bar)</code>，但并不立即展开<code>$(bar)</code>，然后读到<code>bar = Huh?</code>，确定<code>bar</code>的值是<code>Huh?</code>，然后在执行规则<code>all:</code>的命令列表时才需要展开<code>$(foo)</code>，得到<code>$(bar)</code>，再展开<code>$(bar)</code>，得到<code>Huh?</code>。因此，虽然<code>bar</code>的定义写在<code>foo</code>之后，<code>$(foo)</code>展开还是能够取到<code>$(bar)</code>的值。</p>
+<p>这种特性有好处也有坏处。好处是我们可以把变量的值推迟到后面定义，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">main.o: main.c</span><br><span class="line">    $(CC) $(CFLAGS) $(CPPFLAGS) -c $&lt;</span><br><span class="line"></span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS = -O -g</span><br><span class="line">CPPFLAGS = -Iinclude</span><br></pre></td></tr></table></figure>
+<p>编译命令可以展开成<code>gcc -O -g -Iinclude -c main.c</code>。通常把<code>CFLAGS</code>定义成一些编译选项，例如<code>-O</code>、<code>-g</code>等，而把<code>CPPFLAGS</code>定义成一些预处理选项，例如<code>-D</code>、<code>-I</code>等。用<code>=</code>号定义变量的延迟展开特性也有坏处，就是有可能写出无穷递归的定义，例如<code>CFLAGS = $(CFLAGS) -O</code>，或者：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = $(B)</span><br><span class="line">B = $(A)</span><br></pre></td></tr></table></figure>
+<p>当然，<code>make</code>有能力检测出这样的错误而不会陷入死循环。有时候我们希望<code>make</code>在遇到变量定义时立即展开，可以用<code>:=</code>运算符，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x := foo</span><br><span class="line">y := $(x) bar</span><br><span class="line"></span><br><span class="line">all: </span><br><span class="line">    @echo &quot;-$(y)-&quot;</span><br></pre></td></tr></table></figure>
+<p>当<code>make</code>读到<code>y := $(x) bar</code>定义时，立即把<code>$(x)</code>展开，使变量<code>y</code>的取值是<code>foo bar</code>，如果把这两行颠倒过来：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y := $(x) bar</span><br><span class="line">x := foo</span><br></pre></td></tr></table></figure>
+<p>那么当<code>make</code>读到<code>y := $(x) bar</code>时，<code>x</code>还没有定义，展开为空值，所以<code>y</code>的取值是<code>␣bar</code>，注意<code>bar</code>前面有个空格。一个变量的定义从<code>=</code>后面的第一个非空白字符开始（从<code>$(x)</code>的<code>$</code>开始），包括后面的所有字符，直到注释或换行之前结束。如果要定义一个变量的值是一个空格，可以这样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nullstring := </span><br><span class="line">space := $(nullstring) # end of the line</span><br></pre></td></tr></table></figure>
+<p><code>nullstring</code>的值为空，<code>space</code>的值是一个空格，后面写个注释是为了增加可读性，如果不写注释就换行，则很难看出<code>$(nullstring)</code>后面有个空格。</p>
+<p>还有一个比较有用的赋值运算符是<code>?=</code>，例如<code>foo ?= $(bar)</code>的意思是：如果<code>foo</code>没有定义过，那么<code>?=</code>相当于<code>=</code>，定义<code>foo</code>的值是<code>$(bar)</code>，但不立即展开；如果先前已经定义了<code>foo</code>，则什么也不做，不会给<code>foo</code>重新赋值。</p>
+<p><code>+=</code>运算符可以给变量追加值，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objects = main.o</span><br><span class="line">objects += $(foo)</span><br><span class="line">foo = foo.o bar.o</span><br></pre></td></tr></table></figure>
+<p><code>object</code>是用<code>=</code>定义的，<code>+=</code>仍然保持<code>=</code>的特性，<code>objects</code>的值是<code>main.o $(foo)</code>（注意<code>$(foo)</code>前面自动添一个空格），但不立即展开，等到后面需要展开<code>$(objects)</code>时会展开成<code>main.o foo.o bar.o</code>。</p>
+<p>再比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objects := main.o</span><br><span class="line">objects += $(foo)</span><br><span class="line">foo = foo.o bar.o</span><br></pre></td></tr></table></figure>
+<p><code>object</code>是用<code>:=</code>定义的，<code>+=</code>保持<code>:=</code>的特性，<code>objects</code>的值是<code>main.o $(foo)</code>，立即展开得到<code>main.o</code>
+（这时<code>foo</code>还没定义），注意<code>main.o</code>后面的空格仍保留。</p>
+<p>如果变量还没有定义过就直接用<code>+=</code>赋值，那么<code>+=</code>相当于<code>=</code>。</p>
+<p>上一节我们用到了特殊变量<code>$@</code>和<code>$&lt;</code>，这两个变量的特点是不需要给它们赋值，在不同的上下文中它们自动取不同的值。常用的特殊变量有：</p>
+<p><code>$@</code>，表示规则中的目标。</p>
+<p><code>$&lt;</code>，表示规则中的第一个条件。</p>
+<p><code>$?</code>，表示规则中所有比目标新的条件，组成一个列表，以空格分隔。</p>
+<p><code>$^</code>，表示规则中的所有条件，组成一个列表，以空格分隔。</p>
+<p>例如前面写过的这条规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc main.o stack.o maze.o -o main</span><br></pre></td></tr></table></figure>
+<p>可以改写成：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc $^ -o $@</span><br></pre></td></tr></table></figure>
+<p>这样即使以后又往条件里添加了新的目标文件，编译命令也不需要修改，减少了出错的可能。</p>
+<p><code>$?</code>变量也很有用，有时候希望只对更新过的条件进行操作，例如有一个库文件<code>libsome.a</code>依赖于几个目标文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">libsome.a: foo.o bar.o lose.o win.o </span><br><span class="line">    ar r libsome.a $?</span><br><span class="line">    ranlib libsome.a</span><br></pre></td></tr></table></figure>
+<p>这样，只有更新过的目标文件才需要重新打包到<code>libsome.a</code>中，没更新过的目标文件原本已经在<code>libsome.a</code>中了，不必重新打包。</p>
+<p>在上一节我们看到<code>make</code>的隐含规则数据库中用到了很多变量，有些变量没有定义（例如<code>CFLAGS</code>），有些变量定义了缺省值（例如<code>CC</code>），我们写Makefile时可以重新定义这些变量的值，也可以在缺省值的基础上追加。以下列举一些常用的变量，请读者体会其中的规律。</p>
+<p><code>AR</code> 静态库打包命令的名字，缺省值是<code>ar</code>。</p>
+<p><code>ARFLAGS</code>
+静态库打包命令的选项，缺省值是<code>rv</code>。</p>
+<p><code>AS</code> 汇编器的名字，缺省值是<code>as</code>。</p>
+<p><code>ASFLAGS</code> 汇编器的选项，没有定义。</p>
+<p><code>CC</code> C编译器的名字，缺省值是<code>cc</code>。</p>
+<p><code>CFLAGS</code> C编译器的选项，没有定义。</p>
+<p><code>CXX</code> C++编译器的名字，缺省值是<code>g++</code>。</p>
+<p><code>CXXFLAGS</code> C++编译器的选项，没有定义。</p>
+<p><code>CPP</code> C预处理器的名字，缺省值是<code>$(CC) -E</code>。</p>
+<p><code>CPPFLAGS</code> C预处理器的选项，没有定义。</p>
+<p><code>LD</code> 链接器的名字，缺省值是<code>ld</code>。</p>
+<p><code>LDFLAGS</code> 链接器的选项，没有定义。</p>
+<p><code>TARGET_ARCH</code> 和目标平台相关的命令行选项，没有定义。</p>
+<p><code>OUTPUT_OPTION</code>
+输出的命令行选项，缺省值是<code>-o $@</code>。</p>
+<p><code>LINK.o</code>
+把.o文件链接在一起的命令行，缺省值是<code>$(CC) $(LDFLAGS) $(TARGET_ARCH)</code>。</p>
+<p><code>LINK.c</code>
+把.c文件链接在一起的命令行，缺省值是<code>$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)</code>。</p>
+<p><code>LINK.cc</code>
+把.cc文件（C++源文件）链接在一起的命令行，缺省值是<code>$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)</code>。</p>
+<p><code>COMPILE.c</code>
+编译.c文件的命令行，缺省值是<code>$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c</code>。</p>
+<p><code>COMPILE.cc</code>
+编译.cc文件的命令行，缺省值是<code>$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c</code>。</p>
+<p><code>RM</code> 删除命令的名字，缺省值是<code>rm -f</code>。</p>
+<h2 id="自动处理头文件的依赖关系">自动处理头文件的依赖关系</h2>
+<p>现在我们的Makefile写成这样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">all: main</span><br><span class="line"></span><br><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc $^ -o $@</span><br><span class="line"></span><br><span class="line">main.o: main.h stack.h maze.h</span><br><span class="line">stack.o: stack.h main.h</span><br><span class="line">maze.o: maze.h main.h</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    -rm main *.o</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br></pre></td></tr></table></figure>
+<p>按照惯例，用<code>all</code>做缺省目标。现在还有一点比较麻烦，在写<code>main.o</code>、<code>stack.o</code>和<code>maze.o</code>这三个目标的规则时要查看源代码，找出它们依赖于哪些头文件，这很容易出错，一是因为有的头文件包含在另一个头文件中，在写规则时很容易遗漏，二是如果以后修改源代码改变了依赖关系，很可能忘记修改Makefile的规则。为了解决这个问题，可以用gcc的<code>-M</code>选项自动生成目标文件和源文件的依赖关系：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -M main.c</span></span><br><span class="line">main.o: main.c /usr/include/stdio.h /usr/include/features.h \</span><br><span class="line">  /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \</span><br><span class="line">  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \</span><br><span class="line">  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h \</span><br><span class="line">  /usr/include/bits/types.h /usr/include/bits/typesizes.h \</span><br><span class="line">  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \</span><br><span class="line">  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stdarg.h \</span><br><span class="line">  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h main.h \</span><br><span class="line">  stack.h maze.h</span><br></pre></td></tr></table></figure>
+<p><code>-M</code>选项把<code>stdio.h</code>以及它所包含的系统头文件也找出来了，如果我们不需要输出系统头文件的依赖关系，可以用<code>-MM</code>选项：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -MM *.c</span></span><br><span class="line">main.o: main.c main.h stack.h maze.h</span><br><span class="line">maze.o: maze.c maze.h main.h</span><br><span class="line">stack.o: stack.c stack.h main.h</span><br></pre></td></tr></table></figure>
+<p>接下来的问题是怎么把这些规则包含到Makefile中，GNU
+make的官方手册建议这样写：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">all: main</span><br><span class="line"></span><br><span class="line">main: main.o stack.o maze.o</span><br><span class="line">    gcc $^ -o $@</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    -rm main *.o</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br><span class="line"></span><br><span class="line">sources = main.c stack.c maze.c</span><br><span class="line"></span><br><span class="line">include $(sources:.c=.d)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">.d: %.c</span></span><br><span class="line">    set -e; rm -f $@; \</span><br><span class="line">    $(CC) -MM $(CPPFLAGS) $&lt; &gt; $@.$$$$; \</span><br><span class="line">    sed &#x27;s,\($*\)\.o[ :]*,\1.o $@ : ,g&#x27; &lt; $@.$$$$ &gt; $@; \</span><br><span class="line">    rm -f $@.$$$$</span><br></pre></td></tr></table></figure>
+<p><code>sources</code>变量包含我们要编译的所有.c文件，<code>$(sources:.c=.d)</code>是一个变量替换语法，把<code>sources</code>变量中每一项的.c替换成.d，所以<code>include</code>这一句相当于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include main.d stack.d maze.d</span><br></pre></td></tr></table></figure>
+<p>类似于C语言的<code>#include</code>指示，这里的<code>include</code>表示包含三个文件<code>main.d</code>、<code>stack.d</code>和<code>maze.d</code>，这三个文件也应该符合Makefile的语法。如果现在你的工作目录是干净的，只有.c文件、.h文件和Makefile，运行<code>make</code>的结果是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">Makefile:13: main.d: No such file or directory</span><br><span class="line">Makefile:13: stack.d: No such file or directory</span><br><span class="line">Makefile:13: maze.d: No such file or directory</span><br><span class="line">set -e; rm -f maze.d; \</span><br><span class="line">    cc -MM  maze.c &gt; maze.d.$$; \</span><br><span class="line">    sed &#x27;s,\(maze\)\.o[ :]*,\1.o maze.d : ,g&#x27; &lt; maze.d.$$ &gt; maze.d; \</span><br><span class="line">    rm -f maze.d.$$</span><br><span class="line">set -e; rm -f stack.d; \</span><br><span class="line">    cc -MM  stack.c &gt; stack.d.$$; \</span><br><span class="line">    sed &#x27;s,\(stack\)\.o[ :]*,\1.o stack.d : ,g&#x27; &lt; stack.d.$$ &gt; stack.d; \</span><br><span class="line">    rm -f stack.d.$$</span><br><span class="line">set -e; rm -f main.d; \</span><br><span class="line">    cc -MM  main.c &gt; main.d.$$; \</span><br><span class="line">    sed &#x27;s,\(main\)\.o[ :]*,\1.o main.d : ,g&#x27; &lt; main.d.$$ &gt; main.d; \</span><br><span class="line">    rm -f main.d.$$</span><br><span class="line">cc    -c -o main.o main.c</span><br><span class="line">cc    -c -o stack.o stack.c</span><br><span class="line">cc    -c -o maze.o maze.c</span><br><span class="line">gcc main.o stack.o maze.o -o main</span><br></pre></td></tr></table></figure>
+<p>一开始找不到.d文件，所以<code>make</code>会报警告。但是<code>make</code>会把<code>include</code>的文件名也当作目标来尝试更新，而这些目标适用模式规则<code>%.d: %c</code>，所以执行它的命令列表，比如生成<code>maze.d</code>的命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set -e; rm -f maze.d; \</span><br><span class="line">    cc -MM  maze.c &gt; maze.d.$$; \</span><br><span class="line">    sed &#x27;s,\(maze\)\.o[ :]*,\1.o maze.d : ,g&#x27; &lt; maze.d.$$ &gt; maze.d; \</span><br><span class="line">    rm -f maze.d.$$</span><br></pre></td></tr></table></figure>
+<p>注意，虽然在Makefile中这个命令写了四行，但其实是一条命令，<code>make</code>只创建一个Shell进程执行这条命令，这条命令分为5个子命令，用<code>;</code>号隔开，并且为了美观，用续行符<code>\</code>拆成四行来写。执行步骤为：</p>
+<p><code>set -e</code>命令设置当前Shell进程为这样的状态：如果它执行的任何一条命令的退出状态非零则立刻终止，不再执行后续命令。</p>
+<p>把原来的<code>maze.d</code>删掉。</p>
+<p>重新生成<code>maze.c</code>的依赖关系，保存成文件<code>maze.d.1234</code>（假设当前Shell进程的id是1234）。注意，在Makefile中<code>$</code>有特殊含义，如果要表示它的字面意思则需要写两个<code>$</code>，所以Makefile中的四个<code>$</code>传给Shell变成两个<code>$</code>，两个<code>$</code>在Shell中表示当前进程的id，一般用它给临时文件起名，以保证文件名唯一。</p>
+<p>这个<code>sed</code>命令比较复杂，就不细讲了，主要作用是查找替换。<code>maze.d.1234</code>的内容应该是<code>maze.o: maze.c maze.h main.h</code>，经过<code>sed</code>处理之后存为<code>maze.d</code>，其内容是<code>maze.o maze.d: maze.c maze.h main.h</code>。</p>
+<p>最后把临时文件<code>maze.d.1234</code>删掉。</p>
+<p>不管是Makefile本身还是被它包含的文件，只要有一个文件在<code>make</code>过程中被更新了，<code>make</code>就会重新读取整个Makefile以及被它包含的所有文件，现在<code>main.d</code>、<code>stack.d</code>和<code>maze.d</code>都生成了，就可以正常包含进来了（假如这时还没有生成，<code>make</code>就要报错而不是报警告了），相当于在Makefile中添了三条规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">main.o main.d: main.c main.h stack.h maze.h</span><br><span class="line">maze.o maze.d: maze.c maze.h main.h</span><br><span class="line">stack.o stack.d: stack.c stack.h main.h</span><br></pre></td></tr></table></figure>
+<p>如果我在<code>main.c</code>中加了一行<code>#include "foo.h"</code>，那么：</p>
+<p>1、<code>main.c</code>的修改日期变了，根据规则<code>main.o main.d: main.c main.h stack.h maze.h</code>要重新生成<code>main.o</code>和<code>main.d</code>。生成<code>main.o</code>的规则有两条：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main.o: main.c main.h stack.h maze.h</span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">.o: %.c</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> commands to execute (built-in):</span></span><br><span class="line">        $(COMPILE.c) $(OUTPUT_OPTION) $&lt;</span><br></pre></td></tr></table></figure>
+<p>第一条是把规则<code>main.o main.d: main.c main.h stack.h maze.h</code>拆开写得到的，第二条是隐含规则，因此执行<code>cc</code>命令重新编译<code>main.o</code>。生成<code>main.d</code>的规则也有两条：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">main.d: main.c main.h stack.h maze.h</span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">.d: %.c</span></span><br><span class="line">    set -e; rm -f $@; \</span><br><span class="line">    $(CC) -MM $(CPPFLAGS) $&lt; &gt; $@.$$$$; \</span><br><span class="line">    sed &#x27;s,\($*\)\.o[ :]*,\1.o $@ : ,g&#x27; &lt; $@.$$$$ &gt; $@; \</span><br><span class="line">    rm -f $@.$$$$</span><br></pre></td></tr></table></figure>
+<p>因此<code>main.d</code>的内容被更新为<code>main.o main.d: main.c main.h stack.h maze.h foo.h</code>。</p>
+<p>2、由于<code>main.d</code>被Makefile包含，<code>main.d</code>被更新又导致<code>make</code>重新读取整个Makefile，把新的<code>main.d</code>包含进来，于是新的依赖关系生效了。</p>
+<h2 id="常用的make命令行选项">常用的make命令行选项</h2>
+<p><code>-n</code>选项只打印要执行的命令，而不会真的执行命令，这个选项有助于我们检查Makefile写得是否正确，由于Makefile不是顺序执行的，用这个选项可以先看看命令的执行顺序，确认无误了再真正执行命令。</p>
+<p><code>-C</code>选项可以切换到另一个目录执行那个目录下的Makefile，比如先退到上一级目录再执行我们的Makefile（假设我们的源代码都放在testmake目录下）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> ..</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make -C testmake</span></span><br><span class="line">make: Entering directory `/home/akaedu/testmake&#x27;</span><br><span class="line">cc    -c -o main.o main.c</span><br><span class="line">cc    -c -o stack.o stack.c</span><br><span class="line">cc    -c -o maze.o maze.c</span><br><span class="line">gcc main.o stack.o maze.o -o main</span><br><span class="line">make: Leaving directory `/home/akaedu/testmake&#x27;</span><br></pre></td></tr></table></figure>
+<p>一些规模较大的项目会把不同的模块或子系统的源代码放在不同的子目录中，然后在每个子目录下都写一个该目录的Makefile，然后在一个总的Makefile中用<code>make -C</code>命令执行每个子目录下的Makefile。例如Linux内核源代码根目录下有Makefile，子目录fs、net等也有各自的Makefile，二级子目录fs/ramfs、net/ipv4等也有各自的Makefile。</p>
+<p>在<code>make</code>命令行也可以用<code>=</code>或<code>:=</code>定义变量，如果这次编译我想加调试选项<code>-g</code>，但我不想每次编译都加<code>-g</code>选项，可以在命令行定义<code>CFLAGS</code>变量，而不必修改Makefile编译完了再改回来：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make CFLAGS=-g</span></span><br><span class="line">cc -g   -c -o main.o main.c</span><br><span class="line">cc -g   -c -o stack.o stack.c</span><br><span class="line">cc -g   -c -o maze.o maze.c</span><br><span class="line">gcc main.o stack.o maze.o -o main</span><br></pre></td></tr></table></figure>
+<p>如果在Makefile中也定义了<code>CFLAGS</code>变量，则命令行的值覆盖Makefile中的值。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E7%AB%A0/" rel="prev" title="C语言:链表,二叉树和哈希表">
+                  <i class="fa fa-angle-left"></i> C语言:链表,二叉树和哈希表
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E7%AB%A0/" rel="next" title="C语言:指针">
+                  C语言:指针 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">SiyuanLei</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

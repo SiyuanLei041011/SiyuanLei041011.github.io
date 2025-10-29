@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Matplotlib 安装: 1pip install matplotlib 导入 1import matplotlib 查看版本 1print(matplotlib._version_) PyPlot 简单绘图 1234567891011121314151617181920212223import matplotlib.pyplot as pltimport numpy as">
+    <meta name="description" content="Matplotlib 安装 安装: 1pip install matplotlib 导入 1import matplotlib 查看版本 1print(matplotlib._version_) 基本操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python基础">
 <meta property="og:url" content="http://example.com/2025/05/04/Python%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="Matplotlib 安装: 1pip install matplotlib 导入 1import matplotlib 查看版本 1print(matplotlib._version_) PyPlot 简单绘图 1234567891011121314151617181920212223import matplotlib.pyplot as pltimport numpy as">
+<meta property="og:description" content="Matplotlib 安装 安装: 1pip install matplotlib 导入 1import matplotlib 查看版本 1print(matplotlib._version_) 基本操作">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-26T08:05:01.190Z">
+<meta property="article:modified_time" content="2025-08-19T12:09:20.596Z">
 <meta property="article:author" content="SiyuanLei">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -134,7 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#matplotlib"><span class="nav-number">1.</span> <span class="nav-text">Matplotlib</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pyplot"><span class="nav-number">1.1.</span> <span class="nav-text">PyPlot</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%BB%98%E5%9B%BE"><span class="nav-number">1.1.1.</span> <span class="nav-text">简单绘图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">标记</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#matplotlib"><span class="nav-number">1.</span> <span class="nav-text">Matplotlib</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">基本操作</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -149,18 +149,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -252,7 +252,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-06-26 16:05:01" itemprop="dateModified" datetime="2025-06-26T16:05:01+08:00">2025-06-26</time>
+      <time title="Modified: 2025-08-19 20:09:20" itemprop="dateModified" datetime="2025-08-19T20:09:20+08:00">2025-08-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -278,17 +278,14 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="matplotlib">Matplotlib</h2>
+<h3 id="安装">安装</h3>
 <p>安装:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install matplotlib</span><br></pre></td></tr></table></figure>
 <p>导入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br></pre></td></tr></table></figure>
 <p>查看版本</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(matplotlib._version_)</span><br></pre></td></tr></table></figure>
-<h3 id="pyplot">PyPlot</h3>
-<h4 id="简单绘图">简单绘图</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">xpoints=np.array([<span class="number">1</span>,<span class="number">8</span>])</span><br><span class="line">ypoints=np.array([<span class="number">3</span>,<span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot()函数的第一个参数是x坐标的数组，第二个参数是y坐标的数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#绘制从(1,3)到(8,10)的一条直线</span></span><br><span class="line">plt.plot(xpoints,ypoints)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment">#绘制(1,3)和(8,10)处的两个点</span></span><br><span class="line">plt.plot(xpoints,ypoints,<span class="string">&#x27;o&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot()函数如果只输入一个数组，那么默认为y坐标，x坐标默认取值为0,1,2,...</span></span><br><span class="line"></span><br><span class="line">ypoints=np.array([<span class="number">3</span>,<span class="number">8</span>,<span class="number">10</span>,<span class="number">5</span>,<span class="number">4</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h4 id="标记">标记</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">ypoints=np.array([<span class="number">2</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">5</span>,<span class="number">8</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#星号标记每个点</span></span><br><span class="line">plt.plot(ypoints,marker=<span class="string">&#x27;*&#x27;</span>)</span><br><span class="line"><span class="comment">#实心圆圈标记每一个点</span></span><br><span class="line">plt.plot(ypoints,marker=<span class="string">&#x27;o&#x27;</span>)</span><br><span class="line"><span class="comment">#还有很多点，线的标记</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#o代表实心圆标记点，:代表虚线，r代表红色</span></span><br><span class="line">plt.plot(ypoints,<span class="string">&#x27;o:r&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="基本操作">基本操作</h3>
 
     </div>
 
@@ -305,13 +302,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/S-%E7%9F%A9%E9%98%B5/" rel="prev" title="S-Matrix">
-                  <i class="fa fa-angle-left"></i> S-Matrix
+                <a href="/2025/05/04/Matlab/" rel="prev" title="MATLAB基础">
+                  <i class="fa fa-angle-left"></i> MATLAB基础
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/Matlab/" rel="next" title="MATLAB基础">
-                  MATLAB基础 <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/HSpice%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" rel="next" title="HSpice的安装及其基本使用方法">
+                  HSpice的安装及其基本使用方法 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

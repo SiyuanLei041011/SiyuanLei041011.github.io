@@ -27,7 +27,7 @@
 <meta property="og:description" content="Verilog HDL电路仿真和验证概述 仿真,也称模拟,是通过EDA仿真工具,对所设计的电路或系统输入测试信号,然后根据输出信号(如波形,文本或者VCD文件)与期望值进行比较,来确认是否得到与所期望一致的设计结果,从而验证设计的正确性. 在设计过程中,仿真是在综合之前完成的,这就是通常所说的行为级仿真,RTL仿真或者前仿真.在RTL设计阶段只包含了时钟和时序,并未包含门延时和线延时.因此R">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-30T13:00:34.136Z">
+<meta property="article:modified_time" content="2025-10-22T09:20:17.128Z">
 <meta property="article:author" content="SiyuanLei">
 <meta property="article:tag" content="Verilog">
 <meta name="twitter:card" content="summary">
@@ -135,7 +135,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#verilog-hdl%E7%94%B5%E8%B7%AF%E4%BB%BF%E7%9C%9F%E5%92%8C%E9%AA%8C%E8%AF%81%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">Verilog
-HDL电路仿真和验证概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#verilog-hdl%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">Verilog HDL测试程序设计基础</span></a></li></ol></div>
+HDL电路仿真和验证概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#verilog-hdl%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">Verilog HDL测试程序设计基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#testbench%E5%8F%8A%E5%85%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">Testbench及其结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E4%B8%BE%E4%BE%8B"><span class="nav-number">2.2.</span> <span class="nav-text">测试平台举例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="nav-number">2.2.1.</span> <span class="nav-text">组合逻辑电路仿真环境的搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="nav-number">2.2.2.</span> <span class="nav-text">时序逻辑电路仿真环境的搭建</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E%E4%BB%BF%E7%9C%9F%E7%9B%B8%E5%85%B3%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">与仿真相关的系统任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#display%E4%B8%8Ewrite"><span class="nav-number">3.1.</span> <span class="nav-text">$display与$write</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#monitor%E4%B8%8Estrobe"><span class="nav-number">3.2.</span> <span class="nav-text">$monitor与$strobe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#time%E4%B8%8Erealtime"><span class="nav-number">3.3.</span> <span class="nav-text">$time与$realtime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finish%E4%B8%8Estop"><span class="nav-number">3.4.</span> <span class="nav-text">$finish与$stop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#readmemh%E4%B8%8Ereadmemb"><span class="nav-number">3.5.</span> <span class="nav-text">$readmemh与$readmemb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#random"><span class="nav-number">3.6.</span> <span class="nav-text">$random</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%BC%E5%8F%98%E8%BD%AC%E5%82%A8%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.7.</span> <span class="nav-text">值变转储文件系统任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E6%97%B6%E9%97%B4%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.</span> <span class="nav-text">信号时间赋值语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">习题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -150,18 +150,18 @@ HDL电路仿真和验证概述</span></a></li><li class="nav-item nav-level-2"><
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -253,7 +253,7 @@ HDL电路仿真和验证概述</span></a></li><li class="nav-item nav-level-2"><
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-06-30 21:00:34" itemprop="dateModified" datetime="2025-06-30T21:00:34+08:00">2025-06-30</time>
+      <time title="Modified: 2025-10-22 17:20:17" itemprop="dateModified" datetime="2025-10-22T17:20:17+08:00">2025-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -297,10 +297,195 @@ HDL设计中分为4个阶段:</p>
 <p>前三个验证是在PC平台上依靠EDA工具来完成的,最后一个阶段则需要在真正的硬件平台(如FPGA,CPLD等)上进行,需要借助一些调试工具和专业的分析仪来测试.</p>
 <p>常用的功能验证有黑盒法,白盒法,灰盒法.</p>
 <h2 id="verilog-hdl测试程序设计基础">Verilog HDL测试程序设计基础</h2>
+<h3 id="testbench及其结构">Testbench及其结构</h3>
 <p>在Verilog
 HDL中,常采用测试平台(Testbench)方式进行仿真和验证.仿真时,Testbench用来产生测试激励给待验证设计(Design
 Under Verification,DUV),或者称为待测试设计(Design Under
 Test,DUT),同时检查DUV/DUT的输出是否与期望一致,从而达到验证设计功能的目的.</p>
+<h3 id="测试平台举例">测试平台举例</h3>
+<h4 id="组合逻辑电路仿真环境的搭建">组合逻辑电路仿真环境的搭建</h4>
+<p>组合逻辑电路的仿真验证,主要是检查设计结果是否符合电路真值表的功能,因此在搭建仿真环境时,用initial语句把被测试电路的输入按照真值表提供的数据变化作为测试条件.组合逻辑电路的特点决定了仿真中只需对输入信号进行设计即可,没有时序,定时信息和全局复位,置位等需求.</p>
+<p>下面搭建全加器的仿真环境</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">a</th>
+<th style="text-align: center;">b</th>
+<th style="text-align: center;">ci</th>
+<th style="text-align: center;">so</th>
+<th style="text-align: center;">co</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder1(a,b,ci,so,co)</span><br><span class="line">    <span class="keyword">input</span>   a,b,ci;</span><br><span class="line">    <span class="keyword">output</span>  so,co;</span><br><span class="line">    <span class="keyword">assign</span>  &#123;co,so&#125;=a+b+ci;</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> adder1_tb;</span><br><span class="line">    <span class="keyword">wire</span>    so,co;</span><br><span class="line">    <span class="keyword">reg</span>     a,b,ci;</span><br><span class="line">    adder1  U1(a,b,ci,so,so);<span class="comment">//模块实例化</span></span><br><span class="line">    <span class="keyword">initial</span></span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">                a=<span class="number">0</span>;b=<span class="number">0</span>;ci=<span class="number">0</span>;</span><br><span class="line">            #<span class="number">20</span> a=<span class="number">0</span>;b=<span class="number">0</span>;ci=<span class="number">1</span>;</span><br><span class="line">            #<span class="number">20</span> a=<span class="number">0</span>;b=<span class="number">1</span>;ci=<span class="number">0</span>;</span><br><span class="line">            #<span class="number">20</span> a=<span class="number">0</span>;b=<span class="number">1</span>;ci=<span class="number">1</span>;</span><br><span class="line">            #<span class="number">20</span> a=<span class="number">1</span>;b=<span class="number">0</span>;ci=<span class="number">0</span>;</span><br><span class="line">            #<span class="number">20</span> a=<span class="number">1</span>;b=<span class="number">0</span>;ci=<span class="number">1</span>;</span><br><span class="line">            #<span class="number">20</span> a=<span class="number">1</span>;b=<span class="number">1</span>;ci=<span class="number">0</span>;</span><br><span class="line">            #<span class="number">20</span> a=<span class="number">1</span>;b=<span class="number">1</span>;ci=<span class="number">1</span>;</span><br><span class="line">            #<span class="number">200</span> <span class="built_in">$finish</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h4 id="时序逻辑电路仿真环境的搭建">时序逻辑电路仿真环境的搭建</h4>
+<p>时序逻辑电路仿真环境的搭建要求与组合逻辑电路基本相同,但是需要考虑时序,定时信息和全局复位,置位等信号要求,并定义这些信号.</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> cnt10(clk,rst,ena,q,cnt)</span><br><span class="line">    <span class="keyword">input</span>           clk,rst,ena;</span><br><span class="line">    <span class="keyword">output</span>  [<span class="number">3</span>:<span class="number">0</span>]   q;</span><br><span class="line">    <span class="keyword">output</span>          cnt;</span><br><span class="line">    <span class="keyword">reg</span>     [<span class="number">3</span>:<span class="number">0</span>]   q;</span><br><span class="line">    <span class="keyword">always</span>@(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">posedge</span> rst)</span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">if</span>(rst)         q=<span class="number">4&#x27;b0000</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(ena)</span><br><span class="line">                <span class="keyword">begin</span></span><br><span class="line">                    <span class="keyword">if</span>(q&lt;<span class="number">9</span>) q=q+<span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">else</span>    q=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">assign</span>  cnt=q[<span class="number">3</span>]&amp;q[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> cnt10_tb;</span><br><span class="line">    <span class="keyword">reg</span>         clk,rst,ena;</span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>]  q;</span><br><span class="line">    <span class="keyword">wire</span>        cnt;</span><br><span class="line">    cnt10 U1(clk,rst,ena,q,cnt);</span><br><span class="line">    <span class="keyword">always</span> #<span class="number">50</span>  clk=~clk;</span><br><span class="line">    <span class="keyword">initial</span></span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            clk=<span class="number">0</span>;rst=<span class="number">0</span>;ena=<span class="number">1</span>;</span><br><span class="line">            #<span class="number">1200</span>   rst=<span class="number">1</span>;</span><br><span class="line">            #<span class="number">120</span>    rst=<span class="number">0</span>;</span><br><span class="line">            #<span class="number">2000</span>   ena=<span class="number">0</span>;</span><br><span class="line">            #<span class="number">200</span>    ena=<span class="number">1</span>;</span><br><span class="line">            #<span class="number">20000</span>  <span class="built_in">$finish</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span>   </span><br></pre></td></tr></table></figure>
+<h2 id="与仿真相关的系统任务">与仿真相关的系统任务</h2>
+<h3 id="display与write">$display与$write</h3>
+<p>Verilog HDL有两种主要的标准输出任务:$display和
+$write.这两个系统函数用来输出信息且语法格式相同.</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;&lt;format_specifiers&gt;&quot;</span>,&lt;signal1,signal2,...,signaln&gt;);</span><br><span class="line"><span class="built_in">$write</span>(<span class="string">&quot;&lt;format_specifiers&gt;&quot;</span>,&lt;signal1,signal2,...,signaln&gt;);</span><br></pre></td></tr></table></figure>
+<p>其中<code>"&lt;format_specifiers&gt;"</code>称为格式控制,<code>&lt;signal1,signal2,...,signaln&gt;</code>称为信号控制列表.</p>
+<p>$display将特定信息输入到标准输出设备,并且带有行结束字符,即自动地在输出后进行换行;但是$write输出特点信息时不自动换行,如果想要在一行中输出多个信息,可以使用$write.</p>
+<h3 id="monitor与strobe">$monitor与$strobe</h3>
+<h3 id="time与realtime">$time与$realtime</h3>
+<h3 id="finish与stop">$finish与$stop</h3>
+<p>系统任务$finish和$stop用于对仿真过程的控制,分别表示结束仿真和中断仿真.语法格式如下</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$finish</span></span><br><span class="line"><span class="built_in">$finish</span>(n)</span><br><span class="line"><span class="built_in">$stop</span></span><br><span class="line"><span class="built_in">$stop</span>(n)</span><br></pre></td></tr></table></figure>
+<p>其中参数n的含义如下表:</p>
+<table>
+<thead>
+<tr>
+<th>n的取值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>不输出任何信息</td>
+</tr>
+<tr>
+<td>1</td>
+<td>给出仿真时间和位置</td>
+</tr>
+<tr>
+<td>2</td>
+<td>给出仿真时间和位置,同时还有所用memory及CPU时间的统计</td>
+</tr>
+</tbody>
+</table>
+<p>系统任务$finish的作用是退出仿真器,返回主操作系统,也就是结束仿真过程.可以带上参数,输出不同的信息.如果不带参数,则默认设置为1.</p>
+<p>系统任务$stop的作用是把EDA工具暂停,在仿真环境下给出一个交互式的命令提示符,将控制权交给用户.</p>
+<h3 id="readmemh与readmemb">$readmemh与$readmemb</h3>
+<h3 id="random">$random</h3>
+<h3 id="值变转储文件系统任务">值变转储文件系统任务</h3>
+<h2 id="信号时间赋值语句">信号时间赋值语句</h2>
+<p>在集成电路设计和验证阶段,经常需要对特定信号进行延时来实现相应的时序控制,或者避免信号冲突形成电路中的热点.</p>
+<p>信号的时间延迟可以通过两类方式完成:</p>
+<ul>
+<li>延时控制
+<ul>
+<li>串行延时控制</li>
+<li>并行延时控制</li>
+<li>阻塞式延时控制</li>
+<li>非阻塞式延时控制</li>
+</ul></li>
+<li>事件控制
+<ul>
+<li>边沿触发事件控制</li>
+<li>电平敏感事件控制</li>
+</ul></li>
+</ul>
+<h2 id="习题">习题</h2>
+<ol type="1">
+<li>用Verilog HDL的门级建模描述如下电路, 要求:
+输入为<code>a, b, s</code>, 三个<code>wire sa, sb, s0</code>,
+输出为<code>y</code>, 满足如下关系:</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+    &amp;s0=\overline{s}\\
+    &amp;sa=s0\cdot a\\
+    &amp;sb=s\cdot b\\
+    &amp;y=sa+sb\\
+\end{aligned}\]</span></p>
+<p>且延迟时间设定如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>最小值min</th>
+<th>典型值type</th>
+<th>最大值max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a-sa-y</td>
+<td>10</td>
+<td>12</td>
+<td>14</td>
+</tr>
+<tr>
+<td>s-s0-sa-y</td>
+<td>15</td>
+<td>17</td>
+<td>19</td>
+</tr>
+<tr>
+<td>s-sb-y</td>
+<td>11</td>
+<td>13</td>
+<td>15</td>
+</tr>
+<tr>
+<td>b-sb-y</td>
+<td>10</td>
+<td>12</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> mux2to1(a, b, s, y);</span><br><span class="line">    <span class="keyword">input</span>  a, b, s;</span><br><span class="line">    <span class="keyword">output</span> y;</span><br><span class="line">    <span class="keyword">wire</span>   sa, sb, s0;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">not</span> <span class="variable">#(4, 5, 6) (s0, s)</span>;</span><br><span class="line">    <span class="keyword">and</span> <span class="variable">#(6, 7, 8) (sa, s0, a)</span>;</span><br><span class="line">    <span class="keyword">and</span> <span class="variable">#(6, 7, 8) (sb, s, b)</span>;</span><br><span class="line">    <span class="keyword">or</span> <span class="variable">#(5, 6, 7) (y, sa, sb)</span>;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -317,13 +502,13 @@ Test,DUT),同时检查DUV/DUT的输出是否与期望一致,从而达到验证�
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/hello-world/" rel="prev" title="Hello World">
-                  <i class="fa fa-angle-left"></i> Hello World
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E5%85%AD%E7%AB%A0/" rel="prev" title="第六章:Verilog HDL高级程序设计举例">
+                  <i class="fa fa-angle-left"></i> 第六章:Verilog HDL高级程序设计举例
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%B8%89%E7%AB%A0/" rel="next" title="第三章:Verilog HDL程序设计语句和描述方式">
-                  第三章:Verilog HDL程序设计语句和描述方式 <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%BA%8C%E7%AB%A0/" rel="next" title="第二章:Verilog HDL基础知识">
+                  第二章:Verilog HDL基础知识 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

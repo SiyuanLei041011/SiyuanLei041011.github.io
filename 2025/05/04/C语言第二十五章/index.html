@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="在前面的各章中我们已经见过C标准库的一些用法，总结如下： 我们最常用的是包含stdio.h，使用其中声明的printf函数，这个函数在libc中实现，程序在运行时要动态链接libc共享库。 在第 1 节 “数学函数”中用到了math.h中声明的sin和log函数，使用这些函数需要动态链接libm共享库。 在第 2 节 “数组应用实例：统计随机数”中用到了stdlib.h中声明的rand函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言:C标准库">
+<meta property="og:url" content="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E7%AB%A0/index.html">
+<meta property="og:site_name" content="SiyuanLei&#39;s Blog">
+<meta property="og:description" content="在前面的各章中我们已经见过C标准库的一些用法，总结如下： 我们最常用的是包含stdio.h，使用其中声明的printf函数，这个函数在libc中实现，程序在运行时要动态链接libc共享库。 在第 1 节 “数学函数”中用到了math.h中声明的sin和log函数，使用这些函数需要动态链接libm共享库。 在第 2 节 “数组应用实例：统计随机数”中用到了stdlib.h中声明的rand函">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:\blog\Blog\images\C\stdlib.buffer.png">
+<meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-09T10:56:44.503Z">
+<meta property="article:author" content="SiyuanLei">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\blog\Blog\images\C\stdlib.buffer.png">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E7%AB%A0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E7%AB%A0/","path":"2025/05/04/C语言第二十五章/","title":"C语言:C标准库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C语言:C标准库 | SiyuanLei's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SiyuanLei's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">字符串操作函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.</span> <span class="nav-text">初始化字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="nav-number">1.2.</span> <span class="nav-text">取字符串的长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.4.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.5.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.6.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.7.</span> <span class="nav-text">分割字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%87%86io%E5%BA%93%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">标准I&#x2F;O库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">文件的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopenfclose"><span class="nav-number">2.2.</span> <span class="nav-text">fopen&#x2F;fclose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdinstdoutstderr"><span class="nav-number">2.3.</span> <span class="nav-text">stdin&#x2F;stdout&#x2F;stderr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno%E4%B8%8Eperror%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">errno与perror函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%AD%97%E8%8A%82%E4%B8%BA%E5%8D%95%E4%BD%8D%E7%9A%84io%E5%87%BD%E6%95%B0"><span class="nav-number">2.5.</span> <span class="nav-text">以字节为单位的I&#x2F;O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E8%AF%BB%E5%86%99%E4%BD%8D%E7%BD%AE%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">2.6.</span> <span class="nav-text">操作读写位置的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E5%8D%95%E4%BD%8D%E7%9A%84io%E5%87%BD%E6%95%B0"><span class="nav-number">2.7.</span> <span class="nav-text">以字符串为单位的I&#x2F;O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E8%AE%B0%E5%BD%95%E4%B8%BA%E5%8D%95%E4%BD%8D%E7%9A%84io%E5%87%BD%E6%95%B0"><span class="nav-number">2.8.</span> <span class="nav-text">以记录为单位的I&#x2F;O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96io%E5%87%BD%E6%95%B0"><span class="nav-number">2.9.</span> <span class="nav-text">格式化I&#x2F;O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84io%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="nav-number">2.10.</span> <span class="nav-text">C标准库的I&#x2F;O缓冲区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">数值字符串转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">分配内存的函数</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SiyuanLei"
+      src="/images/femboy.jpg">
+  <p class="site-author-name" itemprop="name">SiyuanLei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C语言:C标准库 | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言:C标准库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-09 18:56:44" itemprop="dateModified" datetime="2025-08-09T18:56:44+08:00">2025-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>在前面的各章中我们已经见过C标准库的一些用法，总结如下：</p>
+<p>我们最常用的是包含<code>stdio.h</code>，使用其中声明的<code>printf</code>函数，这个函数在<code>libc</code>中实现，程序在运行时要动态链接<code>libc</code>共享库。</p>
+<p>在第 1 节
+“数学函数”中用到了<code>math.h</code>中声明的<code>sin</code>和<code>log</code>函数，使用这些函数需要动态链接<code>libm</code>共享库。</p>
+<p>在第 2 节
+“数组应用实例：统计随机数”中用到了<code>stdlib.h</code>中声明的<code>rand</code>函数，还提到了这个头文件中定义的<code>RAND_MAX</code>常量，在例
+8.5
+“剪刀石头布”中用到了<code>stdlib.h</code>中声明的<code>srand</code>函数和<code>time.h</code>中声明的<code>time</code>函数。使用这些函数需要动态链接<code>libc</code>共享库。</p>
+<p>在第 2 节
+“main函数和启动例程”中用到了<code>stdlib.h</code>中声明的<code>exit</code>函数，使用这个函数需要动态链接<code>libc</code>共享库。</p>
+<p>在第 6 节
+“折半查找”中用到了<code>assert.h</code>中定义的<code>assert</code>宏，在第
+4 节
+“其它预处理特性”中我们看到了这个宏的一种实现，它的实现需要调用<code>stdio.h</code>和<code>stdlib.h</code>中声明的函数，所以使用这个宏也需要动态链接<code>libc</code>共享库。</p>
+<p>在第 2.4 节
+“sizeof运算符与typedef类型声明”中提到了<code>size_t</code>类型在<code>stddef.h</code>中定义，在第
+1 节
+“指针的基本概念”中提到了<code>NULL</code>指针也在<code>stddef.h</code>中定义。</p>
+<p>在第 1 节
+“本章的预备知识”中介绍了<code>stdlib.h</code>中声明的<code>malloc</code>和<code>free</code>函数以及<code>string.h</code>中声明的<code>strcpy</code>和<code>strncpy</code>函数，使用这些函数需要动态链接<code>libc</code>共享库。</p>
+<p>在第 6 节
+“可变参数”中介绍了<code>stdarg.h</code>中定义的<code>va_list</code>类型和<code>va_arg</code>、<code>va_start</code>、<code>va_end</code>等宏定义，并给出了一种实现，这些宏定义的实现并没有调用库函数，所以不依赖于某个共享库，这一点和<code>assert</code>不同。</p>
+<p>总结一下，Linux平台提供的C标准库包括：</p>
+<p>一组头文件，定义了很多类型和宏，声明了很多库函数。这些头文件放在哪些目录下取决于不同的编译器，在我的系统上，<code>stdarg.h</code>和<code>stddef.h</code>位于/usr/lib/gcc/i486-linux-gnu/4.3.2/include目录下，<code>stdio.h</code>、<code>stdlib.h</code>、<code>time.h</code>、<code>math.h</code>、<code>assert.h</code>位于/usr/include目录下。C99标准定义的头文件有24个，本书只介绍其中最基本、最常用的几个。</p>
+<p>一组库文件，提供了库函数的实现。大多数库函数在<code>libc</code>共享库中，有些库函数在另外的共享库中，例如数学函数在<code>libm</code>中。在第
+4 节
+“共享库”讲过，通常<code>libc</code>共享库是/lib/libc.so.6，而我的系统启用了hwcap机制，<code>libc</code>共享库是/lib/tls/i686/cmov/libc.so.6。</p>
+<p>本章介绍另外一些最基本和最常用的库函数（包括一些不属于C标准但在UNIX平台上很常用的函数），写这一章是为了介绍字符串操作和文件操作的基本概念，而不是为了写一本C标准库函数的参考手册，Man
+Page已经是一本很好的手册了，读者学完这一章之后在开发时应该查阅Man
+Page，而不是把我这一章当参考手册来翻，所以本章不会面面俱到介绍所有的库函数，对于本章讲到的函数有些也不会讲得很细，因为我假定读者经过上一章的学习再结合我讲过的基本概念已经能看懂相关的Man
+Page了。很多技术书的作者给自己的书太多定位，既想写成一本入门教程，又想写成一本参考手册，我觉得这样不好，读者过于依赖技术书就失去了看真正的手册的能力。</p>
+<h2 id="字符串操作函数">字符串操作函数</h2>
+<p>程序按功能划分可分为数值运算、符号处理和I/O操作三类，符号处理程序占相当大的比例，符号处理程序无处不在，编译器、浏览器、Office套件等程序的主要功能都是符号处理。无论多复杂的符号处理都是由各种基本的字符串操作组成的，本节介绍如何用C语言的库函数做字符串初始化、取长度、拷贝、连接、比较、搜索等基本操作。</p>
+<h3 id="初始化字符串">初始化字符串</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">memset</span><span class="params">(<span class="type">void</span> *s, <span class="type">int</span> c, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：<code>s</code>指向哪，返回的指针就指向哪</p>
+<p><code>memset</code>函数把<code>s</code>所指的内存地址开始的n个字节都填充为<code>c</code>的值。通常<code>c</code>的值为0，把一块内存区清零。例如定义<code>char buf[10];</code>，如果它是全局变量或静态变量，则自动初始化为0（位于<code>.bss</code>段），如果它是函数的局部变量，则初值不确定，可以用<code>memset(buf, 0, 10)</code>清零，由<code>malloc</code>分配的内存初值也是不确定的，也可以用<code>memset</code>清零。</p>
+<h3 id="取字符串的长度">取字符串的长度</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">strlen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：字符串的长度</p>
+<p><code>strlen</code>函数返回<code>s</code>所指的字符串的长度。该函数从<code>s</code>所指的第一个字符开始找<code>'\0'</code>字符，一旦找到就返回，返回的长度不包括<code>'\0'</code>字符在内。例如定义<code>char buf[] = "hello";</code>，则<code>strlen(buf)</code>的值是5，但要注意，如果定义<code>char buf[5] = "hello";</code>，则调用<code>strlen(buf)</code>是危险的，会造成数组访问越界。</p>
+<h3 id="拷贝字符串">拷贝字符串</h3>
+<p>在第 1 节
+“本章的预备知识”中介绍了<code>strcpy</code>和<code>strncpy</code>函数，拷贝以<code>'\0'</code>结尾的字符串，<code>strncpy</code>还带一个参数指定最多拷贝多少个字节，此外，<code>strncpy</code>并不保证缓冲区以<code>'\0'</code>结尾。现在介绍<code>memcpy</code>和<code>memmove</code>函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">memcpy</span><span class="params">(<span class="type">void</span> *dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="type">void</span> *<span class="title function_">memmove</span><span class="params">(<span class="type">void</span> *dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：<code>dest</code>指向哪，返回的指针就指向哪</p>
+<p><code>memcpy</code>函数从<code>src</code>所指的内存地址拷贝n个字节到<code>dest</code>所指的内存地址，和<code>strncpy</code>不同，<code>memcpy</code>并不是遇到<code>'\0'</code>就结束，而是一定会拷贝完n个字节。这里的命名规律是，以<code>str</code>开头的函数处理以<code>'\0'</code>结尾的字符串，而以<code>mem</code>开头的函数则不关心<code>'\0'</code>字符，或者说这些函数并不把参数当字符串看待，因此参数的指针类型是<code>void *</code>而非<code>char *</code>。</p>
+<p><code>memmove</code>也是从<code>src</code>所指的内存地址拷贝n个字节到<code>dest</code>所指的内存地址，虽然叫<code>move</code>但其实也是拷贝而非移动。但是和<code>memcpy</code>有一点不同，<code>memcpy</code>的两个参数<code>src</code>和<code>dest</code>所指的内存区间如果重叠则无法保证正确拷贝，而<code>memmove</code>却可以正确拷贝。假设定义了一个数组<code>char buf[20] = "hello world\n";</code>，如果想把其中的字符串往后移动一个字节（变成<code>"hhello world\n"</code>），调用<code>memcpy(buf + 1, buf, 13)</code>是无法保证正确拷贝的：</p>
+<p>例 错误的memcpy调用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">20</span>] = <span class="string">&quot;hello world\n&quot;</span>;</span><br><span class="line">    <span class="built_in">memcpy</span>(buf + <span class="number">1</span>, buf, <span class="number">13</span>);</span><br><span class="line">    <span class="built_in">printf</span>(buf);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在我的机器上运行的结果是<code>hhhllooworrd</code>。如果把代码中的<code>memcpy</code>改成<code>memmove</code>则可以保证正确拷贝。<code>memmove</code>可以这样实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">memmove</span><span class="params">(<span class="type">void</span> *dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> temp[n];</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">char</span> *d = dest;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> *s = src;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        temp[i] = s[i];</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        d[i] = temp[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>借助于一个临时缓冲区<code>temp</code>，即使<code>src</code>和<code>dest</code>所指的内存区间有重叠也能正确拷贝。思考一下，如果不借助于临时缓冲区能不能正确处理重叠内存区间的拷贝？</p>
+<p>用<code>memcpy</code>如果得到的结果是<code>hhhhhhhhhhhhhh</code>倒不奇怪，可为什么会得到<code>hhhllooworrd</code>这个奇怪的结果呢？根据这个结果猜测的一种可能的实现是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">memcpy</span><span class="params">(<span class="type">void</span> *dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *d = dest;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> *s = src;</span><br><span class="line">    <span class="type">int</span> *di;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> *si;</span><br><span class="line">    <span class="type">int</span> r = n % <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">while</span> (r--)</span><br><span class="line">        *d++ = *s++;</span><br><span class="line">    di = (<span class="type">int</span> *)d;</span><br><span class="line">    si = (<span class="type">const</span> <span class="type">int</span> *)s;</span><br><span class="line">    n /= <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">while</span> (n--)</span><br><span class="line">        *di++ = *si++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在32位的x86平台上，每次拷贝1个字节需要一条指令，每次拷贝4个字节也只需要一条指令，<code>memcpy</code>函数的实现尽可能4个字节4个字节地拷贝，因而得到上述结果。</p>
+<p>C99的<code>restrict</code>关键字
+我们来看一个跟<code>memcpy/memmove</code>类似的问题。下面的函数将两个数组中对应的元素相加，结果保存在第三个数组中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">vector_add</span><span class="params">(<span class="type">const</span> <span class="type">double</span> *x, <span class="type">const</span> <span class="type">double</span> *y, <span class="type">double</span> *result)</span></span><br><span class="line">&#123;  </span><br><span class="line">    <span class="type">int</span> i;  </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">64</span>; ++i)  </span><br><span class="line">        result[i] = x[i] + y[i];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果这个函数要在多处理器的计算机上执行，编译器可以做这样的优化：把这一个循环拆成两个循环，一个处理器计算<code>i</code>值从0到31的循环，另一个处理器计算<code>i</code>值从32到63的循环，这样两个处理器可以同时工作，使计算时间缩短一半。但是这样的编译优化能保证得出正确结果吗？假如<code>result</code>和<code>x</code>所指的内存区间是重叠的，<code>result[0]</code>其实是<code>x[1]</code>，<code>result[i]</code>其实是<code>x[i+1]</code>，这两个处理器就不能各干各的事情了，因为第二个处理器的工作依赖于第一个处理器的最终计算结果，这种情况下编译优化的结果是错的。这样看来编译器是不敢随便做优化了，那么多处理器提供的并行性就无法利用，岂不可惜？为此，C99引入<code>restrict</code>关键字，如果程序员把上面的函数声明为<code>void vector_add(const double *restrict x, const double *restrict y, double *restrict result)</code>，就是告诉编译器可以放心地对这个函数做优化，程序员自己会保证这些指针所指的内存区间互不重叠。</p>
+<p>由于<code>restrict</code>是C99引入的新关键字，目前Linux的Man
+Page还没有更新，所以都没有<code>restrict</code>关键字，本书的函数原型都取自Man
+Page，所以也都没有<code>restrict</code>关键字。但在C99标准中库函数的原型都在必要的地方加了<code>restrict</code>关键字，在C99中<code>memcpy</code>的原型是<code>void *memcpy(void * restrict s1, const void * restrict s2, size_t n);</code>，就是告诉调用者，这个函数的实现可能会做些优化，编译器也可能会做些优化，传进来的指针不允许指向重叠的内存区间，否则结果可能是错的，而<code>memmove</code>的原型是<code>void *memmove(void *s1, const void *s2, size_t n);</code>，没有<code>restrict</code>关键字，说明传给这个函数的指针允许指向重叠的内存区间。在<code>restrict</code>关键字出现之前都是用自然语言描述哪些函数的参数不允许指向重叠的内存区间，例如在C89标准的库函数一章开头提到，本章描述的所有函数，除非特别说明，都不应该接收两个指针参数指向重叠的内存区间，例如调用<code>sprintf</code>时传进来的格式化字符串和结果字符串的首地址相同，诸如此类的调用都是非法的。本书也遵循这一惯例，除非像<code>memmove</code>这样特别说明之外，都表示“不允许”。</p>
+<p>关于<code>restrict</code>关键字更详细的解释可以参考[BeganFORTRAN]。</p>
+<p>字符串的拷贝也可以用<code>strdup(3)</code>函数，这个函数不属于C标准库，是POSIX标准中定义的，POSIX标准定义了UNIX系统的各种接口，包含C标准库的所有函数和很多其它的系统函数，在第
+2 节 “C标准I/O库函数与Unbuffered I/O函数”将详细介绍POSIX标准。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strdup</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：指向新分配的字符串
+这个函数调用<code>malloc</code>动态分配内存，把字符串<code>s</code>拷贝到新分配的内存中然后返回。用这个函数省去了事先为新字符串分配内存的麻烦，但是用完之后要记得调用<code>free</code>释放新字符串的内存。</p>
+<h3 id="连接字符串">连接字符串</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strcat</span><span class="params">(<span class="type">char</span> *dest, <span class="type">const</span> <span class="type">char</span> *src)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">strncat</span><span class="params">(<span class="type">char</span> *dest, <span class="type">const</span> <span class="type">char</span> *src, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：<code>dest</code>指向哪，返回的指针就指向哪</p>
+<p><code>strcat</code>把<code>src</code>所指的字符串连接到<code>dest</code>所指的字符串后面，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> d[<span class="number">10</span>] = <span class="string">&quot;foo&quot;</span>;</span><br><span class="line"><span class="type">char</span> s[<span class="number">10</span>] = <span class="string">&quot;bar&quot;</span>;</span><br><span class="line"><span class="built_in">strcat</span>(d, s);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s %s\n&quot;</span>, d, s);</span><br></pre></td></tr></table></figure>
+<p>调用<code>strcat</code>函数后，缓冲区<code>s</code>的内容没变，缓冲区<code>d</code>中保存着字符串<code>"foobar"</code>，注意原来<code>"foo"</code>后面的<code>'\0'</code>被连接上来的字符串<code>"bar"</code>覆盖掉了，<code>"bar"</code>后面的<code>'\0'</code>仍保留。</p>
+<p><code>strcat</code>和<code>strcpy</code>有同样的问题，调用者必须确保<code>dest</code>缓冲区足够大，否则会导致缓冲区溢出错误。<code>strncat</code>函数通过参数<code>n</code>指定一个长度，就可以避免缓冲区溢出错误。注意这个参数<code>n</code>的含义和<code>strncpy</code>的参数<code>n</code>不同，它并不是缓冲区<code>dest</code>的长度，而是表示最多从<code>src</code>缓冲区中取<code>n</code>个字符（不包括结尾的<code>'\0'</code>）连接到<code>dest</code>后面。如果<code>src</code>中前<code>n</code>个字符没有出现<code>'\0'</code>，则取前<code>n</code>个字符再加一个<code>'\0'</code>连接到<code>dest</code>后面，所以<code>strncat</code>总是保证<code>dest</code>缓冲区以<code>'\0'</code>结尾，这一点又和<code>strncpy</code>不同，<code>strncpy</code>并不保证<code>dest</code>缓冲区以<code>'\0'</code>结尾。所以，提供给<code>strncat</code>函数的<code>dest</code>缓冲区的大小至少应该是<code>strlen(dest)+n+1</code>个字节，才能保证不溢出。</p>
+<h3 id="比较字符串">比较字符串</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">memcmp</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *s1, <span class="type">const</span> <span class="type">void</span> *s2, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">strcmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1, <span class="type">const</span> <span class="type">char</span> *s2)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">strncmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1, <span class="type">const</span> <span class="type">char</span> *s2, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：负值表示<code>s1</code>小于<code>s2</code>，<code>0</code>表示<code>s1</code>等于<code>s2</code>，正值表示<code>s1</code>大于<code>s2</code></p>
+<p><code>memcmp</code>从前到后逐个比较缓冲区<code>s1</code>和<code>s2</code>的前n个字节（不管里面有没有<code>'\0'</code>），如果<code>s1</code>和<code>s2</code>的前n个字节全都一样就返回<code>0</code>，如果遇到不一样的字节，<code>s1</code>的字节比<code>s2</code>小就返回负值，<code>s1</code>的字节比<code>s2</code>大就返回正值。</p>
+<p><code>strcmp</code>把<code>s1</code>和<code>s2</code>当字符串比较，在其中一个字符串中遇到<code>'\0'</code>时结束，按照上面的比较准则，<code>"ABC"</code>比<code>"abc"</code>小，<code>"ABCD"</code>比<code>"ABC"</code>大，<code>"123A9"</code>比<code>"123B2"</code>小。</p>
+<p><code>strncmp</code>的比较结束条件是：要么在其中一个字符串中遇到<code>'\0'</code>结束（类似于<code>strcmp</code>），要么比较完n个字符结束（类似于<code>memcmp</code>）。例如，<code>strncmp("ABCD", "ABC", 3)</code>的返回值是<code>0</code>，<code>strncmp("ABCD", "ABC", 4)</code>的返回值是正值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;strings.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">strcasecmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1, <span class="type">const</span> <span class="type">char</span> *s2)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">strncasecmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1, <span class="type">const</span> <span class="type">char</span> *s2, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：负值表示<code>s1</code>小于<code>s2</code>，<code>0</code>表示<code>s1</code>等于<code>s2</code>，正值表示<code>s1</code>大于<code>s2</code></p>
+<p>这两个函数和<code>strcmp/strncmp</code>类似，但在比较过程中忽略大小写，大写字母<code>A</code>和小写字母<code>a</code>认为是相等的。这两个函数不属于C标准库，是POSIX标准中定义的。</p>
+<h3 id="搜索字符串">搜索字符串</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strchr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, <span class="type">int</span> c)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">strrchr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, <span class="type">int</span> c)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：如果找到字符<code>c</code>，返回字符串<code>s</code>中指向字符<code>c</code>的指针，如果找不到就返回<code>NULL</code></p>
+<p><code>strchr</code>在字符串<code>s</code>中从前到后查找字符<code>c</code>，找到字符<code>c</code>第一次出现的位置时就返回，返回值指向这个位置，如果找不到字符<code>c</code>就返回<code>NULL</code>。<code>strrchr</code>和<code>strchr</code>类似，但是从右向左找字符<code>c</code>，找到字符<code>c</code>第一次出现的位置就返回，函数名中间多了一个字母<code>r</code>可以理解为Right-to-left。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strstr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *haystack, <span class="type">const</span> <span class="type">char</span> *needle)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：如果找到子串，返回值指向子串的开头，如果找不到就返回<code>NULL</code></p>
+<p><code>strstr</code>在一个长字符串中从前到后找一个子串（Substring），找到子串第一次出现的位置就返回，返回值指向子串的开头，如果找不到就返回<code>NULL</code>。这两个参数名很形象，在干草堆haystack中找一根针needle，按中文的说法叫大海捞针，显然haystack是长字符串，needle是要找的子串。</p>
+<p>搜索子串有一个显而易见的算法，可以用两层的循环，外层循环把haystack中的每一个字符的位置依次假定为子串的开头，内层循环从这个位置开始逐个比较haystack和needle的每个字符是否相同。想想这个算法最多需要做多少次比较？其实有比这个算法高效得多的算法，有兴趣的读者可以参考[算法导论]。</p>
+<h3 id="分割字符串">分割字符串</h3>
+<p>很多文件格式或协议格式中会规定一些分隔符或者叫界定符（Delimiter），例如/etc/passwd文件中保存着系统的帐号信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> /etc/passwd</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">daemon:x:1:1:daemon:/usr/sbin:/bin/sh</span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>每条记录占一行，也就是说记录之间的分隔符是换行符，每条记录又由若干个字段组成，这些字段包括用户名、密码、用户id、组id、个人信息、主目录、登录Shell，字段之间的分隔符是:号。解析这样的字符串需要根据分隔符把字符串分割成几段，C标准库提供的<code>strtok</code>函数可以很方便地完成分割字符串的操作。tok是Token的缩写，分割出来的每一段字符串称为一个Token。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strtok</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *delim)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">strtok_r</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *delim, <span class="type">char</span> **saveptr)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：返回指向下一个Token的指针，如果没有下一个Token了就返回<code>NULL</code></p>
+<p>参数<code>str</code>是待分割的字符串，<code>delim</code>是分隔符，可以指定一个或多个分隔符，<code>strtok</code>遇到其中任何一个分隔符就会分割字符串。看下面的例子。</p>
+<p>例 strtok</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> str[] = <span class="string">&quot;root:x::0:root:/root:/bin/bash:&quot;</span>;</span><br><span class="line">    <span class="type">char</span> *token;</span><br><span class="line"></span><br><span class="line">    token = strtok(str, <span class="string">&quot;:&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, token);</span><br><span class="line">    <span class="keyword">while</span> ( (token = strtok(<span class="literal">NULL</span>, <span class="string">&quot;:&quot;</span>)) != <span class="literal">NULL</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, token);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out </span><br><span class="line">root</span><br><span class="line">x</span><br><span class="line"><span class="number">0</span></span><br><span class="line">root</span><br><span class="line">/root</span><br><span class="line">/bin/bash</span><br></pre></td></tr></table></figure>
+<p>结合这个例子，<code>strtok</code>的行为可以这样理解：冒号是分隔符，把<code>"root:x::0:root:/root:/bin/bash:"</code>这个字符串分隔成<code>"root"</code>、<code>"x"</code>、<code>""</code>、<code>"0"</code>、<code>"root"</code>、<code>"/root"</code>、<code>"/bin/bash"</code>、<code>""</code>等几个Token，但空字符串的Token被忽略。第一次调用要把字符串首地址传给<code>strtok</code>的第一个参数，以后每次调用第一个参数只要传<code>NULL</code>就可以了，<code>strtok</code>函数自己会记住上次处理到字符串的什么位置（显然这是通过<code>strtok</code>函数中的一个静态指针变量记住的）。</p>
+<p>用gdb跟踪这个程序，会发现<code>str</code>字符串被<code>strtok</code>不断修改，每次调用<code>strtok</code>把<code>str</code>中的一个分隔符改成<code>'\0'</code>，分割出一个小字符串，并返回这个小字符串的首地址。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">(gdb) start</span><br><span class="line">Breakpoint 1 at 0x8048415: file main.c, line 5.</span><br><span class="line">Starting program: /home/akaedu/a.out </span><br><span class="line">main () at main.c:5</span><br><span class="line">5   &#123;</span><br><span class="line">(gdb) n</span><br><span class="line">6       char str[] = &quot;root:x::0:root:/root:/bin/bash:&quot;;</span><br><span class="line">(gdb) </span><br><span class="line">9       token = strtok(str, &quot;:&quot;);</span><br><span class="line">(gdb) display str</span><br><span class="line">1: str = &quot;root:x::0:root:/root:/bin/bash:&quot;</span><br><span class="line">(gdb) n</span><br><span class="line">10      printf(&quot;%s\n&quot;, token);</span><br><span class="line">1: str = &quot;root\000x::0:root:/root:/bin/bash:&quot;</span><br><span class="line">(gdb) </span><br><span class="line">root</span><br><span class="line">11      while ( (token = strtok(NULL, &quot;:&quot;)) != NULL)</span><br><span class="line">1: str = &quot;root\000x::0:root:/root:/bin/bash:&quot;</span><br><span class="line">(gdb) </span><br><span class="line">12          printf(&quot;%s\n&quot;, token);</span><br><span class="line">1: str = &quot;root\000x\000:0:root:/root:/bin/bash:&quot;</span><br><span class="line">(gdb) </span><br><span class="line">x</span><br><span class="line">11      while ( (token = strtok(NULL, &quot;:&quot;)) != NULL)</span><br><span class="line">1: str = &quot;root\000x\000:0:root:/root:/bin/bash:&quot;</span><br></pre></td></tr></table></figure>
+<p>刚才提到在<code>strtok</code>函数中应该有一个静态指针变量记住上次处理到字符串中的什么位置，所以不需要每次调用时都把字符串中的当前处理位置传给<code>strtok</code>，但是在函数中使用静态变量是不好的，以后会讲到这样的函数是不可重入的。<code>strtok_r</code>函数则不存在这个问题，它的内部没有静态变量，调用者需要自己分配一个指针变量来维护字符串中的当前处理位置，每次调用时把这个指针变量的地址传给<code>strtok_r</code>的第三个参数，告诉<code>strtok_r</code>从哪里开始处理，<code>strtok_r</code>返回时再把新的处理位置写回到这个指针变量中（这是一个Value-result参数）。<code>strtok_r</code>末尾的<code>r</code>就表示可重入（Reentrant），这个函数不属于C标准库，是在POSIX标准中定义的。关于<code>strtok_r</code>的用法Man
+Page上有一个很好的例子：</p>
+<p>例 strtok_r</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *str1, *str2, *token, *subtoken;</span><br><span class="line">    <span class="type">char</span> *saveptr1, *saveptr2;</span><br><span class="line">    <span class="type">int</span> j;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Usage: %s string delim subdelim\n&quot;</span>,</span><br><span class="line">            argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">1</span>, str1 = argv[<span class="number">1</span>]; ; j++, str1 = <span class="literal">NULL</span>) &#123;</span><br><span class="line">        token = strtok_r(str1, argv[<span class="number">2</span>], &amp;saveptr1);</span><br><span class="line">        <span class="keyword">if</span> (token == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d: %s\n&quot;</span>, j, token);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (str2 = token; ; str2 = <span class="literal">NULL</span>) &#123;</span><br><span class="line">            subtoken = strtok_r(str2, argv[<span class="number">3</span>], &amp;saveptr2);</span><br><span class="line">            <span class="keyword">if</span> (subtoken == <span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot; --&gt; %s\n&quot;</span>, subtoken);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./a.out <span class="string">&#x27;a/bbb///cc;xxx:yyy:&#x27;</span> <span class="string">&#x27;:;&#x27;</span> <span class="string">&#x27;/&#x27;</span></span></span><br><span class="line">1: a/bbb///cc</span><br><span class="line"><span class="meta prompt_"> --&gt; </span><span class="language-bash">a</span></span><br><span class="line"><span class="meta prompt_"> --&gt; </span><span class="language-bash">bbb</span></span><br><span class="line"><span class="meta prompt_"> --&gt; </span><span class="language-bash">cc</span></span><br><span class="line">2: xxx</span><br><span class="line"><span class="meta prompt_"> --&gt; </span><span class="language-bash">xxx</span></span><br><span class="line">3: yyy</span><br><span class="line"><span class="meta prompt_"> --&gt; </span><span class="language-bash">yyy</span></span><br></pre></td></tr></table></figure>
+<p><code>a/bbb///cc;xxx:yyy:</code>这个字符串有两级分隔符，一级分隔符是<code>:</code>号或<code>;</code>号，把这个字符串分割成<code>a/bbb///cc</code>、<code>xxx</code>、<code>yyy</code>三个子串，二级分隔符是<code>/</code>，只有第一个子串中有二级分隔符，它被进一步分割成<code>a</code>、<code>bbb</code>、<code>cc</code>三个子串。由于<code>strtok_r</code>不使用静态变量，而是要求调用者自己保存字符串的当前处理位置，所以这个例子可以在按一级分隔符分割整个字符串的过程中穿插着用二级分隔符分割其中的每个子串。建议读者用gdb的<code>display</code>命令跟踪<code>argv[1]</code>、<code>saveptr1</code>和<code>saveptr2</code>，以理解<code>strtok_r</code>函数的工作方式。</p>
+<p>Man
+Page的BUGS部分指出了用<code>strtok</code>和<code>strtok_r</code>函数需要注意的问题：</p>
+<p>这两个函数要改写字符串以达到分割的效果</p>
+<p>这两个函数不能用于常量字符串，因为试图改写<code>.rodata</code>段会产生段错误</p>
+<p>在做了分割之后，字符串中的分隔符就被<code>'\0'</code>覆盖了</p>
+<p><code>strtok</code>函数使用了静态变量，它不是线程安全的，必要时应该用可重入的<code>strtok_r</code>函数，以后再详细介绍“可重入”和“线程安全”这两个概念</p>
+<h2 id="标准io库函数">标准I/O库函数</h2>
+<h3 id="文件的基本概念">文件的基本概念</h3>
+<p>我们已经多次用到了文件，例如源文件、目标文件、可执行文件、库文件等，现在学习如何用C标准库对文件进行读写操作，对文件的读写也属于I/O操作的一种，本节介绍的大部分函数在头文件<code>stdio.h</code>中声明，称为标准I/O库函数。</p>
+<p>文件可分为文本文件（Text File）和二进制文件（Binary
+File）两种，源文件是文本文件，而目标文件、可执行文件和库文件是二进制文件。文本文件是用来保存字符的，文件中的字节都是字符的某种编码（例如ASCII或UTF-8），用<code>cat</code>命令可以查看其中的字符，用vi可以编辑其中的字符，而二进制文件不是用来保存字符的，文件中的字节表示其它含义，例如可执行文件中有些字节表示指令，有些字节表示各Section和Segment在文件中的位置，有些字节表示各Segment的加载地址。</p>
+<p>在第 5.1 节
+“目标文件”中我们用<code>hexdump</code>命令查看过一个二进制文件。我们再做一个小实验，用vi编辑一个文件<code>textfile</code>，在其中输入<code>5678</code>然后保存退出，用<code>ls -l</code>命令可以看到它的长度是5：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -l textfile</span> </span><br><span class="line">-rw-r--r-- 1 akaedu akaedu 5 2009-03-20 10:58 textfile</span><br></pre></td></tr></table></figure>
+<p><code>5678</code>四个字符各占一个字节，vi会自动在文件末尾加一个换行符，所以文件长度是5。用<code>od</code>命令查看该文件的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">od</span> -tx1 -tc -Ax textfile</span> </span><br><span class="line">000000 35 36 37 38 0a</span><br><span class="line">         5   6   7   8  \n</span><br><span class="line">000005</span><br></pre></td></tr></table></figure>
+<p><code>-tx1</code>选项表示将文件中的字节以十六进制的形式列出来，每组一个字节，<code>-tc</code>选项表示将文件中的ASCII码以字符形式列出来。和<code>hexdump</code>类似，输出结果最左边的一列是文件中的地址，默认以八进制显示，<code>-Ax</code>选项要求以十六进制显示文件中的地址。这样我们看到，这个文件中保存了5个字符，以ASCII码保存。ASCII码的范围是0~127，所以ASCII码文本文件中每个字节只用到低7位，最高位都是0。以后我们会经常用到<code>od</code>命令。</p>
+<p>文本文件是一个模糊的概念。有些时候说文本文件是指用vi可以编辑出来的文件，例如/etc目录下的各种配置文件，这些文件中只包含ASCII码中的可见字符，而不包含像<code>'\0'</code>这种不可见字符，也不包含最高位是1的非ASCII码字节。从广义上来说，只要是专门保存字符的文件都算文本文件，包含不可见字符的也算，采用其它字符编码（例如UTF-8编码）的也算。</p>
+<h3 id="fopenfclose">fopen/fclose</h3>
+<p>在操作文件之前要用<code>fopen</code>打开文件，操作完毕要用<code>fclose</code>关闭文件。打开文件就是在操作系统中分配一些资源用于保存该文件的状态信息，并得到该文件的标识，以后用户程序就可以用这个标识对文件做各种操作，关闭文件则释放文件在操作系统中占用的资源，使文件的标识失效，用户程序就无法再操作这个文件了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">FILE *<span class="title function_">fopen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *path, <span class="type">const</span> <span class="type">char</span> *mode)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回文件指针，出错返回<code>NULL</code>并设置<code>errno</code></p>
+<p><code>path</code>是文件的路径名，<code>mode</code>表示打开方式。如果文件打开成功，就返回一个<code>FILE *</code>文件指针来标识这个文件。以后调用其它函数对文件做读写操作都要提供这个指针，以指明对哪个文件进行操作。<code>FILE</code>是C标准库中定义的结构体类型，其中包含该文件在内核中标识（在第
+2 节 “C标准I/O库函数与Unbuffered
+I/O函数”将会讲到这个标识叫做文件描述符）、I/O缓冲区和当前读写位置等信息，但调用者不必知道<code>FILE</code>结构体都有哪些成员，我们很快就会看到，调用者只是把文件指针在库函数接口之间传来传去，而文件指针所指的<code>FILE</code>结构体的成员在库函数内部维护，调用者不应该直接访问这些成员，这种编程思想在面向对象方法论中称为封装（Encapsulation）。像<code>FILE *</code>这样的指针称为不透明指针（Opaque
+Pointer）或者叫句柄（Handle），<code>FILE *</code>指针就像一个把手（Handle），抓住这个把手就可以打开门或抽屉，但用户只能抓这个把手，而不能直接抓门或抽屉。</p>
+<p>下面说说参数<code>path</code>和<code>mode</code>，<code>path</code>可以是相对路径也可以是绝对路径，<code>mode</code>表示打开方式是读还是写。比如<code>fp = fopen("/tmp/file2", "w");</code>表示打开绝对路径/tmp/file2，只做写操作，<code>path</code>也可以是相对路径，比如<code>fp = fopen("file.a", "r");</code>表示在当前工作目录下打开文件<code>file.a</code>，只做读操作，再比如<code>fp = fopen("../a.out", "r");</code>只读打开当前工作目录上一层目录下的<code>a.out</code>，<code>fp = fopen("Desktop/file3", "w");</code>只写打开当前工作目录下子目录Desktop下的<code>file3</code>。相对路径是相对于当前工作目录（Current
+Working
+Directory）的路径，每个进程都有自己的当前工作目录，Shell进程的当前工作目录可以用<code>pwd</code>命令查看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">pwd</span></span></span><br><span class="line">/home/akaedu</span><br></pre></td></tr></table></figure>
+<p>通常Linux发行版都把Shell配置成在提示符前面显示当前工作目录，例如<code>~$</code>表示当前工作目录是主目录，<code>/etc$</code>表示当前工作目录是<code>/etc</code>。用<code>cd</code>命令可以改变Shell进程的当前工作目录。在Shell下敲命令启动新的进程，则该进程的当前工作目录继承自Shell进程的当前工作目录，该进程也可以调用<code>chdir(2)</code>函数改变自己的当前工作目录。</p>
+<p><code>mode</code>参数是一个字符串，由<code>rwatb+</code>六个字符组合而成，<code>r</code>表示读，<code>w</code>表示写，<code>a</code>表示追加（Append），在文件末尾追加数据使文件的尺寸增大。<code>t</code>表示文本文件，<code>b</code>表示二进制文件，有些操作系统的文本文件和二进制文件格式不同，而在UNIX系统中，无论文本文件还是二进制文件都是由一串字节组成，<code>t</code>和<code>b</code>没有区分，用哪个都一样，也可以省略不写。如果省略<code>t</code>和<code>b</code>，<code>rwa+</code>四个字符有以下6种合法的组合：</p>
+<p><code>"r"</code> 只读，文件必须已存在</p>
+<p><code>"w"</code>
+只写，如果文件不存在则创建，如果文件已存在则把文件长度截断（Truncate）为0字节再重新写，也就是替换掉原来的文件内容</p>
+<p><code>"a"</code> 只能在文件末尾追加数据，如果文件不存在则创建</p>
+<p><code>"r+"</code> 允许读和写，文件必须已存在</p>
+<p><code>"w+"</code>
+允许读和写，如果文件不存在则创建，如果文件已存在则把文件长度截断为0字节再重新写</p>
+<p><code>"a+"</code> 允许读和追加数据，如果文件不存在则创建</p>
+<p>在打开一个文件时如果出错，<code>fopen</code>将返回<code>NULL</code>并设置<code>errno</code>，<code>errno</code>稍后介绍。在程序中应该做出错处理，通常这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( (fp = fopen(<span class="string">&quot;/tmp/file1&quot;</span>, <span class="string">&quot;r&quot;</span>)) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;error open file /tmp/file1!\n&quot;</span>);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比如<code>/tmp/file1</code>这个文件不存在，而<code>r</code>打开方式又不会创建这个文件，<code>fopen</code>就会出错返回。</p>
+<p>再说说<code>fclose</code>函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fclose</span><span class="params">(FILE *fp)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回<code>0</code>，出错返回<code>EOF</code>并设置<code>errno</code></p>
+<p>把文件指针传给<code>fclose</code>可以关闭它所标识的文件，关闭之后该文件指针就无效了，不能再使用了。如果<code>fclose</code>调用出错（比如传给它一个无效的文件指针）则返回<code>EOF</code>并设置<code>errno</code>，<code>errno</code>稍后介绍，<code>EOF</code>在<code>stdio.h</code>中定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* End of file character.</span></span><br><span class="line"><span class="comment">   Some things throughout the library rely on this being -1.  */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> EOF</span></span><br><span class="line"><span class="meta"># <span class="keyword">define</span> EOF (-1)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>它的值是<code>-1</code>。<code>fopen</code>调用应该和<code>fclose</code>调用配对，打开文件操作完之后一定要记得关闭。如果不调用<code>fclose</code>，在进程退出时系统会自动关闭文件，但是不能因此就忽略<code>fclose</code>调用，如果写一个长年累月运行的程序（比如网络服务器程序），打开的文件都不关闭，堆积得越来越多，就会占用越来越多的系统资源。</p>
+<h3 id="stdinstdoutstderr">stdin/stdout/stderr</h3>
+<p>我们经常用<code>printf</code>打印到屏幕，也用过<code>scanf</code>读键盘输入，这些也属于I/O操作，但不是对文件做I/O操作而是对终端设备做I/O操作。所谓终端（Terminal）是指人机交互的设备，也就是可以接受用户输入并输出信息给用户的设备。在计算机刚诞生的年代，终端是电传打字机和打印机，现在的终端通常是键盘和显示器。终端设备和文件一样也需要先打开后操作，终端设备也有对应的路径名，<code>/dev/tty</code>就表示和当前进程相关联的终端设备（在第
+1.1 节
+“终端的基本概念”会讲到这叫进程的控制终端）。也就是说，<code>/dev/tty</code>不是一个普通的文件，它不表示磁盘上的一组数据，而是表示一个设备。用<code>ls</code>命令查看这个文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -l /dev/tty</span></span><br><span class="line">crw-rw-rw- 1 root dialout 5, 0 2009-03-20 19:31 /dev/tty</span><br></pre></td></tr></table></figure>
+<p>开头的<code>c</code>表示文件类型是字符设备。中间的<code>5</code>,<code>0</code>是它的设备号，主设备号<code>5</code>，次设备号<code>0</code>，主设备号标识内核中的一个设备驱动程序，次设备号标识该设备驱动程序管理的一个设备。内核通过设备号找到相应的驱动程序，完成对该设备的操作。我们知道常规文件的这一列应该显示文件尺寸，而设备文件的这一列显示设备号，这表明设备文件是没有文件尺寸这个属性的，因为设备文件在磁盘上不保存数据，对设备文件做读写操作并不是读写磁盘上的数据，而是在读写设备。UNIX的传统是Everything
+is a
+file，键盘、显示器、串口、磁盘等设备在<code>/dev</code>目录下都有一个特殊的设备文件与之对应，这些设备文件也可以像普通文件一样打开、读、写和关闭，使用的函数接口是相同的。本书中不严格区分“文件”和“设备”这两个概念，遇到“文件”这个词，读者可以根据上下文理解它是指普通文件还是设备，如果需要强调是保存在磁盘上的普通文件，本书会用“常规文件”（Regular
+File）这个词。</p>
+<p>那为什么<code>printf</code>和<code>scanf</code>不用打开就能对终端设备进行操作呢？因为在程序启动时（在<code>main</code>函数还没开始执行之前）会自动把终端设备打开三次，分别赋给三个<code>FILE *</code>指针<code>stdin</code>、<code>stdout</code>和<code>stderr</code>，这三个文件指针是<code>libc</code>中定义的全局变量，在<code>stdio.h</code>中声明，<code>printf</code>向<code>stdout</code>写，而<code>scanf</code>从<code>stdin</code>读，后面我们会看到，用户程序也可以直接使用这三个文件指针。这三个文件指针的打开方式都是可读可写的，但通常<code>stdin</code>只用于读操作，称为标准输入（Standard
+Input），<code>stdout</code>只用于写操作，称为标准输出（Standard
+Output），<code>stderr</code>也只用于写操作，称为标准错误输出（Standard
+Error），通常程序的运行结果打印到标准输出，而错误提示（例如gcc报的警告和错误）打印到标准错误输出，所以<code>fopen</code>的错误处理写成这样更符合惯例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( (fp = fopen(<span class="string">&quot;/tmp/file1&quot;</span>, <span class="string">&quot;r&quot;</span>)) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="built_in">fputs</span>(<span class="string">&quot;Error open file /tmp/file1\n&quot;</span>, <span class="built_in">stderr</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>fputs</code>函数将在稍后详细介绍。不管是打印到标准输出还是打印到标准错误输出效果是一样的，都是打印到终端设备（也就是屏幕）了，那为什么还要分成标准输出和标准错误输出呢？以后我们会讲到重定向操作，可以把标准输出重定向到一个常规文件，而标准错误输出仍然对应终端设备，这样就可以把正常的运行结果和错误提示分开，而不是混在一起打印到屏幕了。</p>
+<h3 id="errno与perror函数">errno与perror函数</h3>
+<p>很多系统函数在错误返回时将错误原因记录在<code>libc</code>定义的全局变量<code>errno</code>中，每种错误原因对应一个错误码，请查阅<code>errno(3)</code>的Man
+Page了解各种错误码，<code>errno</code>在头文件<code>errno.h</code>中声明，是一个整型变量，所有错误码都是正整数。</p>
+<p>如果在程序中打印错误信息时直接打印<code>errno</code>变量，打印出来的只是一个整数值，仍然看不出是什么错误。比较好的办法是用<code>perror</code>或<code>strerror</code>函数将<code>errno</code>解释成字符串再打印。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">perror</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>perror</code>函数将错误信息打印到标准错误输出，首先打印参数<code>s</code>所指的字符串，然后打印<code>:</code>号，然后根据当前<code>errno</code>的值打印错误原因。例如：</p>
+<p>例 perror</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp = fopen(<span class="string">&quot;abcde&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;Open file abcde&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果文件<code>abcde</code>不存在，<code>fopen</code>返回<code>-1</code>并设置<code>errno</code>为<code>ENOENT</code>，紧接着<code>perror</code>函数读取<code>errno</code>的值，将<code>ENOENT</code>解释成字符串<code>No such file or directory</code>并打印，最后打印的结果是<code>Open file abcde: No such file or directory</code>。虽然<code>perror</code>可以打印出错误原因，传给<code>perror</code>的字符串参数仍然应该提供一些额外的信息，以便在看到错误信息时能够很快定位是程序中哪里出了错，如果在程序中有很多个<code>fopen</code>调用，每个<code>fopen</code>打开不同的文件，那么在每个<code>fopen</code>的错误处理中打印文件名就很有帮助。</p>
+<p>如果把上面的程序改成这样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp = fopen(<span class="string">&quot;abcde&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;Open file abcde&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;errno: %d\n&quot;</span>, errno);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>则<code>printf</code>打印的错误号并不是<code>fopen</code>产生的错误号，而是<code>perror</code>产生的错误号。<code>errno</code>是一个全局变量，很多系统函数都会改变它，<code>fopen</code>函数Man
+Page中的ERRORS部分描述了它可能产生的错误码，<code>perror</code>函数的Man
+Page中没有ERRORS部分，说明它本身不产生错误码，但它调用的其它函数也有可能改变<code>errno</code>变量。大多数系统函数都有一个Side
+Effect，就是有可能改变<code>errno</code>变量（当然也有少数例外，比如<code>strcpy</code>），所以一个系统函数错误返回后应该马上检查<code>errno</code>，在检查<code>errno</code>之前不能再调用其它系统函数。</p>
+<p><code>strerror</code>函数可以根据错误号返回错误原因字符串。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strerror</span><span class="params">(<span class="type">int</span> errnum)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：错误码<code>errnum</code>所对应的字符串</p>
+<p>这个函数返回指向静态内存的指针。以后学线程库时我们会看到，有些函数的错误码并不保存在<code>errno</code>中，而是通过返回值返回，就不能调用<code>perror</code>打印错误原因了，这时<code>strerror</code>就派上了用场：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fputs</span>(strerror(n), <span class="built_in">stderr</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="以字节为单位的io函数">以字节为单位的I/O函数</h3>
+<p><code>fgetc</code>函数从指定的文件中读一个字节，<code>getchar</code>从标准输入读一个字节，调用<code>getchar()</code>相当于调用<code>fgetc(stdin)</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fgetc</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">getchar</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回读到的字节，出错或者读到文件末尾时返回<code>EOF</code>
+注意在Man
+Page的函数原型中<code>FILE *</code>指针参数有时会起名叫<code>stream</code>，这是因为标准I/O库操作的文件有时也叫做流（Stream），文件由一串字节组成，每次可以读或写其中任意数量的字节，以后介绍TCP协议时会对流这个概念做更详细的解释。</p>
+<p>对于<code>fgetc</code>函数的使用有以下几点说明：</p>
+<p>要用<code>fgetc</code>函数读一个文件，该文件的打开方式必须是可读的。</p>
+<p>系统对于每个打开的文件都记录着当前读写位置在文件中的地址（或者说距离文件开头的字节数），也叫偏移量（Offset）。当文件打开时，读写位置是0，每调用一次<code>fgetc</code>，读写位置向后移动一个字节，因此可以连续多次调用<code>fgetc</code>函数依次读取多个字节。</p>
+<p><code>fgetc</code>成功时返回读到一个字节，本来应该是<code>unsigned char</code>型的，但由于函数原型中返回值是<code>int</code>型，所以这个字节要转换成<code>int</code>型再返回，那为什么要规定返回值是<code>int</code>型呢？因为出错或读到文件末尾时<code>fgetc</code>将返回<code>EOF</code>，即<code>-1</code>，保存在<code>int</code>型的返回值中是<code>0xffffffff</code>，如果读到字节<code>0xff</code>，由<code>unsigned char</code>型转换为<code>int</code>型是<code>0x000000ff</code>，只有规定返回值是<code>int</code>型才能把这两种情况区分开，如果规定返回值是<code>unsigned char</code>型，那么当返回值是<code>0xff</code>时无法区分到底是<code>EOF</code>还是字节<code>0xff</code>。如果需要保存<code>fgetc</code>的返回值，一定要保存在<code>int</code>型变量中，如果写成<code>unsigned char c = fgetc(fp);</code>，那么根据<code>c</code>的值又无法区分<code>EOF</code>和<code>0xff</code>字节了。注意，<code>fgetc</code>读到文件末尾时返回<code>EOF</code>，只是用这个返回值表示已读到文件末尾，并不是说每个文件末尾都有一个字节是<code>EOF</code>（根据上面的分析，<code>EOF</code>并不是一个字节）。</p>
+<p><code>fputc</code>函数向指定的文件写一个字节，<code>putchar</code>向标准输出写一个字节，调用<code>putchar(c)</code>相当于调用<code>fputc(c, stdout)</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fputc</span><span class="params">(<span class="type">int</span> c, FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">putchar</span><span class="params">(<span class="type">int</span> c)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回写入的字节，出错返回<code>EOF</code></p>
+<p>对于<code>fputc</code>函数的使用也要说明几点：</p>
+<p>要用<code>fputc</code>函数写一个文件，该文件的打开方式必须是可写的（包括追加）。</p>
+<p>每调用一次<code>fputc</code>，读写位置向后移动一个字节，因此可以连续多次调用<code>fputc</code>函数依次写入多个字节。但如果文件是以追加方式打开的，每次调用<code>fputc</code>时总是将读写位置移到文件末尾然后把要写入的字节追加到后面。</p>
+<p>下面的例子演示了这四个函数的用法，从键盘读入一串字符写到一个文件中，再从这个文件中读出这些字符打印到屏幕上。</p>
+<p>例 用fputc/fget读写文件和终端</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp;</span><br><span class="line">    <span class="type">int</span> ch;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( (fp = fopen(<span class="string">&quot;file2&quot;</span>, <span class="string">&quot;w+&quot;</span>)) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;Open file file2\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( (ch = getchar()) != EOF)</span><br><span class="line">        fputc(ch, fp);</span><br><span class="line">    rewind(fp);</span><br><span class="line">    <span class="keyword">while</span> ( (ch = fgetc(fp)) != EOF)</span><br><span class="line">        <span class="built_in">putchar</span>(ch);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从终端设备读有点特殊。当调用<code>getchar()</code>或<code>fgetc(stdin)</code>时，如果用户没有输入字符，<code>getchar</code>函数就阻塞等待，所谓阻塞是指这个函数调用不返回，也就不能执行后面的代码，这个进程阻塞了，操作系统可以调度别的进程执行。从终端设备读还有一个特点，用户输入一般字符并不会使<code>getchar</code>函数返回，仍然阻塞着，只有当用户输入回车或者到达文件末尾时<code>getchar</code>才返回[34]。这个程序的执行过程分析如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./a.out</span></span><br><span class="line">hello（输入hello并回车，这时第一次调用getchar返回，读取字符h存到文件中，然后连续调用getchar五次，读取ello和换行符存到文件中，第七次调用getchar又阻塞了）</span><br><span class="line">hey（输入hey并回车，第七次调用getchar返回，读取字符h存到文件中，然后连续调用getchar三次，读取ey和换行符存到文件中，第11次调用getchar又阻塞了）</span><br><span class="line">（这时输入Ctrl-D，第11次调用getchar返回EOF，跳出循环，进入下一个循环，回到文件开头，把文件内容一个字节一个字节读出来打印，直到文件结束）</span><br><span class="line">hello</span><br><span class="line">hey</span><br></pre></td></tr></table></figure>
+<p>从终端设备输入时有两种方法表示文件结束，一种方法是在一行的开头输入<code>Ctrl-D</code>（如果不在一行的开头则需要连续输入两次<code>Ctrl-D</code>），另一种方法是利用Shell的<code>Heredoc</code>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./a.out &lt;&lt;<span class="string">END</span></span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="string">hello</span></span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="string">hey</span></span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="string">END</span></span></span><br><span class="line">hello</span><br><span class="line">hey</span><br></pre></td></tr></table></figure>
+<p><code>&lt;&lt;END</code>表示从下一行开始是标准输入，直到某一行开头出现<code>END</code>时结束。<code>&lt;&lt;</code>后面的结束符可以任意指定，不一定得是<code>END</code>，只要和输入的内容能区分开就行。</p>
+<p>在上面的程序中，第一个<code>while</code>循环结束时<code>fp</code>所指文件的读写位置在文件末尾，然后调用<code>rewind</code>函数把读写位置移到文件开头，再进入第二个<code>while</code>循环从头读取文件内容。</p>
+<h3 id="操作读写位置的函数">操作读写位置的函数</h3>
+<p>我们在上一节的例子中看到<code>rewind</code>函数把读写位置移到文件开头，本节介绍另外两个操作读写位置的函数，<code>fseek</code>可以任意移动读写位置，<code>ftell</code>可以返回当前的读写位置。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fseek</span><span class="params">(FILE *stream, <span class="type">long</span> offset, <span class="type">int</span> whence)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回<code>0</code>，出错返回<code>-1</code>并设置<code>errno</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">ftell</span><span class="params">(FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回当前读写位置，出错返回<code>-1</code>并设置<code>errno</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">rewind</span><span class="params">(FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>fseek</code>的<code>whence</code>和<code>offset</code>参数共同决定了读写位置移动到何处，<code>whence</code>参数的含义如下：</p>
+<p><code>SEEK_SET</code> 从文件开头移动<code>offset</code>个字节</p>
+<p><code>SEEK_CUR</code> 从当前位置移动<code>offset</code>个字节</p>
+<p><code>SEEK_END</code> 从文件末尾移动<code>offset</code>个字节</p>
+<p><code>offset</code>可正可负，负值表示向前（向文件开头的方向）移动，正值表示向后（向文件末尾的方向）移动，如果向前移动的字节数超过了文件开头则出错返回，如果向后移动的字节数超过了文件末尾，再次写入时将增大文件尺寸，从原来的文件末尾到<code>fseek</code>移动之后的读写位置之间的字节都是0。</p>
+<p>先前我们创建过一个文件<code>textfile</code>，其中有五个字节，<code>5678</code>加一个换行符，现在我们拿这个文件做实验。</p>
+<p>例 fseek</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE* fp;</span><br><span class="line">    <span class="keyword">if</span> ( (fp = fopen(<span class="string">&quot;textfile&quot;</span>,<span class="string">&quot;r+&quot;</span>)) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;Open file textfile&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (fseek(fp, <span class="number">10</span>, SEEK_SET) != <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;Seek file textfile&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    fputc(<span class="string">&#x27;K&#x27;</span>, fp);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行这个程序，然后查看文件<code>textfile</code>的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./a.out</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">od</span> -tx1 -tc -Ax textfile</span> </span><br><span class="line">000000 35 36 37 38 0a 00 00 00 00 00 4b</span><br><span class="line">         5   6   7   8  \n  \0  \0  \0  \0  \0   K</span><br><span class="line">00000b</span><br></pre></td></tr></table></figure>
+<p><code>fseek(fp, 10, SEEK_SET)</code>将读写位置移到第10个字节处（其实是第11个字节，从0开始数），然后在该位置写入一个字符<code>K</code>，这样<code>textfile</code>文件就变长了，从第5到第9个字节自动被填充为0。</p>
+<h3 id="以字符串为单位的io函数">以字符串为单位的I/O函数</h3>
+<p><code>fgets</code>从指定的文件中读一行字符到调用者提供的缓冲区中，<code>gets</code>从标准输入读一行字符到调用者提供的缓冲区中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">fgets</span><span class="params">(<span class="type">char</span> *s, <span class="type">int</span> size, FILE *stream)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">gets</span><span class="params">(<span class="type">char</span> *s)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功时<code>s</code>指向哪返回的指针就指向哪，出错或者读到文件末尾时返回<code>NULL</code></p>
+<p><code>gets</code>函数无需解释，Man
+Page的BUGS部分已经说得很清楚了：<code>Never use gets()</code>。<code>gets</code>函数的存在只是为了兼容以前的程序，我们写的代码都不应该调用这个函数。<code>gets</code>函数的接口设计得很有问题，就像<code>strcpy</code>一样，用户提供一个缓冲区，却不能指定缓冲区的大小，很可能导致缓冲区溢出错误，这个函数比<code>strcpy</code>更加危险，<code>strcpy</code>的输入和输出都来自程序内部，只要程序员小心一点就可以避免出问题，而<code>gets</code>读取的输入直接来自程序外部，用户可能通过标准输入提供任意长的字符串，程序员无法避免<code>gets</code>函数导致的缓冲区溢出错误，所以唯一的办法就是不要用它。</p>
+<p>现在说说<code>fgets</code>函数，参数<code>s</code>是缓冲区的首地址，<code>size</code>是缓冲区的长度，该函数从<code>stream</code>所指的文件中读取以<code>'\n'</code>结尾的一行（包括<code>'\n'</code>在内）存到缓冲区<code>s</code>中，并且在该行末尾添加一个<code>'\0'</code>组成完整的字符串。</p>
+<p>如果文件中的一行太长，<code>fgets</code>从文件中读了<code>size-1</code>个字符还没有读到<code>'\n'</code>，就把已经读到的<code>size-1</code>个字符和一个<code>'\0'</code>字符存入缓冲区，文件中剩下的半行可以在下次调用<code>fgets</code>时继续读。</p>
+<p>如果一次<code>fgets</code>调用在读入若干个字符后到达文件末尾，则将已读到的字符串加上<code>'\0'</code>存入缓冲区并返回，如果再次调用<code>fgets</code>则返回<code>NULL</code>，可以据此判断是否读到文件末尾。</p>
+<p>注意，对于<code>fgets</code>来说，<code>'\n'</code>是一个特别的字符，而<code>'\0'</code>并无任何特别之处，如果读到<code>'\0'</code>就当作普通字符读入。如果文件中存在<code>'\0'</code>字符（或者说<code>0x00</code>字节），调用<code>fgets</code>之后就无法判断缓冲区中的<code>'\0'</code>究竟是从文件读上来的字符还是由<code>fgets</code>自动添加的结束符，所以<code>fgets</code>只适合读文本文件而不适合读二进制文件，并且文本文件中的所有字符都应该是可见字符，不能有<code>'\0'</code>。</p>
+<p><code>fputs</code>向指定的文件写入一个字符串，<code>puts</code>向标准输出写入一个字符串。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fputs</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">puts</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回一个非负整数，出错返回<code>EOF</code></p>
+<p>缓冲区<code>s</code>中保存的是以<code>'\0'</code>结尾的字符串，<code>fputs</code>将该字符串写入文件<code>stream</code>，但并不写入结尾的<code>'\0'</code>。与<code>fgets</code>不同的是，<code>fputs</code>并不关心的字符串中的<code>'\n'</code>字符，字符串中可以有<code>'\n'</code>也可以没有<code>'\n'</code>。<code>puts</code>将字符串<code>s</code>写到标准输出（不包括结尾的<code>'\0'</code>），然后自动写一个<code>'\n'</code>到标准输出。</p>
+<h3 id="以记录为单位的io函数">以记录为单位的I/O函数</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：读或写的记录数，成功时返回的记录数等于<code>nmemb</code>，出错或读到文件末尾时返回的记录数小于<code>nmemb</code>，也可能返回<code>0</code></p>
+<p><code>fread</code>和<code>fwrite</code>用于读写记录，这里的记录是指一串固定长度的字节，比如一个<code>int</code>、一个结构体或者一个定长数组。参数<code>size</code>指出一条记录的长度，而<code>nmemb</code>指出要读或写多少条记录，这些记录在<code>ptr</code>所指的内存空间中连续存放，共占<code>size * nmemb</code>个字节，<code>fread</code>从文件<code>stream</code>中读出<code>size * nmemb</code>个字节保存到<code>ptr</code>中，而<code>fwrite</code>把<code>ptr</code>中的<code>size * nmemb</code>个字节写到文件<code>stream</code>中。</p>
+<p><code>nmemb</code>是请求读或写的记录数，<code>fread</code>和<code>fwrite</code>返回的记录数有可能小于<code>nmemb</code>指定的记录数。例如当前读写位置距文件末尾只有一条记录的长度，调用<code>fread</code>时指定<code>nmemb</code>为<code>2</code>，则返回值为<code>1</code>。如果当前读写位置已经在文件末尾了，或者读文件时出错了，则<code>fread</code>返回<code>0</code>。如果写文件时出错了，则<code>fwrite</code>的返回值小于<code>nmemb</code>指定的值。下面的例子由两个程序组成，一个程序把结构体保存到文件中，另一个程序和从文件中读出结构体。</p>
+<p>例 fread/fwrite</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* writerec.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">record</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">10</span>];</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">record</span> <span class="title">array</span>[2] =</span> &#123;&#123;<span class="string">&quot;Ken&quot;</span>, <span class="number">24</span>&#125;, &#123;<span class="string">&quot;Knuth&quot;</span>, <span class="number">28</span>&#125;&#125;;</span><br><span class="line">    FILE *fp = fopen(<span class="string">&quot;recfile&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;Open file recfile&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    fwrite(<span class="built_in">array</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> record), <span class="number">2</span>, fp);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* readrec.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">record</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">10</span>];</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">record</span> <span class="title">array</span>[2];</span></span><br><span class="line">    FILE *fp = fopen(<span class="string">&quot;recfile&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;Open file recfile&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    fread(<span class="built_in">array</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> record), <span class="number">2</span>, fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name1: %s\tAge1: %d\n&quot;</span>, <span class="built_in">array</span>[<span class="number">0</span>].name, <span class="built_in">array</span>[<span class="number">0</span>].age);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name2: %s\tAge2: %d\n&quot;</span>, <span class="built_in">array</span>[<span class="number">1</span>].name, <span class="built_in">array</span>[<span class="number">1</span>].age);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc writerec.c -o writerec</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc readrec.c -o readrec</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./writerec</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">od</span> -tx1 -tc -Ax recfile</span> </span><br><span class="line">000000 4b 65 6e 00 00 00 00 00 00 00 00 00 18 00 00 00</span><br><span class="line">         K   e   n  \0  \0  \0  \0  \0  \0  \0  \0  \0 030  \0  \0  \0</span><br><span class="line">000010 4b 6e 75 74 68 00 00 00 00 00 00 00 1c 00 00 00</span><br><span class="line">         K   n   u   t   h  \0  \0  \0  \0  \0  \0  \0 034  \0  \0  \0</span><br><span class="line">000020</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./readrec</span> </span><br><span class="line">Name1: Ken  Age1: 24</span><br><span class="line">Name2: Knuth    Age2: 28</span><br></pre></td></tr></table></figure>
+<p>我们把一个<code>struct record</code>结构体看作一条记录，由于结构体中有填充字节，每条记录占16字节，把两条记录写到文件中共占32字节。该程序生成的<code>recfile</code>文件是二进制文件而非文本文件，因为其中不仅保存着字符型数据，还保存着整型数据24和28（在<code>od</code>命令的输出中以八进制显示为030和034）。注意，直接在文件中读写结构体的程序是不可移植的，如果在一种平台上编译运行<code>writebin.c</code>程序，把生成的<code>recfile</code>文件拷到另一种平台并在该平台上编译运行<code>readbin.c</code>程序，则不能保证正确读出文件的内容，因为不同平台的大小端可能不同（因而对整型数据的存储方式不同），结构体的填充方式也可能不同（因而同一个结构体所占的字节数可能不同，<code>age</code>成员在<code>name</code>成员之后的什么位置也可能不同）。</p>
+<h3 id="格式化io函数">格式化I/O函数</h3>
+<p>现在该正式讲一下<code>printf</code>和<code>scanf</code>函数了，这两个函数都有很多种形式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">printf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">sprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">snprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">size_t</span> size, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">vprintf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vfprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vsprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vsnprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">size_t</span> size, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回格式化输出的字节数（不包括字符串的结尾<code>'\0'</code>），出错返回一个负值</p>
+<p><code>printf</code>格式化打印到标准输出，而<code>fprintf</code>打印到指定的文件<code>stream</code>中。<code>sprintf</code>并不打印到文件，而是打印到用户提供的缓冲区<code>str</code>中并在末尾加<code>'\0'</code>，由于格式化后的字符串长度很难预计，所以很可能造成缓冲区溢出，用<code>snprintf</code>更好一些，参数<code>size</code>指定了缓冲区长度，如果格式化后的字符串长度超过缓冲区长度，<code>snprintf</code>就把字符串截断到<code>size-1</code>字节，再加上一个<code>'\0'</code>写入缓冲区，也就是说<code>snprintf</code>保证字符串以<code>'\0'</code>结尾。<code>snprintf</code>的返回值是格式化后的字符串长度（不包括结尾的<code>'\0'</code>），如果字符串被截断，返回的是截断之前的长度，把它和实际缓冲区中的字符串长度相比较就可以知道是否发生了截断。</p>
+<p>上面列出的后四个函数在前四个函数名的前面多了个<code>v</code>，表示可变参数不是以<code>...</code>的形式传进来，而是以<code>va_list</code>类型传进来。下面我们用<code>vsnprintf</code>包装出一个类似<code>printf</code>的带格式化字符串和可变参数的函数。</p>
+<p>例 实现格式化打印错误的err_sys函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXLINE 80</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">err_sys</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *fmt, ...)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> err = errno;</span><br><span class="line">    <span class="type">char</span> buf[MAXLINE+<span class="number">1</span>];</span><br><span class="line">    va_list ap;</span><br><span class="line"></span><br><span class="line">    va_start(ap, fmt);</span><br><span class="line"></span><br><span class="line">    vsnprintf(buf, MAXLINE, fmt, ap);</span><br><span class="line">    <span class="built_in">snprintf</span>(buf+<span class="built_in">strlen</span>(buf), MAXLINE-<span class="built_in">strlen</span>(buf), <span class="string">&quot;: %s&quot;</span>, strerror(err));</span><br><span class="line">    <span class="built_in">strcat</span>(buf, <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="built_in">fputs</span>(buf, <span class="built_in">stderr</span>);</span><br><span class="line"></span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">&quot;Usage: ./a.out pathname\n&quot;</span>, <span class="built_in">stderr</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    fp = fopen(argv[<span class="number">1</span>], <span class="string">&quot;r&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>)</span><br><span class="line">        err_sys(<span class="string">&quot;Line %d - Open file %s&quot;</span>, __LINE__, argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Open %s OK\n&quot;</span>, argv[<span class="number">1</span>]);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了<code>err_sys</code>函数，不仅简化了<code>main</code>函数的代码，而且可以把<code>fopen</code>的错误提示打印得非常清楚，有源代码行号，有打开文件的路径名，一看就知道哪里出错了。</p>
+<p>现在总结一下<code>printf</code>格式化字符串中的转换说明的有哪些写法。在这里只列举几种常用的格式，其它格式请参考Man
+Page。每个转换说明以<code>%</code>号开头，以转换字符结尾，我们以前用过的转换说明仅包含<code>%</code>号和转换字符，例如<code>%d</code>、<code>%s</code>，其实在这两个字符中间还可以插入一些可选项。</p>
+<p><code>printf</code>转换说明的可选项</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#</td>
+<td>八进制前面加0（转换字符为o），十六进制前面加0x（转换字符为x）或0X（转换字符为X）。</td>
+<td>printf(“%#x”, 0xff)打印0xff，printf(“%x”, 0xff)打印ff。</td>
+</tr>
+<tr>
+<td>-</td>
+<td>格式化后的内容居左，右边可以留空格。</td>
+<td>见下面的例子</td>
+</tr>
+<tr>
+<td>宽度</td>
+<td>用一个整数指定格式化后的最小长度，如果格式化后的内容没有这么长，可以在左边留空格，如果前面指定了-号就在右边留空格。宽度有一种特别的形式，不指定整数值而是写成一个*号，表示取一个int型参数作为宽度。</td>
+<td>printf(“-%10s-”, “hello”)打印-␣␣␣␣␣hello-，printf(“-%-*s-“,
+10,”hello”)打印-hello␣␣␣␣␣-。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>用于分隔上一条提到的最小长度和下一条要讲的精度。</td>
+<td>见下面的例子</td>
+</tr>
+<tr>
+<td>精度</td>
+<td>用一个整数表示精度，对于字符串来说指定了格式化后保留的最大长度，对于浮点数来说指定了格式化后小数点右边的位数，对于整数来说指定了格式化后的最小位数。精度也可以不指定整数值而是写成一个*号，表示取下一个int型参数作为精度。</td>
+<td>printf(“%.4s”, “hello”)打印hell，printf(“-%6.4d-”,
+100)打印-␣␣0100-，printf(“-%<em>.</em>f-”, 8, 4,
+3.14)打印-␣␣3.1400-。</td>
+</tr>
+<tr>
+<td>字长</td>
+<td>对于整型参数，hh、h、l、ll分别表示是char、short、long、long
+long型的字长，至于是有符号数还是无符号数则取决于转换字符；对于浮点型参数，L表示long
+double型的字长。</td>
+<td>printf(“%hhd”, 255)打印-1。</td>
+</tr>
+</tbody>
+</table>
+<p><code>printf</code>的转换字符</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>转换字符</th>
+<th>描述</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d i</td>
+<td>取int型参数格式化成有符号十进制表示，如果格式化后的位数小于指定的精度，就在左边补0。</td>
+<td>printf(“%.4d”, 100)打印0100。</td>
+</tr>
+<tr>
+<td>o u x X</td>
+<td>取unsigned
+int型参数格式化成无符号八进制（o）、十进制（u）、十六进制（x或X）表示，x表示十六进制数字用小写abcdef，X表示十六进制数字用大写ABCDEF，如果格式化后的位数小于指定的精度，就在左边补0。</td>
+<td>printf(“%#X”, 0xdeadbeef)打印0XDEADBEEF，printf(“%hhu”,
+-1)打印255。</td>
+</tr>
+<tr>
+<td>c</td>
+<td>取int型参数转换成unsigned char型，格式化成对应的ASCII码字符。</td>
+<td>printf(“%c”, 256+‘A’)打印A。</td>
+</tr>
+<tr>
+<td>s</td>
+<td>取const char
+*型参数所指向的字符串格式化输出，遇到’\0’结束，或者达到指定的最大长度（精度）结束。</td>
+<td>printf(“%.4s”, “hello”)打印hell。</td>
+</tr>
+<tr>
+<td>p</td>
+<td>取void *型参数格式化成十六进制表示。相当于%#x。</td>
+<td>printf(“%p”, main)打印main函数的首地址0x80483c4。</td>
+</tr>
+<tr>
+<td>f</td>
+<td>取double型参数格式化成[-]ddd.ddd这样的格式，小数点后的默认精度是6位。</td>
+<td>printf(“%f”, 3.14)打印3.140000，printf(“%f”,
+0.00000314)打印0.000003。</td>
+</tr>
+<tr>
+<td>e E</td>
+<td>取double型参数格式化成[-]d.ddde±dd（转换字符是e）或[-]d.dddE±dd（转换字符是E）这样的格式，小数点后的默认精度是6位，指数至少是两位。</td>
+<td>printf(“%e”, 3.14)打印3.140000e+00。</td>
+</tr>
+<tr>
+<td>g G</td>
+<td>取double型参数格式化，精度是指有效数字而非小数点后的数字，默认精度是6。如果指数小于-4或大于等于精度就按%e（转换字符是g）或%E（转换字符是G）格式化，否则按%f格式化。小数部分的末尾0去掉，如果没有小数部分，小数点也去掉。</td>
+<td>printf(“%g”, 3.00)打印3，printf(“%g”,
+0.00001234567)打印1.23457e-05。</td>
+</tr>
+<tr>
+<td>%</td>
+<td>格式化成一个%。</td>
+<td>printf(“%%”)打印一个%。</td>
+</tr>
+</tbody>
+</table>
+<p>我们在第 6 节
+“可变参数”讲过可变参数的原理，<code>printf</code>并不知道实际参数的类型，只能按转换说明指出的参数类型从栈帧上取参数，所以如果实际参数和转换说明的类型不符，结果可能会有些意外，上面也举过几个这样的例子。另外，如果<code>s</code>指向一个字符串，用<code>printf(s)</code>打印这个字符串可能得到错误的结果，因为字符串中可能包含<code>%</code>号而被<code>printf</code>当成转换说明，<code>printf</code>并不知道后面没有传其它参数，照样会从栈帧上取参数。所以比较保险的办法是<code>printf("%s", s)</code>。</p>
+<p>下面看<code>scanf</code>函数的各种形式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">scanf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fscanf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">sscanf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">vscanf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vsscanf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vfscanf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：返回成功匹配和赋值的参数个数，成功匹配的参数可能少于所提供的赋值参数，返回<code>0</code>表示一个都不匹配，出错或者读到文件或字符串末尾时返回<code>EOF</code>并设置<code>errno</code></p>
+<p><code>scanf</code>从标准输入读字符，按格式化字符串<code>format</code>中的转换说明解释这些字符，转换后赋给后面的参数，后面的参数都是传出参数，因此必须传地址而不能传值。<code>fscanf</code>从指定的文件<code>stream</code>中读字符，而<code>sscanf</code>从指定的字符串<code>str</code>中读字符。后面三个以<code>v</code>开头的函数的可变参数不是以<code>...</code>的形式传进来，而是以<code>va_list</code>类型传进来。</p>
+<p>现在总结一下<code>scanf</code>的格式化字符串和转换说明，这里也只列举几种常用的格式，其它格式请参考Man
+Page。<code>scanf</code>用输入的字符去匹配格式化字符串中的字符和转换说明，如果成功匹配一个转换说明，就给一个参数赋值，如果读到文件或字符串末尾就停止，或者如果遇到和格式化字符串不匹配的地方（比如转换说明是<code>%d</code>却读到字符<code>A</code>）就停止。如果遇到不匹配的地方而停止，<code>scanf</code>的返回值可能小于赋值参数的个数，文件的读写位置指向输入中不匹配的地方，下次调用库函数读文件时可以从这个位置继续。</p>
+<p>格式化字符串中包括：</p>
+<p>空格或<code>Tab</code>，在处理过程中被忽略。</p>
+<p>普通字符（不包括%），和输入字符中的非空白字符相匹配。输入字符中的空白字符是指空格、<code>Tab</code>、<code>\r</code>、<code>\n</code>、<code>\v</code>、<code>\f</code>。</p>
+<p>转换说明，以%开头，以转换字符结尾，中间也有若干个可选项。</p>
+<p>转换说明中的可选项有：</p>
+<p><code>*</code>号，表示这个转换说明只是用来匹配一段输入字符，但匹配结果并不赋给后面的参数。</p>
+<p>用一个整数指定的宽度N。表示这个转换说明最多匹配N个输入字符，或者匹配到输入字符中的下一个空白字符结束。</p>
+<p>对于整型参数可以指定字长，有<code>hh</code>、<code>h</code>、<code>l</code>、<code>ll</code>（也可以写成一个<code>L</code>），含义和<code>printf</code>相同。但<code>l</code>和<code>L</code>还有一层含义，当转换字符是<code>e</code>、<code>f</code>、<code>g</code>时，表示赋值参数的类型是<code>float *</code>而非<code>double *</code>，这一点跟<code>printf</code>不同（结合以前讲的类型转换规则思考一下为什么不同），这时前面加上<code>l</code>或<code>L</code>分别表示<code>double *</code>或<code>long double *</code>型。</p>
+<p>常用的转换字符有：</p>
+<p><code>scanf</code>的转换字符</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>转换字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d</td>
+<td>匹配十进制整数（开头可以有负号），赋值参数的类型是int *。</td>
+</tr>
+<tr>
+<td>i</td>
+<td>匹配整数（开头可以有负号），赋值参数的类型是int
+*，如果输入字符以0x或0X开头则匹配十六进制整数，如果输入字符以0开头则匹配八进制整数。</td>
+</tr>
+<tr>
+<td>o u x</td>
+<td>匹配八进制、十进制、十六进制整数（开头可以有负号），赋值参数的类型是unsigned
+int *。</td>
+</tr>
+<tr>
+<td>c</td>
+<td>匹配一串字符，字符的个数由宽度指定，缺省宽度是1，赋值参数的类型是char
+*，末尾不会添加’\0’。如果输入字符的开头有空白字符，这些空白字符并不被忽略，而是保存到参数中，要想跳过开头的空白字符，可以在格式化字符串中用一个空格去匹配。</td>
+</tr>
+<tr>
+<td>s</td>
+<td>匹配一串非空白字符，从输入字符中的第一个非空白字符开始匹配到下一个空白字符之前，或者匹配到指定的宽度，赋值参数的类型是char
+*，末尾自动添加’\0’。</td>
+</tr>
+<tr>
+<td>e f g</td>
+<td>匹配符点数（开头可以有负号），赋值参数的类型是float
+<em>，也可以指定double </em>或long double *的字长。</td>
+</tr>
+<tr>
+<td>%</td>
+<td>转换说明%%匹配一个字符%，不做赋值。</td>
+</tr>
+</tbody>
+</table>
+<p>下面几个例子出自[K&amp;R]。第一个例子，读取用户输入的浮点数累加起来。</p>
+<p>例 用scanf实现简单的计算器</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>  <span class="comment">/* rudimentary calculator */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> sum, v;</span><br><span class="line"></span><br><span class="line">    sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;v) == <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\t%.2f\n&quot;</span>, sum += v);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果我们要读取<code>25 Dec 1988</code>这样的日期格式，可以这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *str = <span class="string">&quot;25 Dec 1988&quot;</span>;</span><br><span class="line"><span class="type">int</span> day, year;</span><br><span class="line"><span class="type">char</span> monthname[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">sscanf</span>(str, <span class="string">&quot;%d %s %d&quot;</span>, &amp;day, monthname, &amp;year);</span><br></pre></td></tr></table></figure>
+<p>如果<code>str</code>中的空白字符再多一些，比如<code>" 25 Dec 1998"</code>，仍然可以正确读取。如果格式化字符串中的空格和<code>Tab</code>再多一些，比如<code>"%d %s %d "</code>，也可以正确读取。<code>scanf</code>函数是很强大的，但是要用对了不容易，需要多练习，通过练习体会空白字符的作用。</p>
+<p>如果要读取<code>12/25/1998</code>这样的日期格式，就需要在格式化字符串中用<code>/</code>匹配输入字符中的<code>/</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> day, month, year;</span><br><span class="line"></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d/%d/%d&quot;</span>, &amp;month, &amp;day, &amp;year);</span><br></pre></td></tr></table></figure>
+<p><code>scanf</code>把换行符也看作空白字符，仅仅当作字段之间的分隔符，如果输入中的字段个数不确定，最好是先用<code>fgets</code>按行读取，然后再交给<code>sscanf</code>处理。如果我们的程序需要同时识别以上两种日期格式，可以这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (fgets(line, <span class="keyword">sizeof</span>(line), <span class="built_in">stdin</span>) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">sscanf</span>(line, <span class="string">&quot;%d %s %d&quot;</span>, &amp;day, monthname, &amp;year) == <span class="number">3</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;valid: %s\n&quot;</span>, line); <span class="comment">/* 25 Dec 1988 form */</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">sscanf</span>(line, <span class="string">&quot;%d/%d/%d&quot;</span>, &amp;month, &amp;day, &amp;year) == <span class="number">3</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;valid: %s\n&quot;</span>, line); <span class="comment">/* mm/dd/yy form */</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;invalid: %s\n&quot;</span>, line); <span class="comment">/* invalid form */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="c标准库的io缓冲区">C标准库的I/O缓冲区</h3>
+<p>用户程序调用C标准I/O库函数读写文件或设备，而这些库函数要通过系统调用把读写请求传给内核（以后我们会看到与I/O相关的系统调用），最终由内核驱动磁盘或设备完成I/O操作。C标准库为每个打开的文件分配一个I/O缓冲区以加速读写操作，通过文件的<code>FILE</code>结构体可以找到这个缓冲区，用户调用读写函数大多数时候都在I/O缓冲区中读写，只有少数时候需要把读写请求传给内核。以<code>fgetc/fputc</code>为例，当用户程序第一次调用<code>fgetc</code>读一个字节时，<code>fgetc</code>函数可能通过系统调用进入内核读1K字节到I/O缓冲区中，然后返回I/O缓冲区中的第一个字节给用户，把读写位置指向I/O缓冲区中的第二个字符，以后用户再调<code>fgetc</code>，就直接从I/O缓冲区中读取，而不需要进内核了，当用户把这1K字节都读完之后，再次调用<code>fgetc</code>时，<code>fgetc</code>函数会再次进入内核读1K字节到I/O缓冲区中。在这个场景中用户程序、C标准库和内核之间的关系就像在第
+5 节 “Memory
+Hierarchy”中CPU、Cache和内存之间的关系一样，C标准库之所以会从内核预读一些数据放在I/O缓冲区中，是希望用户程序随后要用到这些数据，C标准库的I/O缓冲区也在用户空间，直接从用户空间读取数据比进内核读数据要快得多。另一方面，用户程序调用<code>fputc</code>通常只是写到I/O缓冲区中，这样<code>fputc</code>函数可以很快地返回，如果I/O缓冲区写满了，<code>fputc</code>就通过系统调用把I/O缓冲区中的数据传给内核，内核最终把数据写回磁盘。有时候用户程序希望把I/O缓冲区中的数据立刻传给内核，让内核写回设备，这称为Flush操作，对应的库函数是<code>fflush</code>，<code>fclose</code>函数在关闭文件之前也会做Flush操作。</p>
+<p>下图以<code>fgets/fputs</code>示意了I/O缓冲区的作用，使用<code>fgets/fputs</code>函数时在用户程序中也需要分配缓冲区（图中的buf1和buf2），注意区分用户程序的缓冲区和C标准库的I/O缓冲区。</p>
+<figure>
+<img src="C:\blog\Blog\images\C\stdlib.buffer.png"
+alt="C标准库的I/O缓冲区" />
+<figcaption aria-hidden="true">C标准库的I/O缓冲区</figcaption>
+</figure>
+<p>C标准库的I/O缓冲区有三种类型：全缓冲、行缓冲和无缓冲。当用户程序调用库函数做写操作时，不同类型的缓冲区具有不同的特性。</p>
+<p>全缓冲 如果缓冲区写满了就写回内核。常规文件通常是全缓冲的。</p>
+<p>行缓冲
+如果用户程序写的数据中有换行符就把这一行写回内核，或者如果缓冲区写满了就写回内核。标准输入和标准输出对应终端设备时通常是行缓冲的。</p>
+<p>无缓冲
+用户程序每次调库函数做写操作都要通过系统调用写回内核。标准错误输出通常是无缓冲的，这样用户程序产生的错误信息可以尽快输出到设备。</p>
+<p>下面通过一个简单的例子证明标准输出对应终端设备时是行缓冲的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行这个程序，会发现<code>hello world</code>并没有打印到屏幕上。用<code>Ctrl-C</code>终止它，去掉程序中的<code>while(1);</code>语句再试一次：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./a.out</span></span><br><span class="line">hello world$</span><br></pre></td></tr></table></figure>
+<p><code>hello world</code>被打印到屏幕上，后面直接跟Shell提示符，中间没有换行。</p>
+<p>我们知道<code>main</code>函数被启动代码这样调用：<code>exit(main(argc, argv));</code>。<code>main</code>函数<code>return</code>时启动代码会调用<code>exit</code>，<code>exit</code>函数首先关闭所有尚未关闭的<code>FILE *</code>指针（关闭之前要做Flush操作），然后通过<code>_exit</code>系统调用进入内核退出当前进程[35]。</p>
+<p>在上面的例子中，由于标准输出是行缓冲的，<code>printf("hello world");</code>打印的字符串中没有换行符，所以只把字符串写到标准输出的I/O缓冲区中而没有写回内核（写到终端设备），如果敲<code>Ctrl-C</code>，进程是异常终止的，并没有调用<code>exit</code>，也就没有机会Flush
+I/O缓冲区，因此字符串最终没有打印到屏幕上。如果把打印语句改成<code>printf("hello world\n");</code>，有换行符，就会立刻写到终端设备，或者如果把<code>while(1);</code>去掉也可以写到终端设备，因为程序退出时会调用<code>exit</code>Flush所有I/O缓冲区。在本书的其它例子中，<code>printf</code>打印的字符串末尾都有换行符，以保证字符串在<code>printf</code>调用结束时就写到终端设备。</p>
+<p>我们再做个实验，在程序中直接调用<code>_exit</code>退出。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    _exit(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果也不会把字符串打印到屏幕上，如果把<code>_exit</code>调用改成<code>exit</code>就可以打印到屏幕上。</p>
+<p>除了写满缓冲区、写入换行符之外，行缓冲还有一种情况会自动做Flush操作。如果：</p>
+<p>用户程序调用库函数从无缓冲的文件中读取</p>
+<p>或者从行缓冲的文件中读取，并且这次读操作会引发系统调用从内核读取数据</p>
+<p>那么在读取之前会自动Flush所有行缓冲。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Please input a line: &quot;</span>);</span><br><span class="line">    fgets(buf, <span class="number">20</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然调用<code>printf</code>并不会把字符串写到设备，但紧接着调用<code>fgets</code>读一个行缓冲的文件（标准输入），在读取之前会自动Flush所有行缓冲，包括标准输出。</p>
+<p>如果用户程序不想完全依赖于自动的Flush操作，可以调<code>fflush</code>函数手动做Flush操作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fflush</span><span class="params">(FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回<code>0</code>，出错返回<code>EOF</code>并设置<code>errno</code></p>
+<p>对前面的例子再稍加改动：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    fflush(<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然字符串中没有换行，但用户程序调用<code>fflush</code>强制写回内核，因此也能在屏幕上打印出字符串。<code>fflush</code>函数用于确保数据写回了内核，以免进程异常终止时丢失数据。作为一个特例，调用<code>fflush(NULL)</code>可以对所有打开文件的I/O缓冲区做Flush操作。</p>
+<h2 id="数值字符串转换函数">数值字符串转换函数</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">atoi</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *nptr)</span>;</span><br><span class="line"><span class="type">double</span> <span class="title function_">atof</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *nptr)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：转换结果</p>
+<p><code>atoi</code>把一个字符串开头可以识别成十进制整数的部分转换成<code>int</code>型，相当于下面要讲的<code>strtol(nptr, (char **) NULL, 10);</code>。例如<code>atoi("123abc")</code>的返回值是<code>123</code>，字符串开头可以有若干空格，例如<code>atoi(" -90.6-")</code>的返回值是<code>-90</code>。如果字符串开头没有可识别的整数，例如<code>atoi("asdf")</code>，则返回<code>0</code>，而<code>atoi("0***")</code>也返回<code>0</code>，根据返回值并不能区分这两种情况，所以使用<code>atoi</code>函数不能检查出错的情况。下面要讲的<code>strtol</code>函数可以设置<code>errno</code>，因此可以检查出错的情况，在严格的场合下应该用<code>strtol</code>，而<code>atoi</code>用起来更简便，所以也很常用。</p>
+<p><code>atof</code>把一个字符串开头可以识别成浮点数的部分转换成<code>double</code>型，相当于下面要讲的<code>strtod(nptr, (char **) NULL);</code>。字符串开头可以识别的浮点数格式和C语言的浮点数常量相同，例如<code>atof("31.4 ")</code>的返回值是<code>31.4</code>，<code>atof("3.14e+1AB")</code>的返回值也是<code>31.4</code>。<code>atof</code>也不能检查出错的情况，而<code>strtod</code>可以。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">int</span> <span class="title function_">strtol</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *nptr, <span class="type">char</span> **endptr, <span class="type">int</span> base)</span>;</span><br><span class="line"><span class="type">double</span> <span class="title function_">strtod</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *nptr, <span class="type">char</span> **endptr)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：转换结果，出错时设置<code>errno</code></p>
+<p><code>strtol</code>是<code>atoi</code>的增强版，主要体现在这几方面：</p>
+<p>不仅可以识别十进制整数，还可以识别其它进制的整数，取决于<code>base</code>参数，比如<code>strtol("0XDEADbeE~~", NULL, 16)</code>返回<code>0xdeadbee</code>的值，<code>strtol("0777~~", NULL, 8)</code>返回<code>0777</code>的值。</p>
+<p><code>endptr</code>是一个传出参数，函数返回时指向后面未被识别的第一个字符。例如<code>char *pos; strtol("123abc", &amp;pos, 10);</code>，<code>strtol</code>返回<code>123</code>，<code>pos</code>指向字符串中的字母<code>a</code>。如果字符串开头没有可识别的整数，例如<code>char *pos; strtol("ABCabc", &amp;pos, 10);</code>，则<code>strtol</code>返回<code>0</code>，<code>pos</code>指向字符串开头，可以据此判断这种出错的情况，而这是<code>atoi</code>处理不了的。</p>
+<p>如果字符串中的整数值超出<code>long int</code>的表示范围（上溢或下溢），则<code>strtol</code>返回它所能表示的最大（或最小）整数，并设置<code>errno</code>为<code>ERANGE</code>，例如<code>strtol("0XDEADbeef~~", NULL, 16)</code>返回<code>0x7fffffff</code>并设置<code>errno</code>为<code>ERANGE</code>。</p>
+<p>回想一下使用<code>fopen</code>的套路<code>if ( (fp = fopen(...)) == NULL) &#123; 读取errno &#125;</code>，<code>fopen</code>在出错时会返回<code>NULL</code>，因此我们知道需要读<code>errno</code>，但<code>strtol</code>在成功调用时也可能返回<code>0x7fffffff</code>，我们如何知道需要读<code>errno</code>呢？最严谨的做法是首先把<code>errno</code>置<code>0</code>，再调用<code>strtol</code>，再查看<code>errno</code>是否变成了错误码。Man
+Page上有一个很好的例子：</p>
+<p>例 strtol的出错处理</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;limits.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> base;</span><br><span class="line">    <span class="type">char</span> *endptr, *str;</span><br><span class="line">    <span class="type">long</span> val;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Usage: %s str [base]\n&quot;</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    str = argv[<span class="number">1</span>];</span><br><span class="line">    base = (argc &gt; <span class="number">2</span>) ? atoi(argv[<span class="number">2</span>]) : <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    errno = <span class="number">0</span>;    <span class="comment">/* To distinguish success/failure after call */</span></span><br><span class="line">    val = strtol(str, &amp;endptr, base);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Check for various possible errors */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ((errno == ERANGE &amp;&amp; (val == LONG_MAX || val == LONG_MIN))</span><br><span class="line">        || (errno != <span class="number">0</span> &amp;&amp; val == <span class="number">0</span>)) &#123;</span><br><span class="line">        perror(<span class="string">&quot;strtol&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (endptr == str) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;No digits were found\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If we got here, strtol() successfully parsed a number */</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;strtol() returned %ld\n&quot;</span>, val);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (*endptr != <span class="string">&#x27;\0&#x27;</span>)        <span class="comment">/* Not necessarily an error... */</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Further characters after number: %s\n&quot;</span>, endptr);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>strtod</code>是<code>atof</code>的增强版，增强的功能和<code>strtol</code>类似。</p>
+<h2 id="分配内存的函数">分配内存的函数</h2>
+<p>除了<code>malloc</code>之外，C标准库还提供了另外两个在堆空间分配内存的函数，它们分配的内存同样由<code>free</code>释放。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">calloc</span><span class="params">(<span class="type">size_t</span> nmemb, <span class="type">size_t</span> size)</span>;</span><br><span class="line"><span class="type">void</span> *<span class="title function_">realloc</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：成功返回所分配内存空间的首地址，出错返回<code>NULL</code></p>
+<p><code>calloc</code>的参数很像<code>fread/fwrite</code>的参数，分配<code>nmemb</code>个元素的内存空间，每个元素占<code>size</code>字节，并且<code>calloc</code>负责把这块内存空间用字节<code>0</code>填充，而<code>malloc</code>并不负责把分配的内存空间清零。</p>
+<p>有时候用<code>malloc</code>或<code>calloc</code>分配的内存空间使用了一段时间之后需要改变它的大小，一种办法是调用<code>malloc</code>分配一块新的内存空间，把原内存空间中的数据拷到新的内存空间，然后调用<code>free</code>释放原内存空间。使用<code>realloc</code>函数简化了这些步骤，把原内存空间的指针<code>ptr</code>传给<code>realloc</code>，通过参数<code>size</code>指定新的大小（字节数），<code>realloc</code>返回新内存空间的首地址，并释放原内存空间。新内存空间中的数据尽量和原来保持一致，如果<code>size</code>比原来小，则前<code>size</code>个字节不变，后面的数据被截断，如果<code>size</code>比原来大，则原来的数据全部保留，后面长出来的一块内存空间未初始化（<code>realloc</code>不负责清零）。注意，参数<code>ptr</code>要么是<code>NULL</code>，要么必须是先前调用<code>malloc</code>、<code>calloc</code>或<code>realloc</code>返回的指针，不能把任意指针传给<code>realloc</code>要求重新分配内存空间。作为两个特例，如果调用<code>realloc(NULL, size)</code>，则相当于调用<code>malloc(size)</code>，如果调用<code>realloc(ptr, 0)</code>，<code>ptr</code>不是<code>NULL</code>，则相当于调用<code>free(ptr)</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;alloca.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">alloca</span><span class="params">(<span class="type">size_t</span> size)</span>;</span><br></pre></td></tr></table></figure>
+<p>返回值：返回所分配内存空间的首地址，如果<code>size</code>太大导致栈空间耗尽，结果是未定义的</p>
+<p>参数<code>size</code>是请求分配的字节数，<code>alloca</code>函数不是在堆上分配空间，而是在调用者函数的栈帧上分配空间，类似于C99的变长数组，当调用者函数返回时自动释放栈帧，所以不需要<code>free</code>。这个函数不属于C标准库，而是在POSIX标准中定义的。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/" rel="prev" title="C语言:深入立即函数">
+                  <i class="fa fa-angle-left"></i> C语言:深入立即函数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E7%AB%A0/" rel="next" title="C语言:常量,变量和表达式">
+                  C语言:常量,变量和表达式 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">SiyuanLei</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

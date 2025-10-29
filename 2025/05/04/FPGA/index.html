@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Modelsim的安装 在网上找到Modelsim 2020.2及其许可证license的安装包, 先安装. 对于license的导入, 按照以下步骤进行:  点击下载附件modelsim_crack.zip，解压。 进入Modelsim的软件安装目录（我的电脑的安装目录是D:&#x2F;modeltech64_10.4&#x2F;win64）文件夹下找到mgls64.dll文件，去掉只读属性. 将解压后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一章:Verilog HDL数字集成电路设计方法概述">
+<meta property="og:url" content="http://example.com/2025/05/04/FPGA/index.html">
+<meta property="og:site_name" content="SiyuanLei&#39;s Blog">
+<meta property="og:description" content="Modelsim的安装 在网上找到Modelsim 2020.2及其许可证license的安装包, 先安装. 对于license的导入, 按照以下步骤进行:  点击下载附件modelsim_crack.zip，解压。 进入Modelsim的软件安装目录（我的电脑的安装目录是D:&#x2F;modeltech64_10.4&#x2F;win64）文件夹下找到mgls64.dll文件，去掉只读属性. 将解压后">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-28T11:35:27.488Z">
+<meta property="article:author" content="SiyuanLei">
+<meta property="article:tag" content="Verilog">
+<meta property="article:tag" content="FPGA">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/FPGA/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/04/FPGA/","path":"2025/05/04/FPGA/","title":"第一章:Verilog HDL数字集成电路设计方法概述"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>第一章:Verilog HDL数字集成电路设计方法概述 | SiyuanLei's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SiyuanLei's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#modelsim%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Modelsim的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modelsim%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Modelsim的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vivado%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">Vivado的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vivado%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Vivado的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">4.1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ip%E6%A0%B8"><span class="nav-number">4.2.</span> <span class="nav-text">IP核</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E9%80%BB%E8%BE%91%E5%88%86%E6%9E%90%E5%99%A8integrated-logic-analyzerila"><span class="nav-number">4.2.1.</span> <span class="nav-text">集成逻辑分析器(Integrated
+Logic Analyzer,ILA)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hdl%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%B0%83%E8%AF%95%E6%8E%A2%E9%92%88%E6%B5%81%E7%A8%8B"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">HDL实例化调试探针流程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clocking-wizard"><span class="nav-number">4.2.2.</span> <span class="nav-text">Clocking Wizard</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#block-memory"><span class="nav-number">4.2.3.</span> <span class="nav-text">Block Memory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fifo"><span class="nav-number">4.2.4.</span> <span class="nav-text">FIFO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1"><span class="nav-number">4.3.</span> <span class="nav-text">UART串口通信</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SiyuanLei"
+      src="/images/femboy.jpg">
+  <p class="site-author-name" itemprop="name">SiyuanLei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/FPGA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="第一章:Verilog HDL数字集成电路设计方法概述 | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第一章:Verilog HDL数字集成电路设计方法概述
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-10-28 19:35:27" itemprop="dateModified" datetime="2025-10-28T19:35:27+08:00">2025-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/EE/" itemprop="url" rel="index"><span itemprop="name">EE</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/EE/%E6%95%B0%E5%AD%97%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">数字设计</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/EE/%E6%95%B0%E5%AD%97%E8%AE%BE%E8%AE%A1/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="modelsim的安装">Modelsim的安装</h2>
+<p>在网上找到Modelsim 2020.2及其许可证license的安装包, 先安装.</p>
+<p>对于license的导入, 按照以下步骤进行:</p>
+<ol type="1">
+<li>点击下载附件modelsim_crack.zip，解压。</li>
+<li>进入Modelsim的软件安装目录（我的电脑的安装目录是D:/modeltech64_10.4/win64）文件夹下找到mgls64.dll文件，去掉只读属性.</li>
+<li>将解压后的文件MentorKG.exe和patch_dll.bat复制到Modelsim软件安装目录下的win64文件夹（我的电脑的安装目录是D:/modeltech64_10.4/win64）</li>
+<li>运行patch_dll.bat，稍等一段时间后即可生成一个TXT文本</li>
+<li>将生成的TXT文本另存为LICENSE.TXT，另存的路径选择Modelsim软件的安装路径win64文件夹（我的电脑的安装目录是D:/modeltech64_10.4/win64）</li>
+<li>恢复mgls64.dll文件的只读属性</li>
+<li>接下来设置环境变量，在电脑桌面上点击“我的电脑”或“计算机”，右键选择【属性】-&gt;【高级系统设置】-&gt;选择“高级”选项卡下的【环境变量】</li>
+<li>Windows环境变量有用户变量和系统变量两个环境变量，这里设置用户变量即可；如果最后使用不了，再以同样的方式设置系统变量。
+点击【新建(N)】，打开编辑用户变量对话框，变量名命名为MGLS_LICENSE_FILE，变量值为刚才生成的LICENSE.TXT的文件路径，即D:/modeltech64_10.4/win64/LICENSE.TXT，点击【确定】</li>
+<li>环境变量设置完成之后，点击两次【确定】按钮，返回电脑桌面即可设置完成。此时双击桌面上的Modelsim软件，可以进入.
+操作完成后打开Modelsim，如果仍然未检测到License，可以试下重启电脑</li>
+</ol>
+<h2 id="modelsim的使用">Modelsim的使用</h2>
+<ol type="1">
+<li>打开Modelsim软件,在左上角选中File-&gt;Change
+Directory,在弹出的对话框中选择当前项目所在的文件夹(注意路径中不能包含中文).</li>
+<li>接下来,选择File-&gt;New-&gt;Project.会弹出一个Create
+Project的界面,只需要输入Project Name这一项,其他保持默认,点击OK.</li>
+<li>点击OK后,会弹出Add items to the Project界面,选择Add Existing
+File,选中我们已经写好的RTL代码和Testbench代码,然后点击OK.</li>
+<li>添加完代码后,在Modelsim上面一栏中选择Compile-&gt;Compile
+All,软件就会编译所有的代码,如果代码正确,就会显示绿色的勾.</li>
+<li>编译完成后,在Modelsim上面一栏中选择Simulate-&gt;Start
+Simulation,这时会弹出一个窗口,点击Optimization
+Options,在Visibility页面中勾选Apply full visibility to all modules(full
+debug mode),然后在Options页面的Optimization一栏中勾选Disable
+Optimization(-o0),最后点击OK保存选项.</li>
+<li>设置好Optimization
+Options之后,点击work左边的加号”+“,选中Testbench代码,然后点击OK.</li>
+<li>此时会出现一个界面,我们用右键点击Testbench下面的实例化模块(通常以u_…开头),选择Add
+Wave选项,就可以打开示波(Wave)界面了.</li>
+<li>在Wave界面的最上面一栏,可以设置仿真的时间,然后点击右边的按钮就可以进行仿真了.</li>
+</ol>
+<h2 id="vivado的安装">Vivado的安装</h2>
+<p>在网上找到Vivado的及其许可证license的安装包, 直接安装即可.</p>
+<h2 id="vivado的使用">Vivado的使用</h2>
+<h3 id="基本操作">基本操作</h3>
+<ol type="1">
+<li>打开Vivado软件,在最上面的Quick Start一栏中点击”Create
+Project”,然后在弹出的窗口中点击”Next”,然后填写Project
+Name和工程路径,点击”Next”后,仅勾选”RTL
+Project”,再点”Next”,会相继弹出”Add Sources”和”Add
+Constraints”,我们直接跳过这两项,接下来选择开发板的芯片型号,我们在Search一栏里面输入”xc7z020clg400-2”,选中这个型号的芯片后点击”Next”,就可以进入工程主界面了.</li>
+<li>在工程主界面中,点击”Sources”窗口里面的加号”+“,弹出”Add
+Sources”窗口,里面有三个选项
+<ol type="1">
+<li>Add or create constraints:添加或者创建管脚约束文件</li>
+<li>Add or create design sources:添加或者创建RTL文件</li>
+<li>Add or create simulation source:添加或者创建Testbench文件</li>
+</ol></li>
+<li>我们勾选Add or create design sources,在弹出的界面中选择”Add
+Files”,添加我们已经写好的RTL代码文件,然后点击”Finish”,再点击”OK”,然后是”Yes”.</li>
+<li>这时,Sources窗口下”Design
+Sources”目录下就会出现我们刚刚添加的RTL文件了,利用同样的方法可以在Sources窗口下”Constrains”和”Simulation
+Sources”目录下分别添加管脚约束文件和Testbench文件.</li>
+<li>事实上,在添加好RTL文件后,就可以进行分析(Elaborated)与综合(Synthesis)了.点击工程主界面左侧一栏”Flow
+Navigator”中的”Open Elaborated
+Design”,此时,Vivado会编译RTL源文件并且进行语法检查,分析完成后,会增加”Schematic(原理图)“和”Netlist(网表)“窗口.</li>
+<li>然后,我们点击工程主界面左侧一栏”Flow Navigator”中的”Run
+Synthesis”来对代码进行综合,在弹出的窗口中直接点击”OK”.综合完成后,会弹出一个窗口,我们直接关闭.</li>
+<li>接下来进行管脚约束,点击”Sources”窗口里面的加号”+“,弹出”Add
+Sources”窗口,勾选Add or create constrains,在弹出的界面中选择”Create
+File”,在弹出的对话框中填写约束文件的名称,注意约束文件是后缀为”XDC”的文本文件,然后点击”OK”和”Finish”,这时,Sources窗口下”Constrains”目录下就会出现我们刚刚添加的约束文件了.</li>
+<li>我们双击打开这个约束文件,写好约束代码,然后保存即可.</li>
+<li>下面我们可以实现设计了,点击工程主界面左侧一栏”Flow
+Navigator”中的”Run
+Implementation”,在弹出的界面直接点击”OK”,实现完成后会弹出一个窗口,我们直接点击”Cancel”关闭窗口.</li>
+<li>在下载程序之前,首先要生成用于下载到器件中的比特流文件,点击工程主界面左侧一栏”Flow
+Navigator”中的”Generate
+Bitstream”,在弹出的窗口中直接点击”OK”,生成比特流完成后会弹出一个窗口,我们直接点击”Cancel”关闭窗口.</li>
+<li>最后我们下载比特流,点击工程主界面左侧一栏”Flow Navigator”中的”Open
+Hardware Manager”,然后工程主界面的窗口布局就会发生变化.</li>
+<li>这时,我们将Xilinx下载器一端连接到电脑,另一端连接到JTAG接口,然后连接开发板电源线,打开开发板上面的电源开关.</li>
+<li>在工程主界面中”Hardware”子窗口中点击”Auto
+Connect”按钮(就是长得像关节一样的那个),再点击”Program
+device”,点击”Program”,此时就会下载比特流文件到板子上,并且可以在板子上看到现象.</li>
+</ol>
+<h3 id="ip核">IP核</h3>
+<h4
+id="集成逻辑分析器integrated-logic-analyzerila">集成逻辑分析器(Integrated
+Logic Analyzer,ILA)</h4>
+<p>传统的FPGA板级调试是由外接的逻辑分析仪连接到FPGA的控制管脚,然后将内部信号引出至引脚IO上,进行板级调试.在线逻辑分析仪利用FPGA中的逻辑资源,将这些功能植入到FPGA的设计中.</p>
+<p>在线逻辑分析仪通过一个或者多个探针(Probe)来采集希望观察的信号,然后通过片内的JTAG硬核组件来将捕获到的数据传送给下载器,进而上传到Vivado
+IDE以供用户查看.Vivado
+IDE也可以按照上述的路径,向在线逻辑分析仪传输一些控制信息.</p>
+<p>在Vivado中,在线逻辑分析仪的功能被称为”集成逻辑分析器(ILA)“,它以IP核的形式来加入到用户设计中.Vivado提供了三种具有不同集成层次的插入ILA方法,以满足不同Vivado用户的需求.</p>
+<p>这里我们介绍第一种:</p>
+<h5 id="hdl实例化调试探针流程">HDL实例化调试探针流程</h5>
+<ol type="1">
+<li>在Vivado左侧的”Flow Navigator”栏中点击”IP Catalog”</li>
+<li>打开”IP Catalog”窗口后,在Search中搜索”ILA”关键字,我们找到”Debug
+&amp; Verification”下的”Debug”下的”ILA(Integrated Logic
+Analyzer)“,点击它弹出”Customize IP”窗口.</li>
+<li>接下来我们在”Customize IP”窗口中设置IP核的参数.</li>
+</ol>
+<p>在这个界面中,最上面一栏的”Component
+Name”是该IP元件的名称,可以自行修改,我们保持默认为”ila_0”.</p>
+<p>IP核的配置包含两个子界面,分别是”General
+Options”和”Probe_Ports(0..0)”</p>
+<p>在”General Options”界面中,“Number of
+Probe”一栏用于设置所需的探针数量,一般来说,一个探针对应一个待测信号.”Sample
+Data
+Depth”用于设置采样深度,在每个时钟采样下,ILA都会将捕获到的探针信号的值送入RAM中,由于RAM存储空间是有限的,所以此选项就用于设置RAM最大存储多少个探针信号的值,我们一般保持默认1024,数值阅读,占用的RAM资源就越多.其他的选项保持默认.</p>
+<p>在”Probe_Ports(0..0)“中,用于设置每个探针的参数,一般我们只需要设置每个探针的宽度”Probe
+Width”即可,例如,“sys_rst_n”,“led”,“cnt”分别是1位,2位,26位,所以我们就设置探针1,探针2,探针3的宽度分别为1位,2位,26位.</p>
+<p>设置完成后,点击”OK”,“Generate”即可生成IP核.</p>
+<p>生成好后,在”Sources”窗口下的”IP
+Sources”中,打开”ila_0.veo”文件,将其中的模板代码复制到用户设计的RTL代码中,然后修改代码,将IP核的时钟信号连接到”sys_clk”,“probe1”连接到”sys_rst_n”,“probe2”连接到”led”,“probe3”连接到”cnt”.</p>
+<p>完成后,就可以保存,直接综合并且生成比特流.我们打开”Hardware
+Manager”,连接到开发板,并且下载比特流.在弹出的窗口中,点击”Program”,Vivado就会自动弹出ILA调试窗口.</p>
+<p>如果Waveform窗口缺少信号,可以点击上面一栏的加号”+(add
+probes)“将所有探针信号加入到波形窗口中.然后,我们点击上面一栏的三角形符号”run
+trigger for this ILA core”,就可以观察到此时信号的波形.</p>
+<p>在调试完毕后,可以在顶层RTL代码中注释掉ILA IP核的实例化.</p>
+<h4 id="clocking-wizard">Clocking Wizard</h4>
+<p>首先创建一个新的工程,命名为”ip_clk_wiz”,下面我们来添加IP核.</p>
+<ol type="1">
+<li>在Vivado左侧的”Flow Navigator”栏中点击”IP Catalog”</li>
+<li>打开”IP
+Catalog”窗口后,在Search中搜索”clock”关键字,Vivado就会自动查找包含”clock”的IP核,我们找到”FPGA
+Features and Design”下的”Clocking”下的”Clocking
+Wizard”,点击它弹出”Customize IP”窗口.</li>
+<li>接下来我们在”Customize IP”窗口中设置IP核的时钟参数.</li>
+</ol>
+<p>在这个界面中,最上面一栏的”Component
+Name”是该IP元件的名称,可以自行修改,我们保持默认为”clk_wiz_1”.</p>
+<p>在第一个”Clocking
+Options”选项卡中,“Primitive”一行可以选择使用MMCM模块还是PLL模块,我们选用功能比较多的MMCM模块.我们还需要修改”Input
+Clock
+Information”一栏,把”Primitive”的时钟输入频率修改为开发板核心板的晶振频率
+<span class="math inline">\(50\rm{MHz}\)</span>,其他的设置保持默认.</p>
+<p>接下来切换至”Output Clocks”选项卡,在”Output
+Clock”一栏中,勾选前四个时钟(表明我们需要四个输出),并且在”Output
+Freq(MHZ)“中分别设置为”<span
+class="math inline">\(100,100,50,25\)</span>“,第二个<span
+class="math inline">\(100\rm{MHZ}\)</span>时钟的相移”Phase(degrees)“一栏设置为”<span
+class="math inline">\(180\)</span>“.</p>
+<p>接下来切换至”Port
+Renaming”,这个选项卡主要是对于一些控制信号的重命名.这里我们只用到锁定指示locked信号,其名称保持默认即可.</p>
+<p>接下来切换至”MMCM
+Setting”和”Summary”,这两个选项卡都保持默认,都点击OK.之后就会弹出”Generate
+Output Products”窗口,我们直接点击”Generate”即可.</p>
+<p>之后我们可以看到在”Design Run”窗口的”Out-of-Context Module
+Runs”一栏中出现了该IP核对应的run”clk_wiz_0_synth_1”,其综合过程独立于顶层模块的综合.</p>
+<h4 id="block-memory">Block Memory</h4>
+<p>首先创建一个新的工程,命名为”ip_ram”,下面我们来添加IP核.</p>
+<ol type="1">
+<li>在Vivado左侧的”Flow Navigator”栏中点击”IP Catalog”</li>
+<li>打开”IP Catalog”窗口后,在Search中搜索”Block
+Memory”关键字,我们找到”Block Memory
+Generator”(这里会出现两个相同名字的IP核,它们实际上是一样的),点击它弹出IP核设置窗口.</li>
+<li>接下来我们在该窗口中设置IP核的参数.</li>
+</ol>
+<p>“Basic”界面中,“Component Name”默认为”blk_mem_gen_0”,我们保持默认.</p>
+<p>Interface
+Type:RAM接口总线,这里保持默认的Native类型(标准RAM接口总线)</p>
+<p>Memory Type:存储器类型.可以配置成Single Port RAM(单端口RAM),Simple
+Dual Port RAM(伪双端口RAM),True Dual Port RAM(真双端口RAM),Single Port
+ROM(单端口ROM),Dual Port ROM(双端口ROM).这里我们选择Single Port RAM.</p>
+<p>ECC Options:即Error Correction
+Capability,纠错能力选项,单端口RAM不支持ECC</p>
+<p>Write
+Enable:字节使能选项,选中后可以单独将数据的某个字节写入RAM中,这里不勾选.</p>
+<p>Algorithm Options:算法选项.可选择Minimum Area(最小面积),Low
+Power(低功耗),Fixed Primitives(固定原语),这里保持默认的Minimum Area.</p>
+<p>“Port A Options”界面中,设置端口A的参数</p>
+<p>Write Width:端口A写数据位宽,这里设置成8位</p>
+<p>Read Width:端口A读数据位宽,这里设置成8位</p>
+<p>Write
+Width:端口A写数据深度,这里设置成32,即RAM所能访问的地址范围为0-31</p>
+<p>Read Width:端口A读数据位宽,这里设置成32</p>
+<p>Operating Mode:RAM读写模式.一共有三种模式</p>
+<ol type="1">
+<li>Write First:写优先模式,数据先写入RAM中,下一个时钟周期读出该数据</li>
+<li>Read
+First:读优先模式,数据先写入RAM中,同时输出RAM中同地址的上一次数据</li>
+<li>No
+Change:不变模式,读写分开操作,不能同时进行读写,我们选择这个选项</li>
+</ol>
+<p>Enable Port Type:使能端口类型.Use ENA Pin(添加使能端口A信号),Always
+Enabled(取消使能信号,端口A一直处于使能状态),这里选择Use ENA Pin</p>
+<p>Port A Optional Output
+Register:端口A输出寄存器选项.其中我们取消勾选”Primitives Output
+Register”</p>
+<p>Port A Optional Reset
+Options:RAM复位信号选项,这里不添加复位信号,保持默认.</p>
+<p>接下来的”Other
+Options”和”Summary”页面都不需要设置,点击”OK”,“Generate”选项后,就可以生成IP核了.</p>
+<h4 id="fifo">FIFO</h4>
+<p>首先创建一个新的工程,命名为”ip_fifo”,下面我们来添加IP核.</p>
+<ol type="1">
+<li>在Vivado左侧的”Flow Navigator”栏中点击”IP Catalog”</li>
+<li>打开”IP Catalog”窗口后,在Search中搜索”fifo”关键字,我们找到”Memories
+&amp; Storage Elements”下的”FIFOs”下的”FIFO
+Generator”,点击它弹出IP核设置窗口.</li>
+<li>接下来我们在该窗口中设置IP核的参数.</li>
+</ol>
+<p>“Basic”界面中,“Component
+Name”默认为”fifo_generator_0”,我们保持默认.</p>
+<p>Interface
+Type:用于选择FIFO接口的类型,这里保持默认的Native类型(标准FIFO接口)</p>
+<p>FIFO
+Implementation:选择实现同步FIFO或者异步FIFO,这里我们选择”Independent
+Clocks Block RAM”,即使用块RAM来实现异步FIFO</p>
+<p>“Native Ports”界面中</p>
+<p>Read Mode:设置读FIFO时的读模式,这里选择默认的”Standard FIFO”</p>
+<p>Data Port Parameters:设置读写端口的数据总线宽度以及FIFO的深度,“Write
+Width”设置为8位,“Write Depth”设置为256位(注意FIFO
+IP核实际实现的深度是255位),“Read Width”和”Read Depth”设置同上.</p>
+<p>Reset Pin:这里我们只是观察FIFO的读写,我们取消勾选这个选项.</p>
+<p>“Status Flags”界面</p>
+<p>我们勾选”Almost Full Flag(即将写满)“和”Almost Empty
+Flag(即将读空)“这两个选项,其他保持默认</p>
+<p>“Data
+Counts”选项卡用于设置FIFO内部数据计数的输出信号,此信号表示当前FIFO内存在多少个有效的数据,这里我们勾选”Write
+Data Count(写数据计数)“和”Read Data
+Count(读数据计数)“,且计数值总线的位宽”Write/Read Count
+Width”设置成8位</p>
+<p>“Summary”界面是总结,我们之间点击”OK”,“Generate”,就可以生成IP核了.</p>
+<h3 id="uart串口通信">UART串口通信</h3>
+<p>串行通信分为两种方式,同步串行通信和异步串行通信.同步串行通信需要双方在同一时钟控制下同步传输数据;异步串行通信是通信双方使用各自的时钟控制数据的发送和接收过程.</p>
+<p>UART是一种采用异步串行通信方式的通用异步收发传输器(universal
+asynchroonous
+receiver-transmitter),它在发送数据时将并行数据转化成串行数据来传输,在接收数据时把接收到的串行数据再转化成并行数据.</p>
+<p>UART串口通信需要两根信号线,一根用于串口发送,一根用于串口接收.UART在发送或者接收过程中的一帧数据由4部分组成:</p>
+<ol type="1">
+<li>起始位:标志着一帧数据的起始</li>
+<li>停止位:标志着一帧数据的结束</li>
+<li>数据位:一帧数据中的有效数据</li>
+<li>奇偶检验位:分为奇校验和偶校验,用于检测数据在传输过程中是否出错</li>
+</ol>
+<p>UART通信过程中的数据格式和传输速率是可以设置的,为了正确的通信,收发双方应该约定好同样的设置.数据位可以选择5,6,7,8位,其中8位数据最常用.校验位可以选择奇校验,偶校验或者无校验位.停止位可以选择1位(默认),1.5位,2位.串口通信的速率用波特率表示,它表示每秒传输二进制数据的位数,单位是bps(位/秒),常用的波特率有9600,19200,38400,57600,115200等.</p>
+<p>设置好数据格式和传输速率之后,UART负责完成串并数据的转换,而信号的传输则由外部驱动电路实现.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Verilog/" rel="tag"># Verilog</a>
+              <a href="/tags/FPGA/" rel="tag"># FPGA</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E7%AB%A0/" rel="prev" title="C语言:gdb">
+                  <i class="fa fa-angle-left"></i> C语言:gdb
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/" rel="next" title="C语言:分支语句">
+                  C语言:分支语句 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">SiyuanLei</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

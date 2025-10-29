@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Weyl Spinors Brief Review of the Dirac Equation and of Some Matrix Properties Dirac Equation: \[\gamma^\mu P_\mu\Psi&#x3D;m\Psi~~\rm{or}~~ \not{\rm{P}}\Psi&#x3D;m\Psi(\rm{use~Feynman&#39;s~slash~notation})">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on Supersymmetry">
+<meta property="og:url" content="http://example.com/2025/05/04/SUSY/index.html">
+<meta property="og:site_name" content="SiyuanLei&#39;s Blog">
+<meta property="og:description" content="Weyl Spinors Brief Review of the Dirac Equation and of Some Matrix Properties Dirac Equation: \[\gamma^\mu P_\mu\Psi&#x3D;m\Psi~~\rm{or}~~ \not{\rm{P}}\Psi&#x3D;m\Psi(\rm{use~Feynman&#39;s~slash~notation})">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-07-14T16:54:15.537Z">
+<meta property="article:author" content="SiyuanLei">
+<meta property="article:tag" content="理论物理">
+<meta property="article:tag" content="超对称">
+<meta property="article:tag" content="SUSY">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/SUSY/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/04/SUSY/","path":"2025/05/04/SUSY/","title":"Notes on Supersymmetry"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Notes on Supersymmetry | SiyuanLei's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SiyuanLei's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#weyl-spinors"><span class="nav-number">1.</span> <span class="nav-text">Weyl Spinors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#brief-review-of-the-dirac-equation-and-of-some-matrix-properties"><span class="nav-number">1.1.</span> <span class="nav-text">Brief
+Review of the Dirac Equation and of Some Matrix Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#weyl-versus-dirac-spinors"><span class="nav-number">1.2.</span> <span class="nav-text">Weyl versus Dirac Spinors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#helicity"><span class="nav-number">1.3.</span> <span class="nav-text">Helicity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lorentz-transformations-and-invariants"><span class="nav-number">1.4.</span> <span class="nav-text">Lorentz Transformations
+and Invariants</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#building-more-lorentz-invariants-out-of-weyl-spinors"><span class="nav-number">1.5.</span> <span class="nav-text">Building
+More Lorentz Invariants Out of Weyl Spinors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#invariants-containing-lorentz-indeces"><span class="nav-number">1.6.</span> <span class="nav-text">Invariants Containing
+Lorentz Indeces</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#introduce-a-new-notation"><span class="nav-number">1.7.</span> <span class="nav-text">Introduce a New Notation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-physics-of-weyl-majorana-and-dirac-spinors"><span class="nav-number">2.</span> <span class="nav-text">The Physics of
+Weyl, Majorana, and Dirac Spinors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#charge-conjugation-and-antiparticles-for-dirac-spinors"><span class="nav-number">2.1.</span> <span class="nav-text">Charge
+Conjugation and Antiparticles for Dirac Spinors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-supersymmetric-charges-and-their-algebra"><span class="nav-number">3.</span> <span class="nav-text">The Supersymmetric
+Charges and Their Algebra</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#charges-general-discussion"><span class="nav-number">3.1.</span> <span class="nav-text">Charges: General Discussion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explict-representations-of-the-charges-and-the-charge-algebra"><span class="nav-number">3.2.</span> <span class="nav-text">Explict
+Representations of the Charges and the Charge Algebra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finding-the-algebra-without-the-explicit-charges"><span class="nav-number">3.3.</span> <span class="nav-text">Finding the
+Algebra Without the Explicit Charges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-susy-algebra"><span class="nav-number">3.4.</span> <span class="nav-text">The SUSY Algebra</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#applications-of-the-susy-algebra"><span class="nav-number">4.</span> <span class="nav-text">Applications of the SUSY
+Algebra</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#classification-of-states-using-the-algebra-review-of-the-poincare-group"><span class="nav-number">4.1.</span> <span class="nav-text">Classification
+of States Using the Algebra: Review of the Poincare Group</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SiyuanLei"
+      src="/images/femboy.jpg">
+  <p class="site-author-name" itemprop="name">SiyuanLei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/SUSY/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Notes on Supersymmetry | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes on Supersymmetry
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-07-15 00:54:15" itemprop="dateModified" datetime="2025-07-15T00:54:15+08:00">2025-07-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%89%A9%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">物理</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%89%A9%E7%90%86/%E8%B6%85%E5%AF%B9%E7%A7%B0/" itemprop="url" rel="index"><span itemprop="name">超对称</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="weyl-spinors">Weyl Spinors</h2>
+<h3
+id="brief-review-of-the-dirac-equation-and-of-some-matrix-properties">Brief
+Review of the Dirac Equation and of Some Matrix Properties</h3>
+<p>Dirac Equation:</p>
+<p><span class="math display">\[\gamma^\mu P_\mu\Psi=m\Psi~~\rm{or}~~
+\not{\rm{P}}\Psi=m\Psi(\rm{use~Feynman&#39;s~slash~notation})\]</span></p>
+<p>Here, <span class="math inline">\(P_\mu\)</span> represents the
+differential operator <span
+class="math inline">\(i\partial_\mu\)</span>. Throughout this note we
+use natural unit, in which <span
+class="math inline">\(c=\hbar=1\)</span>.</p>
+<p>Dirac Lagrangian:</p>
+<p><span class="math display">\[\mathcal{L}=\overline{\Psi}(\gamma^\mu
+P_\mu-m)\Psi\]</span></p>
+<p>where the bar over the spinor denotes the Dirac adjoint <span
+class="math inline">\(\overline{\Psi}=\Psi^\dagger\gamma^0\)</span>.</p>
+<p>Dirac matrix:</p>
+<p>There are several different representations for the Dirac matrix
+<span class="math inline">\(\gamma^0\)</span> and <span
+class="math inline">\(\vec{\gamma}\)</span>. We choose
+representation</p>
+<p><span class="math display">\[\gamma^0=\begin{pmatrix}
+    0 &amp; \boldsymbol{1}\\
+    \boldsymbol{1}&amp;0
+\end{pmatrix}~~\vec{\gamma}=\begin{pmatrix}
+    0&amp; -\vec{\sigma}\\
+    \vec{\sigma}&amp;0\\
+\end{pmatrix}\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{1}\)</span> stands for
+the <span class="math inline">\(2\times 2\)</span> identity matrix.
+These can be used to define <span
+class="math inline">\(\gamma^\mu=(\gamma^0,\vec{\gamma})\)</span>. The
+corresponding quatity with a covariant index is defined as <span
+class="math inline">\(\gamma_\mu=\eta_{\mu\nu}\gamma^\nu=(\gamma^0,-\vec{\gamma})\)</span>,
+where <span
+class="math inline">\(\eta_{\mu\nu}=\rm{diag}(1,-1,-1,-1)\)</span>.</p>
+<p>For <span class="math inline">\(\gamma_5\)</span>, we choose the
+chiral or Weyl representation</p>
+<p><span class="math display">\[\gamma_5=\begin{pmatrix}
+    \boldsymbol{1}&amp;0\\
+    0&amp;-\boldsymbol{1}
+\end{pmatrix}\]</span></p>
+<p>Pauli matrices:</p>
+<p><span class="math display">\[\sigma^1=\begin{pmatrix}
+    0&amp;1\\
+    1&amp;0\\
+\end{pmatrix}~~~~
+\sigma^2=\begin{pmatrix}
+    0&amp;-i\\
+    i&amp;0\\
+\end{pmatrix}~~~~
+\sigma^3=\begin{pmatrix}
+    1&amp;0\\
+    0&amp;-1
+\end{pmatrix}\]</span></p>
+<p>They have the follwing properties:</p>
+<ol type="1">
+<li>They are hermitian, i.e., <span
+class="math inline">\((\sigma^i)^\dagger=\sigma^i\)</span></li>
+<li>The product of any two Pauli matrix is given by <span
+class="math inline">\(\sigma^i\sigma^j=\boldsymbol{1}\delta^{ij}+i\epsilon^{ijk}\sigma^k\)</span></li>
+<li>The commutator of two Pauli matrices is <span
+class="math inline">\([\sigma^1,\sigma^j]=2i\epsilon^{ijk}\sigma^k\)</span></li>
+<li>The anticommutator of two Pauli matries is <span
+class="math inline">\(\{\sigma^i,\sigma^j\}=2\delta^{ij}\boldsymbol{1}\)</span></li>
+<li><span
+class="math inline">\(\sigma^2\vec{\sigma}^T=-\vec{\sigma}\sigma^2,~~\sigma^2\vec{\sigma}^*=-\vec{\sigma}\sigma^2\)</span></li>
+</ol>
+<h3 id="weyl-versus-dirac-spinors">Weyl versus Dirac Spinors</h3>
+<p>We now wirte the four-component Dirac spinor in terms of
+two-component spinors:</p>
+<p><span class="math display">\[\Psi=\begin{pmatrix}
+    \eta\\
+    \chi
+\end{pmatrix}\]</span></p>
+<p>where the two-component spinors are called Weyl spinors. The reason
+it makes sense to decompose a Dirac spinor this way is that, as we will
+see, <span class="math inline">\(\eta\)</span> and <span
+class="math inline">\(\chi\)</span> transform independently under
+Lorentz transformations, i.e., they don’t mix. The technical way to
+express this is to say that a Dirac spinor forms a reducible
+representationpf the Lorentz group, whereas the Weyl spinors form
+irreducible representations.</p>
+<p>Note that setting either <span class="math inline">\(\eta\)</span> or
+<span class="math inline">\(\chi\)</span> equal to zero in a Dirac
+spinor yields eigenstates of <span
+class="math inline">\(\gamma_5\)</span>:</p>
+<p><span class="math display">\[\gamma_5\begin{pmatrix}
+    \eta\\
+    0
+\end{pmatrix}=+\begin{pmatrix}
+    \eta\\
+    0
+\end{pmatrix}~~~~\gamma_5\begin{pmatrix}
+    0\\
+    \chi
+\end{pmatrix}=-\begin{pmatrix}
+    0\\
+    \chi
+\end{pmatrix}\]</span></p>
+<p>The eigenvalue of <span class="math inline">\(\gamma_5\)</span> is
+called the chirality of the spinor, so we say that the upper
+two-component spinor <span class="math inline">\(\eta\)</span> has a
+chirality of <span class="math inline">\(+1\)</span> and <span
+class="math inline">\(\chi\)</span> has a chirality of <span
+class="math inline">\(-1\)</span>. A Weyl spinor with positive chirality
+is sometimes referred to as a right-chiral spinor, and a Weyl spinor
+with negative chirality is referred to as a right-chiral spinor.</p>
+<p>However, some references replace the adjectives right-chiral and
+left-chiral by right-handed and left-handed, but in general, knowing the
+chirality doesn’t tell us the handedness of a particle.</p>
+<p>We will discuss how the handedness, or to be more technical, the
+helicity of a spinor is defined.</p>
+<p>The key point is to make here is that the notions of chirality and
+the helicity of a spinor coincide only when a particle is massless. For
+a massive particle, both the left-chiral and the right-chiral states
+are, in general, linear combinations of left-handed and right-handed
+states.</p>
+<p>It’s chirality that tells us how a spinor behaves under Lorentz
+transformations. For a massive spinor, it’s the chirality that specifies
+what representation of the Lorentz group it belongs to, not its
+helicity, so we will care more about chirality than about helicity.</p>
+<p>It is convenint to introduce the operators <span
+class="math inline">\(P_R\)</span> and <span
+class="math inline">\(P_L\)</span>, which, when applied to a fuul Dirac
+spinor, project out the right-chiral and left-chiral Weyl spinors:</p>
+<p><span class="math display">\[P_R\Psi=P_R\begin{pmatrix}
+    \eta\\
+    \chi\\
+\end{pmatrix}=\begin{pmatrix}
+    \eta\\
+    0
+\end{pmatrix}~~~~P_L\Psi=P_L\begin{pmatrix}
+    \eta\\
+    \chi\\
+\end{pmatrix}=\begin{pmatrix}
+    0\\
+    \chi
+\end{pmatrix}\]</span></p>
+<p>The explicit representations of these opeartors are obviously</p>
+<p><span class="math display">\[P_R=\begin{pmatrix}
+    \boldsymbol{1}&amp;0\\
+    0&amp;0
+\end{pmatrix}=\frac{\boldsymbol{1}+\gamma_5}{2}~~~~P_L=\begin{pmatrix}
+    0&amp;0\\
+    0&amp;\boldsymbol{1}
+\end{pmatrix}=\frac{\boldsymbol{1}-\gamma_5}{2}\]</span></p>
+<p>If we substitute <span class="math inline">\(\Psi=\begin{pmatrix}
+    \eta\\
+    \chi
+\end{pmatrix}\)</span> to the Dirac equation, we can obtain two coupled
+equations for the Weyl spinors:</p>
+<p><span class="math display">\[\begin{aligned}
+    (E\boldsymbol{1}-\vec{\sigma}\cdot\vec{p})\eta=m\chi\\
+    (E\boldsymbol{1}+\vec{\sigma}\cdot\vec{p})\chi=m\eta
+\end{aligned}\]</span></p>
+<p>Now we introduce some useful notations:</p>
+<p><span
+class="math display">\[\sigma^\mu=(\boldsymbol{1},\vec{\sigma}),~~\overline{\sigma}^\mu=(1,-\vec{\sigma})\]</span></p>
+<p>we can check that they have the following properties:</p>
+<ol type="1">
+<li><span
+class="math inline">\(\sigma^2(\sigma^\mu)^T\sigma^2=\overline{\sigma}^\mu,~~\sigma^2(\overline{\sigma}^\mu)^T\sigma^2=\sigma^\mu\)</span></li>
+<li><span
+class="math inline">\(\sigma^2\sigma^\mu\sigma^2=(\overline{\sigma}^\mu)^T,~~\sigma^2\overline{\sigma}^\mu\sigma^2=(\sigma^\mu)^T\)</span></li>
+<li><span
+class="math inline">\(\sigma^\mu\overline{\sigma}^\nu+\sigma^\nu\overline{\sigma}^\mu=2\eta^{\mu\nu}\boldsymbol{1}\)</span></li>
+<li><span
+class="math inline">\(\overline{\sigma}^\mu\sigma^\nu+\overline{\sigma}^\nu\sigma^\mu=2\eta^{\mu\nu}\boldsymbol{1}\)</span></li>
+<li><span class="math inline">\(\gamma^\mu=\begin{pmatrix}
+0&amp;\overline{\sigma}^\mu\\
+\sigma^\mu&amp;0
+\end{pmatrix}\)</span></li>
+</ol>
+<p>So the two coupled equations may be written as</p>
+<p><span class="math display">\[\begin{aligned}
+    P_\mu\sigma^\mu\eta=m\chi\\
+    P_\mu\overline{\sigma}^\mu\chi=m\eta\\
+\end{aligned}\]</span></p>
+<p>and we can also write the Dirac lagrangianin terms of Weyl
+spinors:</p>
+<p><span class="math display">\[\mathcal{L}=\eta^\dagger\sigma^\mu
+i\partial_\mu\eta+\chi^\dagger\overline{\sigma}^\mu
+i\partial_\mu\chi-m\eta^\dagger\chi-m\chi^\dagger\eta\]</span></p>
+<p>Note that despide the fact that <span
+class="math inline">\(\sigma^\mu\)</span> and <span
+class="math inline">\(\overline{\sigma}^\mu\)</span> carry a Lorentz
+index, they are not themselves four-vectors (for the same reason that
+<span class="math inline">\(\gamma^\mu\)</span> is not a four-vector).
+However, we can form quantities with well-defined Lorentz properties by
+sandwiching them between Weyl spinors.</p>
+<h3 id="helicity">Helicity</h3>
+<p>For massless particles, the two equations for Weyl spinors decouple
+to give:</p>
+<p><span class="math display">\[\begin{aligned}
+    (E\boldsymbol{1}-\vec{\sigma}\cdot\vec{p})\eta=0\\
+    (E\boldsymbol{1}+\vec{\sigma}\cdot\vec{p})\chi=0
+\end{aligned}~~\Rightarrow~~\begin{aligned}
+    \frac{\vec{\sigma}\cdot\vec{p}}{|\vec{p}|}\eta=\eta\\
+    \frac{\vec{\sigma}\cdot\vec{p}}{|\vec{p}|}\chi=-\chi
+\end{aligned}\]</span></p>
+<p>where we have set <span class="math inline">\(E=|\vec{p}|\)</span>,
+which is valid for massless particles. We see that for a massless
+particle, the Dirac equation breaks up into two independent equations
+acting on two defferent two-component spinors. These two equations are
+known as the Weyl equations.</p>
+<p>If we multiply those equations by <span
+class="math inline">\(\hbar/2\)</span> and use the fact that <span
+class="math inline">\(\hbar\vec{\sigma}/2\)</span> is the spin operator
+<span class="math inline">\(\vec{S}\)</span>, we get</p>
+<p><span
+class="math display">\[\vec{S}\cdot\hat{p}\eta=\frac{\hbar}{2}\eta~~~~\vec{S}\cdot\hat{p}\chi=-\frac{\hbar}{2}\chi\]</span></p>
+<p>The operator <span class="math inline">\(\vec{S}\cdot\hat{p}\)</span>
+is called the helicity operator, and the corresponding eigenvalue is the
+helicity of the state. This eigenvalue corresponds to the component of
+the spin along the direction of the motion of the particle. We see that,
+in massless limit, thw Weyl spinors are eigenstates of the helicity
+operator.</p>
+<h3 id="lorentz-transformations-and-invariants">Lorentz Transformations
+and Invariants</h3>
+<p>The infinitesimal transformations of the two Weyl spinors are:</p>
+<p><span class="math display">\[\begin{aligned}
+    \eta\rightarrow\eta&#39;=\left(\boldsymbol{1}+\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}-\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}\right)\eta\\
+    \chi\rightarrow\chi&#39;=\left(\boldsymbol{1}+\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}+\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}\right)\chi\\
+\end{aligned}\]</span></p>
+<p>where <span class="math inline">\(\vec{\epsilon}\)</span> is the
+infinitesimal rotation vector (the direction of <span
+class="math inline">\(\vec{\epsilon}\)</span> gives the axis of
+rotation, and its magnitude gives the amount of rotation), and <span
+class="math inline">\(\vec{\beta}\)</span> is the infinitesimal boost
+parameter.</p>
+<p>This transformations show that the left-chiral and right-chiral
+spinors transform independently under Lorentz transformations. They are
+therefore inequivalent irreducible representations of the Lorentz group
+and are the fundamental “building blocks” from which any other spinor
+representation can be constructed. Because Lorentz algebra is equivalent
+to the algebra <span
+class="math inline">\(\mathfrak{su}(2)\times\mathfrak{su}(2)\)</span>,
+all representations can be labeled by two numbers that are multiples of
+one-half. The two fundamental representations then are described by the
+quantum numbers <span class="math inline">\((\frac{1}{2},0)\)</span> and
+<span class="math inline">\((0,\frac{1}{2})\)</span>, which describe the
+left-chiral and right-chiral spinors respectively. By the way, even
+though the algebra acting on the Weyl spinors is <span
+class="math inline">\(\mathfrak{su}(2)\times\mathfrak{su}(2)\)</span>,
+the group under which they transform is not <span
+class="math inline">\(SO(2)\times SO(2)\)</span> but instead <span
+class="math inline">\(SL(2,\mathbb{C})\)</span>, the universal covering
+group of the Lorentz group <span
+class="math inline">\(SO(3,1)\)</span>.</p>
+<p>Now consider the kinetic term of the Dirac lagrangian <span
+class="math inline">\(\overline{\Psi}\gamma^\mu P_\mu\Psi\)</span>.
+Since this is invariant and <span class="math inline">\(P_\mu\)</span>
+is a four-vector, the quantity <span
+class="math inline">\(\overline{\Psi}\gamma^\mu\Psi\)</span> must
+transform as a four-vector, so we find that</p>
+<p><span
+class="math display">\[\overline{\Psi}\gamma^\mu\Psi=\eta^\dagger\sigma^\mu\eta+\chi^\dagger\overline{\sigma}^\mu\chi\]</span></p>
+<p>transform as a four-vector under Lorentz transformations, and it
+turns out that each term on the right separately transform as a
+four-vector.</p>
+<h3 id="building-more-lorentz-invariants-out-of-weyl-spinors">Building
+More Lorentz Invariants Out of Weyl Spinors</h3>
+<p>First we consider <span class="math inline">\(\chi^{\dagger
+T}\)</span>, we find that it transforms as</p>
+<p><span class="math display">\[\begin{aligned}
+   \chi^{\dagger T}\rightarrow (\chi^{\dagger
+T})&#39;=(\chi&#39;)^{\dagger T}
+&amp;=\left(\boldsymbol{1}+\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}+\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}\right)^*\chi^{\dagger
+T}\\
+    &amp;=\left(\boldsymbol{1}-\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}^*+\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}^*\right)\chi^{\dagger
+T}
+\end{aligned}\]</span></p>
+<p>This doesn’t transform like a right-chiral spinor. Now we use the
+equation <span
+class="math inline">\(\sigma^2\vec{\sigma}^*=-\vec{\sigma}\sigma^2\)</span>
+and consider</p>
+<p><span class="math display">\[\begin{aligned}
+   i\sigma^2\chi^{\dagger T}\rightarrow (i\sigma^2\chi^{\dagger T})&#39;
+&amp;=(i\sigma^2)^*\left(\boldsymbol{1}+\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}+\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}\right)^*\chi^{\dagger
+T}\\
+    &amp;=(i\sigma^2)\left(\boldsymbol{1}-\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}^*+\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}^*\right)\chi^{\dagger
+T}\\
+    &amp;=\left(\boldsymbol{1}+\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}-\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}\right)i\sigma^2\chi^{\dagger
+T}
+\end{aligned}\]</span></p>
+<p>which is the transformation of right-chiral spinor! Since the
+expression <span class="math inline">\(\eta^\dagger\chi\)</span> is
+invariant under Lorentz tranformations and <span
+class="math inline">\(i\sigma^2\chi^{\dagger T}\)</span> transforms like
+<span class="math inline">\(\eta\)</span>, we can know that the
+following expression is also invariant:</p>
+<p><span class="math display">\[\begin{aligned}
+    (i\sigma^2\chi^{\dagger
+T})^T\chi&amp;=\chi^T(i\sigma^2)^\dagger\chi\\
+    &amp;=\chi^T(-i\sigma^2)\chi
+\end{aligned}\]</span></p>
+<p>We also know that <span
+class="math inline">\(\chi^\dagger\eta\)</span> is invariant, we obtain
+a second invariant containing only left-chiral spinors:</p>
+<p><span class="math display">\[\chi^\dagger i\sigma\chi^{\dagger
+T}\]</span></p>
+<p>Similarly, it’s easy to check that <span
+class="math inline">\(-i\sigma^2\eta^{\dagger T}\)</span> transforms
+like a left-chiral spinor.</p>
+<p>Define the matrix <span class="math inline">\(A\)</span> as</p>
+<p><span
+class="math display">\[A=\boldsymbol{1}+\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}-\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}\]</span></p>
+<p>so we have</p>
+<p><span
+class="math display">\[A^\dagger=\boldsymbol{1}-\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}-\frac{1}{2}\vec{\beta}\cdot\vec{\sigma},~~A^{-1}=\boldsymbol{1}-\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}+\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}\]</span></p>
+<p>In turn, this implies</p>
+<p><span
+class="math display">\[(A^{-1})^\dagger=(A^\dagger)^{-1}=\boldsymbol{1}+\frac{i}{2}\vec{\epsilon}\cdot\vec{\sigma}+\frac{1}{2}\vec{\beta}\cdot\vec{\sigma}\]</span></p>
+<p>We can write:</p>
+<p><span class="math display">\[\begin{aligned}
+    \eta&amp;\rightarrow A\eta\\
+    i\sigma^2\chi^{\dagger T}&amp;\rightarrow A(i\sigma^2\chi^{\dagger
+T})\\
+    \chi&amp;\rightarrow (A^\dagger)^{-1}\chi\\
+    -i\sigma^2\eta^{\dagger T}&amp;\rightarrow
+(A^\dagger)^{-1}(-i\sigma\eta^{\dagger T})
+\end{aligned}\]</span></p>
+<p>This gives eight combinations, but it turns out that only six of
+those are independent, which be taken to be</p>
+<p><span class="math display">\[\boxed{\begin{aligned}
+    -\chi^T i\sigma^2\chi~~~~&amp;\chi^\dagger i\sigma^2\chi^{\dagger
+T}\\
+    \chi^\dagger \eta~~~~&amp;\eta^\dagger\chi\\
+    -\eta i\sigma^2\eta^{\dagger T}~~~~&amp;\eta^Ti\sigma^2\eta
+\end{aligned}}\]</span></p>
+<h3 id="invariants-containing-lorentz-indeces">Invariants Containing
+Lorentz Indeces</h3>
+<p>We have seen, by looking at the Dirac equation written in terms of
+Weyl spinors, that <span class="math inline">\(\sigma^\mu
+i\partial_\mu\eta\)</span> transforms like a left-chiral spinor and
+<span class="math inline">\(\overline{\sigma}^\mu
+i\partial_\mu\chi\)</span> transforms like a right-chiral spinor.</p>
+<p>To build Lorentz invariants containing derivatives, we simply have to
+use the expressions in the box above with the <span
+class="math inline">\(\chi\)</span> appearing in those equations
+replaced by <span class="math inline">\(\sigma^\mu
+i\partial_\mu\eta\)</span> or the <span
+class="math inline">\(\eta\)</span> replaced by <span
+class="math inline">\(\overline{\sigma}^\mu
+i\partial_\mu\chi\)</span>.</p>
+<p>As examples, we have</p>
+<p><span class="math display">\[\begin{aligned}
+    \chi^\dagger\eta&amp;\rightarrow \chi^\dagger\overline{\sigma}^\mu
+i\partial_\mu \chi\\
+    \eta^\dagger\chi&amp;\rightarrow(\overline{\sigma}^\mu
+i\partial_\mu\chi)^\dagger\chi=-i(\partial_\mu\chi^\dagger)\overline{\sigma}^\mu\chi
+\end{aligned}\]</span></p>
+<p>As part of a lagrangian density, however, an integration by parts can
+be used to show that the terms above are equivalent to each other after
+discarding a surface term. We will always assume that the surface terms
+vanish so that we may write</p>
+<p><span class="math display">\[\int \mathrm{d}^4xA\partial_\mu
+B=-\int\mathrm{d}^4x(\partial_\mu A)B\]</span></p>
+<h3 id="introduce-a-new-notation">Introduce a New Notation</h3>
+<p>In practice, SUSY theorists work almost exclusively with left-chiral
+spinors, even when considering supersymmetric extensions of the standard
+model, so we really only need to focus on the two invariants built out
+of a left-chiral spinor:</p>
+<p><span class="math display">\[\chi^\dagger i\sigma^2\chi^{\dagger
+T},~~\chi^T(-i\sigma^2)\chi\]</span></p>
+<p>We define two new types of spinor dot products between left-chiral
+Weyl spinors:</p>
+<p><span
+class="math display">\[\chi\cdot\chi=\chi^T(-i\sigma^2)\chi,~~\overline{\chi}\cdot\overline{\chi}=\chi^\dagger
+i\sigma^2\chi^{\dagger T}\]</span></p>
+<h2 id="the-physics-of-weyl-majorana-and-dirac-spinors">The Physics of
+Weyl, Majorana, and Dirac Spinors</h2>
+<p>Supersymmetric theories are often written in terms of Majorana
+spinors, instead of Weyl spinors or Dirac spinors.</p>
+<h3 id="charge-conjugation-and-antiparticles-for-dirac-spinors">Charge
+Conjugation and Antiparticles for Dirac Spinors</h3>
+<p>Charge conjugation is the operation that turns a field describing a
+certain particle into a field describing the corresponding
+antiparticle.</p>
+<p>Consider a Dirac spinor corresponding to a certain particle <span
+class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[\Psi_p=\begin{pmatrix}
+    \eta_p\\
+    \chi_p
+\end{pmatrix}\]</span></p>
+<p>The antiparticle spinor is obtained by applying the
+charge-conjugation operator to the particle state, we may write</p>
+<p><span
+class="math display">\[\Psi_p^c=\Psi_{\overline{p}}=\begin{aligned}
+    \eta_{\overline{p}}\\
+    \chi_{\overline{p}}
+\end{aligned}\]</span></p>
+<p>where <span class="math inline">\(c\)</span> denotes charge
+conjugation.</p>
+<h2 id="the-supersymmetric-charges-and-their-algebra">The Supersymmetric
+Charges and Their Algebra</h2>
+<p>When a lagrangian is observed to possess some continuous symmetry,
+the natural thing to do is to find the charges generating the symmetry,
+also called the generators of the symmetry. Actually, as we will see,
+what really matters is the algebra obeyed by the charges, i.e., the
+commutation or anticommutation rules, not the charges themselves (as an
+aside, when the algebra involves anticommutators, it is often referred
+to as a graded Lie algebra).</p>
+<h3 id="charges-general-discussion">Charges: General Discussion</h3>
+<p>We firet consider a scalar field operator <span
+class="math inline">\(\phi\)</span>. If a certain transformation is a
+symmetry of the theory, it must leave unchanged the expectation value
+<span class="math inline">\(\langle a|\phi|b\rangle\)</span>. Let us
+focus now on spacetime transformations, and we have <span
+class="math inline">\(\langle a&#39;|\phi(x&#39;)|b&#39;\rangle=\langle
+a|\phi(x)|b\rangle\)</span>. We now introduce a new field operator <span
+class="math inline">\(\phi&#39;\)</span> that we define by <span
+class="math inline">\(\langle a&#39;|\phi(x&#39;)|b&#39;\rangle=\langle
+a|\phi&#39;(x&#39;)|b\rangle\)</span>, so we get <span
+class="math inline">\(\langle a|\phi&#39;(x&#39;)|b\rangle=\langle
+a|\phi(x)|b\rangle\)</span>, thus <span
+class="math inline">\(\phi&#39;(x&#39;)=\phi(x)\)</span>. This is
+exactly how a scalar field behaves under a Lorentz transformation. We
+write <span class="math inline">\(x&#39;=x-\delta x\)</span>, so we have
+<span class="math inline">\(\phi&#39;(x-\delta x)=\phi(x)\)</span> or
+<span class="math inline">\(\phi&#39;(x)=\phi(x+\delta x)\)</span>.</p>
+<p>We now consider a field operator <span
+class="math inline">\(\mathcal{F}\)</span> that transforms under some
+representations of the Lorentz group (a vector, a spinor, etc.). Then we
+have <span class="math inline">\(\langle
+a&#39;|\mathcal{F}(x)|b&#39;\rangle=S(\Lambda)\langle
+a|\mathcal{F}(x)|b\rangle\)</span>, where <span
+class="math inline">\(S(\Lambda)\)</span> is the Lorentz transformation
+matrix corresponding to the representation of the field operator.
+Correspondingly, we have <span
+class="math inline">\(\mathcal{F}&#39;(x)=S(\Lambda)\mathcal{F}(x+\delta
+x)\)</span>.</p>
+<p>Physically meaningful transformations preserve the norm of states and
+therefore can be written in the form of unitary operators (or
+antiunitary operators in the case of time inversal), namely, operators
+satisfying <span class="math inline">\(U^\dagger=U^{-1}\)</span>. We
+will take the transformation of states to be</p>
+<p><span class="math display">\[|a\rangle\rightarrow
+|a&#39;\rangle=U^\dagger|a\rangle,~~|b\rangle\rightarrow
+|b&#39;\rangle=U^\dagger|b\rangle\]</span></p>
+<p>We now have <span class="math inline">\(\langle
+a&#39;|\phi(x&#39;)|b&#39;\rangle=\langle
+a|U\phi(x&#39;)U^\dagger|b\rangle=\langle
+a|\phi&#39;(x&#39;)|b\rangle\)</span>, which implies <span
+class="math inline">\(\phi&#39;(x)=U\phi(x)U^\dagger\)</span>.</p>
+<p>Now we are ready to introduce the charges generating the
+transformations. Assume that the transformation we are interested in are
+parametrized by a set of <span class="math inline">\(n\)</span>
+infinitesimal parameters <span
+class="math inline">\(\epsilon_1,\epsilon_2,\cdots,\epsilon_n\)</span>,
+in which case there are necessarily <span
+class="math inline">\(n\)</span> charges <span
+class="math inline">\(Q_1,Q_2,\cdots,Q_n\)</span>. The charges are
+defined through</p>
+<p><span class="math display">\[U=\exp(\pm i\epsilon_iQ_i)=\exp(\pm
+i\epsilon\cdot Q)\]</span></p>
+<p>We get</p>
+<p><span class="math display">\[\begin{aligned}
+    \phi&#39;(x)&amp;\approx(1+\pm i\epsilon\cdot Q)\phi(x)(1\mp
+i\epsilon\cdot Q)\\
+            &amp;=\phi(x)\pm i\epsilon\cdot Q\phi(x)\mp
+i\phi(x)\epsilon\cdot Q\\
+            &amp;=\phi(x)\pm i[\epsilon\cdot Q,\phi(x)]
+\end{aligned}\]</span></p>
+<p>Let’s define <span
+class="math inline">\(\delta\phi(x)=\phi&#39;(x)-\phi(x)\)</span>, we
+obtain a very useful result:</p>
+<p><span class="math display">\[\pm[\epsilon\cdot
+Q,\phi]=-i\delta\phi\]</span></p>
+<p>where the sign on the left-hand side is the same sign as the argument
+of the exponential in the operator <span
+class="math inline">\(U\)</span>.</p>
+<p>In the case of spacetime symmetries, for a scalar field, we have
+<span class="math inline">\(\delta\phi=\phi(x+\delta
+x)-\phi(x)\)</span>, for a general field <span
+class="math inline">\(\mathcal{F}\)</span>, we have instead <span
+class="math inline">\(\delta\mathcal{F}(x)=S(\Lambda)\mathcal{F}(x+\delta
+x)-\mathcal{F}(x)\)</span>.</p>
+<p>As a simple example, consider a lagrangian density that is a function
+of a single real scalar field <span
+class="math inline">\(\mathcal{L}(\phi)\)</span>. The action <span
+class="math inline">\(S=i\int \mathrm{d}^4x\mathcal{L}\)</span> is
+obviously invariant under a transformation of the field</p>
+<p><span class="math display">\[\phi(x^\mu)\rightarrow
+\phi&#39;(x^\mu)=\phi(x^\mu+a^\mu)\]</span></p>
+<p>where <span class="math inline">\(a^\mu\)</span> is a
+constant-displacement four-vector. Therefore</p>
+<p><span
+class="math display">\[\delta\phi(x^\mu)=\phi(x^\mu+a^\mu)-\phi(x^\mu)\approx
+a^\mu\partial_\mu\phi\]</span></p>
+<p>Since there are four parameters, the four <span
+class="math inline">\(a_\mu\)</span>, we introduce four charges that we
+suggestively call <span class="math inline">\(P^\mu\)</span>, and write
+the unitary operator as</p>
+<p><span class="math display">\[U=\exp(ia^\mu P_\mu)\]</span></p>
+<p>so we get</p>
+<p><span
+class="math display">\[a^\mu[P_\mu,\phi]=-ia^\mu\partial_\mu\phi\Rightarrow
+[P_\mu,\phi]=-i\partial_\mu\phi\]</span></p>
+<p>We next consider Lorentz transformation <span
+class="math inline">\(x^\mu\rightarrow \Lambda^\mu_\nu x^\nu\)</span>,
+for an infinitesimal transformation, we may write</p>
+<p><span class="math display">\[\begin{aligned}
+    \Lambda^\mu_\nu x^\nu&amp;\approx x^\mu+\omega^\mu_\nu x^\nu\\
+                         &amp;=x^\mu+\omega^{\mu\nu}x_\nu
+\end{aligned}\]</span></p>
+<p>where <span class="math inline">\(\omega^{\mu\nu}\)</span> is
+antisymmetric, <span
+class="math inline">\(\omega^{\mu\nu}=-\omega^{\nu\mu}\)</span>.</p>
+<p>We write the unitary operator implementing Lorentz transformation on
+a scalar field as</p>
+<p><span
+class="math display">\[U=\exp\left(-\frac{i}{2}\omega^{\mu\nu}M_{\mu\nu}\right)\]</span></p>
+<p>where the charges <span class="math inline">\(M^{\mu\nu}\)</span> are
+also antisymmetric.</p>
+<p>The transformation og the field is given by <span
+class="math inline">\(\delta\phi=\phi(x+\omega^{\mu\nu}x_\nu)-\phi(x^\mu)\)</span>,
+and <span
+class="math inline">\(\delta\phi=\frac{1}{2}\omega^{\mu\nu}(x_\nu\partial_\mu-x_\mu\partial_\nu)\phi\)</span>,
+so we have</p>
+<p><span
+class="math display">\[[M_{\mu\nu},\phi]=i(x_\nu\partial_\nu-x_\mu\partial_\nu)\phi\]</span></p>
+<p>We finally consider the <span class="math inline">\(U(1)\)</span>
+transformation <span class="math inline">\(\phi\rightarrow
+e^{i\alpha}\phi\)</span> with <span
+class="math inline">\(\alpha\)</span> being a constant parameter, in
+this case, <span class="math inline">\(\delta\phi=i\alpha\phi\)</span>.
+Writing <span class="math inline">\(U=\exp(i\alpha Q)\)</span>, we
+have</p>
+<p><span class="math display">\[[Q,\phi]=\phi\]</span></p>
+<h3
+id="explict-representations-of-the-charges-and-the-charge-algebra">Explict
+Representations of the Charges and the Charge Algebra</h3>
+<p>The first strategy thet one can work out the algebra of the charges
+are the following steps:</p>
+<p><span class="math display">\[\rm{Field~ transformations}\Rightarrow
+\rm{currents}\Rightarrow\rm{charges~as~quantum~fields}\Rightarrow\rm{algebra}\]</span></p>
+<p>It consists of building a set of currents <span
+class="math inline">\(J_\mu^i\)</span> associated with the symmetry from
+which the corresponding charges are found by integrating over space
+thezeroth component of the currents:</p>
+<p><span
+class="math display">\[Q^i=\int\mathrm{d}^3xJ_0^i(\vec{x},t)\]</span></p>
+<p>It is important to note that in this approach, the charges (and the
+currents) are themselves quantum field operators. The algebra of the
+charges then can be found using the equal time commutation relations of
+the fields present in the theory.</p>
+<p>In the case of spacetime symmetries, there is a second explict
+representation of the charges available: as differential operators (not
+quantum field operators) acting on the fields. The differential operator
+representation of the charge is defined via</p>
+<p><span class="math display">\[\begin{aligned}
+    \phi(x&#39;)&amp;=\exp(\pm i\epsilon_i\hat{Q}_i)\phi(x)\\
+            &amp;\approx\phi(x)\pm i\epsilon_i\hat{Q}_i\phi(x)
+\end{aligned}\]</span></p>
+<p>We first consider <span class="math inline">\(U=\exp(-ia^\mu
+\hat{P}_\mu)\)</span>, we have <span
+class="math inline">\(\phi(x)+a^\mu\partial_\mu\phi(x)=\phi(x)-ia^\mu\hat{P}_\mu\phi(x)\)</span>,
+which leads to</p>
+<p><span class="math display">\[\hat{P}_\mu=i\partial_\mu\]</span></p>
+<p>For the differential operators <span
+class="math inline">\(\hat{M}_{\mu\nu}\)</span> on a scalar field, we
+have</p>
+<p><span
+class="math display">\[\phi(x&#39;)=\exp\left(\frac{i}{2}\omega^{\mu\nu}\hat{M}_{\mu\nu}\right)\phi\]</span></p>
+<p>we can prove that</p>
+<p><span
+class="math display">\[\hat{M}_{\mu\nu}=i(x_\mu\partial_\nu-x_\nu\partial_\mu)\]</span></p>
+<p>Finally, we can use the representations of the operators <span
+class="math inline">\(P^\mu\)</span> and <span
+class="math inline">\(M^{\mu\nu}\)</span> as differential operators to
+show that they obey the so-called Poincare algebra:</p>
+<p><span class="math display">\[\begin{aligned}
+    [P_\mu,P_\nu]&amp;=0\\
+    [M_{\mu\nu},P_\lambda]&amp;=i(\eta_{\nu\lambda}P_\mu-\eta_{\lambda\mu}P_{\nu})\\
+    [M_{\mu\nu},M_{\rho\sigma}]&amp;=i(\eta_{\nu\rho}M_{\mu\sigma}-\eta_{\nu\sigma}M_{\mu\rho}-\eta_{\mu\rho}M_{\nu\sigma}+\eta_{\mu\sigma}M_{\nu\rho})
+\end{aligned}\]</span></p>
+<h3 id="finding-the-algebra-without-the-explicit-charges">Finding the
+Algebra Without the Explicit Charges</h3>
+<p>In this section, all the charges have to be thought of as quantum
+field operators, not differential operators.</p>
+<p>We first consider two successive transformations applied to a field
+<span class="math inline">\(\phi\)</span>: the first transformation with
+parameters <span class="math inline">\(\alpha_i\)</span>, followed by
+the second tranformation with parameters <span
+class="math inline">\(\beta_j\)</span>. We have:</p>
+<p><span class="math display">\[\begin{aligned}
+    U_\beta U_\alpha\phi U_\alpha^\dagger
+U_\beta^\dagger&amp;=\exp(i\beta\cdot Q)\exp(i\alpha\cdot
+Q)\phi\exp(-i\alpha\cdot Q)\exp(-i\beta\cdot Q)\\
+    &amp;\approx \phi+i[\beta\cdot Q,\phi]+i[\alpha\cdot
+Q,\phi]-[\beta\cdot Q,[\alpha\cdot Q,\phi]]+\cdots
+\end{aligned}\]</span></p>
+<p>We write</p>
+<p><span class="math display">\[U_\beta U_\alpha\phi U_\alpha^\dagger
+U_\beta^\dagger=\delta_\beta\delta_\alpha\phi\]</span></p>
+<p>Consider</p>
+<p><span
+class="math display">\[\delta_\beta\delta_\alpha\phi-\delta_\alpha\delta_\beta\phi\]</span></p>
+<p>which is equal to</p>
+<p><span class="math display">\[U_\beta U_\alpha\phi U_\alpha^\dagger
+U_\beta^\dagger- U_\alpha U_\beta\phi  U_\beta^\dagger
+U_\alpha^\dagger\approx -[\beta\cdot Q,[\alpha\cdot
+Q,\phi]]+[\alpha\cdot Q,[\beta\cdot Q,\phi]]\]</span></p>
+<p>If we expand this out, being careful about the order of all the
+quantities involved, we find that half the terms cancel out, leaving</p>
+<p><span
+class="math display">\[\delta_\beta\delta_\alpha\phi-\delta_\alpha\delta_\beta\phi=[[\alpha\cdot
+Q,\beta\cdot Q],\phi]\]</span></p>
+<h3 id="the-susy-algebra">The SUSY Algebra</h3>
+<p>There is the two-component spinor <span
+class="math inline">\(\zeta\)</span> and its complex conjugate <span
+class="math inline">\(\zeta^*\)</span> for a total of four parameters.
+We therefore need four charges <span
+class="math inline">\(Q_1,Q_2,Q_1^\dagger,Q_2^\dagger\)</span>, which we
+can group into a Weyl spinor, that we will call <span
+class="math inline">\(Q\)</span>, and its hermitian conjugate <span
+class="math inline">\(Q^\dagger\)</span>. These SUSY charges are also
+referred to as supercharges.</p>
+<p>We choose to make <span class="math inline">\(Q\)</span> a
+left-chiral spinor, so we have</p>
+<p><span
+class="math display">\[Q\cdots\zeta=Q(-i\sigma^2)\zeta,~~\overline{Q}\cdot\overline{\zeta}=Q^\dagger
+i\sigma^2\zeta^*\]</span></p>
+<p>(recall that <span class="math inline">\(\zeta\)</span> is not a
+quantum field operator, so we write <span
+class="math inline">\(\zeta^{\dagger T}\)</span> simply as <span
+class="math inline">\(\zeta^*\)</span>).</p>
+<p>The unitary operator <span class="math inline">\(U\)</span>
+generating SUSY transformations therefore is given by</p>
+<p><span
+class="math display">\[U_\zeta=\exp(iQ\cdot\zeta+i\overline{Q}\cdot\overline{\zeta})\]</span></p>
+<p>We get</p>
+<p><span class="math display">\[\begin{aligned}
+    [Q\cdot\zeta+\overline{Q}\cdot\overline{\zeta},\phi]&amp;=-i\zeta\cdot\chi\\
+    [Q\cdot\zeta+\overline{Q}\cdot\overline{\zeta},\chi]&amp;=-i(\partial_\mu\phi)\sigma^\mu\sigma^2\zeta^*\\
+\end{aligned}\]</span></p>
+<p>which implies</p>
+<p><span class="math display">\[\begin{aligned}
+    [Q\cdot\zeta,\phi]&amp;=-i\zeta\cdot\chi\\
+    [\overline{Q}\cdot\overline{\zeta},\chi]&amp;=-i(\partial_\mu\phi)\sigma^\mu\sigma^2\zeta^*\\
+    [\overline{Q}\cdot\overline{\zeta},\phi]&amp;=[Q\cdot\zeta,\chi]=0
+\end{aligned}\]</span></p>
+<h2 id="applications-of-the-susy-algebra">Applications of the SUSY
+Algebra</h2>
+<h3
+id="classification-of-states-using-the-algebra-review-of-the-poincare-group">Classification
+of States Using the Algebra: Review of the Poincare Group</h3>
+<p>We first briefly review some basic representations og the Poincare
+group on one particle states.</p>
+<p>Casimir operator are operators that commute with all the generators
+of the group. These operators are of key importance in building
+representations because their eigenvalues can be used to classify the
+representations of the group. One Casimir operator of the Poincare group
+is the squared momentum generator <span class="math inline">\(P^\mu
+P_\mu\)</span>, and this obviously commutes with the momentum
+generators. The eigenvalue of <span class="math inline">\(P^\mu
+P_\mu\)</span> is <span class="math inline">\(m^2\)</span>, which is
+therefore one of the parameters used to classify one-particle
+states.</p>
+<p>The second Casimir operator is build out of the so-called
+Pauli-Lubanski operator <span class="math inline">\(W_\mu\)</span>,
+defined as</p>
+<p><span
+class="math display">\[W^\mu=\frac{1}{2}\epsilon^{\mu\nu\rho\sigma}M_{\rho\sigma}P_\nu\]</span></p>
+<p>where <span
+class="math inline">\(\epsilon^{\mu\nu\rho\sigma}\)</span> is the
+totally antisymmetric Levi-Civita symbol in four dimensions. We will use
+the normalization <span
+class="math inline">\(\epsilon_{0123}=1\)</span>, which implies <span
+class="math inline">\(\epsilon^{0123}=-1\)</span>. With this
+normalization, it’s clear that <span
+class="math inline">\(\epsilon^{0ijk}=-\epsilon^{ijk}\)</span>.</p>
+<p>Note that we have</p>
+<p><span class="math display">\[W^\mu
+P_\mu=\frac{1}{2}\epsilon^{\mu\nu\rho\sigma}M_{\rho\sigma}P_\nu
+P_\mu=0\]</span></p>
+<p>which is obvious beacuse <span class="math inline">\(P_\nu
+P_\mu\)</span> is symmetric. But it is not as obvious that <span
+class="math inline">\(P_\mu W^\mu\)</span> is also equal to zero, and we
+have <span class="math inline">\([P_\mu,W^\mu]=0\)</span>.</p>
+<p>With some effort, one can show that <span class="math inline">\(W^\mu
+W_\mu\)</span> also commutes with all the generators of the Poincare
+group, so it is our second Casimir operator.</p>
+<p>To uncover the physicial signification of the Pauli-Lubanski
+operator, consider first massive particles. In that case, we can choose
+to work in the rest frame of the particle, where its four-momentum is
+simply <span class="math inline">\(p^\mu=p_\mu=(m,\vec{0})\)</span>, so
+we have</p>
+<p><span
+class="math display">\[P_\mu|p\rangle=P_0|p\rangle=m|p\rangle\]</span></p>
+<p>Let us now apply the Pauli-Lubanski operator to this state</p>
+<p><span class="math display">\[\begin{aligned}
+    W^\mu|p\rangle&amp;=\frac{1}{2}\epsilon^{\mu\nu\rho\sigma}M_{\rho\sigma}P_\nu|p\rangle\\
+    &amp;=\frac{1}{2}\epsilon^{\mu
+0\rho\sigma}M_{\rho\sigma}P_0|p\rangle\\
+    &amp;=\frac{m}{2}\epsilon^{\mu 0\rho\sigma}M_{\rho\sigma}|p\rangle\\
+\end{aligned}\]</span></p>
+<p>We can essily see that</p>
+<p><span class="math display">\[W^0|p\rangle=0\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\begin{aligned}
+    W^i|p\rangle&amp;=\frac{m}{2}\epsilon^{i0jk}M_{jk}|p\rangle\\
+    &amp;=-\frac{m}{2}\epsilon^{0ijk}M_{jk}|p\rangle\\
+    &amp;=\frac{m}{2}\epsilon^{ijk}M_{jk}|p\rangle\\
+\end{aligned}\]</span></p>
+<p>It turns out that the operator <span
+class="math inline">\(frac{1}{2}\epsilon^{ijk}M_{jk}\)</span> is simply
+the total angular momentum of the particle, i.e.,</p>
+<p><span
+class="math display">\[\frac{1}{2}\epsilon^{ijk}M_{jk}=L^i+S^i\]</span></p>
+<p>We therefore have</p>
+<p><span
+class="math display">\[W^i|p\rangle=m(S^i+L^i)|p\rangle\]</span></p>
+<p>which, in the rest frame, reduced to</p>
+<p><span class="math display">\[W^i|p\rangle=mS^i|p\rangle\]</span></p>
+<p>So the Casimir operator <span class="math inline">\(W_\mu
+W^\mu\)</span> acting on this state gives</p>
+<p><span class="math display">\[W_\mu W^\mu|p\rangle=W^0
+W^0|p\rangle-W^iW^i|p\rangle=-m^2\vec{S}^2|p\rangle=-m^2s(s+1)|p\rangle\]</span></p>
+<p>We now see that the second porperty that can be used to specify the
+masssive representation of the Lorentz group is the spin (or total
+angular momentum, if we are not working in the rest frame).</p>
+<p>To classify all these possible states of a massive particle at rest,
+we need a complete set of commuting observables. In addition to the
+four-momentum squared (whose eigenvalue is <span
+class="math inline">\(m^2\)</span>) and the square of the spin, we also
+may use the component of the spin along the z axis, <span
+class="math inline">\(S_z\)</span>, because this operator obviously
+commutes with <span class="math inline">\(P_\mu P^\mu\)</span> and with
+<span class="math inline">\(\vec{S}^2\)</span>. Note that</p>
+<p><span class="math display">\[W^3=m(L_z+S_z)\]</span></p>
+<p>which, in the rest frame of the particle, reduces to <span
+class="math inline">\(W^3=mS_z\)</span>.</p>
+<p>Therefore, massive states are labeled in their rest frame by three
+quantum numbers: <span class="math inline">\(p,s,s_z\)</span>, with</p>
+<p><span class="math display">\[\begin{aligned}
+    P^\mu|p,s,s_z\rangle&amp;=m|p,s,s_z\rangle\\
+    W_\mu W^\mu|p,s,s_z\rangle&amp;=-m^2\vec{S}^2|p,s,s_z\rangle\\
+    &amp;=-m^2s(s+1)|p,s,s_z\rangle\\
+    \frac{W^3}{m}|p,s,s_z\rangle&amp;=S_z|p,s,s_z\rangle=s_z|p,s,s_z\rangle
+\end{aligned}\]</span></p>
+<p>As we know from quantum mechanics, <span
+class="math inline">\(s_z\)</span> may take <span
+class="math inline">\(2s+1\)</span> values, ranging from <span
+class="math inline">\(-s\)</span> to <span
+class="math inline">\(+s\)</span> in integer steps.</p>
+<p>Now consider massless particles. In this case, we cannot go to the
+rest frame of the particle, but we may choose to work in a frame where
+the four-momentum is given by</p>
+<p><span class="math display">\[p^\mu=(E,0,0,E)\]</span></p>
+<p>We will denote the corresponding stste by <span
+class="math inline">\(|p\rangle_0\)</span>. We then have</p>
+<p><span class="math display">\[\begin{aligned}
+    P^\mu|p\rangle_0&amp;=(P^0,P^1,P^2,P^3)|p\rangle_0\\
+                    &amp;=(E,0,0,E)|p\rangle_0
+\end{aligned}\]</span></p>
+<p>or</p>
+<p><span class="math display">\[\begin{aligned}
+    &amp;P^1|p\rangle_0=P^2|p\rangle_0=0\\
+    &amp;P^0|p\rangle_0=P^3|p\rangle_0=E|p\rangle_0
+\end{aligned}\]</span></p>
+<p>We can write <span
+class="math inline">\(P^\mu|p\rangle_0=(P^3,0,0,P^3)|p\rangle_0\)</span>.</p>
+<p>It turns out that like <span class="math inline">\(P^\mu P_\mu, W^\mu
+W_\mu\)</span> gives zero when acting on a massless one-particle state.
+The proof can be found in Wigner’s original paper. The fact that <span
+class="math inline">\(W^\mu W_\mu\)</span> gives zero when applied to a
+one-particle massless state, together with <span
+class="math inline">\(W^\mu P_\mu=0\)</span>, implies that when acting
+on such a state, the operator <span class="math inline">\(W^\mu\)</span>
+is proportional to the four-momentum operator</p>
+<p><span
+class="math display">\[W^\mu|p\rangle_0=hP^\mu|p\rangle_0\]</span></p>
+<p>Now we prove this, consider</p>
+<p><span class="math display">\[\begin{aligned}
+    W^\mu
+P_\mu|p\rangle_0&amp;=(W^0P^0-W^1P^1-W^2P^2-W^3P^3)|p\rangle_0\\
+    &amp;=(W^0P^0-W^3P^3)|p\rangle_0\\
+    &amp;=E(W^0-W^3)|p\rangle_0=0
+\end{aligned}\]</span></p>
+<p>so we conclude that</p>
+<p><span
+class="math display">\[W^0|p\rangle_0=W^3|p\rangle_0\]</span></p>
+<p>Using this we have</p>
+<p><span class="math display">\[\begin{aligned}
+    W^\mu W_\mu&amp;=(W^0W_0-W^1W_1-W^2W_2-W^3W_3)|p\rangle_0\\
+               &amp;=-(W^1W_1+W^2W_2)|p\rangle_0=0
+\end{aligned}\]</span></p>
+<p>so we obtain</p>
+<p><span
+class="math display">\[W^1|p\rangle_0=W^2|p\rangle_0=0\]</span></p>
+<p>Therefore, when acting on the state, the action of the operator <span
+class="math inline">\(W^\mu\)</span> reduces to</p>
+<p><span
+class="math display">\[W^\mu|p\rangle_0=(W^3,0,0,W^3)|p\rangle_0\]</span></p>
+<p>From <span class="math inline">\([P_\mu,W^\mu]=0\)</span> we know
+that <span class="math inline">\(W^3\)</span> commutes with <span
+class="math inline">\(P^3\)</span>, so we may take <span
+class="math inline">\(|p\rangle_0\)</span> to be a common eigenstate of
+these two operators. This implise that we may write</p>
+<p><span
+class="math display">\[W^3|p\rangle_0=hP^3|p\rangle_0\]</span></p>
+<p>Using <span
+class="math inline">\(P^\mu|p\rangle_0=(P^3,0,0,P^3)|p\rangle_0\)</span>
+and <span
+class="math inline">\(W^\mu|p\rangle_0=(W^3,0,0,W^3)|p\rangle_0\)</span>
+we can conclude that</p>
+<p><span
+class="math display">\[W^\mu|p\rangle_0=hP^\mu|p\rangle_0\]</span></p>
+<p>as we had set out to prove.</p>
+<p>To find out what the constant <span class="math inline">\(h\)</span>
+represents, we consider</p>
+<p><span class="math display">\[\begin{aligned}
+    W^\mu|p\rangle_0&amp;=(hE,0,0,hE)|p\rangle_0\\
+    \Leftrightarrow ~~~~~~~~~~~~~W^3|p\rangle_0&amp;=hE|p\rangle_0\\
+    \Leftrightarrow E(S_z+L_z)|p\rangle_0&amp;=hE|p\rangle_0\\
+    \Leftrightarrow ~~~~~~~~~~~~Es_z|p\rangle_0&amp;=hE|p\rangle_0\\
+    \Leftrightarrow ~~~~~~~~~~~~~~~~~~~~~~~h&amp;=s_z
+\end{aligned}\]</span></p>
+<p>Since our state has its momentum along the z direction, we may
+write</p>
+<p><span class="math display">\[h=\vec{s}\cdot\hat{p}\]</span></p>
+<p>which is nothing other than the helicity of the perticle.</p>
+<p>So massless representations of the Lorentz group are therefore
+completely specified by only two numbers: their energy (which then
+specifies their four-momentum) and their helicity <span
+class="math inline">\(h\)</span>. The reason we don’t have <span
+class="math inline">\(2s+1\)</span> states lies in <span
+class="math inline">\(W^1|p\rangle_0=W^2|p\rangle_0=0\)</span>, which
+reveals that we do not have any ladder operators to change the z
+component of the spin. Therefore, there is only one spin state.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%90%86%E8%AE%BA%E7%89%A9%E7%90%86/" rel="tag"># 理论物理</a>
+              <a href="/tags/%E8%B6%85%E5%AF%B9%E7%A7%B0/" rel="tag"># 超对称</a>
+              <a href="/tags/SUSY/" rel="tag"># SUSY</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%BA%8C%E7%AB%A0/" rel="prev" title="第二章:Verilog HDL基础知识">
+                  <i class="fa fa-angle-left"></i> 第二章:Verilog HDL基础知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/VMware/" rel="next" title="VMware">
+                  VMware <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">SiyuanLei</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

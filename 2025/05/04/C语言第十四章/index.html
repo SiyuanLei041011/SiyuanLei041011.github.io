@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="为什么计算机使用二进制数 人类的计数方式通常是“逢十进一”，称为十进制（Decimal），大概因为人有十个手指，所以十进制是最自然的计数方式，很多民族的语言文字中都有十个数字，而阿拉伯数字0~9是目前最广泛采用的。 计算机是用数字电路搭成的，数字电路中只有1和0两种状态，或者可以说计算机只有两个手指，所以对计算机来说二进制（Binary）是最自然的计数方式。根据“逢二进一”的原则，十进制的1、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言:计算机中数的表示">
+<meta property="og:url" content="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0/index.html">
+<meta property="og:site_name" content="SiyuanLei&#39;s Blog">
+<meta property="og:description" content="为什么计算机使用二进制数 人类的计数方式通常是“逢十进一”，称为十进制（Decimal），大概因为人有十个手指，所以十进制是最自然的计数方式，很多民族的语言文字中都有十个数字，而阿拉伯数字0~9是目前最广泛采用的。 计算机是用数字电路搭成的，数字电路中只有1和0两种状态，或者可以说计算机只有两个手指，所以对计算机来说二进制（Binary）是最自然的计数方式。根据“逢二进一”的原则，十进制的1、">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-08T11:54:02.359Z">
+<meta property="article:author" content="SiyuanLei">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0/","path":"2025/05/04/C语言第十四章/","title":"C语言:计算机中数的表示"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C语言:计算机中数的表示 | SiyuanLei's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SiyuanLei's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%BF%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">为什么计算机使用二进制数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%BF%9B%E5%88%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E6%8D%A2%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">不同进制之间的换算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E7%9A%84%E5%8A%A0%E5%87%8F%E8%BF%90%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text">整数的加减运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sign-and-magnitude%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">Sign and Magnitude表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#s-complement%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">1’s Complement表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#s-complement%E8%A1%A8%E7%A4%BA%E6%B3%95-1"><span class="nav-number">3.3.</span> <span class="nav-text">2’s Complement表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">有符号数和无符号数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">浮点数</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SiyuanLei"
+      src="/images/femboy.jpg">
+  <p class="site-author-name" itemprop="name">SiyuanLei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SiyuanLei041011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SiyuanLei041011" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:SiyuanLei041011@gmail.com" title="E-Mail → mailto:SiyuanLei041011@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Esther041011" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Esther041011" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://arxiv.org/" title="https:&#x2F;&#x2F;arxiv.org&#x2F;" rel="noopener" target="_blank">Arxiv</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://libgen.onl/library-genesis/" title="https:&#x2F;&#x2F;libgen.onl&#x2F;library-genesis&#x2F;" rel="noopener" target="_blank">LibGen</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://down.wlwkw.cn:8888/" title="http:&#x2F;&#x2F;down.wlwkw.cn:8888&#x2F;" rel="noopener" target="_blank">EBook</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C语言:计算机中数的表示 | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言:计算机中数的表示
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-08 19:54:02" itemprop="dateModified" datetime="2025-08-08T19:54:02+08:00">2025-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="为什么计算机使用二进制数">为什么计算机使用二进制数</h2>
+<p>人类的计数方式通常是“逢十进一”，称为十进制（Decimal），大概因为人有十个手指，所以十进制是最自然的计数方式，很多民族的语言文字中都有十个数字，而阿拉伯数字0~9是目前最广泛采用的。</p>
+<p>计算机是用数字电路搭成的，数字电路中只有1和0两种状态，或者可以说计算机只有两个手指，所以对计算机来说二进制（Binary）是最自然的计数方式。根据“逢二进一”的原则，十进制的1、2、3、4分别对应二进制的1、10、11、100。二进制的一位数字称为一个位（Bit），三个bit能够表示的最大的二进制数是111，也就是十进制的7。不管用哪种计数方式，数的大小并没有变，十进制的1+1等于2，二进制的1+1等于10，二进制的10和十进制的2大小是相等的。</p>
+<h2 id="不同进制之间的换算">不同进制之间的换算</h2>
+<p>在十进制中，个位的1代表100=1，十位的1代表101=10，百位的1代表102=100，所以</p>
+<p>123=1×102+2×101+3×100</p>
+<p>同样道理，在二进制中，个位的1代表20=1，十位的1代表21=2，百位的1代表22=4，所以</p>
+<p>(A3A2A1A0)2=A3×23+A2×22+A1×21+A0×20</p>
+<p>如果二进制和十进制数出现在同一个等式中，为了区别我们用(A3A2A1A0)2这种形式表示A3A2A1A0是二进制数，每个数字只能是0或1，其它没有套括号加下标的数仍表示十进制数。对于(A3A2A1A0)2这样一个二进制数，最左边的A3位称为最高位（MSB，Most
+Significant Bit），最右边的A0位称为最低位（LSB，Least Significant
+Bit）。以后我们遵循这样的惯例：LSB称为第0位而不是第1位，所以如果一个数是32位的，则MSB是第31位。上式就是从二进制到十进制的换算公式。作为练习，请读者算一下(1011)2和(1111)2换算成十进制分别是多少。</p>
+<p>下面来看十进制怎么换算成二进制。我们知道</p>
+<p>13=1×23+1×22+0×21+1×20</p>
+<p>所以13换算成二进制应该是(1101)2。问题是怎么把13分解成等号右边的形式呢？注意到等号右边可以写成</p>
+<p>13=(((0×2+13)×2+12)×2+01)×2+10</p>
+<p>我们将13反复除以2取余数就可以提取出上式中的1101四个数字，为了让读者更容易看清楚是哪个1和哪个0，上式和下式中对应的数字都加了下标：</p>
+<p>13÷2=6…10 6÷2=3…01 3÷2=1…12 1÷2=0…13</p>
+<p>把这四步得到的余数按相反的顺序排列就是13的二进制表示，因此这种方法称为除二反序取余法。</p>
+<p>计算机用二进制表示数，程序员也必须习惯使用二进制，但二进制写起来太啰嗦了，所以通常将二进制数分成每三位一组或者每四位一组，每组用一个数字表示。比如把(10110010)2从最低位开始每三位分成一组，10、110、010，然后把每组写成一个十进制数字，就是(262)8，这样每一位数字的取值范围是0<sub>7，逢八进一，称为八进制（Octal）。类似地，把(10110010)2分成每四位一组，1011、0010，然后把每组写成一个数字，这个数的低位是2，高位已经大于9了，我们规定用字母A</sub>F表示10<sub>15，这个数可以写成(B2)16，每一位数字的取值范围是0</sub>F，逢十六进一，称为十六进制（Hexadecimal）。所以，八进制和十六进制是程序员为了书写二进制方便而发明的简便写法，好比草书和正楷的关系一样。</p>
+<h2 id="整数的加减运算">整数的加减运算</h2>
+<p>我们已经了解了计算机中正整数如何表示，加法如何计算，那么负数如何表示，减法又如何计算呢？本节讨论这些问题。为了书写方便，本节举的例子都用8个bit表示一个数，实际计算机做整数加减运算的操作数可以是8位、16位、32位甚至64位的。</p>
+<h3 id="sign-and-magnitude表示法">Sign and Magnitude表示法</h3>
+<p>要用8个bit表示正数和负数，一种简单的想法是把最高位规定为符号位（Sign
+Bit），0表示正1表示负，剩下的7位表示绝对值的大小，这称为Sign and
+Magnitude表示法。例如-1表示成10000001，+1表示成00000001。这样用8个bit表示整数的取值范围是-27-1<sub>27-1，即-127</sub>127。</p>
+<p>采用这种表示法，计算机做加法运算需要处理以下逻辑：</p>
+<p>如果两数符号位相同，就把它们的低7位相加，符号位不变。如果低7位相加时在最高位产生进位，说明结果的绝对值大于127，超出7位所能表示的数值范围，这称为溢出（Overflow）[24]，这时通常把计算机中的一个标志位置1表示当前运算产生了溢出。</p>
+<p>如果两数符号位不同，首先比较它们的低7位谁大，然后用大数减小数，结果的符号位和大数相同。</p>
+<p>那么减法如何计算呢？由于我们规定了负数的表示，可以把减法转换成加法来计算，要计算a-b，可以先把b变号然后和a相加，相当于计算a+(-b)。但如果两个加数的符号位不同就要用大数的绝对值减小数的绝对值，这一步减法计算仍然是免不了的。我们知道加法要进位，减法要借位，计算过程是不同的，所以除了要有第
+1 节
+“为什么计算机用二进制计数”提到的加法器电路之外，还要另外有一套减法器电路。</p>
+<p>如果采用Sign and
+Magnitude表示法，计算机做加减运算需要处理很多逻辑：比较符号位，比较绝对值，加法改减法，减法改加法，小数减大数改成大数减小数……这是非常低效率的。还有一个缺点是0的表示不唯一，既可以表示成10000000也可以表示成00000000，这进一步增加了逻辑的复杂性，所以我们迫切需要重新设计整数的表示方法使计算过程更简单。</p>
+<h3 id="s-complement表示法">1’s Complement表示法</h3>
+<p>本节介绍一种二进制补码表示法，为了便于理解，我们先看一个十进制的例子：</p>
+<p>167-52=167+(-52)=167+(999-52)-1000+1=167+947-1000+1=1114-1000+1=114+1=115
+167-52 → 减法转换成加法 167+(-52) → 负数取9的补码表示 167+947 → 114进1 →
+高位进的1加到低位上去，结果为115</p>
+<p>在这个例子中我们用三位十进制数字表示正数和负数，具体规定如下：</p>
+<p>9’s Complement表示法</p>
+<table>
+<thead>
+<tr>
+<th>数值</th>
+<th>补码表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-499</td>
+<td>500</td>
+</tr>
+<tr>
+<td>-498</td>
+<td>501</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>998</td>
+</tr>
+<tr>
+<td>0</td>
+<td>999</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>498</td>
+<td>498</td>
+</tr>
+<tr>
+<td>499</td>
+<td>499</td>
+</tr>
+</tbody>
+</table>
+<p>首先-52要用999-52表示，就是947，这称为取9的补码（9’s
+Complement）；然后把167和947相加，得到114进1；再把高位进的1加到低位上去，得115，本来应该加1000，结果加了1，少加了999，正好把先前取9的补码多加的999抵消掉了。我们本来要做167-52的减法运算，结果变成做999-52的减法运算，后者显然要容易一些，因为没有借位。这种补码表示法的计算规则用一句话概括就是：负数用9的补码表示，减法转换成加法，计算结果的最高位如果有进位则要加回到最低位上去。要验证这条规则得考虑四种情况：</p>
+<p>两个正数，相加得正</p>
+<p>一正一负，相加得正</p>
+<p>一正一负，相加得负</p>
+<p>两个负数，相加得负</p>
+<p>我们举的例子验证了第二种情况，另外三种情况请读者自己验证，暂时不考虑溢出的问题，稍后会讲到如何判定溢出。</p>
+<p>上述规则也适用于二进制：负数用1的补码（1’s
+Complement）表示，减法转换成加法，计算结果的最高位如果有进位则要加回到最低位上去。取1的补码更简单，连减法都不用做，因为1-1=0，1-0=1，取1的补码就是把每个bit取反，所以1的补码也称为反码。比如：</p>
+<p>00001000-00000100 → 00001000+(-00000100) → 00001000+11111011 →
+00000011进1 → 高位进的1加到低位上去，结果为00000100</p>
+<p>1’s Complement表示法相对于Sign and
+Magnitude表示法的优势是非常明显的：不需要把符号和绝对值分开考虑，正数和负数的加法都一样算，计算逻辑更简单，甚至连减法器电路都省了，只要有一套加法器电路，再有一套把每个bit取反的电路，就可以做加法和减法运算。如果8个bit采用1’s
+Complement表示法，负数的取值范围是从10000000到11111111（-127<sub>0），正数是从00000000到01111111（0</sub>127），仍然可以根据最高位判断一个数是正是负。美中不足的是0的表示仍然不唯一，既可以表示成11111111也可以表示成00000000，为了解决这最后一个问题，我们引入2’s
+Complement表示法。</p>
+<h3 id="s-complement表示法-1">2’s Complement表示法</h3>
+<p>2’s
+Complement表示法规定：正数不变，负数先取反码再加1。如果8个bit采用2’s
+Complement表示法，负数的取值范围是从10000000到11111111（-128<sub>-1），正数是从00000000到01111111（0</sub>127），也可以根据最高位判断一个数是正是负，并且0的表示是唯一的，目前绝大多数计算机都采用这种表示法。为什么称为“2的补码”呢？因为对一位二进制数b取补码就是1-b+1=10-b，相当于从2里面减去b。类似地，要表示-4需要对00000100取补码，11111111-00000100+1=100000000-00000100，相当于从28里面减去4。2’s
+Complement表示法的计算规则有些不同：减法转换成加法，忽略计算结果最高位的进位，不必加回到最低位上去。请读者自己验证上一节提到的四种情况下这条规则都能算出正确结果。</p>
+<p>8个bit采用2’s
+Complement表示法的取值范围是-128~127，如果计算结果超出这个范围就会产生溢出，例如：</p>
+<p>10000010(-126)+11111000(-8)=01111010(122)</p>
+<p>如何判断产生了溢出呢？我们还是分四种情况讨论：如果两个正数相加溢出，结果一定是负数；如果两个负数相加溢出，结果一定是正数；一正一负相加，无论结果是正是负都不可能溢出。在相加过程中最高位产生的进位和次高位产生的进位如果相同则没有溢出，如果不同则表示有溢出。逻辑电路的实现可以把这两个进位连接到一个异或门，把异或门的输出连接到溢出标志位。</p>
+<h3 id="有符号数和无符号数">有符号数和无符号数</h3>
+<p>前面几节我们用8个bit表示正数和负数，讲了三种表示法，每种表示法对应一种计算规则，这称为有符号数（Signed
+Number）；如果8个bit全部表示正数则取值范围是0~255，这称为无符号数（Unsigned
+Number）。其实计算机做加法时并不区分操作数是有符号数还是无符号数，计算过程都一样，比如上面的例子也可以看作无符号数的加法：</p>
+<p>10000010(130)+11111000(248)=01111010(122+256)</p>
+<p>如果把这两个操作数看作有符号数-126和-8相加，计算结果是错的，因为产生了溢出；但如果看作无符号数130和248相加，计算结果是122进1，也就是122+256，这个结果是对的。计算机的加法器在做完计算之后，根据最高位产生的进位设置进位标志，同时根据最高位和次高位产生的进位的异或设置溢出标志。至于这个加法到底是有符号数加法还是无符号数加法则取决于程序怎么理解了，如果程序把它理解成有符号数加法，下一步就要检查溢出标志，如果程序把它理解成无符号数加法，下一步就要检查进位标志。通常计算机在做算术运算之后还可能设置另外两个标志，如果计算结果的所有bit都是零则设置零标志，如果计算结果的最高位是1则设置负数标志，如果程序把计算结果理解成有符号数，也可以检查负数标志判断结果是正是负。</p>
+<h2 id="浮点数">浮点数</h2>
+<p>浮点数在计算机中的表示是基于科学计数法（Scientific
+Notation）的，我们知道32767这个数用科学计数法可以写成3.2767×104，3.2767称为尾数（Mantissa，或者叫Significand），4称为指数（Exponent）。浮点数在计算机中的表示与此类似，只不过基数（Radix）是2而不是10。下面我们用一个简单的模型来解释浮点数的基本概念。我们的模型由三部分组成：符号位、指数部分（表示2的多少次方）和尾数部分（小数点前面是0，尾数部分只表示小数点后的数字）。</p>
+<p>一种浮点数格式</p>
+<table>
+<thead>
+<tr>
+<th>1 bit</th>
+<th>5 bits</th>
+<th>8 bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sign bit</td>
+<td>exponent</td>
+<td>significand</td>
+</tr>
+</tbody>
+</table>
+<p>如果要表示17这个数，我们知道17=17.0×100=0.17×102，类似地，17=(10001)2×20=(0.10001)2×25，把尾数的有效数字全部移到小数点后，这样就可以表示为：</p>
+<p>17的浮点数表示</p>
+<table>
+<thead>
+<tr>
+<th>sign bit</th>
+<th>exponent</th>
+<th>significand</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>00101</td>
+<td>10001000</td>
+</tr>
+</tbody>
+</table>
+<p>如果我们要表示0.25就遇到新的困难了，因为0.25=1×2-2=(0.1)2×2-1，而我们的模型中指数部分没有规定如何表示负数。我们可以在指数部分规定一个符号位，然而更广泛采用的办法是使用偏移的指数（Biased
+Exponent）。规定一个偏移值，比如16，实际的指数要加上这个偏移值再填写到指数部分，这样比16大的就表示正指数，比16小的就表示负指数。要表示0.25，指数部分应该填16-1=15：</p>
+<p>0.25的偏移指数浮点数表示</p>
+<table>
+<thead>
+<tr>
+<th>sign bit</th>
+<th>biased exponent</th>
+<th>significand</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>01111</td>
+<td>10000000</td>
+</tr>
+</tbody>
+</table>
+<p>现在还有一个问题需要解决：每个浮点数的表示都不唯一，例如17=(0.10001)2×25=(0.010001)2×26，这样给计算机处理增加了复杂性。为了解决这个问题，我们规定尾数部分的最高位必须是1，也就是说尾数必须以0.1开头，对指数做相应的调整，这称为正规化（Normalize）。由于尾数部分的最高位必须是1，这个1就不必保存了，可以节省出一位来用于提高精度，我们说最高位的1是隐含的（Implied）。这样17就只有一种表示方法了，指数部分应该是16+5=21=(10101)2，尾数部分去掉最高位的1是0001：</p>
+<p>17的正规化尾数浮点数表示</p>
+<table>
+<thead>
+<tr>
+<th>sign bit</th>
+<th>biased exponent</th>
+<th>normalized significand</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10101</td>
+<td>00010000</td>
+</tr>
+</tbody>
+</table>
+<p>两个浮点数相加，首先把小数点对齐然后相加：</p>
+<table>
+<thead>
+<tr>
+<th>sign bit</th>
+<th>biased exponent</th>
+<th>normalized significand</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10010</td>
+<td>10010000</td>
+<td>+</td>
+</tr>
+<tr>
+<td>0</td>
+<td>10000</td>
+<td>00110110</td>
+<td>=</td>
+</tr>
+<tr>
+<td>0</td>
+<td>10010</td>
+<td>11011101</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>11.0010000+0.100110110=11.101110110</p>
+<p>由于浮点数表示的精度有限，计算结果末尾的10两位被舍去了。做浮点运算时要注意精度损失（Significance
+Loss）问题，有时计算顺序不同也会导致不同的结果，比如11.0010000+0.00000001+0.00000001=11.0010000+0.00000001=11.0010000，后面加的两个很小的数全被舍去了，没有对计算结果产生任何影响，但如果调一下计算顺序它们就能影响到计算结果了，0.00000001+0.00000001+11.0010000=0.00000010+11.0010000=11.0010001。再比如128.25=(10000000.01)2，需要10个有效位，而我们的模型中尾数部分是8位，算上隐含的最高位1一共有9个有效位，那么128.25的浮点数表示只能舍去末尾的1，表示成(10000000.0)2，其实跟128相等了。在第
+2 节
+“if/else语句”讲过浮点数不能做精确比较，现在读者应该知道为什么不能精确比较了。</p>
+<p>整数运算会产生溢出，浮点运算也会产生溢出，浮点运算的溢出也分上溢和下溢两种，但和整数运算的定义不同。假设整数采用8位2’s
+Complement表示法，取值范围是-128<sub>127，如果计算结果是-130则称为下溢，计算结果是130则称为上溢。假设按本节介绍的浮点数表示法，取值范围是-(0.111111111)2×215</sub>(0.111111111)2×215，如果计算结果超出这个范围则称为上溢；如果计算结果未超出这个范围但绝对值太小了，在-(0.1)2×2-16~(0.1)2×2-16之间，那么也同样无法表示，称为下溢。</p>
+<p>浮点数是一个相当复杂的话题，不同平台的浮点数表示和浮点运算也有较大差异，本节只是通过这个简单的模型介绍一些基本概念而不深入讨论，理解了这些基本概念有助于你理解浮点数标准，目前业界广泛采用的符点数标准是由IEEE（Institute
+of Electrical and Electronics Engineers）制定的IEEE 754。</p>
+<p>最后讨论一个细节问题。我们知道，定义全局变量时如果没有Initializer就用0初始化，定义数组时如果Initializer中提供的元素不够那么剩下的元素也用0初始化。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i;</span><br><span class="line"><span class="type">double</span> d;</span><br><span class="line"><span class="type">double</span> a[<span class="number">10</span>] = &#123; <span class="number">1.0</span> &#125;;</span><br></pre></td></tr></table></figure>
+<p>“用<code>0</code>初始化”的意思是变量<code>i</code>、变量<code>d</code>和数组元素<code>a[1]~a[9]</code>的所有字节都用<code>0</code>填充，或者说所有bit都是0。无论是用Sign
+and Magnitude表示法、1’s Complement表示法还是2’s
+Complement表示法，一个整数的所有bit是0都表示0值，但一个浮点数的所有bit是0一定表示0值吗？严格来说不一定，某种平台可能会规定一个浮点数的所有bit是0并不表示0值，但[C99
+Rationale]第6.7.8节的条款25提到：As far as the committee knows, all
+machines treat all bits zero as a representation of floating-point zero.
+But, all bits zero might not be the canonical representation of zero.
+因此在绝大多数平台上，一个浮点数的所有bit是0就表示0值。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/" rel="prev" title="C语言:分支语句">
+                  <i class="fa fa-angle-left"></i> C语言:分支语句
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/" rel="next" title="C语言:数据类型">
+                  C语言:数据类型 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">SiyuanLei</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
