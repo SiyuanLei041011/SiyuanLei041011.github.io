@@ -19,18 +19,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="实验环境搭建 在VMware中安装完Ubuntu Linux 20.04 系统后,打开终端,可以通过如下命令安装需要的软件包: 123456$sudo apt update -y[sudo] siyuanlei 的密码： 123456$sudo apt install net-tools libncurses5-dev libssl-dev build-essential openssl qemu">
+    <meta name="description" content="实验环境搭建 在VMware中安装完Ubuntu Linux 20.04 系统后,打开终端,可以通过如下命令安装需要的软件包: 123456$sudo apt update -y[sudo] siyuanlei 的密码： 123456$sudo apt install net-tools libncurses5-dev libssl-dev build-essential openssl q">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RISC-V体系结构编程与实践">
 <meta property="og:url" content="http://example.com/2025/05/04/RISC-V%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%BC%96%E7%A8%8B%E4%B8%8E%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="实验环境搭建 在VMware中安装完Ubuntu Linux 20.04 系统后,打开终端,可以通过如下命令安装需要的软件包: 123456$sudo apt update -y[sudo] siyuanlei 的密码： 123456$sudo apt install net-tools libncurses5-dev libssl-dev build-essential openssl qemu">
+<meta property="og:description" content="实验环境搭建 在VMware中安装完Ubuntu Linux 20.04 系统后,打开终端,可以通过如下命令安装需要的软件包: 123456$sudo apt update -y[sudo] siyuanlei 的密码： 123456$sudo apt install net-tools libncurses5-dev libssl-dev build-essential openssl q">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
 <meta property="article:modified_time" content="2025-08-08T05:16:24.575Z">
 <meta property="article:author" content="SiyuanLei">
-<meta property="article:tag" content="RISC-V">
 <meta property="article:tag" content="Linux">
+<meta property="article:tag" content="RISC-V">
 <meta property="article:tag" content="VMware">
 <meta property="article:tag" content="ISA">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">实验环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C2-1-%E8%BE%93%E5%87%BA-Welcome-to-RISC-V"><span class="nav-number">1.1.</span> <span class="nav-text">实验2-1:输出&quot;Welcome to RISC-V!&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C2-2-%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95BenOS%E5%92%8CMySBI"><span class="nav-number">1.2.</span> <span class="nav-text">实验2-2:单步调试BenOS和MySBI</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">实验环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C2-1%E8%BE%93%E5%87%BAwelcome-to-risc-v"><span class="nav-number">1.1.</span> <span class="nav-text">实验2-1:输出”Welcome to
+RISC-V!”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C2-2%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95benos%E5%92%8Cmysbi"><span class="nav-number">1.2.</span> <span class="nav-text">实验2-2:单步调试BenOS和MySBI</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -281,17 +282,19 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="实验环境搭建">实验环境搭建</h2>
-<p>在VMware中安装完Ubuntu Linux 20.04 系统后,打开终端,可以通过如下命令安装需要的软件包:</p>
+<p>在VMware中安装完Ubuntu Linux 20.04
+系统后,打开终端,可以通过如下命令安装需要的软件包:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash"><span class="built_in">sudo</span> apt update -y</span></span><br><span class="line"></span><br><span class="line">[sudo] siyuanlei 的密码： 123456</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash"><span class="built_in">sudo</span> apt install net-tools libncurses5-dev libssl-dev build-essential openssl qemu-system-misc libncurses5-dev gcc-riscv64-linux-gnu git bison flex bc vim universal-ctags cscope gdb-multiarch libsdl2-dev libreadline-dev</span></span><br></pre></td></tr></table></figure>
 <p>我们再克隆GitHub上的<code>runninglinuxkernel/riscv_ programming_ practice</code>仓库到当前目录下,在Linux系统中,使用<code>git clone</code>命令克隆的GitHub仓库默认会保存在当前工作目录下具体位置取决于你执行命令时所在的目录:</p>
-<ol>
+<ol type="1">
 <li>默认存储位置:如果你没有切换目录就直接执行<code>git clone</code>,仓库会保存在当前用户的主目录(/home/你的用户名/),例如：/home/ubuntu/riscv_programming_practice/</li>
 <li>如果你先切换了目录再执行克隆,仓库会保存在你切换后的目录,例如:</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp  # 先切换到 /tmp 目录</span><br><span class="line">git clone https://github.com/xxx/yyy.git  # 仓库会保存在 /tmp/yyy/</span><br></pre></td></tr></table></figure>
 <p>下面我们进行克隆</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Git</span></span><br><span class="line">sudo apt update &amp;&amp; sudo apt install git -y</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">克隆仓库</span></span><br><span class="line">git clone https://github.com/runninglinuxkernel/riscv_programming_practice.git</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入 chapter2</span></span><br><span class="line">cd riscv_programming_practice/chapter2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看目录内容（验证）</span></span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-<h3 id="实验2-1-输出-Welcome-to-RISC-V">实验2-1:输出&quot;Welcome to RISC-V!&quot;</h3>
+<h3 id="实验2-1输出welcome-to-risc-v">实验2-1:输出”Welcome to
+RISC-V!”</h3>
 <p>在Linux主机中安装相关工具</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash"><span class="built_in">sudo</span> apt-get install qemu-system-misc libncurses5-dev gcc-riscv64-linux-gnu build-essential git bison flex libssl-dev</span></span><br></pre></td></tr></table></figure>
 <p>下面我们在QEMU上运行BenOS</p>
@@ -300,8 +303,9 @@
 <p>想要编译可以在QEMU模拟器上运行的可执行二进制文件,需要先设置<code>board=qemu</code>.</p>
 <p>直接输入<code>make run</code>命令并运行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rlk@master:benos$ make run</span><br></pre></td></tr></table></figure>
-<p>我们可以看到QEMU输出&quot;Welcome RISC-V!&quot;.要关闭QEMU,可以按下<code>Ctrl+A</code>键,松开后再快速按下<code>X</code>键.</p>
-<h3 id="实验2-2-单步调试BenOS和MySBI">实验2-2:单步调试BenOS和MySBI</h3>
+<p>我们可以看到QEMU输出”Welcome
+RISC-V!“.要关闭QEMU,可以按下<code>Ctrl+A</code>键,松开后再快速按下<code>X</code>键.</p>
+<h3 id="实验2-2单步调试benos和mysbi">实验2-2:单步调试BenOS和MySBI</h3>
 <p>使用<code>make debug</code>命令在终端启动QEMU虚拟机的gdbserver</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash"><span class="built_in">cd</span> riscv_programming_practice/chapter_2/benos</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">make debug</span></span><br></pre></td></tr></table></figure>
 <p>或者直接使用如下命令启动gdbserver</p>
@@ -319,8 +323,8 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/RISC-V/" rel="tag"># RISC-V</a>
               <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/RISC-V/" rel="tag"># RISC-V</a>
               <a href="/tags/VMware/" rel="tag"># VMware</a>
               <a href="/tags/ISA/" rel="tag"># ISA</a>
           </div>
@@ -329,13 +333,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/Linux%E5%85%A5%E9%97%A8/" rel="prev" title="Linux入门">
-                  <i class="fa fa-angle-left"></i> Linux入门
+                <a href="/2025/05/04/SUSY/" rel="prev" title="Notes on Supersymmetry">
+                  <i class="fa fa-angle-left"></i> Notes on Supersymmetry
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/Minecraft/" rel="next" title="Minecraft">
-                  Minecraft <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/Python%E5%9F%BA%E7%A1%80/" rel="next" title="Python基础">
+                  Python基础 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

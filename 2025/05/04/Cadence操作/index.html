@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="VMware基本操作 打开VMware Workstation Pro,点击左侧&quot;我的计算机&quot;一栏中的&quot;IC618&quot;,然后点击最上面一栏的绿色小三角,就可以运行虚拟机了. 注意, 可以利用共享文件夹来添加工艺库文件, 步骤如下: 虚拟机设置-共享文件夹-点击&quot;总是启用&quot;, 主机路径直接设置成工艺库解压之后的文件夹. 然后打开虚拟机桌面的c">
+    <meta name="description" content="VMware基本操作 打开VMware Workstation Pro,点击左侧”我的计算机”一栏中的”IC618”,然后点击最上面一栏的绿色小三角,就可以运行虚拟机了. 注意, 可以利用共享文件夹来添加工艺库文件, 步骤如下: 虚拟机设置-共享文件夹-点击”总是启用”, 主机路径直接设置成工艺库解压之后的文件夹. 然后打开虚拟机桌面的computer-filesystem-mnt,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cadence">
 <meta property="og:url" content="http://example.com/2025/05/04/Cadence%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="VMware基本操作 打开VMware Workstation Pro,点击左侧&quot;我的计算机&quot;一栏中的&quot;IC618&quot;,然后点击最上面一栏的绿色小三角,就可以运行虚拟机了. 注意, 可以利用共享文件夹来添加工艺库文件, 步骤如下: 虚拟机设置-共享文件夹-点击&quot;总是启用&quot;, 主机路径直接设置成工艺库解压之后的文件夹. 然后打开虚拟机桌面的c">
+<meta property="og:description" content="VMware基本操作 打开VMware Workstation Pro,点击左侧”我的计算机”一栏中的”IC618”,然后点击最上面一栏的绿色小三角,就可以运行虚拟机了. 注意, 可以利用共享文件夹来添加工艺库文件, 步骤如下: 虚拟机设置-共享文件夹-点击”总是启用”, 主机路径直接设置成工艺库解压之后的文件夹. 然后打开虚拟机桌面的computer-filesystem-mnt,">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/source/images/Cadence/Introduction/file.png">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
@@ -137,7 +137,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#VMware%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">VMware基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cadence%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">Cadence简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">软件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cadence%E7%9A%84%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87"><span class="nav-number">2.2.</span> <span class="nav-text">Cadence的文件组织</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%93"><span class="nav-number">2.2.1.</span> <span class="nav-text">库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Library-Manager"><span class="nav-number">2.2.2.</span> <span class="nav-text">Library Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Library-Manager-Categories"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">Library Manager-Categories</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Library-Manager-Library-Path-Editor"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">Library Manager-Library Path Editor</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VDE%E7%95%8C%E9%9D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">VDE界面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#VDE-File"><span class="nav-number">2.3.1.</span> <span class="nav-text">VDE-File</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VDE-Tools"><span class="nav-number">2.3.2.</span> <span class="nav-text">VDE-Tools</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VSE%E7%95%8C%E9%9D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">VSE界面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#VSE-Symbol-Editor"><span class="nav-number">2.4.1.</span> <span class="nav-text">VSE-Symbol Editor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADE%E7%95%8C%E9%9D%A2"><span class="nav-number">2.5.</span> <span class="nav-text">ADE界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VLS%E7%95%8C%E9%9D%A2"><span class="nav-number">2.6.</span> <span class="nav-text">VLS界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Calibre%E7%95%8C%E9%9D%A2"><span class="nav-number">2.7.</span> <span class="nav-text">Calibre界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PDK"><span class="nav-number">2.8.</span> <span class="nav-text">PDK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PDK%E7%AE%80%E4%BB%8B"><span class="nav-number">2.8.1.</span> <span class="nav-text">PDK简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PDK%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.8.2.</span> <span class="nav-text">PDK的安装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#virtuoso%E7%8E%AF%E5%A2%83%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">virtuoso环境的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">3.1.</span> <span class="nav-text">库的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E8%89%BA%E5%BA%93%E7%9B%B8%E5%85%B3"><span class="nav-number">3.2.</span> <span class="nav-text">工艺库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A5%E8%89%BA%E5%BA%93%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.2.1.</span> <span class="nav-text">工艺库的位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PDK%E5%B7%A5%E8%89%BA%E5%BA%93%E7%9A%84%E5%AF%BC%E5%85%A5"><span class="nav-number">3.2.2.</span> <span class="nav-text">PDK工艺库的导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E7%9B%B8%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">反相器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IC617-%E5%8F%8D%E7%9B%B8%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">IC617 反相器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-%E5%8A%9F%E8%80%97%E4%BB%BF%E7%9C%9F"><span class="nav-number">4.</span> <span class="nav-text">实验: 功耗仿真</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vmware%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">VMware基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cadence%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">Cadence简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">软件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cadence%E7%9A%84%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87"><span class="nav-number">2.2.</span> <span class="nav-text">Cadence的文件组织</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%93"><span class="nav-number">2.2.1.</span> <span class="nav-text">库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#library-manager"><span class="nav-number">2.2.2.</span> <span class="nav-text">Library Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#library-manager-categories"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">Library Manager-Categories</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#library-manager-library-path-editor"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">Library Manager-Library
+Path Editor</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vde%E7%95%8C%E9%9D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">VDE界面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vde-file"><span class="nav-number">2.3.1.</span> <span class="nav-text">VDE-File</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vde-tools"><span class="nav-number">2.3.2.</span> <span class="nav-text">VDE-Tools</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vse%E7%95%8C%E9%9D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">VSE界面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vse-symbol-editor"><span class="nav-number">2.4.1.</span> <span class="nav-text">VSE-Symbol Editor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ade%E7%95%8C%E9%9D%A2"><span class="nav-number">2.5.</span> <span class="nav-text">ADE界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vls%E7%95%8C%E9%9D%A2"><span class="nav-number">2.6.</span> <span class="nav-text">VLS界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#calibre%E7%95%8C%E9%9D%A2"><span class="nav-number">2.7.</span> <span class="nav-text">Calibre界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pdk"><span class="nav-number">2.8.</span> <span class="nav-text">PDK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pdk%E7%AE%80%E4%BB%8B"><span class="nav-number">2.8.1.</span> <span class="nav-text">PDK简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pdk%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.8.2.</span> <span class="nav-text">PDK的安装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#virtuoso%E7%8E%AF%E5%A2%83%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">virtuoso环境的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">3.1.</span> <span class="nav-text">库的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E8%89%BA%E5%BA%93%E7%9B%B8%E5%85%B3"><span class="nav-number">3.2.</span> <span class="nav-text">工艺库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A5%E8%89%BA%E5%BA%93%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.2.1.</span> <span class="nav-text">工艺库的位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pdk%E5%B7%A5%E8%89%BA%E5%BA%93%E7%9A%84%E5%AF%BC%E5%85%A5"><span class="nav-number">3.2.2.</span> <span class="nav-text">PDK工艺库的导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E7%9B%B8%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">反相器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ic617-%E5%8F%8D%E7%9B%B8%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">IC617 反相器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-%E5%8A%9F%E8%80%97%E4%BB%BF%E7%9C%9F"><span class="nav-number">4.</span> <span class="nav-text">实验: 功耗仿真</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -284,15 +285,25 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="VMware基本操作">VMware基本操作</h2>
-<p>打开VMware Workstation Pro,点击左侧&quot;我的计算机&quot;一栏中的&quot;IC618&quot;,然后点击最上面一栏的绿色小三角,就可以运行虚拟机了.</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="vmware基本操作">VMware基本操作</h2>
+<p>打开VMware Workstation
+Pro,点击左侧”我的计算机”一栏中的”IC618”,然后点击最上面一栏的绿色小三角,就可以运行虚拟机了.</p>
 <p>注意, 可以利用共享文件夹来添加工艺库文件, 步骤如下:</p>
-<p>虚拟机设置-共享文件夹-点击&quot;总是启用&quot;, 主机路径直接设置成工艺库解压之后的文件夹. 然后打开虚拟机桌面的computer-filesystem-mnt, 这里就可以我们添加的工艺库了.</p>
-<p>在桌面上面新建一个文件夹, 找到刚才导入的工艺库文件, ctrl+C ctrl+V把它复制进来</p>
-<h2 id="Cadence简介">Cadence简介</h2>
+<p>虚拟机设置-共享文件夹-点击”总是启用”,
+主机路径直接设置成工艺库解压之后的文件夹.
+然后打开虚拟机桌面的computer-filesystem-mnt,
+这里就可以我们添加的工艺库了.</p>
+<p>在桌面上面新建一个文件夹, 找到刚才导入的工艺库文件, ctrl+C
+ctrl+V把它复制进来</p>
+<h2 id="cadence简介">Cadence简介</h2>
 <h3 id="软件介绍">软件介绍</h3>
 <p>Cadence软件是CADENCE公司开发的集成电路设计产品的总称.Cadence可以完成电子设计的方方面面,包括ASIC设计,FPGA设计和PCB设计.与众所周知的EDA软件Synopsys相比,Cadence软件的综合工具略为逊色,但是Cadence在仿真,电路图设计,自动布局布线,版图设计以及验证等方面却有着绝对的优势.</p>
-<p>在实际设计中,经常用到Cadence软件的工具包括:Verilog HDL仿真工具Verilog-XL,电路设计工具Composer,电路模拟工具Analog Artist,版图设计工具Virtuoso Layout Editor,版图验证工具Dracula和Diva,自动布局布线工具Preview和Silicon Ensemble. 几乎可以完成电子设计的方方面面, 包括ASIC设计, FPGA设计和PCB板设计. 具体来说, 可以完成如下功能:</p>
+<p>在实际设计中,经常用到Cadence软件的工具包括:Verilog
+HDL仿真工具Verilog-XL,电路设计工具Composer,电路模拟工具Analog
+Artist,版图设计工具Virtuoso Layout
+Editor,版图验证工具Dracula和Diva,自动布局布线工具Preview和Silicon
+Ensemble. 几乎可以完成电子设计的方方面面, 包括ASIC设计,
+FPGA设计和PCB板设计. 具体来说, 可以完成如下功能:</p>
 <ul>
 <li>板级电路设计系统</li>
 <li>Alta系统级无线设计</li>
@@ -308,11 +319,12 @@
 <li>版图设计工具: Virtuoso Layout Suite</li>
 <li>版图验证工具: Virtuoso Layout Calibre</li>
 </ul>
-<h3 id="Cadence的文件组织">Cadence的文件组织</h3>
-<p><img src="/source/images/Cadence/Introduction/file.png" alt=""></p>
+<h3 id="cadence的文件组织">Cadence的文件组织</h3>
+<p><img src="/source/images/Cadence/Introduction/file.png" /></p>
 <p>Cadence软件是按照库(Library),单元(Cell)和视图(View)的层次实现对文件的管理.</p>
 <h4 id="库">库</h4>
-<p>库文件是一组单元的集合, 包含各个单元的不同视图. 以文件夹的形式存在. 包含如下内容:</p>
+<p>库文件是一组单元的集合, 包含各个单元的不同视图. 以文件夹的形式存在.
+包含如下内容:</p>
 <ul>
 <li>基准库: 是Cadence软件自带的:
 <ul>
@@ -320,15 +332,16 @@
 <li>US_8th存储各种尺寸和模板</li>
 <li>Basic库包含特殊管脚信息</li>
 <li>Analog库包含基本模拟器件</li>
-</ul>
-</li>
-<li>设计库: 针对用户而言, 是用户自己创建的库(用户的设计库必须与某个工艺库相关联)</li>
+</ul></li>
+<li>设计库: 针对用户而言,
+是用户自己创建的库(用户的设计库必须与某个工艺库相关联)</li>
 <li>工艺库: 针对集成电路制造工艺而言</li>
 </ul>
 <p>单元是构造芯片和逻辑结构的最低层次的结构单元,例如反相器,运放,正弦波发生器等.视图位于单元层次下,包括电路图(Schematic),版图(Layout),符号(Symbol)等.</p>
 <p>在Cadence软件中,库文件又包含设计库和工艺库(又称技术库).设计库是对于用户而言的,不同的用户可以有不同的设计库;工艺库是对集成电路制造工艺而言的,不同的特征尺寸工艺,不同的芯片制造厂商的工艺库是不同的.为了能够完成集成电路的制造,用户的设计库必须和某个工艺库相关联.</p>
-<h4 id="Library-Manager">Library Manager</h4>
-<p>通过Library Manager(库文件管理器)对库文件进行管理, 主要有以下操作:</p>
+<h4 id="library-manager">Library Manager</h4>
+<p>通过Library Manager(库文件管理器)对库文件进行管理,
+主要有以下操作:</p>
 <ul>
 <li>导入和访问设计数据</li>
 <li>定义Cadence库的访问路径cds.lib文件</li>
@@ -339,55 +352,65 @@
 <li>编辑库, 单元格和查看属性</li>
 </ul>
 <p>进入Library Manager的两种方式</p>
-<ol>
+<ol type="1">
 <li>在Command窗口输入libManager &amp;</li>
 <li>在VDE窗口选择Tools-Library Manager</li>
 </ol>
 <p>两种显示方式:</p>
-<ol>
+<ol type="1">
 <li>List</li>
 <li>通过View-list选择Tree</li>
 </ol>
-<h5 id="Library-Manager-Categories">Library Manager-Categories</h5>
-<p>Library Manager-Categories将元件按照种类分别展示, 可以帮助更快寻找所需的元件, 选中Show Categories选项即可.</p>
-<h5 id="Library-Manager-Library-Path-Editor">Library Manager-Library Path Editor</h5>
-<p>Library Path Editor管理库文件的所有路径. 可以通过Library Path Editor添加工艺库文件.</p>
+<h5 id="library-manager-categories">Library Manager-Categories</h5>
+<p>Library Manager-Categories将元件按照种类分别展示,
+可以帮助更快寻找所需的元件, 选中Show Categories选项即可.</p>
+<h5 id="library-manager-library-path-editor">Library Manager-Library
+Path Editor</h5>
+<p>Library Path Editor管理库文件的所有路径. 可以通过Library Path
+Editor添加工艺库文件.</p>
 <p>打开方式: Library Manager-Edit-Library Path</p>
 <p>通过Library Path Editor链接工艺库:</p>
-<ol>
+<ol type="1">
 <li>VDE窗口</li>
 <li>Tools-Library Path Editor</li>
 <li>Edit-Add new library</li>
 <li>在Directory处选择工艺文件所在路径并在Library选择库文件</li>
 </ol>
 <p>链接设计库和工艺库:</p>
-<ol>
+<ol type="1">
 <li>在VDE Tools菜单下打开Technology File Manager-Attach</li>
-<li>在Design Library选择设计库, 在Technology Library选择工艺库, 点击OK绑定.</li>
+<li>在Design Library选择设计库, 在Technology Library选择工艺库,
+点击OK绑定.</li>
 </ol>
-<h3 id="VDE界面">VDE界面</h3>
+<h3 id="vde界面">VDE界面</h3>
 <p>VDE就是Virtuoso Design Environment, 启动过程如下:</p>
-<ol>
+<ol type="1">
 <li>在Linux的Open Terminal界面输入virtuoso &amp;</li>
 <li>按下回车</li>
 <li>出现命令解释器窗口CIW, 可以从命令解释器窗口CIW与设计环境交互</li>
 </ol>
-<h4 id="VDE-File">VDE-File</h4>
-<ol>
-<li>File-New-Library创建一个新的库, 注意不允许在现有的库中创建新的或者临时库, 因为在一个库中找到的任何目录都会被视为单元格</li>
+<h4 id="vde-file">VDE-File</h4>
+<ol type="1">
+<li>File-New-Library创建一个新的库,
+注意不允许在现有的库中创建新的或者临时库,
+因为在一个库中找到的任何目录都会被视为单元格</li>
 <li>File-New-Cellview创建一个新的单元</li>
 <li>File-Open-open file打开一个cell单元的视图</li>
 <li>File-Import选择一个翻译器将另一种格式的设计导入到Cadence设计数据库格式中</li>
 <li>File-Export选择一个翻译器将Cadence设计数据库格式转换成另一种格式的设计</li>
 </ol>
-<h4 id="VDE-Tools">VDE-Tools</h4>
-<ol>
+<h4 id="vde-tools">VDE-Tools</h4>
+<ol type="1">
 <li>Tools-Library Manager 创建, 添加, 复制, 删除和组织库和视图</li>
-<li>Tools-Library Path Editor 定义在设计中使用的库. 设置cds.lib文件指向要在设计中使用的引用和设计库. 注意从IC614开始, Virtuoso不再支持lib.defs库定义文件, 目前唯一支持的格式为cds.lib.</li>
+<li>Tools-Library Path Editor 定义在设计中使用的库.
+设置cds.lib文件指向要在设计中使用的引用和设计库. 注意从IC614开始,
+Virtuoso不再支持lib.defs库定义文件, 目前唯一支持的格式为cds.lib.</li>
 </ol>
-<h3 id="VSE界面">VSE界面</h3>
-<p>VSE就是Virtuoso Schematic Editor, 是一个原理图绘制工具, 版本有Virtuoso Schematic Editor L和Virtuoso Schematic Editor XL.</p>
-<p>原理图设计是电子电路设计的图示. 连接性信息来自于引脚, 线路和实例的放置.</p>
+<h3 id="vse界面">VSE界面</h3>
+<p>VSE就是Virtuoso Schematic Editor, 是一个原理图绘制工具,
+版本有Virtuoso Schematic Editor L和Virtuoso Schematic Editor XL.</p>
+<p>原理图设计是电子电路设计的图示. 连接性信息来自于引脚,
+线路和实例的放置.</p>
 <p>VSE窗口界面主要包括如下要素:</p>
 <ul>
 <li>Assistant Panes</li>
@@ -399,14 +422,19 @@
 <li>Resource Indictors</li>
 </ul>
 <p>注意:</p>
-<ol>
-<li>可以使用多工作表原理图将大型设计划分到多个工作表(页面)中, 从而提高可读性并产生更好的绘图输出.</li>
-<li>如果以只读模式打开原理图或符号, 则可以更改模式使其可以编辑, 具体做法是点击File-Make Editable</li>
+<ol type="1">
+<li>可以使用多工作表原理图将大型设计划分到多个工作表(页面)中,
+从而提高可读性并产生更好的绘图输出.</li>
+<li>如果以只读模式打开原理图或符号, 则可以更改模式使其可以编辑,
+具体做法是点击File-Make Editable</li>
 </ol>
-<h4 id="VSE-Symbol-Editor">VSE-Symbol Editor</h4>
-<p>Symbol Editor-Creating Symbols: 在Schematic Editor界面选择Creat-cell view from cellview, View name选择symbol, 确定Pin方向</p>
-<h3 id="ADE界面">ADE界面</h3>
-<p>ADE就是Analog Design Environment, 模拟设计环境使用不同的模拟器设置和运行模拟. 运行仿真后, 可以查看和分析仿真结果.</p>
+<h4 id="vse-symbol-editor">VSE-Symbol Editor</h4>
+<p>Symbol Editor-Creating Symbols: 在Schematic Editor界面选择Creat-cell
+view from cellview, View name选择symbol, 确定Pin方向</p>
+<h3 id="ade界面">ADE界面</h3>
+<p>ADE就是Analog Design Environment,
+模拟设计环境使用不同的模拟器设置和运行模拟. 运行仿真后,
+可以查看和分析仿真结果.</p>
 <p>ADE界面主要包含如下要素:</p>
 <ul>
 <li>Setup toolbar</li>
@@ -416,9 +444,11 @@
 <li>Output</li>
 <li>ADE toolbar</li>
 </ul>
-<p>当ADE L从VSE启动时, ADE L工具栏将显示在Virtuoso Schematic工具栏区域.</p>
-<h3 id="VLS界面">VLS界面</h3>
-<p>VLS就是Virtuoso Layout Suite, 是一个版图编辑工具, 支持创建自定义布局或编辑任何现有版图.</p>
+<p>当ADE L从VSE启动时, ADE L工具栏将显示在Virtuoso
+Schematic工具栏区域.</p>
+<h3 id="vls界面">VLS界面</h3>
+<p>VLS就是Virtuoso Layout Suite, 是一个版图编辑工具,
+支持创建自定义布局或编辑任何现有版图.</p>
 <p>VLS XL版本的界面包含如下要素:</p>
 <ul>
 <li>Schematic View</li>
@@ -426,20 +456,34 @@
 <li>LSW</li>
 <li>CIW</li>
 </ul>
-<h3 id="Calibre界面">Calibre界面</h3>
-<p>Mentor Graphics公司的Calibre物理验证和提取工具已经被完整地集成到Cadence Design Systems公司的Virtuoso设计环境, 用于设计规则检验(DRC), 布局对原理图(layout-versus-schematic, LVS)和寄生提取.</p>
-<h3 id="PDK">PDK</h3>
-<h4 id="PDK简介">PDK简介</h4>
-<p>为了方便用户利用Cadence进行不同代工厂(Foundry)的版图设计, 代工厂提供了工艺设计工具包(Process Design Kit, PDK), ,PDK是为模拟/混合信号IC电路设计而提供的完整工艺文件集合, PDK是连接代工厂(IC工艺制造)和用户设计(IC设计)的重要桥梁. PDK主要包含以下部件:</p>
-<ol>
+<h3 id="calibre界面">Calibre界面</h3>
+<p>Mentor
+Graphics公司的Calibre物理验证和提取工具已经被完整地集成到Cadence Design
+Systems公司的Virtuoso设计环境, 用于设计规则检验(DRC),
+布局对原理图(layout-versus-schematic, LVS)和寄生提取.</p>
+<h3 id="pdk">PDK</h3>
+<h4 id="pdk简介">PDK简介</h4>
+<p>为了方便用户利用Cadence进行不同代工厂(Foundry)的版图设计,
+代工厂提供了工艺设计工具包(Process Design Kit, PDK),
+,PDK是为模拟/混合信号IC电路设计而提供的完整工艺文件集合,
+PDK是连接代工厂(IC工艺制造)和用户设计(IC设计)的重要桥梁.
+PDK主要包含以下部件:</p>
+<ol type="1">
 <li>器件模型(Device Model):由Foundry提供的仿真模型器件.</li>
 <li>符号(Symbol)和视图(View):用于原理图设计的符号,通过了SPICE仿真验证参数化的设计单元.</li>
-<li>CDF(Component Description Format,组件描述格式)和Callback(器件的属性描述文件):定义了各种器件类型,器件名称,器件参数及参数调用关系函数集Callback,器件模型,器件的各种视图格式等.</li>
-<li>参数化单元(Parameterized Cell,Pcell):由Cadence语言的SKILL语言编写,其对应的版图通过了DRC和LVS验证,方便设计人员进行Schematic Driven Layout(原理图驱动的版图)设计流程,利用Pcell可以加速版图设计过程.</li>
-<li>技术文件(Technology File):用于版图设计和验证的工艺文件,包含GDSII的数据层和工艺层的映射关系定义,设计数据层的属性定义,在线设计规则,电气规则,显示彩色定义和图形格式定义等.</li>
-<li>PV Rule(物理验证规则)文件:包含版图验证文件DRC/LVS/RC的提取,支持Cadence软件的Diva,Dracula,Assura等.</li>
+<li>CDF(Component Description
+Format,组件描述格式)和Callback(器件的属性描述文件):定义了各种器件类型,器件名称,器件参数及参数调用关系函数集Callback,器件模型,器件的各种视图格式等.</li>
+<li>参数化单元(Parameterized
+Cell,Pcell):由Cadence语言的SKILL语言编写,其对应的版图通过了DRC和LVS验证,方便设计人员进行Schematic
+Driven
+Layout(原理图驱动的版图)设计流程,利用Pcell可以加速版图设计过程.</li>
+<li>技术文件(Technology
+File):用于版图设计和验证的工艺文件,包含GDSII的数据层和工艺层的映射关系定义,设计数据层的属性定义,在线设计规则,电气规则,显示彩色定义和图形格式定义等.</li>
+<li>PV
+Rule(物理验证规则)文件:包含版图验证文件DRC/LVS/RC的提取,支持Cadence软件的Diva,Dracula,Assura等.</li>
 </ol>
-<p>简而言之, 就是包含了反映制造工艺基本的元素: 晶体管, 接触孔, 互连线等.</p>
+<p>简而言之, 就是包含了反映制造工艺基本的元素: 晶体管, 接触孔,
+互连线等.</p>
 <ul>
 <li>设计规则文件DRC</li>
 <li>电学规则文件LVS</li>
@@ -448,85 +492,171 @@
 <li>器件版图</li>
 <li>器件定制参数</li>
 </ul>
-<h4 id="PDK的安装">PDK的安装</h4>
+<h4 id="pdk的安装">PDK的安装</h4>
 <p>对于版图设计用户,熟悉并掌握PDK的安装尤为重要.PDK的格式通常为压缩文件(.tar.gz).如某代工厂提供的40nm工艺PDK文件为PDK40LL_1125_1TM_OA_CDS.tar.gz.下面是安装步骤:</p>
-<ol>
+<ol type="1">
 <li>将该PDK压缩文件复制到某一路径下用于后续安装</li>
-<li>进入终端并更改工作路径为刚才PDK复制的路径;也可直接在刚才PDK复制的路径右键,在弹出的快捷菜单中选择Open in Terminal命令,打开终端.</li>
-<li>在终端输入解压缩命令: gtar zxvf PDK40LL_1125_1TM_OA_CDS.tar.gz,并按Enter键.如果解压失败,也可以双击该文件,然后执行Extract命令.</li>
+<li>进入终端并更改工作路径为刚才PDK复制的路径;也可直接在刚才PDK复制的路径右键,在弹出的快捷菜单中选择Open
+in Terminal命令,打开终端.</li>
+<li>在终端输入解压缩命令: gtar zxvf
+PDK40LL_1125_1TM_OA_CDS.tar.gz,并按Enter键.如果解压失败,也可以双击该文件,然后执行Extract命令.</li>
 <li>解压完毕后会出现名为PDK40LL_1125_1TM_OA_CDS的文件夹,进入该文件夹,可以看到该文件夹里面还有压缩文件,可以用相同的方法进行解压.PDK40LL_1125_1TM_OA_CDS中有六个压缩文件,每个文件名中的1PXM(X代表数字4~9),表示该工艺可以制作一层多晶硅X层金属.这里选择1P4M压缩文件进行解压.</li>
 <li>进入解压完成的文件4011_1125_1tm_oa_cds_1P4M,其主要内容如下:
-<ol>
+<ol type="1">
 <li>PDK_ReleaseNote_RevisionHistory_40LL_1125.pdf:PDF文件,包含PDK的发行说明和修订历史记录.</li>
 <li>cds.lib:Cadence库定义文件</li>
 <li>display.drf:Cadence显示资源文件</li>
 <li>icc.rules_4lm_1tm:Virtuoso自定义布线规则文件</li>
 <li>40ll:PDK库</li>
-<li><a target="_blank" rel="noopener" href="http://techfile.tf">techfile.tf</a>:ASCII版本工艺文件</li>
+<li>techfile.tf:ASCII版本工艺文件</li>
 <li>models:存储PDK模型的路径(文件夹)</li>
 <li>stream:包含Cadence数据流输入和输出映射的目录</li>
 <li>doc:包含PDK文档的目录</li>
 <li>Calibre:包含Calibre验证文件的目录</li>
-</ol>
-</li>
+</ol></li>
 <li>在终端输入Virtuoso &amp;,启动Cadence软件.</li>
-<li>我们下面添加40nm工艺库.点击&quot;Tool-&gt;Library Manager&quot;,然后在弹出的Library Manager窗口点击&quot;Edit-&gt;Library Path&quot;,在弹出的Library Path Editor窗口点击&quot;Edit-&gt;Add Library&quot;,在弹出的Add Library窗口中找到刚才解压的工艺库文件(即40ll),点击OK,就可以看到在Library Path Editor窗口的最后一行出现&quot;40ll&quot;,然后在该窗口中点击&quot;File-&gt;Save&quot;.</li>
+<li>我们下面添加40nm工艺库.点击”Tool-&gt;Library
+Manager”,然后在弹出的Library Manager窗口点击”Edit-&gt;Library
+Path”,在弹出的Library Path Editor窗口点击”Edit-&gt;Add
+Library”,在弹出的Add
+Library窗口中找到刚才解压的工艺库文件(即40ll),点击OK,就可以看到在Library
+Path
+Editor窗口的最后一行出现”40ll”,然后在该窗口中点击”File-&gt;Save”.</li>
 </ol>
 <h2 id="virtuoso环境的配置">virtuoso环境的配置</h2>
 <h3 id="库的创建">库的创建</h3>
-<p>我们在桌面右键,点击&quot;Open in Terminal&quot;,在弹出的窗口中输入&quot;virtuoso &amp;&quot;并按下回车键.就可以打开&quot;Virtuoso 6.1.8-64b - Log:/home/IC/CDS.log&quot;界面.</p>
-<p>我们点击最上面一栏的&quot;File-&gt;New-&gt;Library&quot;,就会弹出&quot;New Library&quot;窗口,在&quot;Name&quot;一栏中,输入我们建立的设计库的名字&quot;test1&quot;.在&quot;Technology File&quot;中选择&quot;Attach to an existing technology library&quot;,路径默认为&quot;/home/IC&quot;,设置完成后,我们点击&quot;OK&quot;,在弹出的&quot;Attach Library to Technology Library&quot;中选择&quot;tsmcN65&quot;,然后点击&quot;OK&quot;.</p>
-<p>此时,在&quot;Virtuoso 6.1.8-64b - Log:/home/IC/CDS.log&quot;界面就会显示</p>
-<p>“INFO (TECH-180011): Design library ‘test1’ successfully attached to technology library ‘tsmcN65’.”</p>
-<p>接下来,我们点击最上面一栏的&quot;Tools-&gt;Library Manager&quot;,打开&quot;Library Manager&quot;窗口,在&quot;Library&quot;子窗口就可以看到我们新创建的&quot;test1&quot;了.</p>
-<p>我们在&quot;Library Manager&quot;窗口最上面一栏点击&quot;File-&gt;New-&gt;Library&quot;创建一个仿真文件,路径默认为&quot;/home/IC&quot;,在弹出的窗口中输入建立的仿真文件夹的名字&quot;test1_sim&quot;,然后点击&quot;OK&quot;,在弹出的&quot;Technology File for New Library&quot;中选择&quot;Attach to an existing technology library&quot;,我们点击&quot;OK&quot;,在弹出的&quot;Attach Library to Technology Library&quot;中选择&quot;tsmcN65&quot;,然后点击&quot;OK&quot;.我们就可以看到在在&quot;Library&quot;子窗口出现了我们新创建的&quot;test1_sim&quot;了</p>
-<p>下面我们建立设计单元,在&quot;Library Manager&quot;窗口最上面一栏点击&quot;File-&gt;New-&gt;Cell View&quot;,这时会弹出&quot;New File&quot;窗口,在&quot;Library&quot;中选择我们刚刚创建的&quot;test1&quot;,在&quot;Cell&quot;一栏中我们命名为&quot;display&quot;,注意&quot;Library path file&quot;是&quot;/home/IC/cds.lib&quot;,然后选择&quot;Type&quot;为&quot;layout&quot;,其他保持默认,然后点击&quot;OK&quot;,就会弹出&quot;Virtuoso Schematic Editor: test1 newtry schematic&quot;窗口,下面就可以在其中摆放器件了.</p>
+<p>我们在桌面右键,点击”Open in Terminal”,在弹出的窗口中输入”virtuoso
+&amp;“并按下回车键.就可以打开”Virtuoso 6.1.8-64b -
+Log:/home/IC/CDS.log”界面.</p>
+<p>我们点击最上面一栏的”File-&gt;New-&gt;Library”,就会弹出”New
+Library”窗口,在”Name”一栏中,输入我们建立的设计库的名字”test1”.在”Technology
+File”中选择”Attach to an existing technology
+library”,路径默认为”/home/IC”,设置完成后,我们点击”OK”,在弹出的”Attach
+Library to Technology Library”中选择”tsmcN65”,然后点击”OK”.</p>
+<p>此时,在”Virtuoso 6.1.8-64b - Log:/home/IC/CDS.log”界面就会显示</p>
+<p>“INFO (TECH-180011): Design library ‘test1’ successfully attached to
+technology library ‘tsmcN65’.”</p>
+<p>接下来,我们点击最上面一栏的”Tools-&gt;Library Manager”,打开”Library
+Manager”窗口,在”Library”子窗口就可以看到我们新创建的”test1”了.</p>
+<p>我们在”Library
+Manager”窗口最上面一栏点击”File-&gt;New-&gt;Library”创建一个仿真文件,路径默认为”/home/IC”,在弹出的窗口中输入建立的仿真文件夹的名字”test1_sim”,然后点击”OK”,在弹出的”Technology
+File for New Library”中选择”Attach to an existing technology
+library”,我们点击”OK”,在弹出的”Attach Library to Technology
+Library”中选择”tsmcN65”,然后点击”OK”.我们就可以看到在在”Library”子窗口出现了我们新创建的”test1_sim”了</p>
+<p>下面我们建立设计单元,在”Library
+Manager”窗口最上面一栏点击”File-&gt;New-&gt;Cell View”,这时会弹出”New
+File”窗口,在”Library”中选择我们刚刚创建的”test1”,在”Cell”一栏中我们命名为”display”,注意”Library
+path
+file”是”/home/IC/cds.lib”,然后选择”Type”为”layout”,其他保持默认,然后点击”OK”,就会弹出”Virtuoso
+Schematic Editor: test1 newtry
+schematic”窗口,下面就可以在其中摆放器件了.</p>
 <h3 id="工艺库相关">工艺库相关</h3>
 <h4 id="工艺库的位置">工艺库的位置</h4>
-<p>我们点击桌面上的&quot;Files&quot;图标,就会弹出所有文件.我们打开&quot;Tech&quot;文件夹,里面就包含了所有可用的工艺库.我们打开&quot;TSMC-65nm(OA)&quot;文件夹.其中:</p>
-<p>&quot;Calibre&quot;就是验证文件存放的地方</p>
-<p>&quot;models&quot;就是电路仿真所需要的文件</p>
-<p>&quot;skill&quot;就是在调用PCell的时候所需要的文件</p>
-<p>&quot;tsmcN65&quot;就是工艺库</p>
-<p>&quot;display.drf&quot;就是图层颜色所显示的文件</p>
-<h4 id="PDK工艺库的导入">PDK工艺库的导入</h4>
-<p>假设我们在主机界面上有一个&quot;tsmc18rf.tar&quot;的压缩文件</p>
+<p>我们点击桌面上的”Files”图标,就会弹出所有文件.我们打开”Tech”文件夹,里面就包含了所有可用的工艺库.我们打开”TSMC-65nm(OA)“文件夹.其中:</p>
+<p>“Calibre”就是验证文件存放的地方</p>
+<p>“models”就是电路仿真所需要的文件</p>
+<p>“skill”就是在调用PCell的时候所需要的文件</p>
+<p>“tsmcN65”就是工艺库</p>
+<p>“display.drf”就是图层颜色所显示的文件</p>
+<h4 id="pdk工艺库的导入">PDK工艺库的导入</h4>
+<p>假设我们在主机界面上有一个”tsmc18rf.tar”的压缩文件</p>
 <p>方法一: 直接将这个压缩包拖入虚拟机的主界面,不多谈</p>
-<p>方法二: 在主机界面创建一个名为&quot;share&quot;的文件夹,将&quot;tsmc18rf.tar&quot;放入其中,我们点击右上角的关机按钮,将IC618关闭.在IC618界面中点击&quot;硬盘(SCSI)“,然后在&quot;选项&quot;界面中启用共享文件夹,将刚刚创建的&quot;share&quot;文件夹添加进去,点击&quot;确定”,然后再运行虚拟机.打开&quot;Files&quot;,在左边一栏中点击&quot;Other Locations&quot;,点击&quot;Computer-&gt;mnt-&gt;hgfs&quot;就可以看到共享文件夹&quot;share&quot;了.在虚拟机中使用共享文件夹中的文件,需要将文件复制到虚拟机的目录下.</p>
+<p>方法二:
+在主机界面创建一个名为”share”的文件夹,将”tsmc18rf.tar”放入其中,我们点击右上角的关机按钮,将IC618关闭.在IC618界面中点击”硬盘(SCSI)“,然后在”选项”界面中启用共享文件夹,将刚刚创建的”share”文件夹添加进去,点击”确定”,然后再运行虚拟机.打开”Files”,在左边一栏中点击”Other
+Locations”,点击”Computer-&gt;mnt-&gt;hgfs”就可以看到共享文件夹”share”了.在虚拟机中使用共享文件夹中的文件,需要将文件复制到虚拟机的目录下.</p>
 <h3 id="反相器">反相器</h3>
-<p>在&quot;Library Manager&quot;窗口最上面一栏点击&quot;File-&gt;New-&gt;Cell View&quot;,这时会弹出&quot;New File&quot;窗口,在&quot;Library&quot;中选择我们刚刚创建的&quot;test1&quot;,在&quot;Cell&quot;一栏中我们命名为&quot;inv&quot;,注意&quot;Library path file&quot;是&quot;/home/IC/cds.lib&quot;,然后选择&quot;Type&quot;为&quot;schematic&quot;,其他保持默认,然后点击&quot;OK&quot;,就会弹出&quot;Virtuoso Schematic Editor: test1 newtry schematic&quot;窗口,下面就可以在其中摆放器件了.</p>
-<p>在原理图窗口中,按下&quot;i&quot;键就可以打开&quot;Add Instance&quot;窗口,在&quot;Library&quot;一栏中选择&quot;tsmcN65&quot;,“Cell&quot;一栏中选择&quot;nch_33”,按下回车键,将该N管放置好,然后再按下&quot;i&quot;键,在&quot;Cell&quot;一栏中选择&quot;pch_33&quot;,将其摆放好.然后按下&quot;esc&quot;键退出放置.然后长按鼠标左键进行连线.按下&quot;p&quot;键,打开&quot;Create Pin&quot;窗口,在&quot;Direction&quot;一栏中选择&quot;input/output&quot;接口.电路图连接完成后点击左上角的&quot;save and check&quot;选项.保存好后,点击&quot;Create-&gt;Cellview-&gt;From Cellview…“,在&quot;Library Name&quot;一栏选择&quot;text1”,其他保持默认点击&quot;OK&quot;,然后在弹出的&quot;Symbol Generation Options&quot;窗口中保持默认,点击&quot;OK&quot;,就会弹出&quot;Virtuoso Symbol Editor: test1 inv symbol&quot;窗口,然后保存.</p>
-<p>我们退出原理图窗口,在&quot;Library Manager&quot;下的&quot;test1&quot;库中,“Cell&quot;中有我们刚刚创建的&quot;inv”,“view&quot;中对应的有&quot;schematic&quot;和&quot;symbol”.</p>
-<p>接下来我们进行仿真.点击&quot;File-&gt;New-&gt;Cell View&quot;,弹出&quot;New File&quot;窗口,在&quot;Library&quot;一栏中选择&quot;test1_sim&quot;,“Cell&quot;一栏中命名为&quot;inv_sim”,其他默认,点击&quot;Ok&quot;,弹出&quot;Virtuoso Schematic Editor L Editing: test1_sim inv_sim schematic&quot;,按下&quot;i&quot;键弹出&quot;Add Instance&quot;窗口,在&quot;Library&quot;一栏中选择&quot;test1&quot;,然后在&quot;Cell&quot;一栏中选择&quot;inv&quot;(就是把我们刚刚创建的symbol调出来),摆放好即可.</p>
-<p>下面我们设置偏置电压,按下&quot;i&quot;键,在&quot;Library&quot;一栏中选择&quot;analogLib&quot;,然后在&quot;Cell&quot;一栏中选择&quot;vdc&quot;,放置好电源后,点击电源图标,在左下角&quot;Property Editor&quot;下的&quot;DC voltage&quot;一栏设置参数,分别为&quot;0,2&quot;,再按下&quot;i&quot;键,在&quot;Library&quot;一栏中选择&quot;basic&quot;,然后在&quot;Cell&quot;一栏中选择&quot;gnd&quot;.</p>
-<p>之后我们添加输入信号,按下&quot;i&quot;键,在&quot;Library&quot;一栏中选择&quot;analogLib&quot;,然后在&quot;Cell&quot;一栏中选择&quot;vpulse&quot;,放置好后,设置参数&quot;Voltage 1=0&quot;,“Voltage 2=2”,“Period=1/fin”,“Raise time=1n”,“Fall time=1n”,“Pulse width=0.5/fin”.这里&quot;fin&quot;是变量,为输入频率.</p>
-<p>设置完成后,点击&quot;Check and Save&quot;.然后点击&quot;Launch-&gt;ADE L&quot;,弹出&quot;ADE L - test1_sim inv_sim schematic&quot;界面,在&quot;Design Variables&quot;一栏中右键,点击&quot;Copy from Cellview&quot;,就可以将变量&quot;fin&quot;添加进去,然后在&quot;Value&quot;中设置其为50M(也就是20ns),然后在右边一栏点击&quot;Choose Analyses&quot;,在弹出的窗口中的&quot;Analysis&quot;下&quot;tran&quot;,“Stop Time&quot;设置为100n(也就是5个周期),并且勾选&quot;conservative”,然后点击&quot;OK&quot;.</p>
-<p>接下来在&quot;ADE L - test1_sim inv_sim schematic&quot;界面点击&quot;Model Library&quot;图标,将其他选项取消勾选,点击&quot;&lt; Click here to add model file &gt;“,添加路径”/home/IC/Tech/TSMC-65nm(OA)/models/spectre&quot;下面的&quot;crn65lp_3d3_lk_v1d5.scs&quot;,并且在&quot;section&quot;中选择&quot;tt_33&quot;和&quot;stat_noise&quot;,然后点击&quot;Ok&quot;.</p>
-<p>上面的设置完成后,再次在原理图界面点击&quot;Check and Save&quot;,然后在ADE L界面点击&quot;Netlist and Run&quot;开始仿真,等待一会之后就会弹出窗口.</p>
-<p>我们接下来回到原理图窗口,点击第三行图标&quot;Direct Plot-&gt;Main Form&quot;,然后点击第二行图标的&quot;Defualt Selection Filter&quot;,然后我们就可以单击电路图中的连线,就会弹出&quot;Virtuoso ® Visualization &amp; Analysis Xl&quot;的波形图窗口,我们再点击其他连线,也会把其他连线上的波形加入到波形图中.</p>
-<h3 id="IC617-反相器">IC617 反相器</h3>
-<p>在桌面新建一个文件夹, 把需要的工艺库文件夹复制粘贴到这个文件夹里面.</p>
-<p>在终端输入<code>virtuoso &amp;</code>打开Cadence, 打开Library Manager, 新建一个库, 随便命名, 路径就是刚刚在桌面创建的文件夹, 然后Attach到AnalogLib库即可. 这时, 我们就可以在Library Path Editor里面把我们导入的工艺库(路径就是桌面上那个文件夹)添加进去. 这时我们就可以开始做自己的项目了.</p>
-<p>再次新建一个库, 随便命名, 路径还是选择桌面上新建的那个文件夹, 然后Attach到我们导入的那个工艺库上. 库建好后, 点击File-New-CellView, 命名为INV, 然后就会弹出VSE界面. 点击Add Instance, Library一般就是选择AnalogLib和我们导入的工艺库. 然后就可以摆放器件了, 摆放好之后要给它封装起来, 变成一个symbol, 我们需要pin脚, 比如input, output, VDD, GND之类的. 做完之后记得保存.</p>
-<p>然后在最上面一栏, 点击Create-Cellview-From Cellview…点击ok, 然后在left/right/top/bottom pins分别输入我们给pin脚的命名(要和上一段一致). 保存之后, 这一部分工作就完成了!</p>
-<p>这时我们再返回Library Manager里面, 点击Cell里面的INV, 就可以在右边的View里面看到schematic和symbol了.</p>
-<p>接下来我们新建一个Testbench, 点击File-New-Cellview, 命名为INV_tb, 然后我们直接在Add Instance里面调用新建的库, 这个库里面就有我们刚刚设计好的INV, 选择好之后可以看到它以symbol的形式出现, 我们把四个pin脚用线引出来. 然后在Add Instance中的AnalogLib库里面选择vdc和gnd, 然后给线打上label, 相同label的线代表是同一根线. 弄好之后记得保存.</p>
-<p>接下来进行仿真, 最上面一栏选择Launch-ADE L, 在Analog窗口右键选择Edit, 我们选择tran(瞬态). Stop time输入10u, 选择moderate, 点击ok. 在Output窗口右键点击Edit, 点击From Design, 然后就可以点击我们想要观察的线的信号, 选完之后点击ok. 弄完之后点击右边的绿色的按钮就可以跑仿真了, 这时就会出现波形图.</p>
+<p>在”Library Manager”窗口最上面一栏点击”File-&gt;New-&gt;Cell
+View”,这时会弹出”New
+File”窗口,在”Library”中选择我们刚刚创建的”test1”,在”Cell”一栏中我们命名为”inv”,注意”Library
+path
+file”是”/home/IC/cds.lib”,然后选择”Type”为”schematic”,其他保持默认,然后点击”OK”,就会弹出”Virtuoso
+Schematic Editor: test1 newtry
+schematic”窗口,下面就可以在其中摆放器件了.</p>
+<p>在原理图窗口中,按下”i”键就可以打开”Add
+Instance”窗口,在”Library”一栏中选择”tsmcN65”,“Cell”一栏中选择”nch_33”,按下回车键,将该N管放置好,然后再按下”i”键,在”Cell”一栏中选择”pch_33”,将其摆放好.然后按下”esc”键退出放置.然后长按鼠标左键进行连线.按下”p”键,打开”Create
+Pin”窗口,在”Direction”一栏中选择”input/output”接口.电路图连接完成后点击左上角的”save
+and check”选项.保存好后,点击”Create-&gt;Cellview-&gt;From
+Cellview…“,在”Library
+Name”一栏选择”text1”,其他保持默认点击”OK”,然后在弹出的”Symbol Generation
+Options”窗口中保持默认,点击”OK”,就会弹出”Virtuoso Symbol Editor: test1
+inv symbol”窗口,然后保存.</p>
+<p>我们退出原理图窗口,在”Library
+Manager”下的”test1”库中,“Cell”中有我们刚刚创建的”inv”,“view”中对应的有”schematic”和”symbol”.</p>
+<p>接下来我们进行仿真.点击”File-&gt;New-&gt;Cell View”,弹出”New
+File”窗口,在”Library”一栏中选择”test1_sim”,“Cell”一栏中命名为”inv_sim”,其他默认,点击”Ok”,弹出”Virtuoso
+Schematic Editor L Editing: test1_sim inv_sim
+schematic”,按下”i”键弹出”Add
+Instance”窗口,在”Library”一栏中选择”test1”,然后在”Cell”一栏中选择”inv”(就是把我们刚刚创建的symbol调出来),摆放好即可.</p>
+<p>下面我们设置偏置电压,按下”i”键,在”Library”一栏中选择”analogLib”,然后在”Cell”一栏中选择”vdc”,放置好电源后,点击电源图标,在左下角”Property
+Editor”下的”DC
+voltage”一栏设置参数,分别为”0,2”,再按下”i”键,在”Library”一栏中选择”basic”,然后在”Cell”一栏中选择”gnd”.</p>
+<p>之后我们添加输入信号,按下”i”键,在”Library”一栏中选择”analogLib”,然后在”Cell”一栏中选择”vpulse”,放置好后,设置参数”Voltage
+1=0”,“Voltage 2=2”,“Period=1/fin”,“Raise time=1n”,“Fall time=1n”,“Pulse
+width=0.5/fin”.这里”fin”是变量,为输入频率.</p>
+<p>设置完成后,点击”Check and Save”.然后点击”Launch-&gt;ADE L”,弹出”ADE L
+- test1_sim inv_sim schematic”界面,在”Design
+Variables”一栏中右键,点击”Copy from
+Cellview”,就可以将变量”fin”添加进去,然后在”Value”中设置其为50M(也就是20ns),然后在右边一栏点击”Choose
+Analyses”,在弹出的窗口中的”Analysis”下”tran”,“Stop
+Time”设置为100n(也就是5个周期),并且勾选”conservative”,然后点击”OK”.</p>
+<p>接下来在”ADE L - test1_sim inv_sim schematic”界面点击”Model
+Library”图标,将其他选项取消勾选,点击”&lt; Click here to add model file
+&gt;“,添加路径”/home/IC/Tech/TSMC-65nm(OA)/models/spectre”下面的”crn65lp_3d3_lk_v1d5.scs”,并且在”section”中选择”tt_33”和”stat_noise”,然后点击”Ok”.</p>
+<p>上面的设置完成后,再次在原理图界面点击”Check and Save”,然后在ADE
+L界面点击”Netlist and Run”开始仿真,等待一会之后就会弹出窗口.</p>
+<p>我们接下来回到原理图窗口,点击第三行图标”Direct Plot-&gt;Main
+Form”,然后点击第二行图标的”Defualt Selection
+Filter”,然后我们就可以单击电路图中的连线,就会弹出”Virtuoso (R)
+Visualization &amp; Analysis
+Xl”的波形图窗口,我们再点击其他连线,也会把其他连线上的波形加入到波形图中.</p>
+<h3 id="ic617-反相器">IC617 反相器</h3>
+<p>在桌面新建一个文件夹,
+把需要的工艺库文件夹复制粘贴到这个文件夹里面.</p>
+<p>在终端输入<code>virtuoso &amp;</code>打开Cadence, 打开Library
+Manager, 新建一个库, 随便命名, 路径就是刚刚在桌面创建的文件夹,
+然后Attach到AnalogLib库即可. 这时, 我们就可以在Library Path
+Editor里面把我们导入的工艺库(路径就是桌面上那个文件夹)添加进去.
+这时我们就可以开始做自己的项目了.</p>
+<p>再次新建一个库, 随便命名, 路径还是选择桌面上新建的那个文件夹,
+然后Attach到我们导入的那个工艺库上. 库建好后, 点击File-New-CellView,
+命名为INV, 然后就会弹出VSE界面. 点击Add Instance,
+Library一般就是选择AnalogLib和我们导入的工艺库. 然后就可以摆放器件了,
+摆放好之后要给它封装起来, 变成一个symbol, 我们需要pin脚, 比如input,
+output, VDD, GND之类的. 做完之后记得保存.</p>
+<p>然后在最上面一栏, 点击Create-Cellview-From Cellview…点击ok,
+然后在left/right/top/bottom
+pins分别输入我们给pin脚的命名(要和上一段一致). 保存之后,
+这一部分工作就完成了!</p>
+<p>这时我们再返回Library Manager里面, 点击Cell里面的INV,
+就可以在右边的View里面看到schematic和symbol了.</p>
+<p>接下来我们新建一个Testbench, 点击File-New-Cellview, 命名为INV_tb,
+然后我们直接在Add Instance里面调用新建的库,
+这个库里面就有我们刚刚设计好的INV,
+选择好之后可以看到它以symbol的形式出现, 我们把四个pin脚用线引出来.
+然后在Add Instance中的AnalogLib库里面选择vdc和gnd, 然后给线打上label,
+相同label的线代表是同一根线. 弄好之后记得保存.</p>
+<p>接下来进行仿真, 最上面一栏选择Launch-ADE L, 在Analog窗口右键选择Edit,
+我们选择tran(瞬态). Stop time输入10u, 选择moderate, 点击ok.
+在Output窗口右键点击Edit, 点击From Design,
+然后就可以点击我们想要观察的线的信号, 选完之后点击ok.
+弄完之后点击右边的绿色的按钮就可以跑仿真了, 这时就会出现波形图.</p>
 <h2 id="实验-功耗仿真">实验: 功耗仿真</h2>
 <p>work用户密码是111111</p>
 <p>IC1用户密码是123456</p>
 <p>home-work-project里面有cds.lib</p>
 <p>在终端输入Virtuoso &amp;打开Cadence.</p>
 <p>点击Tool-Library Manager操作界面</p>
-<p>几个重要的Library: AnalogLib, tsmc65. 新建的用户设计库要和工艺库连接起来.</p>
-<p>File-New-Library 命名为PowerSim, 可以看到cell里面是空的. 然后把设计库和tsmc连接起来. View选择Schematic. 点击ok就打开了</p>
-<ol>
-<li>新建lib, 命名为PowerSim, 在库中新建cell命名为nand2, 在tsmc18rf工艺库里面选择nmod2v和pmos2v等单元, 将参数修改如下:
-<ol>
+<p>几个重要的Library: AnalogLib, tsmc65.
+新建的用户设计库要和工艺库连接起来.</p>
+<p>File-New-Library 命名为PowerSim, 可以看到cell里面是空的.
+然后把设计库和tsmc连接起来. View选择Schematic. 点击ok就打开了</p>
+<ol type="1">
+<li>新建lib, 命名为PowerSim, 在库中新建cell命名为nand2,
+在tsmc18rf工艺库里面选择nmod2v和pmos2v等单元, 将参数修改如下:
+<ol type="1">
 <li>pl:180n; pw: 1u; fingers of pmos: 1</li>
 <li>nl:180n; nw: 1u; fingers of nmos: 1</li>
-</ol>
-</li>
+</ol></li>
 </ol>
 
     </div>
@@ -550,8 +680,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/07/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" rel="next" title="Python数据分析">
-                  Python数据分析 <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%89%E7%AB%A0/" rel="next" title="C语言:简单函数">
+                  C语言:简单函数 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

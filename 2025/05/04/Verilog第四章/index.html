@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Verilog HDL的设计思想和可综合特性 Verilog HDL主要用于电路设计和验证, 部分语言是为了电路的测试核仿真制定的, 因此其语言分为用于电路设计的可综合性语言和用于仿真测试的不可综合性语言. 对于可综合性语言, EDA综合工具可以将其综合为物理电路. 组合电路的设计 组合电路的特点是, 电路中任意时刻的稳态输出仅与当前时刻输入有关, 而与电路原来的状态无关. 组合电路没有记忆功能,">
+    <meta name="description" content="Verilog HDL的设计思想和可综合特性 Verilog HDL主要用于电路设计和验证, 部分语言是为了电路的测试核仿真制定的, 因此其语言分为用于电路设计的可综合性语言和用于仿真测试的不可综合性语言. 对于可综合性语言, EDA综合工具可以将其综合为物理电路. 组合电路的设计 组合电路的特点是, 电路中任意时刻的稳态输出仅与当前时刻输入有关, 而与电路原来的状态无关. 组合电">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第四章:Verilog HDL数字逻辑电路设计方法">
 <meta property="og:url" content="http://example.com/2025/05/04/Verilog%E7%AC%AC%E5%9B%9B%E7%AB%A0/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="Verilog HDL的设计思想和可综合特性 Verilog HDL主要用于电路设计和验证, 部分语言是为了电路的测试核仿真制定的, 因此其语言分为用于电路设计的可综合性语言和用于仿真测试的不可综合性语言. 对于可综合性语言, EDA综合工具可以将其综合为物理电路. 组合电路的设计 组合电路的特点是, 电路中任意时刻的稳态输出仅与当前时刻输入有关, 而与电路原来的状态无关. 组合电路没有记忆功能,">
+<meta property="og:description" content="Verilog HDL的设计思想和可综合特性 Verilog HDL主要用于电路设计和验证, 部分语言是为了电路的测试核仿真制定的, 因此其语言分为用于电路设计的可综合性语言和用于仿真测试的不可综合性语言. 对于可综合性语言, EDA综合工具可以将其综合为物理电路. 组合电路的设计 组合电路的特点是, 电路中任意时刻的稳态输出仅与当前时刻输入有关, 而与电路原来的状态无关. 组合电">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
 <meta property="article:modified_time" content="2026-01-14T23:10:50.976Z">
@@ -134,7 +134,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog-HDL%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E5%92%8C%E5%8F%AF%E7%BB%BC%E5%90%88%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">Verilog HDL的设计思想和可综合特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E7%94%B5%E8%B7%AF%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">组合电路的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">加法器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%AF%94%E8%BE%83%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">数据比较器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">数据选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">2.4.</span> <span class="nav-text">数字编码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E8%AF%91%E7%A0%81%E5%99%A8"><span class="nav-number">2.5.</span> <span class="nav-text">数字译码器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E7%94%B5%E8%B7%AF%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">时序电路的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">移位寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">序列信号发生器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%90%8C%E6%AD%A5%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">有限同步状态机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">习题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#verilog-hdl%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E5%92%8C%E5%8F%AF%E7%BB%BC%E5%90%88%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">Verilog
+HDL的设计思想和可综合特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E7%94%B5%E8%B7%AF%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">组合电路的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">加法器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%AF%94%E8%BE%83%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">数据比较器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">数据选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%BC%96%E7%A0%81%E5%99%A8"><span class="nav-number">2.4.</span> <span class="nav-text">数字编码器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E8%AF%91%E7%A0%81%E5%99%A8"><span class="nav-number">2.5.</span> <span class="nav-text">数字译码器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E7%94%B5%E8%B7%AF%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">时序电路的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">移位寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E4%BF%A1%E5%8F%B7%E5%8F%91%E7%94%9F%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">序列信号发生器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%90%8C%E6%AD%A5%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">有限同步状态机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">习题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -281,83 +282,92 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="Verilog-HDL的设计思想和可综合特性">Verilog HDL的设计思想和可综合特性</h2>
-<p>Verilog HDL主要用于电路设计和验证, 部分语言是为了电路的测试核仿真制定的, 因此其语言分为用于电路设计的可综合性语言和用于仿真测试的不可综合性语言. 对于可综合性语言, EDA综合工具可以将其综合为物理电路.</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="verilog-hdl的设计思想和可综合特性">Verilog
+HDL的设计思想和可综合特性</h2>
+<p>Verilog HDL主要用于电路设计和验证,
+部分语言是为了电路的测试核仿真制定的,
+因此其语言分为用于电路设计的可综合性语言和用于仿真测试的不可综合性语言.
+对于可综合性语言, EDA综合工具可以将其综合为物理电路.</p>
 <h2 id="组合电路的设计">组合电路的设计</h2>
-<p>组合电路的特点是, 电路中任意时刻的稳态输出仅与当前时刻输入有关, 而与电路原来的状态无关. 组合电路没有记忆功能, 只有输入到输出的通路, 没有输出到输入的回路.</p>
+<p>组合电路的特点是, 电路中任意时刻的稳态输出仅与当前时刻输入有关,
+而与电路原来的状态无关. 组合电路没有记忆功能, 只有输入到输出的通路,
+没有输出到输入的回路.</p>
 <p>组合电路的设计需要满足以下几个方面:</p>
-<ol>
-<li>首先, 所用的逻辑器件数目最少, 器件的种类最少, 且器件之间的连线最简单, 这样的电路称为&quot;最小化&quot;电路.</li>
-<li>其次, 为了满足速度要求， 应该使得级数尽量少, 以减少门电路的延时.</li>
+<ol type="1">
+<li>首先, 所用的逻辑器件数目最少, 器件的种类最少,
+且器件之间的连线最简单, 这样的电路称为”最小化”电路.</li>
+<li>其次, 为了满足速度要求， 应该使得级数尽量少,
+以减少门电路的延时.</li>
 <li>电路的功耗尽可能小, 工作时稳定可靠.</li>
 </ol>
 <p>组合电路的描述方式有4种:</p>
-<ol>
+<ol type="1">
 <li>真值表</li>
 <li>逻辑代数</li>
 <li>结构描述</li>
 <li>抽象描述</li>
 </ol>
-<p>例子: 设计一个举重裁判电路, 有A, B, C三个裁判, 只有当两个及以上通过, 才算通过.</p>
+<p>例子: 设计一个举重裁判电路, 有A, B, C三个裁判, 只有当两个及以上通过,
+才算通过.</p>
 <p>先列出真值表, 然后写出逻辑代数, 然后利用卡诺图化简</p>
 <p>真值表如下</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">A</th>
-<th style="text-align:center">B</th>
-<th style="text-align:center">C</th>
-<th style="text-align:center">OUT</th>
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: center;">C</th>
+<th style="text-align: center;">OUT</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 </tbody>
 </table>
@@ -365,27 +375,27 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">C\AB</th>
-<th style="text-align:center">00</th>
-<th style="text-align:center">01</th>
-<th style="text-align:center">10</th>
-<th style="text-align:center">11</th>
+<th style="text-align: center;">C</th>
+<th style="text-align: center;">00</th>
+<th style="text-align: center;">01</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><strong>0</strong></td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center"><em>1</em></td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><em>1</em></td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>1</strong></td>
-<td style="text-align:center">0</td>
-<td style="text-align:center"><em>1</em></td>
-<td style="text-align:center"><em>1</em></td>
-<td style="text-align:center"><em>1</em></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><em>1</em></td>
+<td style="text-align: center;"><em>1</em></td>
+<td style="text-align: center;"><em>1</em></td>
 </tr>
 </tbody>
 </table>
@@ -397,75 +407,74 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">A</th>
-<th style="text-align:center">B</th>
-<th style="text-align:center">C_IN</th>
-<th style="text-align:center">SUM</th>
-<th style="text-align:center">C_OUT</th>
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: center;">C_IN</th>
+<th style="text-align: center;">SUM</th>
+<th style="text-align: center;">C_OUT</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 </tbody>
 </table>
 <p>由此可知</p>
-<p>$ SUM=A\oplus B\oplus C_IN $<br>
-$ C_OUT=AB+(A\oplus B)C_IN $</p>
+<p>$ SUM=ABC_IN $ $ C_OUT=AB+(AB)C_IN $</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> one_bit_fulladder(A,B,C_IN,SUM,C_OUT)</span><br><span class="line">    <span class="keyword">input</span>   A,B,C_IN;</span><br><span class="line">    <span class="keyword">output</span>  SUM,C_OUT;</span><br><span class="line">        <span class="keyword">assign</span> SUM=(A^B)^C_IN;</span><br><span class="line">        <span class="keyword">assign</span> C_OUT=(A&amp;B)|((A^B)&amp;C_IN);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <p>另外一种行为级建模:</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> one_bit_fulladder(A,B,C_IN,SUM,C_OUT)</span><br><span class="line">    <span class="keyword">input</span>   A,B,C_IN;</span><br><span class="line">    <span class="keyword">output</span>  SUM,C_OUT;</span><br><span class="line">        <span class="keyword">assign</span> &#123;C_OUT,SUM&#125;=A+B+C_IN;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
@@ -473,129 +482,181 @@ $ C_OUT=AB+(A\oplus B)C_IN $</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> eight_bit_fulladder(A,B,C_IN,SUM,C_OUT)</span><br><span class="line">    <span class="keyword">input</span>  [<span class="number">7</span>:<span class="number">0</span>]   A,B;</span><br><span class="line">    <span class="keyword">input</span>          C_IN;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>]   SUM;</span><br><span class="line">    <span class="keyword">output</span>         C_OUT;</span><br><span class="line">        <span class="keyword">assign</span> &#123;C_OUT,SUM&#125;=A+B+C_IN;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <h3 id="数据比较器">数据比较器</h3>
 <p>先来看4位数据比较器的真值表</p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
 <thead>
 <tr>
-<th style="text-align:center">$A_3~B_3$</th>
-<th style="text-align:center">$A_2~B_2$</th>
-<th style="text-align:center">$A_1~B_1$</th>
-<th style="text-align:center">$A_0~B_0$</th>
-<th style="text-align:center">$C_{A&gt;B}$</th>
-<th style="text-align:center">$C_{A=B}$</th>
-<th style="text-align:center">$C_{A&lt;B}$</th>
-<th style="text-align:center">$F_{A&gt;B}$</th>
-<th style="text-align:center">$F_{A=B}$</th>
-<th style="text-align:center">$F_{A&lt;B}$</th>
+<th style="text-align: center;"><span
+class="math inline">\(A_3~B_3\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(A_2~B_2\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(A_1~B_1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(A_0~B_0\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(C_{A&gt;B}\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(C_{A=B}\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(C_{A&lt;B}\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(F_{A&gt;B}\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(F_{A=B}\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(F_{A&lt;B}\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">$A_3&gt;B_3$</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3&gt;B_3\)</span></td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$A_3&lt;B_3$</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3&lt;B_3\)</span></td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">$A_3=B_3$</td>
-<td style="text-align:center">$A_2&gt;B_2$</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3=B_3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_2&gt;B_2\)</span></td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$A_3=B_3$</td>
-<td style="text-align:center">$A_2&lt;B_2$</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3=B_3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_2&lt;B_2\)</span></td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">$A_3=B_3$</td>
-<td style="text-align:center">$A_2=B_2$</td>
-<td style="text-align:center">$A_1&gt;B_1$</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3=B_3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_2=B_2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_1&gt;B_1\)</span></td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$A_3=B_3$</td>
-<td style="text-align:center">$A_2=B_2$</td>
-<td style="text-align:center">$A_1&lt;B_1$</td>
-<td style="text-align:center">x x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3=B_3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_2=B_2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_1&lt;B_1\)</span></td>
+<td style="text-align: center;">x x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">$A_3=B_3$</td>
-<td style="text-align:center">$A_2=B_2$</td>
-<td style="text-align:center">$A_1=B_1$</td>
-<td style="text-align:center">$A_0&gt;B_0$</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3=B_3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_2=B_2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_1=B_1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_0&gt;B_0\)</span></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$A_3=B_3$</td>
-<td style="text-align:center">$A_2=B_2$</td>
-<td style="text-align:center">$A_1=B_1$</td>
-<td style="text-align:center">$A_0&lt;B_0$</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3=B_3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_2=B_2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_1=B_1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_0&lt;B_0\)</span></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">$A_3=B_3$</td>
-<td style="text-align:center">$A_2=B_2$</td>
-<td style="text-align:center">$A_1=B_1$</td>
-<td style="text-align:center">$A_0=B_0$</td>
-<td style="text-align:center">$C_{A&gt;B}$</td>
-<td style="text-align:center">$C_{A=B}$</td>
-<td style="text-align:center">$C_{A&lt;B}$</td>
-<td style="text-align:center">$C_{A&gt;B}$</td>
-<td style="text-align:center">$C_{A=B}$</td>
-<td style="text-align:center">$C_{A&lt;B}$</td>
+<td style="text-align: center;"><span
+class="math inline">\(A_3=B_3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_2=B_2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_1=B_1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(A_0=B_0\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(C_{A&gt;B}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(C_{A=B}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(C_{A&lt;B}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(C_{A&gt;B}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(C_{A=B}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(C_{A&lt;B}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -605,493 +666,605 @@ $ C_OUT=AB+(A\oplus B)C_IN $</p>
 <h3 id="数字编码器">数字编码器</h3>
 <p>3位二进制8线-3线编码器真值表</p>
 <table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
 <thead>
 <tr>
-<th style="text-align:center">$I_0$</th>
-<th style="text-align:center">$I_1$</th>
-<th style="text-align:center">$I_2$</th>
-<th style="text-align:center">$I_3$</th>
-<th style="text-align:center">$I_4$</th>
-<th style="text-align:center">$I_5$</th>
-<th style="text-align:center">$I_6$</th>
-<th style="text-align:center">$I_7$</th>
-<th style="text-align:center">$F_2$</th>
-<th style="text-align:center">$F_1$</th>
-<th style="text-align:center">$F_0$</th>
+<th style="text-align: center;"><span
+class="math inline">\(I_0\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(I_1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(I_2\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(I_3\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(I_4\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(I_5\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(I_6\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(I_7\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(F_2\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(F_1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(F_0\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 </tbody>
 </table>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> code8to3 (F,I);</span><br><span class="line">    <span class="keyword">input</span>  [<span class="number">7</span>:<span class="number">0</span>]    I;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>]    F;</span><br><span class="line">    <span class="keyword">reg</span>    [<span class="number">3</span>:<span class="number">0</span>]    F;</span><br><span class="line">    <span class="keyword">always</span> @(I) </span><br><span class="line">        <span class="keyword">case</span> (I)<span class="comment">//照着真值表把case和输出结果F写出来就行了</span></span><br><span class="line">            <span class="number">8&#x27;b00000001</span>:F=<span class="number">3&#x27;b000</span>; </span><br><span class="line">            <span class="number">8&#x27;b00000010</span>:F=<span class="number">3&#x27;b001</span>; </span><br><span class="line">            <span class="number">8&#x27;b00000100</span>:F=<span class="number">3&#x27;b010</span>; </span><br><span class="line">            <span class="number">8&#x27;b00001000</span>:F=<span class="number">3&#x27;b011</span>; </span><br><span class="line">            <span class="number">8&#x27;b00010000</span>:F=<span class="number">3&#x27;b100</span>; </span><br><span class="line">            <span class="number">8&#x27;b00100000</span>:F=<span class="number">3&#x27;b101</span>; </span><br><span class="line">            <span class="number">8&#x27;b01000000</span>:F=<span class="number">3&#x27;b110</span>; </span><br><span class="line">            <span class="number">8&#x27;b10000000</span>:F=<span class="number">3&#x27;b111</span>; </span><br><span class="line">            <span class="keyword">default</span>:    F=<span class="number">3&#x27;bx</span>;</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//8线-3线编码器</span></span><br></pre></td></tr></table></figure>
 <p>8线-3线优先编码器真值表</p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+</colgroup>
 <thead>
 <tr>
-<th style="text-align:center">$\overline{S}$</th>
-<th style="text-align:center">$\overline{I}_0$</th>
-<th style="text-align:center">$\overline{I}_1$</th>
-<th style="text-align:center">$\overline{I}_2$</th>
-<th style="text-align:center">$\overline{I}_3$</th>
-<th style="text-align:center">$\overline{I}_4$</th>
-<th style="text-align:center">$\overline{I}_5$</th>
-<th style="text-align:center">$\overline{I}_6$</th>
-<th style="text-align:center">$\overline{I}_7$</th>
-<th style="text-align:center">$\overline{Y}_2$</th>
-<th style="text-align:center">$\overline{Y}_1$</th>
-<th style="text-align:center">$\overline{Y}_0$</th>
-<th style="text-align:center">$\overline{Y}_s$</th>
-<th style="text-align:center">$\overline{Y}_{ex}$</th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{S}\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{I}_0\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{I}_1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{I}_2\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{I}_3\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{I}_4\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{I}_5\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{I}_6\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{I}_7\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_2\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_0\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_s\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_{ex}\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 </tbody>
 </table>
 <p>说明:</p>
-<ol>
-<li>$\overline{S}=1$时, 电路处于禁止工作状态, 此时无论是什么输入, 输出总为高电平.</li>
-<li>$\overline{S}=0$时, 电路工作, $\overline{I}_7$优先级最高, $\overline{I}_0$优先级最低. 当$\overline{I}_7=0$时, 无论其他输入端为何值, 输出总为$\overline{Y}_2\overline{Y}_1\overline{Y}_0=000$, 其他状态以此类推.</li>
-<li>对于$\overline{Y}_2\overline{Y}_1\overline{Y}_0=111$, 有三种状态,若$\overline{Y}<em>s\overline{Y}</em>{ex}=10$, 则表示电路工作且$\overline{I}_0$有编码信号输入; 若$\overline{Y}<em>s\overline{Y}</em>{ex}=01$, 则表示电路工作且没有编码信号输入; 若$\overline{Y}<em>s\overline{Y}</em>{ex}=11$, 则表示电路不工作.</li>
+<ol type="1">
+<li><span class="math inline">\(\overline{S}=1\)</span>时,
+电路处于禁止工作状态, 此时无论是什么输入, 输出总为高电平.</li>
+<li><span class="math inline">\(\overline{S}=0\)</span>时, 电路工作,
+<span class="math inline">\(\overline{I}_7\)</span>优先级最高, <span
+class="math inline">\(\overline{I}_0\)</span>优先级最低. 当<span
+class="math inline">\(\overline{I}_7=0\)</span>时, 无论其他输入端为何值,
+输出总为<span
+class="math inline">\(\overline{Y}_2\overline{Y}_1\overline{Y}_0=000\)</span>,
+其他状态以此类推.</li>
+<li>对于<span
+class="math inline">\(\overline{Y}_2\overline{Y}_1\overline{Y}_0=111\)</span>,
+有三种状态,若<span
+class="math inline">\(\overline{Y}_s\overline{Y}_{ex}=10\)</span>,
+则表示电路工作且<span
+class="math inline">\(\overline{I}_0\)</span>有编码信号输入; 若<span
+class="math inline">\(\overline{Y}_s\overline{Y}_{ex}=01\)</span>,
+则表示电路工作且没有编码信号输入; 若<span
+class="math inline">\(\overline{Y}_s\overline{Y}_{ex}=11\)</span>,
+则表示电路不工作.</li>
 </ol>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> mux8to3_p(data_out,Ys,Yex,sel,data_in);</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">2</span>:<span class="number">0</span>]     data_out;</span><br><span class="line">    <span class="keyword">output</span>           Ys,Yex;</span><br><span class="line">    <span class="keyword">input</span>  [<span class="number">7</span>:<span class="number">0</span>]     data_in;</span><br><span class="line">    <span class="keyword">input</span>            sel;</span><br><span class="line">    <span class="keyword">reg</span>    [<span class="number">2</span>:<span class="number">0</span>]     data_out;</span><br><span class="line">    <span class="keyword">reg</span>              Ys,Yex;</span><br><span class="line">        <span class="keyword">always</span>@(data_in <span class="keyword">or</span> sel)</span><br><span class="line">            <span class="keyword">if</span>(sel) &#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b111</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">begin</span></span><br><span class="line">                    <span class="keyword">casex</span> (data_in)</span><br><span class="line">                        <span class="number">8&#x27;b0</span>???????:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b000</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b0</span>&#125;;</span><br><span class="line">                        <span class="number">8&#x27;b10</span>??????:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b001</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b0</span>&#125;;</span><br><span class="line">                        <span class="number">8&#x27;b110</span>?????:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b010</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b0</span>&#125;;</span><br><span class="line">                        <span class="number">8&#x27;b1110</span>????:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b011</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b0</span>&#125;;</span><br><span class="line">                        <span class="number">8&#x27;b11110</span>???:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b100</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b0</span>&#125;;</span><br><span class="line">                        <span class="number">8&#x27;b111110</span>??:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b101</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b0</span>&#125;;</span><br><span class="line">                        <span class="number">8&#x27;b1111110</span>?:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b110</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b0</span>&#125;;</span><br><span class="line">                        <span class="number">8&#x27;b11111110</span>:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b111</span>,<span class="number">1&#x27;b1</span>,<span class="number">1&#x27;b0</span>&#125;;</span><br><span class="line">                        <span class="number">8&#x27;b11111111</span>:&#123;data_out,Ys,Yex&#125;=&#123;<span class="number">3&#x27;b111</span>,<span class="number">1&#x27;b0</span>,<span class="number">1&#x27;b1</span>&#125;;</span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <p>二进制转十进制的8421BCD编码器的真值表如下</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">十进制数</th>
-<th style="text-align:center">D</th>
-<th style="text-align:center">C</th>
-<th style="text-align:center">B</th>
-<th style="text-align:center">A</th>
+<th style="text-align: center;">十进制数</th>
+<th style="text-align: center;">D</th>
+<th style="text-align: center;">C</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: center;">A</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">$0(Y_0)$</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(0(Y_0)\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$1(Y_1)$</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(1(Y_1)\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">$2(Y_2)$</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(2(Y_2)\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$3(Y_3)$</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(3(Y_3)\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">$4(Y_4)$</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(4(Y_4)\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$5(Y_5)$</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(5(Y_5)\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">$6(Y_6)$</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(6(Y_6)\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$7(Y_7)$</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(7(Y_7)\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">$8(Y_8)$</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;"><span
+class="math inline">\(8(Y_8)\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">$9(Y_9)$</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;"><span
+class="math inline">\(9(Y_9)\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 </tbody>
 </table>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> BCD8421(data_out,data_in);</span><br><span class="line">    <span class="keyword">output</span>  [<span class="number">3</span>:<span class="number">0</span>]   data_out;</span><br><span class="line">    <span class="keyword">input</span>   [<span class="number">8</span>:<span class="number">0</span>]   data_in;</span><br><span class="line">    <span class="keyword">reg</span>     [<span class="number">3</span>:<span class="number">0</span>]   data_out;</span><br><span class="line">        <span class="keyword">always</span>@(data_in)</span><br><span class="line">            <span class="keyword">case</span>(data_in)<span class="comment">//照着真值表把输入case和输出的8421码抄下来就行</span></span><br><span class="line">                <span class="number">9&#x27;b000000000</span>:data_out=<span class="number">4&#x27;b0000</span>;</span><br><span class="line">                <span class="number">9&#x27;b000000001</span>:data_out=<span class="number">4&#x27;b0001</span>;</span><br><span class="line">                <span class="number">9&#x27;b000000010</span>:data_out=<span class="number">4&#x27;b0010</span>;</span><br><span class="line">                <span class="number">9&#x27;b000000100</span>:data_out=<span class="number">4&#x27;b0011</span>;</span><br><span class="line">                <span class="number">9&#x27;b000001000</span>:data_out=<span class="number">4&#x27;b0100</span>;</span><br><span class="line">                <span class="number">9&#x27;b000010000</span>:data_out=<span class="number">4&#x27;b0101</span>;</span><br><span class="line">                <span class="number">9&#x27;b000100000</span>:data_out=<span class="number">4&#x27;b0110</span>;</span><br><span class="line">                <span class="number">9&#x27;b001000000</span>:data_out=<span class="number">4&#x27;b0111</span>;</span><br><span class="line">                <span class="number">9&#x27;b010000000</span>:data_out=<span class="number">4&#x27;b1000</span>;</span><br><span class="line">                <span class="number">9&#x27;b100000000</span>:data_out=<span class="number">4&#x27;b1001</span>;</span><br><span class="line">                <span class="keyword">default</span>     :data_out=<span class="number">4&#x27;b0000</span>;</span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <h3 id="数字译码器">数字译码器</h3>
 <p>2线-4线译码器的真值表如下</p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
 <thead>
 <tr>
-<th style="text-align:center">$E$</th>
-<th style="text-align:center">$A_1$</th>
-<th style="text-align:center">$A_0$</th>
-<th style="text-align:center">$\overline{Y}_0$</th>
-<th style="text-align:center">$\overline{Y}_1$</th>
-<th style="text-align:center">$\overline{Y}_2$</th>
-<th style="text-align:center">$\overline{Y}_3$</th>
+<th style="text-align: center;"><span
+class="math inline">\(E\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(A_1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(A_0\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_0\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_1\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_2\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\overline{Y}_3\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">x</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 </tbody>
 </table>
 <p>说明:</p>
-<ol>
-<li>$N$位二进制译码器有$N$个输入, $2^N$个输出. $E$为使能端, $E=1$时禁止工作, $E=0$时正常工作.</li>
-<li>输出函数可以写为$\overline{Y}_i=\overline{\overline{E}m_i}$, 其中$m_i$表示输入地址变量的一个最小项.</li>
+<ol type="1">
+<li><span class="math inline">\(N\)</span>位二进制译码器有<span
+class="math inline">\(N\)</span>个输入, <span
+class="math inline">\(2^N\)</span>个输出. <span
+class="math inline">\(E\)</span>为使能端, <span
+class="math inline">\(E=1\)</span>时禁止工作, <span
+class="math inline">\(E=0\)</span>时正常工作.</li>
+<li>输出函数可以写为<span
+class="math inline">\(\overline{Y}_i=\overline{\overline{E}m_i}\)</span>,
+其中<span
+class="math inline">\(m_i\)</span>表示输入地址变量的一个最小项.</li>
 </ol>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> decode_2to4(Y,E,A);</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>] Y;</span><br><span class="line">    <span class="keyword">input</span>  [<span class="number">1</span>:<span class="number">0</span>] A;</span><br><span class="line">    <span class="keyword">input</span>        E;</span><br><span class="line">    <span class="keyword">reg</span>    [<span class="number">3</span>:<span class="number">0</span>] Y;</span><br><span class="line">        <span class="keyword">always</span>@(E <span class="keyword">or</span> A)</span><br><span class="line">            <span class="keyword">case</span>(&#123;E,A&#125;)</span><br><span class="line">                <span class="number">3&#x27;b1</span>?? :Y=<span class="number">4&#x27;b0000</span>;</span><br><span class="line">                <span class="number">3&#x27;b000</span> :Y=<span class="number">4&#x27;b0001</span>;</span><br><span class="line">                <span class="number">3&#x27;b001</span> :Y=<span class="number">4&#x27;b0010</span>;</span><br><span class="line">                <span class="number">3&#x27;b010</span> :Y=<span class="number">4&#x27;b0100</span>;</span><br><span class="line">                <span class="number">3&#x27;b011</span> :Y=<span class="number">4&#x27;b1000</span>;</span><br><span class="line">                <span class="keyword">default</span>:Y=<span class="number">4&#x27;b0000</span>;</span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <h2 id="时序电路的设计">时序电路的设计</h2>
-<p>时序逻辑电路的输出不仅与当前时刻输入变量的取值有关, 而且与电路的原状态(即过去的输入情况)有关. 与组合逻辑电路相比, 时序逻辑电路有两个特点:</p>
-<ol>
-<li>时序逻辑电路包括组合逻辑电路和存储电路两部分, 存储电路具有记忆功能, 通常由触发器构成.</li>
+<p>时序逻辑电路的输出不仅与当前时刻输入变量的取值有关,
+而且与电路的原状态(即过去的输入情况)有关. 与组合逻辑电路相比,
+时序逻辑电路有两个特点:</p>
+<ol type="1">
+<li>时序逻辑电路包括组合逻辑电路和存储电路两部分, 存储电路具有记忆功能,
+通常由触发器构成.</li>
 <li>存储电路的状态反馈到组合逻辑电路的输入端.</li>
 </ol>
-<p>时序逻辑电路按照状态变化的特点, 可以分为同步时序逻辑电路和异步时序逻辑电路. 同步时序逻辑电路中, 电路状态的变化在同一时钟脉冲作用下发生, 即各个触发器的状态转换同一时刻完成. 在异步时序逻辑电路中, 没有统一的时钟脉冲信号, 即各触发器的状态转换是异步完成的.</p>
+<p>时序逻辑电路按照状态变化的特点,
+可以分为同步时序逻辑电路和异步时序逻辑电路. 同步时序逻辑电路中,
+电路状态的变化在同一时钟脉冲作用下发生,
+即各个触发器的状态转换同一时刻完成. 在异步时序逻辑电路中,
+没有统一的时钟脉冲信号, 即各触发器的状态转换是异步完成的.</p>
 <p>时序逻辑电路功能的描述方式有三种:</p>
-<ol>
+<ol type="1">
 <li>逻辑方程</li>
 <li>状态转移表和状态转移图</li>
 <li>时序图</li>
 </ol>
 <p>Verilog HDL对于时序逻辑电路的设计也有三种方式:</p>
-<ol>
+<ol type="1">
 <li>状态转移图描述</li>
 <li>基于状态化简的结构性描述</li>
 <li>Verilog HDL抽象描述</li>
 </ol>
 <h3 id="触发器">触发器</h3>
-<p>触发器是时序逻辑的最基本电路单元. 根据功能的不同, 触发器还可以有置位, 复位, 使能, 选择等功能.</p>
+<p>触发器是时序逻辑的最基本电路单元. 根据功能的不同, 触发器还可以有置位,
+复位, 使能, 选择等功能.</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> DFF(q,clk,data_in)</span><br><span class="line">    <span class="keyword">output</span> q;</span><br><span class="line">    <span class="keyword">input</span>  clk,data_in;</span><br><span class="line">    <span class="keyword">reg</span>    q;</span><br><span class="line">        <span class="keyword">always</span>@(<span class="keyword">posedge</span> clk) q&lt;=data_in;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//最简单的D触发器</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> DFF(q,clk,reset,data_in)</span><br><span class="line">    <span class="keyword">output</span> q;</span><br><span class="line">    <span class="keyword">input</span>  clk,reset,data_in;</span><br><span class="line">    <span class="keyword">reg</span>    q;</span><br><span class="line">        <span class="keyword">always</span>@(<span class="keyword">posedge</span> clk);</span><br><span class="line">            <span class="keyword">if</span>(!reset) q&lt;=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span>       q&lt;=data_in;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//同步清零的D触发器</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> DFF(q,clk,reset,data_in)</span><br><span class="line">    <span class="keyword">output</span> q;</span><br><span class="line">    <span class="keyword">input</span>  clk,reset,data_in;</span><br><span class="line">    <span class="keyword">reg</span>    q;</span><br><span class="line">        <span class="keyword">always</span>@(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> reset);</span><br><span class="line">            <span class="keyword">if</span>(!reset) q&lt;=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span>       q&lt;=data_in;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//异步清零的D触发器</span></span><br></pre></td></tr></table></figure>
@@ -1099,38 +1272,74 @@ $ C_OUT=AB+(A\oplus B)C_IN $</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> TFF (T,clk,rst,out);</span><br><span class="line">    <span class="keyword">input</span>  T,clk,rst;</span><br><span class="line">    <span class="keyword">output</span> out;</span><br><span class="line">    <span class="keyword">reg</span> out;</span><br><span class="line">        <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst)</span><br><span class="line">            <span class="keyword">if</span>(!rst)    out&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(T)  out&lt;=~out;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//T触发器</span></span><br></pre></td></tr></table></figure>
 <h3 id="计数器">计数器</h3>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> comp2bit(Q,clk,reset);</span><br><span class="line">    <span class="keyword">output</span>  Q;</span><br><span class="line">    <span class="keyword">input</span>   clk,reset;</span><br><span class="line">    <span class="keyword">reg</span>     Q;</span><br><span class="line">        <span class="keyword">always</span>@(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> reset)</span><br><span class="line">            <span class="keyword">if</span>(!reset)  Q&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">            <span class="keyword">else</span>        Q&lt;=~Q;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//二进制计数器</span></span><br></pre></td></tr></table></figure>
-<p>对于$M$进制的计数器, 首先应该确定计数器所需触发器的个数. $N$个触发器对应了$2^N$个状态, 所以应该有$2^N&gt;M$. 例如, 下面的十一进制计数器最少需要$4$个触发器.</p>
+<p>对于<span class="math inline">\(M\)</span>进制的计数器,
+首先应该确定计数器所需触发器的个数. <span
+class="math inline">\(N\)</span>个触发器对应了<span
+class="math inline">\(2^N\)</span>个状态, 所以应该有<span
+class="math inline">\(2^N&gt;M\)</span>. 例如,
+下面的十一进制计数器最少需要<span
+class="math inline">\(4\)</span>个触发器.</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> counter (clk,rst,count);</span><br><span class="line">    <span class="keyword">input</span>           clk,rst;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>]    count;</span><br><span class="line">    <span class="keyword">reg</span>    [<span class="number">3</span>:<span class="number">0</span>]    count;</span><br><span class="line">        <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">            <span class="keyword">if</span>(rst)                 count&lt;=<span class="number">4&#x27;b0000</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(count==<span class="number">4&#x27;b1010</span>) count&lt;=<span class="number">4&#x27;b0000</span>;<span class="comment">//计数的范围是4&#x27;b0000~4&#x27;b1010，也就是11</span></span><br><span class="line">            <span class="keyword">else</span>                    count&lt;=count+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//11进制计数器，在此基础上可以修改成任意进制计数器，只需要调整count的位宽和else if括号里面的值即可</span></span><br></pre></td></tr></table></figure>
 <h3 id="移位寄存器">移位寄存器</h3>
-<p>$N$位环形移位寄存器由$N$个寄存器组成, 将每个寄存器的输出作为下一个寄存器的输入, 并将高位寄存器的输出作为循环的输入.</p>
+<p><span class="math inline">\(N\)</span>位环形移位寄存器由<span
+class="math inline">\(N\)</span>个寄存器组成,
+将每个寄存器的输出作为下一个寄存器的输入,
+并将高位寄存器的输出作为循环的输入.</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> shiftregist (D,clk,rst);</span><br><span class="line">    <span class="keyword">parameter</span> width=<span class="number">4</span>;</span><br><span class="line">    <span class="keyword">input</span>               clk,rst;</span><br><span class="line">    <span class="keyword">output</span> [width-<span class="number">1</span>:<span class="number">0</span>]  D;</span><br><span class="line">    <span class="keyword">reg</span>    [width-<span class="number">1</span>:<span class="number">0</span>]  D;</span><br><span class="line">        <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) </span><br><span class="line">            <span class="keyword">if</span>(!rst) D&lt;=<span class="number">4&#x27;b0000</span>;</span><br><span class="line">            <span class="keyword">else</span>     D&lt;=&#123;D[width-<span class="number">2</span>:<span class="number">0</span>],D[width-<span class="number">1</span>]&#125;;<span class="comment">//把第一位搬到最后一位，第一位之后的位整体前移一位</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//环形移位寄存器</span></span><br></pre></td></tr></table></figure>
 <h3 id="序列信号发生器">序列信号发生器</h3>
-<p>序列信号发生器按照循环长度$M$与触发器数目$n$的关系可以分成三种:</p>
-<ol>
-<li>最大循环长度序列码, $M=2^n$</li>
-<li>最长线性序列码($M$序列码), $M=2^n-1$</li>
-<li>任意循环长度序列码, $M&lt;2^n$</li>
+<p>序列信号发生器按照循环长度<span
+class="math inline">\(M\)</span>与触发器数目<span
+class="math inline">\(n\)</span>的关系可以分成三种:</p>
+<ol type="1">
+<li>最大循环长度序列码, <span class="math inline">\(M=2^n\)</span></li>
+<li>最长线性序列码(<span class="math inline">\(M\)</span>序列码), <span
+class="math inline">\(M=2^n-1\)</span></li>
+<li>任意循环长度序列码, <span
+class="math inline">\(M&lt;2^n\)</span></li>
 </ol>
-<p>序列信号发生器可以由纯时序逻辑电路构成, 也可以由时序和组合逻辑电路组成.</p>
+<p>序列信号发生器可以由纯时序逻辑电路构成,
+也可以由时序和组合逻辑电路组成.</p>
 <p>例: 用Verilog HDL设计一个产生100111序列的序列信号发生器.</p>
-<p>第一种方法是采用循环移位寄存器, 在电路工作前, 先把需要的序列码放入移位寄存器中, 然后循环移位, 将最高位输出.</p>
+<p>第一种方法是采用循环移位寄存器, 在电路工作前,
+先把需要的序列码放入移位寄存器中, 然后循环移位, 将最高位输出.</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> signal_maker (out,clk,load,D);</span><br><span class="line">    <span class="keyword">parameter</span> M=<span class="number">6</span>;</span><br><span class="line">    <span class="keyword">input</span>               clk,load;</span><br><span class="line">    <span class="keyword">input</span>  [M-<span class="number">1</span>:<span class="number">0</span>]      D;</span><br><span class="line">    <span class="keyword">output</span>              out;</span><br><span class="line">    <span class="keyword">reg</span>    [M-<span class="number">1</span>:<span class="number">0</span>]      Q;</span><br><span class="line">        <span class="keyword">initial</span> Q=<span class="number">6&#x27;b100111</span>;            <span class="comment">//初始化序列码</span></span><br><span class="line">            <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">                <span class="keyword">if</span>(load) Q&lt;=D;          <span class="comment">//可以根据需要加载新的序列码</span></span><br><span class="line">                <span class="keyword">else</span>     Q&lt;=&#123;Q[M-<span class="number">2</span>:<span class="number">0</span>],Q[M-<span class="number">1</span>]&#125;;<span class="comment">//把第一位搬到最后一位，第一位之后的位整体前移一位</span></span><br><span class="line">        <span class="keyword">assign</span> out=Q[M-<span class="number">1</span>];<span class="comment">//利用连续赋值语句输出最高位，组合电路</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//这是一个产生100111序列的信号发生器，由时序逻辑组成</span></span><br></pre></td></tr></table></figure>
-<p>第二种方法是利用时序和组合逻辑电路设计序列信号发生器, 设计步骤如下:</p>
-<ol>
-<li>根据给定的序列信号循环周期$M$, 确定移位寄存器的个数$n$, $2^{n-1}&lt;M\leq 2^n$</li>
-<li>确定移位寄存器的$M$个独立状态, 将给定的序列码按照移位规律每$n$位一组, 划分为$M$个状态. 若$M$个状态里出现重复现象, 则应该增加移位寄存器的个数. 用$n+1$位重复上述过程, 直至划分为$M$个独立状态.</li>
-<li>根据$M$个不同的状态列出移位寄存器的态序表和反馈函数表, 求出反馈函数$F$的表达式</li>
+<p>第二种方法是利用时序和组合逻辑电路设计序列信号发生器,
+设计步骤如下:</p>
+<ol type="1">
+<li>根据给定的序列信号循环周期<span class="math inline">\(M\)</span>,
+确定移位寄存器的个数<span class="math inline">\(n\)</span>, <span
+class="math inline">\(2^{n-1}&lt;M\leq 2^n\)</span></li>
+<li>确定移位寄存器的<span class="math inline">\(M\)</span>个独立状态,
+将给定的序列码按照移位规律每<span
+class="math inline">\(n\)</span>位一组, 划分为<span
+class="math inline">\(M\)</span>个状态. 若<span
+class="math inline">\(M\)</span>个状态里出现重复现象,
+则应该增加移位寄存器的个数. 用<span
+class="math inline">\(n+1\)</span>位重复上述过程, 直至划分为<span
+class="math inline">\(M\)</span>个独立状态.</li>
+<li>根据<span
+class="math inline">\(M\)</span>个不同的状态列出移位寄存器的态序表和反馈函数表,
+求出反馈函数<span class="math inline">\(F\)</span>的表达式</li>
 <li>检查自启动功能</li>
 </ol>
-<p>对于100111的序列信号发生器, 首先确定所需的移位寄存器的个数$n$, 因为$M=6$, 所以$n\geq 3$, 然后确定寄存器的6个独立状态, 按照移位规律每三个一组:100, 001, 011, 111, 111, 110, 其中状态111出现了两次, 这是不行的, 因此取$n=4$, 重新划分状态可得: 1001, 0011, 0111, 1111, 1110, 1100. 没有重复状态, 所以$n=4$. 第三, 列出态序表和反馈激励函数表如下:</p>
+<p>对于100111的序列信号发生器, 首先确定所需的移位寄存器的个数<span
+class="math inline">\(n\)</span>, 因为<span
+class="math inline">\(M=6\)</span>, 所以<span
+class="math inline">\(n\geq 3\)</span>, 然后确定寄存器的6个独立状态,
+按照移位规律每三个一组:100, 001, 011, 111, 111, 110,
+其中状态111出现了两次, 这是不行的, 因此取<span
+class="math inline">\(n=4\)</span>, 重新划分状态可得: 1001, 0011, 0111,
+1111, 1110, 1100. 没有重复状态, 所以<span
+class="math inline">\(n=4\)</span>. 第三,
+列出态序表和反馈激励函数表如下:</p>
 <table>
 <thead>
 <tr>
-<th>$Q_0$</th>
-<th>$Q_1$</th>
-<th>$Q_2$</th>
-<th>$Q_3$</th>
-<th>$F$</th>
+<th><span class="math inline">\(Q_0\)</span></th>
+<th><span class="math inline">\(Q_1\)</span></th>
+<th><span class="math inline">\(Q_2\)</span></th>
+<th><span class="math inline">\(Q_3\)</span></th>
+<th><span class="math inline">\(F\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1179,19 +1388,22 @@ $ C_OUT=AB+(A\oplus B)C_IN $</p>
 </tbody>
 </table>
 <p>可得反馈激励函数</p>
-<p>$$F=\overline{Q_3}+\overline{Q_1}\cdot\overline{Q_0}+Q_3+\overline{Q_2}$$</p>
+<p><span
+class="math display">\[F=\overline{Q_3}+\overline{Q_1}\cdot\overline{Q_0}+Q_3+\overline{Q_2}\]</span></p>
 <p>由此可得</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> signal_maker(out, clk, load, D);</span><br><span class="line">    <span class="keyword">parameter</span> M=<span class="number">4</span>;</span><br><span class="line">    <span class="keyword">input</span>           clk, load;</span><br><span class="line">    <span class="keyword">input</span>   [M-<span class="number">1</span>:<span class="number">0</span>] D;</span><br><span class="line">    <span class="keyword">output</span>          out;</span><br><span class="line">    <span class="keyword">reg</span>     [M-<span class="number">1</span>:<span class="number">0</span>] Q;</span><br><span class="line">    <span class="keyword">wire</span>            w1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)                            <span class="comment">//时序电路部分, 移位寄存器</span></span><br><span class="line">        <span class="keyword">if</span> (load) Q&lt;=D;</span><br><span class="line">        <span class="keyword">else</span>      Q&lt;=&#123;Q[M-<span class="number">2</span>:<span class="number">0</span>], w1&#125;;</span><br><span class="line">    <span class="keyword">assign</span> w1=(~Q[<span class="number">3</span>])|(~Q[<span class="number">1</span>]&amp;(~Q[<span class="number">0</span>]))|(Q[<span class="number">3</span>]&amp;(~Q[<span class="number">2</span>]));<span class="comment">//组合逻辑电路, 反馈网络</span></span><br><span class="line">    <span class="keyword">assign</span> out=Q[M-<span class="number">1</span>];</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <p>第三种方法是由计数器构成, 分成两步:</p>
 <p>第一步: 根据序列码M的长度设计M进制计数器, 状态自定.</p>
 <p>第二步: 按照计数器的状态转移关系和序列码的要求设计组合输出电路</p>
-<p>对于100111序列码的信号发生器, 序列信号的M值为6, 因为需要选用模6计数器; 计数器的状态选择从000到101, 得到输出组合逻辑真值表如下:</p>
+<p>对于100111序列码的信号发生器, 序列信号的M值为6,
+因为需要选用模6计数器; 计数器的状态选择从000到101,
+得到输出组合逻辑真值表如下:</p>
 <table>
 <thead>
 <tr>
-<th>$Q_2$</th>
-<th>$Q_1$</th>
-<th>$Q_0$</th>
+<th><span class="math inline">\(Q_2\)</span></th>
+<th><span class="math inline">\(Q_1\)</span></th>
+<th><span class="math inline">\(Q_0\)</span></th>
 <th>out</th>
 </tr>
 </thead>
@@ -1235,126 +1447,151 @@ $ C_OUT=AB+(A\oplus B)C_IN $</p>
 </tbody>
 </table>
 <p>画出卡诺图并化简得</p>
-<p>$$\rm{out}=Q_2+\overline{Q_1}~\overline{Q_0}+Q_1Q_0$$</p>
+<p><span
+class="math display">\[\rm{out}=Q_2+\overline{Q_1}~\overline{Q_0}+Q_1Q_0\]</span></p>
 <p>由此可得</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> signal_maker(out, clk, rst);</span><br><span class="line">    <span class="keyword">parameter</span> M=<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">input</span>       clk, rst;</span><br><span class="line">    <span class="keyword">output</span>      out;</span><br><span class="line">    <span class="keyword">reg</span> [M-<span class="number">1</span>:<span class="number">0</span>] counter;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)<span class="comment">//计数器模块，为时序逻辑电路</span></span><br><span class="line">        <span class="keyword">if</span> (!rst)   counter&lt;=<span class="number">3&#x27;b000</span>;</span><br><span class="line">        <span class="keyword">else</span>        counter&lt;=counter+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">assign</span> out=counter[<span class="number">2</span>]|((~counter[<span class="number">1</span>])&amp;(~counter[<span class="number">2</span>]))|(counter[<span class="number">1</span>]&amp;counter[<span class="number">0</span>]);<span class="comment">//输出模块，为组合逻辑电路</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <h2 id="有限同步状态机">有限同步状态机</h2>
-<p>有限状态机分为同步和异步, 这里只讨论同步. 有限状态机是时序电路的通用模型, 即任何时序电路都可以表示成有限状态机. 由时序电路表示的有限状态机中, 各个状态之间的转移总是在时钟的触发下进行的, 状态信息储存在寄存器中. 因为状态个数是有限的, 所以称为有限同步状态机.</p>
-<p>和时序电路一样, 有限同步状态机也由两部分组成: 存储电路和组合逻辑电路. 存储电路用来生成状态机的状态, 组合逻辑电路用来提供输出以及状态机跳转的条件.</p>
-<p>根据输出信号的产生方式, 有限状态机可以分成Mealy型和Moore型, Mealy型状态机的输出和当前状态和输入有关, Moore型状态机的输出只依赖于当前状态而与输入无关.</p>
-<p>在Verilog HDL中, 有限状态机的描述方式有很多, 一般有两段式和三段式.</p>
+<p>有限状态机分为同步和异步, 这里只讨论同步.
+有限状态机是时序电路的通用模型, 即任何时序电路都可以表示成有限状态机.
+由时序电路表示的有限状态机中,
+各个状态之间的转移总是在时钟的触发下进行的, 状态信息储存在寄存器中.
+因为状态个数是有限的, 所以称为有限同步状态机.</p>
+<p>和时序电路一样, 有限同步状态机也由两部分组成: 存储电路和组合逻辑电路.
+存储电路用来生成状态机的状态,
+组合逻辑电路用来提供输出以及状态机跳转的条件.</p>
+<p>根据输出信号的产生方式, 有限状态机可以分成Mealy型和Moore型,
+Mealy型状态机的输出和当前状态和输入有关,
+Moore型状态机的输出只依赖于当前状态而与输入无关.</p>
+<p>在Verilog HDL中, 有限状态机的描述方式有很多,
+一般有两段式和三段式.</p>
 <p>两段式:</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个进程, 同步时序always模块, 格式化描述次态寄存器迁移到现态寄存器</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst)<span class="comment">//异步复位</span></span><br><span class="line">    <span class="keyword">if</span>(!rst) current_state&lt;=IDLE;</span><br><span class="line">    <span class="keyword">else</span>     current_state&lt;=next_state;</span><br><span class="line"><span class="comment">//第二个进程, 组合逻辑always模块, 描述状态转移条件判断</span></span><br><span class="line"><span class="keyword">always</span> @(current_state <span class="keyword">or</span> 其他输入信号)</span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        next_state=x;</span><br><span class="line">        <span class="keyword">case</span>(current_state)</span><br><span class="line">            S1: <span class="keyword">if</span>(...)</span><br><span class="line">                next_state=S2;</span><br><span class="line">                out1&lt;=<span class="number">1&#x27;b1</span>;</span><br><span class="line">            ...</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p>三段式描述方法</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个进程, 同步时序always模块, 格式化描述次态寄存器迁移到现态寄存器</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst)<span class="comment">//异步复位</span></span><br><span class="line">    <span class="keyword">if</span>(!rst) current_state&lt;=IDLE;</span><br><span class="line">    <span class="keyword">else</span>     current_state&lt;=next_state;</span><br><span class="line"><span class="comment">//第二个进程, 组合逻辑always模块, 描述状态转移条件判断</span></span><br><span class="line"><span class="keyword">always</span> @(current_state <span class="keyword">or</span> 输入信号)</span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        next_state=x;</span><br><span class="line">        <span class="keyword">case</span>(current_state)</span><br><span class="line">            S1: <span class="keyword">if</span>(...)</span><br><span class="line">            next_state=S2;</span><br><span class="line">            ...</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="comment">//第三个进程, 同步时序always模块, 格式化描述次态寄存器输出</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst)</span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">    ...<span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">case</span>(next_state <span class="keyword">or</span> 输入信号)</span><br><span class="line">            S1:</span><br><span class="line">            out1&lt;=<span class="number">1&#x27;b1</span>;</span><br><span class="line">            S2:</span><br><span class="line">            out1&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">            <span class="keyword">default</span>:...</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p>例: 设计顺序脉冲发生器</p>
-<p>以4位顺序脉冲发射器为例, 它有4路输出$S_0, S_1, S_2, S_3$, 每路输出上高电平脉冲依次出现, 输出在1000, 0100, 0010, 0001之间循环. 4位顺序脉冲发生器的状态转移图如下:</p>
-<p>$$S_0:00/1000\rightarrow S_1:01/0100\rightarrow S_2:10/0010\rightarrow S_3:11/0001\rightarrow S_0\cdots$$</p>
+<p>以4位顺序脉冲发射器为例, 它有4路输出<span class="math inline">\(S_0,
+S_1, S_2, S_3\)</span>, 每路输出上高电平脉冲依次出现, 输出在1000, 0100,
+0010, 0001之间循环. 4位顺序脉冲发生器的状态转移图如下:</p>
+<p><span class="math display">\[S_0:00/1000\rightarrow
+S_1:01/0100\rightarrow S_2:10/0010\rightarrow S_3:11/0001\rightarrow
+S_0\cdots\]</span></p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> state4(out, clk, rst);</span><br><span class="line">    <span class="keyword">input</span>        clk, rst;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>] out;</span><br><span class="line">    <span class="keyword">reg</span>    [<span class="number">3</span>:<span class="number">0</span>] out;</span><br><span class="line">    <span class="keyword">reg</span>    [<span class="number">1</span>:<span class="number">0</span>] state, next_state;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(state)</span><br><span class="line">        <span class="keyword">case</span>(state)</span><br><span class="line">            <span class="number">2&#x27;b00</span>:</span><br><span class="line">                <span class="keyword">begin</span></span><br><span class="line">                    out&lt;=<span class="number">4&#x27;b0001</span>;</span><br><span class="line">                    next_state&lt;=<span class="number">2&#x27;b01</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="number">2&#x27;b01</span>:</span><br><span class="line">                <span class="keyword">begin</span></span><br><span class="line">                    out&lt;=<span class="number">4&#x27;b0010</span>;</span><br><span class="line">                    next_state&lt;=<span class="number">2&#x27;b10</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="number">2&#x27;b10</span>:</span><br><span class="line">                <span class="keyword">begin</span></span><br><span class="line">                    out&lt;=<span class="number">4&#x27;b0100</span>;</span><br><span class="line">                    next_state&lt;=<span class="number">2&#x27;b11</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="number">2&#x27;b11</span>:</span><br><span class="line">                <span class="keyword">begin</span></span><br><span class="line">                    out&lt;=<span class="number">4&#x27;b1000</span>;</span><br><span class="line">                    next_state&lt;=<span class="number">2&#x27;b00</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst)</span><br><span class="line">        <span class="keyword">if</span>(!rst)    state&lt;=<span class="number">2&#x27;b00</span>;</span><br><span class="line">        <span class="keyword">else</span>        state&lt;=next_state;</span><br><span class="line"><span class="keyword">endmodule</span>   </span><br></pre></td></tr></table></figure>
-<p>例: 设计一个自动售报机, 报纸价格为每份8角, 纸币有1角, 2角, 5角, 1元, 其他情况不考虑.</p>
-<p>设$S_0\sim S_7$为状态机的8个状态, 其中下标表示已经投币的总和, 如$S_1$为投入1角, $S_2$为投入2角. $M$表示输入, $M1$表示投入1角, $M2$表示投入2角, $M5$表示投入5角, $M10$表示投入1元.</p>
-<p><code>data_out=1</code>表示给出报纸, <code>data_out_return1=1</code>表示找回1角, <code>data_out_return2=1</code>表示找回2角.</p>
+<p>例: 设计一个自动售报机, 报纸价格为每份8角, 纸币有1角, 2角, 5角, 1元,
+其他情况不考虑.</p>
+<p>设<span class="math inline">\(S_0\sim S_7\)</span>为状态机的8个状态,
+其中下标表示已经投币的总和, 如<span
+class="math inline">\(S_1\)</span>为投入1角, <span
+class="math inline">\(S_2\)</span>为投入2角. <span
+class="math inline">\(M\)</span>表示输入, <span
+class="math inline">\(M1\)</span>表示投入1角, <span
+class="math inline">\(M2\)</span>表示投入2角, <span
+class="math inline">\(M5\)</span>表示投入5角, <span
+class="math inline">\(M10\)</span>表示投入1元.</p>
+<p><code>data_out=1</code>表示给出报纸,
+<code>data_out_return1=1</code>表示找回1角,
+<code>data_out_return2=1</code>表示找回2角.</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> auto_sellor(current_state, data_out, data_out_return1, data_out_return2, clk, rst, data_in);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">parameter</span> state_width=<span class="number">3</span>, data_in_width=<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">output</span> [state_width-<span class="number">1</span>:<span class="number">0</span>]   current_state;</span><br><span class="line">    <span class="keyword">output</span>                     data_out, data_out_return1, data_out_return2;</span><br><span class="line">    <span class="keyword">input</span>  [data_in_width-<span class="number">1</span>:<span class="number">0</span>] data_in;</span><br><span class="line">    <span class="keyword">input</span>                      clk, rst;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">reg</span>    [state_width-<span class="number">1</span>:<span class="number">0</span>]   current_state, next_state;</span><br><span class="line">    <span class="keyword">reg</span>                        data_out, data_out_return1, data_out_return2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(current_state <span class="keyword">or</span> data_in)</span><br><span class="line">        <span class="keyword">case</span>(current_state)</span><br><span class="line">        <span class="comment">//下面一部分是S_0</span></span><br><span class="line">            <span class="number">3&#x27;b000</span>: <span class="keyword">case</span>(data_in)</span><br><span class="line">                        <span class="number">3&#x27;b000</span>:                             <span class="comment">//不操作</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b000</span>;  <span class="comment">//保持S_0</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b001</span>:                             <span class="comment">//投入1角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b001</span>;  <span class="comment">//跳转到S_1</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b010</span>:                             <span class="comment">//投入2角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b010</span>;  <span class="comment">//跳转到S_2</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b011</span>:                             <span class="comment">//投入5角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b101</span>;  <span class="comment">//跳转到S_5</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b100</span>:                             <span class="comment">//投入1元</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b000</span>;  <span class="comment">//跳转到S_0</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//给出报纸</span></span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//找回2角</span></span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line">        <span class="comment">//下面一部分是S_1</span></span><br><span class="line">            <span class="number">3&#x27;b001</span>: <span class="keyword">case</span>(data_in)</span><br><span class="line">                        <span class="number">3&#x27;b000</span>:                             <span class="comment">//不操作</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b001</span>;  <span class="comment">//保持S_1</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b001</span>:                             <span class="comment">//投入1角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b010</span>;  <span class="comment">//跳转到S_2</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b010</span>:                             <span class="comment">//投入2角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b011</span>;  <span class="comment">//跳转到S_3</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b011</span>:                             <span class="comment">//投入5角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b110</span>;  <span class="comment">//跳转到S_6</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line">        <span class="comment">//下面一部分是S_2</span></span><br><span class="line">            <span class="number">3&#x27;b010</span>: <span class="keyword">case</span>(data_in)</span><br><span class="line">                        <span class="number">3&#x27;b000</span>:                             <span class="comment">//不操作</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b010</span>;  <span class="comment">//保持S_2</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b001</span>:                             <span class="comment">//投入1角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b011</span>;  <span class="comment">//跳转到S_3</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b010</span>:                             <span class="comment">//投入2角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b100</span>;  <span class="comment">//跳转到S_4</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b011</span>:                             <span class="comment">//投入5角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b111</span>;  <span class="comment">//跳转到S_7</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line">        <span class="comment">//下面是S_3</span></span><br><span class="line">            <span class="number">3&#x27;b011</span>: <span class="keyword">case</span>(data_in)</span><br><span class="line">                        <span class="number">3&#x27;b000</span>:                             <span class="comment">//不操作</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b011</span>;  <span class="comment">//保持S_3</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b001</span>:                             <span class="comment">//投入1角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b100</span>;  <span class="comment">//跳转到S_4</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b010</span>:                             <span class="comment">//投入2角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b101</span>;  <span class="comment">//跳转到S_5</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b011</span>:                             <span class="comment">//投入5角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b000</span>;  <span class="comment">//跳转到S_0</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//给出报纸</span></span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line">        <span class="comment">//下面是S_4$</span></span><br><span class="line">            <span class="number">3&#x27;b100</span>: <span class="keyword">case</span>(data_in)</span><br><span class="line">                        <span class="number">3&#x27;b000</span>:                             <span class="comment">//不操作</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b100</span>;  <span class="comment">//保持S_4</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b001</span>:                             <span class="comment">//投入1角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b101</span>;  <span class="comment">//跳转到S_5</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b010</span>:                             <span class="comment">//投入2角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b110</span>;  <span class="comment">//跳转到S_6</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b011</span>:                             <span class="comment">//投入5角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b000</span>;  <span class="comment">//跳转到S_0</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//给出报纸</span></span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//找回1角</span></span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line">        <span class="comment">//下面是S_5</span></span><br><span class="line">            <span class="number">3&#x27;b101</span>: <span class="keyword">case</span>(data_in)</span><br><span class="line">                        <span class="number">3&#x27;b000</span>:                             <span class="comment">//不操作</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b101</span>;  <span class="comment">//保持S_5</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b001</span>:                             <span class="comment">//投入1角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b110</span>;  <span class="comment">//跳转到S_6</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b010</span>:                             <span class="comment">//投入2角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b111</span>;  <span class="comment">//跳转到S_7</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b011</span>:                             <span class="comment">//投入5角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b000</span>;  <span class="comment">//跳转到S_0</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//给出报纸</span></span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//找回2角</span></span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line">        <span class="comment">//下面是S_6</span></span><br><span class="line">            <span class="number">3&#x27;b110</span>: <span class="keyword">case</span>(data_in)</span><br><span class="line">                        <span class="number">3&#x27;b000</span>:                             <span class="comment">//不操作</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b110</span>;  <span class="comment">//保持S_6</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b001</span>:                             <span class="comment">//投入1角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b111</span>;  <span class="comment">//保持S_7</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b010</span>:                             <span class="comment">//投入2角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b000</span>;  <span class="comment">//跳转到S_0</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//给出报纸</span></span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line">        <span class="comment">//下面是S_7</span></span><br><span class="line">            <span class="number">3&#x27;b111</span>: <span class="keyword">case</span>(data_in)</span><br><span class="line">                        <span class="number">3&#x27;b000</span>:                             <span class="comment">//不操作</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b111</span>;  <span class="comment">//保持S_7</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                        <span class="number">3&#x27;b001</span>:                             <span class="comment">//投入1角</span></span><br><span class="line">                            <span class="keyword">begin</span></span><br><span class="line">                                next_state       &lt;=<span class="number">3&#x27;b000</span>;  <span class="comment">//跳转到S_0</span></span><br><span class="line">                                data_out         &lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//给出报纸</span></span><br><span class="line">                                data_out_return1 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                                data_out_return2 &lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">                            <span class="keyword">end</span></span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> rst)</span><br><span class="line">        <span class="keyword">if</span>(!rst)    current_state&lt;=<span class="number">3&#x27;b000</span>;</span><br><span class="line">        <span class="keyword">else</span>        current_state&lt;=next_state;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <p>例: 11010序列检测器</p>
-<p>序列检测器就是将一个指定的序列从数字码流中检测出来. 当输入端出现序列11010时, 输出为1, 否则为0. 此处不考虑重复序列, 即出现指定序列后就重新开始序列检测, 不再考虑以前的数据. 规定数据从右端输入,即按照$1\rightarrow 1\rightarrow 0\rightarrow 1\rightarrow 0$的顺序输入.</p>
+<p>序列检测器就是将一个指定的序列从数字码流中检测出来.
+当输入端出现序列11010时, 输出为1, 否则为0. 此处不考虑重复序列,
+即出现指定序列后就重新开始序列检测, 不再考虑以前的数据.
+规定数据从右端输入,即按照<span class="math inline">\(1\rightarrow
+1\rightarrow 0\rightarrow 1\rightarrow 0\)</span>的顺序输入.</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> seqdet(dout, din, clk, rst);</span><br><span class="line">    <span class="keyword">parameter</span> IDLE=<span class="number">3&#x27;d0</span>, A=<span class="number">3&#x27;d1</span>, B=<span class="number">3&#x27;d2</span>, C=<span class="number">3&#x27;d3</span>, D=<span class="number">3&#x27;d4</span>, E=<span class="number">3&#x27;d5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">input</span>        din, clk, rst;</span><br><span class="line">    <span class="keyword">output</span>       dout;</span><br><span class="line">    <span class="keyword">reg</span>    [<span class="number">2</span>:<span class="number">0</span>] state, next_state;</span><br><span class="line">    <span class="keyword">wire</span>         dout;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assign</span> dout=(state==E)?<span class="number">1</span>:<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(state <span class="keyword">or</span> din)</span><br><span class="line">        <span class="keyword">case</span>(state)</span><br><span class="line">            IDLE: <span class="keyword">if</span>(din) next_state=A;</span><br><span class="line">                  <span class="keyword">else</span>    next_state=IDLE;</span><br><span class="line">            A:    <span class="keyword">if</span>(din) next_state=B;</span><br><span class="line">                  <span class="keyword">else</span>    next_state=IDLE;</span><br><span class="line">            B:    <span class="keyword">if</span>(din) next_state=B;</span><br><span class="line">                  <span class="keyword">else</span>    next_state=C;</span><br><span class="line">            C:    <span class="keyword">if</span>(din) next_state=D;</span><br><span class="line">                  <span class="keyword">else</span>    next_state=IDLE;</span><br><span class="line">            D:    <span class="keyword">if</span>(din) next_state=B;</span><br><span class="line">                  <span class="keyword">else</span>    next_state=E;</span><br><span class="line">            E:    <span class="keyword">if</span>(din) next_state=IDLE;</span><br><span class="line">                  <span class="keyword">else</span>    next_state=A;</span><br><span class="line">            <span class="keyword">default</span>:      next_state=IDLE;</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">        state&lt;=next_state;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <h2 id="习题">习题</h2>
-<ol>
-<li>
-<p>用查找表的方式实现真值表中的加法器, 写出Verilog HDL代码</p>
+<ol type="1">
+<li><p>用查找表的方式实现真值表中的加法器, 写出Verilog HDL代码</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">Cin</th>
-<th style="text-align:center">ain</th>
-<th style="text-align:center">bin</th>
-<th style="text-align:center">sum</th>
-<th style="text-align:center">Cout</th>
+<th style="text-align: center;">Cin</th>
+<th style="text-align: center;">ain</th>
+<th style="text-align: center;">bin</th>
+<th style="text-align: center;">sum</th>
+<th style="text-align: center;">Cout</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 </tbody>
 </table>
- <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder(Cin, ain, bin, sum, Cout);</span><br><span class="line">    <span class="keyword">input</span>       Cin, ain, bin;</span><br><span class="line">    <span class="keyword">output</span>      sum, Cout;</span><br><span class="line">    <span class="keyword">reg</span>         sum, Cout;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span> @(Cin <span class="keyword">or</span> ain <span class="keyword">or</span> bin) </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">case</span>(&#123;Cin, ain, bin&#125;)<span class="comment">//按照真值表直接抄下来就好</span></span><br><span class="line">                <span class="number">3&#x27;b000</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b00</span>;</span><br><span class="line">                <span class="number">3&#x27;b001</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b01</span>;</span><br><span class="line">                <span class="number">3&#x27;b010</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b01</span>;</span><br><span class="line">                <span class="number">3&#x27;b011</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b10</span>;</span><br><span class="line">                <span class="number">3&#x27;b100</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b01</span>;</span><br><span class="line">                <span class="number">3&#x27;b101</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b10</span>;</span><br><span class="line">                <span class="number">3&#x27;b110</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b10</span>;</span><br><span class="line">                <span class="number">3&#x27;b111</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b11</span>;</span><br><span class="line">                <span class="keyword">default</span>: &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b00</span>;</span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>用Verilog HDL描述用D触发器实现带有同步清零功能(低电平有效)的二分频电路, 并设计功能模块的测试程序,要求输入两个信号<code>CLK1, RESET</code>,经过这个二分频电路后输出<code>CLK2</code>.</p>
- <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 功能：基于D触发器的二分频电路，带有同步清零功能（低电平有效）</span></span><br><span class="line"><span class="comment">// 工作原理：每个输入时钟的上升沿，输出时钟状态翻转；当复位有效时输出清零</span></span><br><span class="line"><span class="keyword">module</span> div2(CLK1, RESET, CLK2);</span><br><span class="line">    <span class="comment">// 输入端口声明</span></span><br><span class="line">    <span class="keyword">input</span>   CLK1;     <span class="comment">// 输入时钟信号</span></span><br><span class="line">    <span class="keyword">input</span>   RESET;    <span class="comment">// 同步复位信号，低电平有效（0=复位，1=工作）</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出端口声明</span></span><br><span class="line">    <span class="keyword">output</span>  CLK2;     <span class="comment">// 二分频输出时钟信号</span></span><br><span class="line">    <span class="keyword">reg</span>     CLK2;     <span class="comment">// 将输出声明为reg类型，因为它在always块中被赋值</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// always块：在CLK1的每个上升沿触发</span></span><br><span class="line">    <span class="comment">// 描述时序逻辑，实现D触发器的功能</span></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> CLK1) </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 同步复位：当RESET为低电平（0）时，在时钟上升沿将CLK2清零</span></span><br><span class="line">            <span class="keyword">if</span> (!RESET)  <span class="comment">// !RESET 表示 RESET == 1&#x27;b0</span></span><br><span class="line">                CLK2 &lt;= <span class="number">1&#x27;b0</span>;  <span class="comment">// 同步清零输出</span></span><br><span class="line">            <span class="comment">// 正常工作：当RESET为高电平（1）时，每个时钟上升沿翻转CLK2</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                CLK2 &lt;= ~CLK2; <span class="comment">// 输出取反，实现二分频</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="comment">// 注意：&lt;= 是非阻塞赋值，用于时序逻辑，确保在时钟边沿同时更新所有寄存器</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
- <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 功能：测试div2模块的功能，验证同步清零和二分频功能</span></span><br><span class="line"><span class="comment">// 测试方法：生成激励信号，观察输出响应</span></span><br><span class="line"><span class="keyword">module</span> div2_tb;</span><br><span class="line">    <span class="comment">// 测试信号声明</span></span><br><span class="line">    <span class="keyword">reg</span>  CLK1, RESET;  <span class="comment">// reg类型，用于驱动被测模块的输入</span></span><br><span class="line">    <span class="keyword">wire</span> CLK2;         <span class="comment">// wire类型，连接被测模块的输出</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 实例化被测模块</span></span><br><span class="line">    <span class="comment">// U1是被测模块的实例名称，括号内是端口映射（位置映射方式）</span></span><br><span class="line">    div2 U1(<span class="variable">.CLK1</span>(CLK1), <span class="variable">.RESET</span>(RESET), <span class="variable">.CLK2</span>(CLK2));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第一个initial块：生成输入时钟信号CLK1</span></span><br><span class="line">    <span class="comment">// 初始值设为0，然后每隔10个时间单位翻转一次</span></span><br><span class="line">    <span class="keyword">initial</span> </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            CLK1 = <span class="number">0</span>;          <span class="comment">// 初始时刻，时钟设为0</span></span><br><span class="line">            <span class="keyword">forever</span> #<span class="number">10</span> CLK1 = ~CLK1;  <span class="comment">// 每隔10个时间单位翻转一次，产生周期为20的时钟</span></span><br><span class="line">            <span class="comment">// 时钟频率计算：周期=20，频率=1/20=0.05时间单位^-1</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第二个initial块：生成复位信号RESET，控制测试过程</span></span><br><span class="line">    <span class="keyword">initial</span> </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 初始化复位信号为0（复位状态）</span></span><br><span class="line">            RESET = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 保持复位状态100个时间单位，观察复位效果</span></span><br><span class="line">            #<span class="number">100</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 释放复位（设为1），让电路正常工作200个时间单位</span></span><br><span class="line">            RESET = <span class="number">1</span>;</span><br><span class="line">            #<span class="number">200</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 再次复位100个时间单位，测试复位功能的重复性</span></span><br><span class="line">            RESET = <span class="number">0</span>;</span><br><span class="line">            #<span class="number">100</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 再次释放复位200个时间单位，继续观察正常分频</span></span><br><span class="line">            RESET = <span class="number">1</span>;</span><br><span class="line">            #<span class="number">200</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 结束仿真</span></span><br><span class="line">            <span class="built_in">$finish</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意：测试模块中两个initial块并行执行</span></span><br><span class="line">    <span class="comment">// CLK1始终以20个时间单位为周期运行，直到$finish</span></span><br><span class="line">    <span class="comment">// RESET按照指定时间序列变化，测试不同工作状态</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>用Verilog HDL设计实现函数表达式$out=AB+BC+AC$</p>
- <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> <span class="keyword">logic</span>(A, B, C, out);</span><br><span class="line">    <span class="keyword">input</span>  A, B, C;</span><br><span class="line">    <span class="keyword">output</span> out;</span><br><span class="line">    <span class="keyword">assign</span> out=(A&amp;B)|(B&amp;C)|(A&amp;C);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>用Verilog HDL设计实现一个4-2二进制编码器.当输入编码不是4中取1码时,编码输出全为0.</p>
- <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> encoder_4to2(in, out);</span><br><span class="line">    <span class="keyword">input</span>      [<span class="number">3</span>:<span class="number">0</span>] in;</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] out;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(in) </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span> (in == <span class="number">4&#x27;b0001</span>) out = <span class="number">2&#x27;b00</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (in == <span class="number">4&#x27;b0010</span>) out = <span class="number">2&#x27;b01</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (in == <span class="number">4&#x27;b0100</span>) out = <span class="number">2&#x27;b10</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (in == <span class="number">4&#x27;b1000</span>) out = <span class="number">2&#x27;b11</span>;</span><br><span class="line">            <span class="keyword">else</span>                    out = <span class="number">2&#x27;b00</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>用Verilog HDL内置的基本门级元件, 描述如下电路, 要求: 输入为<code>in1, in2, in3</code>, 两个<code>wire wire1, wire2</code>, 一个输出<code>out</code>, 满足关系:</p>
-<p>$$\begin{aligned}<br>
-&amp;\rm{wire1}=\rm{in1in2}\<br>
-&amp;\rm{wire2}=\rm{wire1in3}\<br>
-&amp;\rm{out}=\rm{wire2}\oplus \rm{in1}\<br>
-\end{aligned}$$</p>
- <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> circuit3(in1, in2, in3, out);</span><br><span class="line">    <span class="keyword">input</span>  in1, in2, in3;</span><br><span class="line">    <span class="keyword">output</span> out;</span><br><span class="line">    <span class="keyword">wire</span>   wire1, wire2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">and</span> (wire1, in1, in2);</span><br><span class="line">    <span class="keyword">and</span> (wire2, wire1, in3);</span><br><span class="line">    <span class="keyword">xor</span> (out, wire2, in1);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-</li>
+<p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> adder(Cin, ain, bin, sum, Cout);</span><br><span class="line">    <span class="keyword">input</span>       Cin, ain, bin;</span><br><span class="line">    <span class="keyword">output</span>      sum, Cout;</span><br><span class="line">    <span class="keyword">reg</span>         sum, Cout;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span> @(Cin <span class="keyword">or</span> ain <span class="keyword">or</span> bin) </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">case</span>(&#123;Cin, ain, bin&#125;)<span class="comment">//按照真值表直接抄下来就好</span></span><br><span class="line">                <span class="number">3&#x27;b000</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b00</span>;</span><br><span class="line">                <span class="number">3&#x27;b001</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b01</span>;</span><br><span class="line">                <span class="number">3&#x27;b010</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b01</span>;</span><br><span class="line">                <span class="number">3&#x27;b011</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b10</span>;</span><br><span class="line">                <span class="number">3&#x27;b100</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b01</span>;</span><br><span class="line">                <span class="number">3&#x27;b101</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b10</span>;</span><br><span class="line">                <span class="number">3&#x27;b110</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b10</span>;</span><br><span class="line">                <span class="number">3&#x27;b111</span>:  &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b11</span>;</span><br><span class="line">                <span class="keyword">default</span>: &#123;Cout, sum&#125; &lt;= <span class="number">2&#x27;b00</span>;</span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>用Verilog
+HDL描述用D触发器实现带有同步清零功能(低电平有效)的二分频电路,
+并设计功能模块的测试程序,要求输入两个信号<code>CLK1, RESET</code>,经过这个二分频电路后输出<code>CLK2</code>.</p>
+<p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 功能：基于D触发器的二分频电路，带有同步清零功能（低电平有效）</span></span><br><span class="line"><span class="comment">// 工作原理：每个输入时钟的上升沿，输出时钟状态翻转；当复位有效时输出清零</span></span><br><span class="line"><span class="keyword">module</span> div2(CLK1, RESET, CLK2);</span><br><span class="line">    <span class="comment">// 输入端口声明</span></span><br><span class="line">    <span class="keyword">input</span>   CLK1;     <span class="comment">// 输入时钟信号</span></span><br><span class="line">    <span class="keyword">input</span>   RESET;    <span class="comment">// 同步复位信号，低电平有效（0=复位，1=工作）</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出端口声明</span></span><br><span class="line">    <span class="keyword">output</span>  CLK2;     <span class="comment">// 二分频输出时钟信号</span></span><br><span class="line">    <span class="keyword">reg</span>     CLK2;     <span class="comment">// 将输出声明为reg类型，因为它在always块中被赋值</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// always块：在CLK1的每个上升沿触发</span></span><br><span class="line">    <span class="comment">// 描述时序逻辑，实现D触发器的功能</span></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> CLK1) </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 同步复位：当RESET为低电平（0）时，在时钟上升沿将CLK2清零</span></span><br><span class="line">            <span class="keyword">if</span> (!RESET)  <span class="comment">// !RESET 表示 RESET == 1&#x27;b0</span></span><br><span class="line">                CLK2 &lt;= <span class="number">1&#x27;b0</span>;  <span class="comment">// 同步清零输出</span></span><br><span class="line">            <span class="comment">// 正常工作：当RESET为高电平（1）时，每个时钟上升沿翻转CLK2</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                CLK2 &lt;= ~CLK2; <span class="comment">// 输出取反，实现二分频</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="comment">// 注意：&lt;= 是非阻塞赋值，用于时序逻辑，确保在时钟边沿同时更新所有寄存器</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 功能：测试div2模块的功能，验证同步清零和二分频功能</span></span><br><span class="line"><span class="comment">// 测试方法：生成激励信号，观察输出响应</span></span><br><span class="line"><span class="keyword">module</span> div2_tb;</span><br><span class="line">    <span class="comment">// 测试信号声明</span></span><br><span class="line">    <span class="keyword">reg</span>  CLK1, RESET;  <span class="comment">// reg类型，用于驱动被测模块的输入</span></span><br><span class="line">    <span class="keyword">wire</span> CLK2;         <span class="comment">// wire类型，连接被测模块的输出</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 实例化被测模块</span></span><br><span class="line">    <span class="comment">// U1是被测模块的实例名称，括号内是端口映射（位置映射方式）</span></span><br><span class="line">    div2 U1(<span class="variable">.CLK1</span>(CLK1), <span class="variable">.RESET</span>(RESET), <span class="variable">.CLK2</span>(CLK2));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第一个initial块：生成输入时钟信号CLK1</span></span><br><span class="line">    <span class="comment">// 初始值设为0，然后每隔10个时间单位翻转一次</span></span><br><span class="line">    <span class="keyword">initial</span> </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            CLK1 = <span class="number">0</span>;          <span class="comment">// 初始时刻，时钟设为0</span></span><br><span class="line">            <span class="keyword">forever</span> #<span class="number">10</span> CLK1 = ~CLK1;  <span class="comment">// 每隔10个时间单位翻转一次，产生周期为20的时钟</span></span><br><span class="line">            <span class="comment">// 时钟频率计算：周期=20，频率=1/20=0.05时间单位^-1</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第二个initial块：生成复位信号RESET，控制测试过程</span></span><br><span class="line">    <span class="keyword">initial</span> </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 初始化复位信号为0（复位状态）</span></span><br><span class="line">            RESET = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 保持复位状态100个时间单位，观察复位效果</span></span><br><span class="line">            #<span class="number">100</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 释放复位（设为1），让电路正常工作200个时间单位</span></span><br><span class="line">            RESET = <span class="number">1</span>;</span><br><span class="line">            #<span class="number">200</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 再次复位100个时间单位，测试复位功能的重复性</span></span><br><span class="line">            RESET = <span class="number">0</span>;</span><br><span class="line">            #<span class="number">100</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 再次释放复位200个时间单位，继续观察正常分频</span></span><br><span class="line">            RESET = <span class="number">1</span>;</span><br><span class="line">            #<span class="number">200</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 结束仿真</span></span><br><span class="line">            <span class="built_in">$finish</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意：测试模块中两个initial块并行执行</span></span><br><span class="line">    <span class="comment">// CLK1始终以20个时间单位为周期运行，直到$finish</span></span><br><span class="line">    <span class="comment">// RESET按照指定时间序列变化，测试不同工作状态</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>用Verilog HDL设计实现函数表达式<span
+class="math inline">\(out=AB+BC+AC\)</span></p>
+<p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> <span class="keyword">logic</span>(A, B, C, out);</span><br><span class="line">    <span class="keyword">input</span>  A, B, C;</span><br><span class="line">    <span class="keyword">output</span> out;</span><br><span class="line">    <span class="keyword">assign</span> out=(A&amp;B)|(B&amp;C)|(A&amp;C);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>用Verilog
+HDL设计实现一个4-2二进制编码器.当输入编码不是4中取1码时,编码输出全为0.</p>
+<p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> encoder_4to2(in, out);</span><br><span class="line">    <span class="keyword">input</span>      [<span class="number">3</span>:<span class="number">0</span>] in;</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] out;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(in) </span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">if</span> (in == <span class="number">4&#x27;b0001</span>) out = <span class="number">2&#x27;b00</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (in == <span class="number">4&#x27;b0010</span>) out = <span class="number">2&#x27;b01</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (in == <span class="number">4&#x27;b0100</span>) out = <span class="number">2&#x27;b10</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (in == <span class="number">4&#x27;b1000</span>) out = <span class="number">2&#x27;b11</span>;</span><br><span class="line">            <span class="keyword">else</span>                    out = <span class="number">2&#x27;b00</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>用Verilog HDL内置的基本门级元件, 描述如下电路, 要求:
+输入为<code>in1, in2, in3</code>, 两个<code>wire wire1, wire2</code>,
+一个输出<code>out</code>, 满足关系:</p>
+<p><span class="math display">\[\begin{aligned}
+     &amp;\rm{wire1}=\rm{in1in2}\\
+     &amp;\rm{wire2}=\rm{wire1in3}\\
+     &amp;\rm{out}=\rm{wire2}\oplus \rm{in1}\\
+\end{aligned}\]</span></p>
+<p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> circuit3(in1, in2, in3, out);</span><br><span class="line">    <span class="keyword">input</span>  in1, in2, in3;</span><br><span class="line">    <span class="keyword">output</span> out;</span><br><span class="line">    <span class="keyword">wire</span>   wire1, wire2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">and</span> (wire1, in1, in2);</span><br><span class="line">    <span class="keyword">and</span> (wire2, wire1, in3);</span><br><span class="line">    <span class="keyword">xor</span> (out, wire2, in1);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></p></li>
 </ol>
 
     </div>
@@ -1372,13 +1609,13 @@ $ C_OUT=AB+(A\oplus B)C_IN $</p>
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/WPS%E8%BD%AF%E4%BB%B6%E6%95%99%E7%A8%8B/" rel="prev" title="WPS软件入门教程">
-                  <i class="fa fa-angle-left"></i> WPS软件入门教程
+                <a href="/2025/05/04/%E6%A8%A1%E6%8B%9F%E7%94%B5%E8%B7%AF%E7%89%88%E5%9B%BE/" rel="prev" title="模拟电路版图">
+                  <i class="fa fa-angle-left"></i> 模拟电路版图
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/Verilog%E7%AC%AC%E5%85%AD%E7%AB%A0/" rel="next" title="第六章:Verilog HDL高级程序设计举例">
-                  第六章:Verilog HDL高级程序设计举例 <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/WPS%E8%BD%AF%E4%BB%B6%E6%95%99%E7%A8%8B/" rel="next" title="WPS软件入门教程">
+                  WPS软件入门教程 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
