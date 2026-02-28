@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Verilog HDL的语言要素 Verilog HDL和C语言类似.程序的语言要素也称为词法,是由符号,数据类型,运算符和表达式构成的,其中 符号包括空白符,注释符,标识符,转义标识符,关键字,数值等. 数据类型可以分成两大类,物理数据类型,包括连线型wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, supply1, supp">
+    <meta name="description" content="Verilog HDL的语言要素 Verilog HDL和C语言类似. 程序的语言要素也称为词法, 是由符号, 数据类型, 运算符和表达式构成的, 其中   符号包括空白符, 注释符, 标识符, 转义标识符, 关键字, 数值等.   数据类型可以分成两大类, 物理数据类型, 包括连线型wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第二章:Verilog HDL基础知识">
 <meta property="og:url" content="http://example.com/2025/05/04/Verilog%E7%AC%AC%E4%BA%8C%E7%AB%A0/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="Verilog HDL的语言要素 Verilog HDL和C语言类似.程序的语言要素也称为词法,是由符号,数据类型,运算符和表达式构成的,其中 符号包括空白符,注释符,标识符,转义标识符,关键字,数值等. 数据类型可以分成两大类,物理数据类型,包括连线型wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, supply1, supp">
+<meta property="og:description" content="Verilog HDL的语言要素 Verilog HDL和C语言类似. 程序的语言要素也称为词法, 是由符号, 数据类型, 运算符和表达式构成的, 其中   符号包括空白符, 注释符, 标识符, 转义标识符, 关键字, 数值等.   数据类型可以分成两大类, 物理数据类型, 包括连线型wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, s">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-10-16T09:42:31.105Z">
+<meta property="article:modified_time" content="2026-01-14T23:34:39.911Z">
 <meta property="article:author" content="SiyuanLei">
 <meta property="article:tag" content="Verilog">
 <meta name="twitter:card" content="summary">
@@ -134,7 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#verilog-hdl%E7%9A%84%E8%AF%AD%E8%A8%80%E8%A6%81%E7%B4%A0"><span class="nav-number">1.</span> <span class="nav-text">Verilog HDL的语言要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">符号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E7%99%BD%E7%AC%A6"><span class="nav-number">2.1.</span> <span class="nav-text">空白符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A%E7%AC%A6"><span class="nav-number">2.2.</span> <span class="nav-text">注释符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%92%8C%E8%BD%AC%E4%B9%89%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">标识符和转义标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC"><span class="nav-number">2.4.</span> <span class="nav-text">数值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.4.1.</span> <span class="nav-text">整数及其表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">表示形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%95%B0%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.4.2.</span> <span class="nav-text">实数及其表示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">物理数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BA%BF%E5%9E%8B%E5%92%8C%E5%AF%84%E5%AD%98%E5%99%A8%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="nav-number">3.1.1.</span> <span class="nav-text">连线型和寄存器型数据类型的声明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E7%BA%BF%E5%9E%8B"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">连线型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%9E%8B"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">寄存器型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E5%9E%8Bmemory"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">存储器型(memory)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">抽象数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.2.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.3.</span> <span class="nav-text">相等关系运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.4.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.5.</span> <span class="nav-text">按位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.6.</span> <span class="nav-text">移位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.7.</span> <span class="nav-text">条件运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.8.</span> <span class="nav-text">复制和连接运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97"><span class="nav-number">5.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">5.1.</span> <span class="nav-text">模块的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">5.2.</span> <span class="nav-text">模块的引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">习题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog-HDL%E7%9A%84%E8%AF%AD%E8%A8%80%E8%A6%81%E7%B4%A0"><span class="nav-number">1.</span> <span class="nav-text">Verilog HDL的语言要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">符号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E7%99%BD%E7%AC%A6"><span class="nav-number">2.1.</span> <span class="nav-text">空白符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A%E7%AC%A6"><span class="nav-number">2.2.</span> <span class="nav-text">注释符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%92%8C%E8%BD%AC%E4%B9%89%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">标识符和转义标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC"><span class="nav-number">2.4.</span> <span class="nav-text">数值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.4.1.</span> <span class="nav-text">整数及其表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">表示形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%95%B0%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.4.2.</span> <span class="nav-text">实数及其表示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">物理数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BA%BF%E5%9E%8B%E5%92%8C%E5%AF%84%E5%AD%98%E5%99%A8%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="nav-number">3.1.1.</span> <span class="nav-text">连线型和寄存器型数据类型的声明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E7%BA%BF%E5%9E%8B"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">连线型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%9E%8B"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">寄存器型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E5%9E%8B-memory"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">存储器型(memory)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">抽象数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.2.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.3.</span> <span class="nav-text">相等关系运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.4.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.5.</span> <span class="nav-text">按位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.6.</span> <span class="nav-text">移位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.7.</span> <span class="nav-text">条件运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.8.</span> <span class="nav-text">复制和连接运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97"><span class="nav-number">5.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">5.1.</span> <span class="nav-text">模块的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">5.2.</span> <span class="nav-text">模块的引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">习题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -149,18 +149,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -252,7 +252,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-10-16 17:42:31" itemprop="dateModified" datetime="2025-10-16T17:42:31+08:00">2025-10-16</time>
+      <time title="Modified: 2026-01-15 07:34:39" itemprop="dateModified" datetime="2026-01-15T07:34:39+08:00">2026-01-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,70 +281,78 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="verilog-hdl的语言要素">Verilog HDL的语言要素</h2>
-<p>Verilog
-HDL和C语言类似.程序的语言要素也称为词法,是由<strong>符号,数据类型,运算符和表达式</strong>构成的,其中</p>
-<p>符号包括空白符,注释符,标识符,转义标识符,关键字,数值等.</p>
-<p>数据类型可以分成两大类,物理数据类型,包括连线型<code>wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, supply1, supply0</code>,寄存器型<code>reg</code>;
-抽象数据类型,包括整型<code>integer</code>, 时间型<code>time</code>,
-实型<code>real</code>, 参数型<code>parameter</code></p>
-<p>运算符包括算数运算符<code>+, -, *, /, %</code>,
-关系运算符<code>&gt;, &lt;, &gt;=, &lt;=</code>,
-相等关系运算符<code>==, !=, ===, !==</code>,
-逻辑运算符<code>&amp;&amp;, ||, !</code>,
-按位运算符<code>~, &amp;, |, ^, ^~</code>,
-归约运算符<code>&amp;, |, ^, ~&amp;, ~|, ~^, ^~</code>,
-移位运算符<code>&lt;&lt;, &gt;&gt;</code>, 条件运算符<code>?:</code>,
-连接和复制运算符<code>&#123;&#125;, &#123;&#123;&#125;&#125;</code>.</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="Verilog-HDL的语言要素">Verilog HDL的语言要素</h2>
+<p>Verilog HDL和C语言类似. 程序的语言要素也称为词法, 是由<strong>符号, 数据类型, 运算符和表达式</strong>构成的, 其中</p>
+<ul>
+<li>
+<p>符号包括空白符, 注释符, 标识符, 转义标识符, 关键字, 数值等.</p>
+</li>
+<li>
+<p>数据类型可以分成两大类, 物理数据类型, 包括连线型<code>wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, supply1, supply0</code>, 寄存器型<code>reg</code>; 抽象数据类型, 包括整型<code>integer</code>, 时间型<code>time</code>, 实型<code>real</code>, 参数型<code>parameter</code></p>
+</li>
+<li>
+<p>运算符包括算数运算符<code>+, -, *, /, %</code>, 关系运算符<code>&gt;, &lt;, &gt;=, &lt;=</code>, 相等关系运算符<code>==, !=, ===, !==</code>, 逻辑运算符<code>&amp;&amp;, ||, !</code>, 按位运算符<code>~, &amp;, |, ^, ^~</code>, 归约运算符<code>&amp;, |, ^, ~&amp;, ~|, ~^, ^~</code>, 移位运算符<code>&lt;&lt;, &gt;&gt;</code>, 条件运算符<code>?:</code>, 连接和复制运算符<code>&#123;&#125;, &#123;&#123;&#125;&#125;</code>.</p>
+</li>
+</ul>
 <h2 id="符号">符号</h2>
 <h3 id="空白符">空白符</h3>
-<p>空白符包括空格符<code>\b</code>,制表符<code>\t</code>,换行符和换页符,空白符使代码看起来结构清晰,便于阅读.在编译和综合时,空白符被忽略.</p>
+<p>空白符包括空格符<code>\b</code>, 制表符<code>\t</code>, 换行符和换页符, 空白符使代码看起来结构清晰, 便于阅读. 在编译和综合时, 空白符被忽略.</p>
 <h3 id="注释符">注释符</h3>
 <p>单行注释</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> a=b&amp;c <span class="comment">//单行注释</span></span><br></pre></td></tr></table></figure>
 <p>多行注释</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> a[<span class="number">3</span>:<span class="number">0</span>]=b[<span class="number">3</span>:<span class="number">0</span>]&amp;c[<span class="number">3</span>:<span class="number">0</span>]  <span class="comment">/*注释行1</span></span><br><span class="line"><span class="comment">                            注释行2*/</span></span><br></pre></td></tr></table></figure>
 <h3 id="标识符和转义标识符">标识符和转义标识符</h3>
-<p>标识符被用来命名信号,模块,参数等,它可以是任意一组字母,数字,<code>$</code>符号和<code>_</code>下划线的组合.注意标识符的字母区分大小写,并且第一个字符必须是字母或者是下划线.</p>
+<p>标识符被用来命名信号, 模块, 参数等, 它可以是任意一组字母, 数字, <code>$</code>符号和<code>_</code>下划线的组合. 注意标识符的字母区分大小写, 并且第一个字符必须是字母或者是下划线.</p>
 <p>合法标识符:</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">count</span><br><span class="line">COUNT <span class="comment">//和count不同</span></span><br><span class="line">_CC_G5</span><br><span class="line">B25_78</span><br><span class="line">Six</span><br></pre></td></tr></table></figure>
 <p>非法标识符</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">30</span>count <span class="comment">//标识符不能以数字开头</span></span><br><span class="line">out*    <span class="comment">//标识符不能包含*</span></span><br><span class="line">a+b-c   <span class="comment">//标识符不能包含+-</span></span><br><span class="line">n@<span class="number">234</span>   <span class="comment">//标识符不能包含@ </span></span><br></pre></td></tr></table></figure>
-<p>为了使用标识符以外的字符或符号, Verilog
-HDL规定了转义标识符.采用转义标识符,可以在一条标识符中包含任何可打印的字符.转义标识符由<code>\</code>开头,以空白(可以是一个空格,一个制表字符或换行符)结尾.</p>
+<p>为了使用标识符以外的字符或符号, Verilog HDL规定了转义标识符. 采用转义标识符, 可以在一条标识符中包含任何可打印的字符. 转义标识符由<code>\</code>开头, 以空白(可以是一个空格, 一个制表字符或换行符)结尾.</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\a+b=c</span><br><span class="line">\<span class="number">7400</span></span><br><span class="line">\.*.$</span><br><span class="line">\&#123;***&#125;</span><br><span class="line">\~Q</span><br><span class="line">\OutGate</span><br></pre></td></tr></table></figure>
 <h3 id="数值">数值</h3>
 <h4 id="整数及其表示">整数及其表示</h4>
-<p><code>0</code> ————&gt;低电平，逻辑假 <code>1</code>
-————&gt;高电平，逻辑真 <code>x/X</code>————&gt;不确定或未知逻辑态
+<p><code>0</code>  ————&gt;低电平, 逻辑假<br>
+<code>1</code>  ————&gt;高电平, 逻辑真<br>
+<code>x/X</code>————&gt;不确定或未知逻辑态<br>
 <code>z/Z</code>————&gt;高阻态</p>
-<p><code>b</code>或<code>B</code>————&gt;二进制,<code>0、1、x/X、z/Z/?、_;</code>
-<code>o</code>或<code>O</code>————&gt;八进制,<code>0~7、x/X、z/Z/?、_;</code>
-<code>d</code>或<code>D</code>————&gt;十进制,<code>0~9、_;</code>
-<code>h</code>或<code>H</code>————&gt;十六进制,<code>0~9 、a/A~f/F、x/X、z/Z/?、\_;</code></p>
+<p><code>b</code>或<code>B</code>————&gt;二进制, <code>0、1、x/X、z/Z/?、_;</code><br>
+<code>o</code>或<code>O</code>————&gt;八进制, <code>0~7、x/X、z/Z/?、_;</code><br>
+<code>d</code>或<code>D</code>————&gt;十进制, <code>0~9、_;</code><br>
+<code>h</code>或<code>H</code>————&gt;十六进制, <code>0~9 、a/A~f/F、x/X、z/Z/?、\_;</code></p>
 <h5 id="表示形式">表示形式</h5>
 <p>整数的表示形式如下:</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+/-&lt;size&gt;&#x27;&lt;base&gt;&lt;number&gt;</span><br></pre></td></tr></table></figure>
-<p>其中<code>+/-</code>放在最前面；</p>
-<p><code>size</code>是将数字<strong>换算成二进制数之后</strong>的位数,注意这里要转换成二进制！！！；</p>
-<p><code>'</code>不能省略</p>
-<p><code>base</code>可选二进制<code>b</code>，八进制<code>o</code>，十进制<code>d</code>，十六进制<code>h</code>；</p>
-<p><code>number</code>用所选取的进制数表示；</p>
+<ul>
+<li>其中<code>+/-</code>放在最前面;</li>
+<li><code>size</code>是将数字<strong>换算成二进制数之后</strong>的位数, 注意这里要转换成二进制!!!;</li>
+<li><code>'</code>不能省略;</li>
+<li><code>base</code>可选二进制<code>b</code>, 八进制<code>o</code>, 十进制<code>d</code>, 十六进制<code>h</code>;</li>
+<li><code>number</code>用所选取的进制数表示.</li>
+</ul>
 <h5 id="注意事项">注意事项</h5>
 <ul>
-<li>较长的数字可以用下划线分开，例如</li>
+<li>较长的数字可以用下划线分开, 例如</li>
 </ul>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">16&#x27;b1110_1011_0011_1010</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>没有说明数字位宽时,默认为32位</p></li>
-<li><p>x或z在二进制中只代表一位的x或z,在八进制中代表三位的x或z,在十六进制中代表四位的x或z,例如</p></li>
+<li>
+<p>没有说明数字位宽时, 默认为32位</p>
+</li>
+<li>
+<p>x或z在二进制中只代表一位的x或z, 在八进制中代表三位的x或z, 在十六进制中代表四位的x或z, 例如</p>
+</li>
 </ul>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8&#x27;b1011xxxx</span>=<span class="number">8&#x27;hBx</span></span><br><span class="line"><span class="number">8&#x27;b1001zzzz</span>=<span class="number">8&#x27;h9z</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>如果没有定义一个整数的位宽,那么其宽度就是相应值中定义的位数,例如
-<code>'o642</code>是9位八进制数
-<code>'hBD</code>是8位十六进制数</p></li>
-<li><p>若定义的位宽比实际的数要大，则在左边用0补齐，例如</p></li>
+<li>
+<p>如果没有定义一个整数的位宽, 那么其宽度就是相应值中定义的位数, 例如<br>
+<code>'o642</code>是9位八进制数<br>
+<code>'hBD</code>是8位十六进制数</p>
+</li>
+<li>
+<p>若定义的位宽比实际的数要大, 则在左边自动用0补齐, 例如</p>
+</li>
 </ul>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10&#x27;b101</span>=<span class="number">10&#x27;b0000000101</span></span><br><span class="line"><span class="number">8&#x27;bz0x1</span>=<span class="number">8&#x27;bzzzzz0x1</span></span><br></pre></td></tr></table></figure>
 <p>若定义的位宽比实际的数要小，那么左边的位要被截断</p>
@@ -354,218 +362,288 @@ HDL规定了转义标识符.采用转义标识符,可以在一条标识符中包
 </ul>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>&#x27;b??=<span class="number">2&#x27;bzz</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>整数可以带正负号,并且正负号应该写在最左边.负数表示为二进制补码,例如</li>
+<li>整数可以带正负号, 并且正负号应该写在最左边. 负数表示为二进制补码, 例如</li>
 </ul>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">4</span>=<span class="number">4&#x27;b1100</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>如果位宽和进制都省略,那么就表示十进制数</li>
+<li>如果位宽和进制都省略, 那么就表示十进制数</li>
 </ul>
 <h4 id="实数及其表示">实数及其表示</h4>
 <ul>
-<li><p>十进制表示法:小数点两边必须都要有数字,例如0.8、4.68、9.9等</p></li>
-<li><p>科学计数法:8.7e2=870.0、3E-3=0.003等</p></li>
+<li>
+<p>十进制表示法:小数点两边必须都要有数字,例如0.8、4.68、9.9等</p>
+</li>
+<li>
+<p>科学计数法:8.7e2=870.0、3E-3=0.003等</p>
+</li>
 </ul>
 <h2 id="数据类型">数据类型</h2>
-<p>Verilog
-HDL的数据类型可以分成两大类,第一类为<strong>物理数据类型(包括连线型和寄存器型)</strong>,第二类为<strong>抽象数据类型(包括整型,时间型,实型,参数型)</strong>.</p>
+<p>Verilog HDL的数据类型可以分成两大类, 第一类为<strong>物理数据类型(包括连线型和寄存器型)</strong>, 第二类为<strong>抽象数据类型(包括整型, 时间型, 实型, 参数型)</strong>.</p>
 <h3 id="物理数据类型">物理数据类型</h3>
-<p>Verilog
-HDL最主要的物理数据类型是连线型,寄存器型和存储器型,并使用四种逻辑电平<code>0, 1, x/X, z/Z</code>和八种信号强度对实际的硬件电路建模.</p>
-<ol type="1">
-<li><p><strong>连线型(wire)</strong>:
-连线表示逻辑单元的物理连接,可以对应电路中的物理信号连线,这种变量类型不能保持电荷(<code>trireg</code>除外).
-连线型变量必须要有驱动源,一种是连接到一个门或者模块的输出端,另一种是用<code>assign</code>连续赋值语句对它进行赋值.若没有驱动源,则保持高阻态z.</p></li>
-<li><p><strong>寄存器型(reg)</strong>:
-<code>reg</code>型变量是最常见也是最重要的寄存器型数据类型,它是数据储存单元的抽象类型,其对应的硬件电路元件具有状态保持作用,能够储存数据,如触发器,锁存器等.
-<code>reg</code>型变量常用于行为级描述,由过程赋值语句对其进行赋值.</p></li>
+<p>Verilog HDL最主要的物理数据类型是连线型, 寄存器型和存储器型, 并使用四种逻辑电平<code>0, 1, x/X, z/Z</code>和八种信号强度对实际的硬件电路建模.</p>
+<p>四值逻辑电平是对信号的抽象表示方式, 信号强度表示数字电路中不同强度的驱动源, 用来解决不同驱动强度下的赋值冲突, 如下表, 驱动强度从上到下递减:</p>
+<table>
+<thead>
+<tr>
+<th>标记符</th>
+<th>名称</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>supply</code></td>
+<td>电源级驱动</td>
+<td>驱动</td>
+</tr>
+<tr>
+<td><code>strong</code></td>
+<td>强驱动</td>
+<td>驱动</td>
+</tr>
+<tr>
+<td><code>pull</code></td>
+<td>上拉级驱动</td>
+<td>驱动</td>
+</tr>
+<tr>
+<td><code>large</code></td>
+<td>大容性</td>
+<td>存储</td>
+</tr>
+<tr>
+<td><code>weak</code></td>
+<td>弱驱动</td>
+<td>驱动</td>
+</tr>
+<tr>
+<td><code>medium</code></td>
+<td>中性驱动</td>
+<td>存储</td>
+</tr>
+<tr>
+<td><code>small</code></td>
+<td>小容性</td>
+<td>存储</td>
+</tr>
+<tr>
+<td><code>highz</code></td>
+<td>高容性</td>
+<td>高阻</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p><strong>连线型(wire)</strong>: 连线表示逻辑单元的物理连接, 可以对应电路中的物理信号连线, 这种变量类型不能保持电荷(<code>trireg</code>除外). 连线型变量必须要有驱动源, 一种是连接到一个门或者模块的输出端, 另一种是用<code>assign</code>连续赋值语句对它进行赋值. 若没有驱动源, 则保持高阻态<code>z</code>.</p>
+</li>
+<li>
+<p><strong>寄存器型(reg)</strong>: <code>reg</code>型变量是最常见也是最重要的寄存器型数据类型, 它是数据储存单元的抽象类型, 其对应的硬件电路元件具有状态保持作用, 能够储存数据, 如触发器, 锁存器等. <code>reg</code>型变量常用于行为级描述, 由过程赋值语句对其进行赋值.</p>
+</li>
 </ol>
-<h4
-id="连线型和寄存器型数据类型的声明">连线型和寄存器型数据类型的声明</h4>
+<h4 id="连线型和寄存器型数据类型的声明">连线型和寄存器型数据类型的声明</h4>
 <h5 id="连线型">连线型</h5>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;net_declaration&gt;&lt;drive_strength&gt;&lt;range&gt;&lt;delay&gt;[list_of_variables];</span><br></pre></td></tr></table></figure>
-<p><code>net_declaration</code>:可以选择<code>wire,tri,tri0,tri1</code>等等</p>
-<p><code>drive_strength</code>:连线变量的驱动强度</p>
-<p><code>range</code>:指定数据为标量或者矢量,默认为1位的标量</p>
-<p><code>delay</code>:指定仿真延迟时间</p>
-<p><code>list_of_variables</code>:变量名称,可以一次定义多个,中间用逗号隔开</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;net_declaration&gt; &lt;drive_strength&gt; &lt;range&gt; &lt;delay&gt; [list_of_variables];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>net_declaration</code>: 可以选择<code>wire, tri, tri0, tri1</code>等等</p>
+</li>
+<li>
+<p><code>drive_strength</code>: 连线变量的驱动强度</p>
+</li>
+<li>
+<p><code>range</code>: 指定数据为标量或者矢量, 默认为1位的标量</p>
+</li>
+<li>
+<p><code>delay</code>: 指定仿真延迟时间</p>
+</li>
+<li>
+<p><code>list_of_variables</code>: 变量名称, 可以一次定义多个, 中间用逗号隔开</p>
+</li>
+</ul>
 <h5 id="寄存器型">寄存器型</h5>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span>&lt;range&gt;[list_of_register_variables]</span><br></pre></td></tr></table></figure>
-<p><code>range</code>:指定寄存器的位宽,默认为1位</p>
-<p><code>list_of_register_variables</code>:变量名称,可以一次定义多个,中间用逗号隔开</p>
-<h5 id="存储器型memory">存储器型(memory)</h5>
-<p>存储器型本质上是寄存器型变量阵列,这是因为Verilog
-HDL中没有多维数组,所以就用一些<code>reg</code>类型变量组成寄存器组来实现存储器的功能,也就是
-扩展的<code>reg</code>型数据地址范围.存储器型变量可以描述RAM型、ROM型存储器和reg文件.数组中的每一个单元通过一个数组索引进行寻址.</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> &lt;range&gt; [list_of_register_variables]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>range</code>: 指定寄存器的位宽, 默认为1位</p>
+</li>
+<li>
+<p><code>list_of_register_variables</code>: 变量名称, 可以一次定义多个, 中间用逗号隔开</p>
+</li>
+</ul>
+<h5 id="存储器型-memory">存储器型(memory)</h5>
+<p>存储器型本质上是寄存器型变量阵列, 这是因为Verilog HDL中没有多维数组, 所以就用一些<code>reg</code>类型变量组成寄存器组来实现存储器的功能, 也就是<br>
+扩展的<code>reg</code>型数据地址范围. 存储器型变量可以描述RAM型、ROM型存储器和reg文件. 数组中的每一个单元通过一个数组索引进行寻址.</p>
 <p>存储器型变量的声明如下:</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span>&lt;range1&gt;&lt;list_of_register&gt;&lt;range2&gt;</span><br></pre></td></tr></table></figure>
-<p><code>range1</code>:存储器中的每个寄存器的<strong>位宽</strong>,格式为<code>[msb:lsb]</code></p>
-<p><code>range2</code>:寄存器的<strong>个数</strong>,也就是<strong>存储器的地址范围</strong>,格式为<code>[msb:lsb]</code></p>
-<p><code>list_of_register</code>:变量名称,可以一次定义多个,中间用逗号隔开</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> &lt;range1&gt; &lt;list_of_register&gt; &lt;range2&gt;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>range1</code>: 存储器中的每个寄存器的<strong>位宽</strong>, 格式为<code>[msb:lsb]</code></p>
+</li>
+<li>
+<p><code>range2</code>: 寄存器的<strong>个数</strong>, 也就是<strong>存储器的地址范围</strong>, 格式为<code>[msb:lsb]</code></p>
+</li>
+<li>
+<p><code>list_of_register</code>: 变量名称, 可以一次定义多个, 中间用逗号隔开</p>
+</li>
+</ul>
 <p>例如</p>
-<p><code>reg [7:0] mem1 [255:0];</code>
-这是一个有<strong>256</strong>个<strong>8</strong>位寄存器的存储器<code>mem1</code>,<strong>地址范围是0~255</strong></p>
-<p><code>reg [15:0] mem1 [127:0],reg1,reg2;</code>
-这是一个有128个16位寄存器的存储器<code>mem1</code>,地址范围是0~128,除此之外还有两个16位的寄存器<code>reg1</code>,<code>reg2</code></p>
-<p><code>reg [15:0] a=16'b1011_0101_1001_0001;</code>
-这是一个16位寄存器,可以直接对这一个寄存器赋值</p>
-<p><code>reg mem1 [15:0];</code>
-这是一个有1个16位寄存器的存储器<code>mem1</code>,不能对整个寄存器赋值,注意和上面的寄存器进行区分</p>
-<p><code>mem1[2]=1'b0;</code>
-给<code>mem1</code>存储器中的第三个寄存器赋值</p>
+<p><code>reg [7:0] mem1 [255:0];</code> 这是一个有<strong>256</strong>个<strong>8</strong>位寄存器的存储器<code>mem1</code>, <strong>地址范围是0~255</strong></p>
+<p><code>reg [15:0] mem1 [127:0], reg1, reg2;</code> 这是一个有128个16位寄存器的存储器<code>mem1</code>, 地址范围是0~128, 除此之外还有两个16位的寄存器<code>reg1</code>, <code>reg2</code></p>
+<p><code>reg [15:0] a=16'b1011_0101_1001_0001;</code> 这是一个16位寄存器, 可以直接对这一个寄存器赋值</p>
+<p><code>reg mem1 [15:0];</code> 这是一个有1个16位寄存器的存储器<code>mem1</code>, 不能对整个存储器赋值, 注意和上面的寄存器进行区分</p>
+<p><code>mem1[2]=1'b0;</code> 给<code>mem1</code>存储器中的第三个寄存器赋值</p>
 <h3 id="抽象数据类型">抽象数据类型</h3>
-<p>1.整型 声明格式为 <code>integer \&lt;name&gt;</code></p>
+<p>1.整型</p>
+<p>整型数据与32位寄存器型数据在实际应用上相同, 声明格式为</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">integer</span> &lt;name&gt;;</span><br></pre></td></tr></table></figure>
+<p>例如</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">integer</span> index;   <span class="comment">//32位有符号整数</span></span><br><span class="line"><span class="keyword">integer</span> i[<span class="number">31</span>:<span class="number">0</span>]; <span class="comment">//定义了整型数组，有32个元素</span></span><br></pre></td></tr></table></figure>
 <p>2.时间型</p>
+<p>时间型数据是64位无符号数, 声明格式如下:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">time</span> &lt;name&gt;;</span><br></pre></td></tr></table></figure>
 <p>3.实型</p>
+<p>实型数据为浮点数, 声明格式为</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">real</span> &lt;name&gt;;</span><br></pre></td></tr></table></figure>
 <p>4.参数型</p>
-<p>声明格式为 parameter 参数名1=表达式1，参数名2=表达式2，…</p>
+<p>参数型数据属于常量, 声明格式为</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">parameter</span> 参数名<span class="number">1</span>=表达式<span class="number">1</span>，参数名<span class="number">2</span>=表达式<span class="number">2</span>，...</span><br></pre></td></tr></table></figure>
+<p>其中表达式既可以是常数, 也可以是表达式.</p>
+<p>示例如下:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">parameter</span> length=<span class="number">32</span>, weight=<span class="number">16</span>;</span><br><span class="line"><span class="keyword">parameter</span> pi=<span class="number">3</span><span class="variable">.14</span>, load=<span class="number">4&#x27;b1101</span>;</span><br><span class="line"><span class="keyword">parameter</span> delay=(<span class="keyword">byte</span>+<span class="keyword">bit</span>)/<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="运算符">运算符</h2>
 <h3 id="算术运算符">算术运算符</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> arith_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]a ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>]b ;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">4&#x27;b1111</span>;<span class="comment">//15</span></span><br><span class="line">    b=<span class="number">4&#x27;b011</span>;<span class="comment">//3</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a*b);<span class="comment">//结果是45，但是结果必须是4位二进制数，高位被舍去</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a/b);<span class="comment">//结果是5，4&#x27;b0101</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a+b);<span class="comment">//结果是18，高位被舍去</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a-b);<span class="comment">//结果是12</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a%b);<span class="comment">//结果是0</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//算数运算代码例</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> arith_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] a;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] b;</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        a=<span class="number">4&#x27;b1111</span>;<span class="comment">//15</span></span><br><span class="line">        b=<span class="number">4&#x27;b011</span>;<span class="comment">//3</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a*b);<span class="comment">//结果是45，但是结果必须是4位二进制数，高位被舍去</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a/b);<span class="comment">//结果是5，4&#x27;b0101</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a+b);<span class="comment">//结果是18，高位被舍去</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a-b);<span class="comment">//结果是12</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a%b);<span class="comment">//结果是0</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//算数运算代码例</span></span><br></pre></td></tr></table></figure>
 <h3 id="关系运算符">关系运算符</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> rela_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]a,b,c,d;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">3</span>;</span><br><span class="line">    b=<span class="number">6</span>;</span><br><span class="line">    c=<span class="number">1</span>;</span><br><span class="line">    d=<span class="number">4&#x27;hx</span>;</span><br><span class="line">    <span class="built_in">$display</span>(a&lt;b);<span class="comment">//结果为真，输出1</span></span><br><span class="line">    <span class="built_in">$display</span>(a&gt;b);<span class="comment">//结果为假，输出0</span></span><br><span class="line">    <span class="built_in">$display</span>(a&lt;=c);<span class="comment">//结果为假，输出0</span></span><br><span class="line">    <span class="built_in">$display</span>(d&lt;=a);<span class="comment">//结果不确定，输出x</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//关系运算代码例</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> rela_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]a,b,c,d;</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        a=<span class="number">3</span>;</span><br><span class="line">        b=<span class="number">6</span>;</span><br><span class="line">        c=<span class="number">1</span>;</span><br><span class="line">        d=<span class="number">4&#x27;hx</span>;</span><br><span class="line">        <span class="built_in">$display</span>(a&lt;b);<span class="comment">//结果为真，输出1</span></span><br><span class="line">        <span class="built_in">$display</span>(a&gt;b);<span class="comment">//结果为假，输出0</span></span><br><span class="line">        <span class="built_in">$display</span>(a&lt;=c);<span class="comment">//结果为假，输出0</span></span><br><span class="line">        <span class="built_in">$display</span>(d&lt;=a);<span class="comment">//结果不确定，输出x</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//关系运算代码例</span></span><br></pre></td></tr></table></figure>
 <h3 id="相等关系运算符">相等关系运算符</h3>
-<p><code>==</code>和<code>!=</code>是逻辑等式运算符,其结果是由两个操作数的值决定,由于操作数中某些位可能是不定值<code>x</code>或者高阻态值<code>z</code>,所以结果可能是不定值<code>x</code>.</p>
-<p><code>===</code>和<code>!==</code>对操作数进行按位比较,两个操作数必须完全一样,结果才为1,否则为0.但是,若两个操作数对应位出现<code>x</code>或者<code>z</code>,则可以认为是相同的.</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> equal_tb;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]a,b,c,d;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">4&#x27;b0xx1</span>;</span><br><span class="line">    b=<span class="number">4&#x27;b0xx1</span>;</span><br><span class="line">    c=<span class="number">4&#x27;b0011</span>;</span><br><span class="line">    d=<span class="number">2&#x27;b11</span>;</span><br><span class="line">    <span class="built_in">$display</span>(a==b);<span class="comment">//结果不确定，输出x</span></span><br><span class="line">    <span class="built_in">$display</span>(c==d);<span class="comment">//结果相等，输出1</span></span><br><span class="line">    <span class="built_in">$display</span>(a===b);<span class="comment">//结果全等，输出1</span></span><br><span class="line">    <span class="built_in">$display</span>(c===d);<span class="comment">//结果不全等，输出0</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//相等关系代码例</span></span><br></pre></td></tr></table></figure>
+<p><code>==</code>和<code>!=</code>是逻辑等式运算符, 其结果是由两个操作数的值决定, 由于操作数中某些位可能是不定值<code>x</code>或者高阻态值<code>z</code>, 所以结果可能是不定值<code>x</code>.</p>
+<p><code>===</code>和<code>!==</code>对操作数进行按位比较, 两个操作数必须完全一样(连位数都必须一样, 比如<code>4'b0011</code>和<code>3'b011</code>不全等), 结果才为<code>1</code>, 否则为<code>0</code>. 但是, 若两个操作数对应位出现<code>x</code>或者<code>z</code>, 则可以认为是相同的.</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> equal_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] a,b,c,d;</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        a=<span class="number">4&#x27;b0xx1</span>;</span><br><span class="line">        b=<span class="number">4&#x27;b0xx1</span>;</span><br><span class="line">        c=<span class="number">4&#x27;b0011</span>;</span><br><span class="line">        d=<span class="number">2&#x27;b11</span>;</span><br><span class="line">        <span class="built_in">$display</span>(a==b);<span class="comment">//结果不确定，输出x</span></span><br><span class="line">        <span class="built_in">$display</span>(c==d);<span class="comment">//结果相等，输出1</span></span><br><span class="line">        <span class="built_in">$display</span>(a===b);<span class="comment">//结果全等，输出1</span></span><br><span class="line">        <span class="built_in">$display</span>(c===d);<span class="comment">//结果不全等，输出0</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//相等关系代码例</span></span><br></pre></td></tr></table></figure>
 <h3 id="逻辑运算符">逻辑运算符</h3>
-<p>对于一个操作数，如果它的<strong>每一位都是0</strong>，那么其逻辑就是0；但凡出现一个1，那么其逻辑就为1；</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> logic_tb;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] a,b,c;</span><br><span class="line"><span class="keyword">reg</span> d,f;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">4&#x27;b0000</span>;<span class="comment">//逻辑0</span></span><br><span class="line">    b=<span class="number">4&#x27;b1011</span>;<span class="comment">//逻辑1</span></span><br><span class="line">    c=<span class="number">4&#x27;b1001</span>;<span class="comment">//逻辑1</span></span><br><span class="line">    d=<span class="number">1&#x27;b0</span>;<span class="comment">//逻辑0</span></span><br><span class="line">    f=<span class="number">1&#x27;b1</span>;<span class="comment">//逻辑1</span></span><br><span class="line">    <span class="built_in">$display</span>(!a);<span class="comment">//输出1&#x27;b1</span></span><br><span class="line">    <span class="built_in">$display</span>(!b);<span class="comment">//输出1&#x27;b0</span></span><br><span class="line">    <span class="built_in">$display</span>(!d);<span class="comment">//输出1&#x27;b1</span></span><br><span class="line">    <span class="built_in">$display</span>(!f);<span class="comment">//输出1&#x27;b0</span></span><br><span class="line">    <span class="built_in">$display</span>(a&amp;&amp;b);<span class="comment">//逻辑与运算，输出1&#x27;b0</span></span><br><span class="line">    <span class="built_in">$display</span>(b&amp;&amp;c);<span class="comment">//逻辑与运算，输出1&#x27;b1</span></span><br><span class="line">    <span class="built_in">$display</span>(c||d);<span class="comment">//逻辑或运算，输出1&#x27;b1</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>对于一个操作数, 如果它的<strong>每一位都是<code>0</code></strong>, 那么其逻辑就是<code>0</code>; 但凡出现一个<code>1</code>, 那么其逻辑就为<code>1</code>;</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> logic_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] a,b,c;</span><br><span class="line">    <span class="keyword">reg</span>       d,f;</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        a=<span class="number">4&#x27;b0000</span>;<span class="comment">//逻辑0</span></span><br><span class="line">        b=<span class="number">4&#x27;b1011</span>;<span class="comment">//逻辑1</span></span><br><span class="line">        c=<span class="number">4&#x27;b1001</span>;<span class="comment">//逻辑1</span></span><br><span class="line">        d=<span class="number">1&#x27;b0</span>;<span class="comment">//逻辑0</span></span><br><span class="line">        f=<span class="number">1&#x27;b1</span>;<span class="comment">//逻辑1</span></span><br><span class="line">        <span class="built_in">$display</span>(!a);<span class="comment">//输出1&#x27;b1</span></span><br><span class="line">        <span class="built_in">$display</span>(!b);<span class="comment">//输出1&#x27;b0</span></span><br><span class="line">        <span class="built_in">$display</span>(!d);<span class="comment">//输出1&#x27;b1</span></span><br><span class="line">        <span class="built_in">$display</span>(!f);<span class="comment">//输出1&#x27;b0</span></span><br><span class="line">        <span class="built_in">$display</span>(a&amp;&amp;b);<span class="comment">//逻辑与运算，输出1&#x27;b0</span></span><br><span class="line">        <span class="built_in">$display</span>(b&amp;&amp;c);<span class="comment">//逻辑与运算，输出1&#x27;b1</span></span><br><span class="line">        <span class="built_in">$display</span>(c||d);<span class="comment">//逻辑或运算，输出1&#x27;b1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <h3 id="按位运算符">按位运算符</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> bit_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] a ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] b ;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">5&#x27;b101</span>;<span class="comment">//运算的时候补成5&#x27;b00101</span></span><br><span class="line">    b=<span class="number">5&#x27;b11101</span>;</span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,~a);<span class="comment">//按位取反，结果是5&#x27;b11010</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,~b);<span class="comment">//按位取反，结果是5&#x27;b00010</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a&amp;b);<span class="comment">//按位与，结果是5&#x27;b00101</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a|b);<span class="comment">//按位或，结果是5&#x27;b11101</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a^b);<span class="comment">//按位异或，结果是5&#x27;b11000</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//按位运算代码例</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> bit_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] a ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] b ;</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        a=<span class="number">5&#x27;b101</span>;<span class="comment">//运算的时候补成5&#x27;b00101</span></span><br><span class="line">        b=<span class="number">5&#x27;b11101</span>;</span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,~a);<span class="comment">//按位取反，结果是5&#x27;b11010</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,~b);<span class="comment">//按位取反，结果是5&#x27;b00010</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a&amp;b);<span class="comment">//按位与，结果是5&#x27;b00101</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a|b);<span class="comment">//按位或，结果是5&#x27;b11101</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,a^b);<span class="comment">//按位异或，结果是5&#x27;b11000</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//按位运算代码例</span></span><br></pre></td></tr></table></figure>
 <h3 id="移位运算符">移位运算符</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> shift_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">5</span>:<span class="number">0</span>]a,b,c,d ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>]e ;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">6&#x27;b101101</span>;</span><br><span class="line">    b=a&lt;&lt;<span class="number">2</span>;<span class="comment">//把a左移两位，再用0补上空位</span></span><br><span class="line">    c=a&gt;&gt;<span class="number">3</span>;<span class="comment">//把a右移三位，再用0补上空位</span></span><br><span class="line">    d=a&lt;&lt;<span class="number">7</span>;<span class="comment">//把a左移七位，再用0补上空位</span></span><br><span class="line">    e=a&lt;&lt;<span class="number">2</span>;<span class="comment">//把a左移两位，再用0补上空位</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,b);<span class="comment">//结果为6&#x27;b110100</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,c);<span class="comment">//结果为6&#x27;b000101</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,d);<span class="comment">//结果为6&#x27;b000000</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,e);<span class="comment">//结果为8&#x27;b10110100</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//移位运算代码例</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> shift_tb;</span><br><span class="line">        <span class="keyword">reg</span> [<span class="number">5</span>:<span class="number">0</span>] a,b,c,d ;</span><br><span class="line">        <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] e ;</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        a=<span class="number">6&#x27;b101101</span>;</span><br><span class="line">        b=a&lt;&lt;<span class="number">2</span>;<span class="comment">//把a左移两位，再用0补上空位</span></span><br><span class="line">        c=a&gt;&gt;<span class="number">3</span>;<span class="comment">//把a右移三位，再用0补上空位</span></span><br><span class="line">        d=a&lt;&lt;<span class="number">7</span>;<span class="comment">//把a左移七位，再用0补上空位</span></span><br><span class="line">        e=a&lt;&lt;<span class="number">2</span>;<span class="comment">//把a左移两位，再用0补上空位</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,b);<span class="comment">//结果为6&#x27;b110100</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,c);<span class="comment">//结果为6&#x27;b000101</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,d);<span class="comment">//结果为6&#x27;b000000</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,e);<span class="comment">//结果为8&#x27;b10110100</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//移位运算代码例</span></span><br></pre></td></tr></table></figure>
 <h3 id="条件运算符">条件运算符</h3>
 <p>唯一的三目运算符</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> mux2 (in1,in2,sel,out);</span><br><span class="line">    <span class="keyword">input</span>  [<span class="number">3</span>:<span class="number">0</span>]in1,in2;</span><br><span class="line">    <span class="keyword">input</span>  sel;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>]out;</span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>]out;</span><br><span class="line">    <span class="keyword">assign</span> out=(!sel)?in1:in2;  <span class="comment">//当sel=0时，out=in1；当sel=1时，out=in2</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//verilog里面唯一的三目条件运算符代码例</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> mux2 (in1,in2,sel,out);</span><br><span class="line">    <span class="keyword">input</span>  [<span class="number">3</span>:<span class="number">0</span>] in1,in2;</span><br><span class="line">    <span class="keyword">input</span>        sel;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>] out;</span><br><span class="line">    <span class="keyword">wire</span>   [<span class="number">3</span>:<span class="number">0</span>] out;</span><br><span class="line">    <span class="keyword">assign</span> out=(!sel)?in1:in2;  <span class="comment">//当sel=0时，out=in1；当sel=1时，out=in2</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//verilog里面唯一的三目条件运算符代码例</span></span><br></pre></td></tr></table></figure>
 <h3 id="复制和连接运算符">复制和连接运算符</h3>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> con_rep_tb;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>]a ;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>]b ;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>]c ;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">4</span>:<span class="number">0</span>]d ;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">5</span>:<span class="number">0</span>]e ;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    a=<span class="number">3&#x27;b101</span>;</span><br><span class="line">    b=<span class="number">4&#x27;b1110</span>;</span><br><span class="line">    c=&#123;a,b&#125;;            <span class="comment">//连接a和b</span></span><br><span class="line">    d=&#123;a[<span class="number">2</span>:<span class="number">1</span>],b[<span class="number">2</span>:<span class="number">0</span>]&#125;;  <span class="comment">//连接a[2:1]和b[2:0]</span></span><br><span class="line">    e=&#123;<span class="number">2</span>&#123;a&#125;&#125;;           <span class="comment">//把a复制两次</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,c);<span class="comment">//结果为8&#x27;b01011110</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,d);<span class="comment">//结果为5&#x27;b10110</span></span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,e);<span class="comment">//结果为6&#x27;b101101</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//连接和复制运算符代码例</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> con_rep_tb;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] a ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] b ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] c ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">4</span>:<span class="number">0</span>] d ;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">5</span>:<span class="number">0</span>] e ;</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        a=<span class="number">3&#x27;b101</span>;</span><br><span class="line">        b=<span class="number">4&#x27;b1110</span>;</span><br><span class="line">        c=&#123;a,b&#125;;            <span class="comment">//连接a和b</span></span><br><span class="line">        d=&#123;a[<span class="number">2</span>:<span class="number">1</span>],b[<span class="number">2</span>:<span class="number">0</span>]&#125;;  <span class="comment">//连接a[2:1]和b[2:0]</span></span><br><span class="line">        e=&#123;<span class="number">2</span>&#123;a&#125;&#125;;           <span class="comment">//把a复制两次</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,c);<span class="comment">//结果为8&#x27;b01011110</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,d);<span class="comment">//结果为5&#x27;b10110</span></span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;%b&quot;</span>,e);<span class="comment">//结果为6&#x27;b101101</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//连接和复制运算符代码例</span></span><br></pre></td></tr></table></figure>
 <h2 id="模块">模块</h2>
 <h3 id="模块的内容">模块的内容</h3>
 <p>模块包含四个部分</p>
-<ol type="1">
-<li>模块的开始和结束:
-<code>module</code>开始，<code>endmodule</code>结束,其中模块开始语句必须以分号结束.开始的部分包括模块名和端口列表（各个端口名用逗号隔开）；</li>
-<li>模块端口定义：<code>input</code>，<code>output</code>，<code>inout</code>，以及位宽；</li>
-<li>模块的数据类型：<code>input</code>默认为<code>wire</code>，<code>output</code>可以是<code>wire</code>，也可以是<code>reg</code>,默认为<code>wire</code>(当在<code>always</code>或者<code>initial</code>语句块中被赋值时需要额外声明<code>output</code>为<code>reg</code>类型),<code>inout</code>一般为<code>tri</code>,表示有多个驱动源.</li>
-<li>模块的逻辑功能描述:产生各种逻辑(主要是组合逻辑和时序逻辑),主要包括<code>initial</code>语句,<code>always</code>语句,其他子模块实例化语句,门实例化语句,用户自定义原语实例化语句,连续赋值语句<code>assign</code>,函数(function)和任务(task).</li>
+<ol>
+<li>模块的开始和结束: <code>module</code>开始, <code>endmodule</code>结束, 其中模块开始语句必须以分号结束. 开始的部分包括模块名和端口列表(各个端口名用逗号隔开);</li>
+<li>模块端口定义: <code>input</code>, <code>output</code>, <code>inout</code>, 以及位宽;</li>
+<li>模块的数据类型: <code>input</code>默认为<code>wire</code>; <code>output</code>可以是<code>wire</code>, 也可以是<code>reg</code>, 默认为<code>wire</code>(当在<code>always</code>或者<code>initial</code>语句块中被赋值时需要额外声明<code>output</code>为<code>reg</code>类型); <code>inout</code>一般为<code>tri</code>, 表示有多个驱动源.</li>
+<li>模块的逻辑功能描述: 产生各种逻辑(主要是组合逻辑和时序逻辑), 主要包括<code>initial</code>语句, <code>always</code>语句, 其他子模块实例化语句, 门实例化语句, 用户自定义原语实例化语句, 连续赋值语句<code>assign</code>, 函数(function)和任务(task).</li>
 </ol>
 <h3 id="模块的引用">模块的引用</h3>
-<p>将信号线和被引用模块的端口连接，有两种方式：</p>
-<ol type="1">
-<li>按照源模块定义时的端口顺序连接</li>
-</ol>
+<p>将信号线和被引用模块的端口连接, 有两种方式:</p>
+<ol>
+<li>
+<p>按照源模块定义时的端口顺序连接</p>
 <p><code>模块名(连接端口1信号线名,连接端口2信号线名,...)</code></p>
-<ol start="2" type="1">
-<li>在引用时用小数点表明源模块定义时的端口名(更常用)</li>
-</ol>
+</li>
+<li>
+<p>在引用时用小数点表明源模块定义时的端口名(更常用)</p>
 <p><code>模块名(.端口1名(连接端口1信号线名),.端口2名(连接端口2信号线名),...)</code></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> dff (din,clk,q);</span><br><span class="line"><span class="keyword">input</span> din,clk;</span><br><span class="line"><span class="keyword">output</span> q;</span><br><span class="line"><span class="keyword">reg</span> q;</span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">    q&lt;=din;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//D触发器</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> dff (din,clk,q);</span><br><span class="line">    <span class="keyword">input</span>  din,clk;</span><br><span class="line">    <span class="keyword">output</span> q;</span><br><span class="line">    <span class="keyword">reg</span>    q;</span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk)</span><br><span class="line">        q&lt;=din;</span><br><span class="line"><span class="keyword">endmodule</span><span class="comment">//D触发器</span></span><br></pre></td></tr></table></figure>
 <h2 id="习题">习题</h2>
-<ol type="1">
-<li>Verilog HDL中,基本的语言要素有哪些?</li>
-</ol>
-<p>程序的语言要素也称为词法,是由符号,数据类型,运算符和表达式构成的,其中</p>
-<p>符号包括空白符,注释符,标识符,转义标识符,关键字,数值等.</p>
-<p>数据类型可以分成两大类,物理数据类型,包括连线型<code>wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, supply1, supply0</code>,寄存器型<code>reg</code>;
-抽象数据类型,包括整型<code>integer</code>, 时间型<code>time</code>,
-实型<code>real</code>, 参数型<code>parameter</code></p>
-<p>运算符包括算数运算符<code>+, -, *, /, %</code>,
-关系运算符<code>&gt;, &lt;, &gt;=, &lt;=</code>,
-相等关系运算符<code>==, !=, ===, !==</code>,
-逻辑运算符<code>&amp;&amp;, ||, !</code>,
-按位运算符<code>~, &amp;, |, ^, ^~</code>,
-归约运算符<code>&amp;, |, ^, ~&amp;, ~|, ~^, ^~</code>,
-移位运算符<code>&lt;&lt;, &gt;&gt;</code>, 条件运算符<code>?:</code>,
-连接和复制运算符<code>&#123;&#125;, &#123;&#123;&#125;&#125;</code>.</p>
-<ol start="2" type="1">
-<li>Verilog HDL中,空白符总是可以忽略吗?</li>
-</ol>
-<p>不是。在字符串中,在标识符中(分隔不同的标识符)不能忽略.</p>
-<ol start="3" type="1">
-<li>Verilog HDL中,插入注释的方法有哪两种?</li>
-</ol>
-<p>单行注释<code>//</code>,多行注释<code>/* */</code></p>
-<ol start="4" type="1">
-<li>下面的标识符哪些是非法的,哪些是非法的?<code>Always, 2_1mux, \din, \wait, _qout, $data, data$, c#out, \@out</code></li>
-</ol>
-<p>合法的：<code>Always, \din, \wait, _qout, $data, data$, \@out</code>
-非法的：<code>2_1mux, c#out</code></p>
-<ol start="5" type="1">
-<li>下列数字的表示方法是否正确?若正确,表示多少?<code>5'd20, 'B10, 4'b10x1, 'dc10, 5'b101, 6'HAAFB</code></li>
-</ol>
-<p><code>5'd20</code>正确，表示5位十进制数20</p>
-<p><code>'B10</code>正确，默认为32位的二进制数10(前面补0)</p>
-<p><code>4'b10x1</code>正确，表示4位二进制数10x1</p>
-<p><code>'dc10</code>错误，十进制中没有c</p>
-<p><code>5'b101</code>正确，表示5位二进制数101</p>
-<p><code>6'HAAFB</code>错误，6位十六进制数不能表示AAFB,至少需要16位</p>
-<ol start="6" type="1">
-<li>已知<code>a=1'b1; b=3'b011</code>,那么<code>&#123;a,b&#125;</code>是多少?</li>
-</ol>
+<ol>
+<li>
+<p>Verilog HDL中, 基本的语言要素有哪些?</p>
+<p>程序的语言要素也称为词法, 是由符号, 数据类型, 运算符和表达式构成的, 其中</p>
+<p>符号包括空白符, 注释符, 标识符, 转义标识符, 关键字, 数值等.</p>
+<p>数据类型可以分成两大类, 物理数据类型, 包括连线型<code>wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, supply1, supply0</code>, 寄存器型<code>reg</code>; 抽象数据类型, 包括整型<code>integer</code>, 时间型<code>time</code>, 实型<code>real</code>, 参数型<code>parameter</code></p>
+<p>运算符包括算数运算符<code>+, -, *, /, %</code>, 关系运算符<code>&gt;, &lt;, &gt;=, &lt;=</code>, 相等关系运算符<code>==, !=, ===, !==</code>, 逻辑运算符<code>&amp;&amp;, ||, !</code>, 按位运算符<code>~, &amp;, |, ^, ^~</code>, 归约运算符<code>&amp;, |, ^, ~&amp;, ~|, ~^, ^~</code>, 移位运算符<code>&lt;&lt;, &gt;&gt;</code>, 条件运算符<code>?:</code>, 连接和复制运算符<code>&#123;&#125;, &#123;&#123;&#125;&#125;</code>.</p>
+</li>
+<li>
+<p>Verilog HDL中,空白符总是可以忽略吗?</p>
+<p>不是. 在字符串中, 在标识符中(分隔不同的标识符)不能忽略.</p>
+</li>
+<li>
+<p>Verilog HDL中, 插入注释的方法有哪两种?</p>
+<p>单行注释<code>//</code>, 多行注释<code>/* */</code></p>
+</li>
+<li>
+<p>下面的标识符哪些是非法的, 哪些是非法的? <code>Always, 2_1mux, \din, \wait, _qout, $data, data$, c#out, \@out</code></p>
+<p>合法的: <code>Always, \din, \wait, _qout, data$, \@out</code><br>
+非法的: <code>2_1mux, c#out, $data</code></p>
+</li>
+<li>
+<p>下列数字的表示方法是否正确? 若正确, 表示多少? <code>5'd20, 'B10, 4'b10x1, 'dc10, 5'b101, 6'HAAFB</code></p>
+<p><code>5'd20</code>正确, 表示5位十进制数20</p>
+<p><code>'B10</code>正确, 默认为32位的二进制数10(前面补0)</p>
+<p><code>4'b10x1</code>正确, 表示4位二进制数10x1</p>
+<p><code>'dc10</code>错误, 十进制中没有c</p>
+<p><code>5'b101</code>正确, 表示5位二进制数101</p>
+<p><code>6'HAAFB</code>错误, 6位十六进制数不能表示AAFB,至少需要16位</p>
+</li>
+<li>
+<p>已知<code>a=1'b1; b=3'b011</code>, 那么<code>&#123;a,b&#125;</code>是多少?</p>
 <p><code>&#123;a,b&#125; = 4'b1011</code></p>
-<ol start="7" type="1">
-<li>Verilog
-HDL中,数据类型可以分成几类?每一类又包含哪些具体的数据类型?</li>
-</ol>
-<p>数据类型可以分成两大类,物理数据类型,包括连线型<code>wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, supply1, supply0</code>,寄存器型<code>reg</code>;
-抽象数据类型,包括整型<code>integer</code>, 时间型<code>time</code>,
-实型<code>real</code>, 参数型<code>parameter</code></p>
-<ol start="8" type="1">
-<li>从电路角度分析<code>wire</code>和<code>reg</code>型数据的区别.</li>
-</ol>
-<p>连线型(wire):
-连线表示逻辑单元的物理连接,可以对应电路中的物理信号连线,这种变量类型不能保持电荷(<code>trireg</code>除外).
-连线型变量必须要有驱动源,一种是连接到一个门或者模块的输出端,另一种是用<code>assign</code>连续赋值语句对它进行赋值.若没有驱动源,则保持高阻态<code>z</code>.</p>
-<p>寄存器型(reg):
-<code>reg</code>型变量是最常见也是最重要的寄存器型数据类型,它是数据储存单元的抽象类型,其对应的硬件电路元件具有状态保持作用,能够储存数据,如触发器,锁存器等.</p>
-<ol start="9" type="1">
-<li>Verilog
-HDL中,若连线型变量的驱动强度说明被省略,则默认的驱动强度是多少?</li>
-</ol>
+</li>
+<li>
+<p>Verilog HDL中, 数据类型可以分成几类? 每一类又包含哪些具体的数据类型?</p>
+<p>数据类型可以分成两大类, 物理数据类型, 包括连线型<code>wire, tri, wor, trior, wand, trand, trireg, tri1, tri0, supply1, supply0</code>, 寄存器型<code>reg</code>; 抽象数据类型, 包括整型<code>integer</code>, 时间型<code>time</code>, 实型<code>real</code>, 参数型<code>parameter</code></p>
+</li>
+<li>
+<p>从电路角度分析<code>wire</code>和<code>reg</code>型数据的区别.</p>
+<p>连线型(wire): 连线表示逻辑单元的物理连接,可以对应电路中的物理信号连线,这种变量类型不能保持电荷(<code>trireg</code>除外). 连线型变量必须要有驱动源,一种是连接到一个门或者模块的输出端,另一种是用<code>assign</code>连续赋值语句对它进行赋值.若没有驱动源,则保持高阻态<code>z</code>.</p>
+<p>寄存器型(reg): <code>reg</code>型变量是最常见也是最重要的寄存器型数据类型,它是数据储存单元的抽象类型,其对应的硬件电路元件具有状态保持作用,能够储存数据,如触发器,锁存器等.</p>
+</li>
+<li>
+<p>Verilog HDL中,若连线型变量的驱动强度说明被省略,则默认的驱动强度是多少?</p>
 <p>默认驱动强度为 (<code>strong1</code>, <code>strong0</code>)</p>
-<ol start="10" type="1">
-<li>能否对<code>memory</code>型数据进行位选择和域选择?</li>
-</ol>
-<p>不能直接对memory型数据进行位选择或域选择，只能先选择memory中的某个元素，再对该元素进行位选择。</p>
-<ol start="11" type="1">
-<li>Verilog HDL中,定义参数<code>parameter</code>有什么用?</li>
-</ol>
-<p>提高代码的可读性和可维护性,方便模块的复用和参数化设计,在模块实例化时可以重新定义参数值</p>
-<ol start="12" type="1">
-<li>运算符<code>~</code>和<code>!</code>,<code>&amp;&amp;</code>和<code>&amp;</code>有什么区别?</li>
-</ol>
-<p><code>~</code>按位取反, <code>!</code>逻辑取反
+</li>
+<li>
+<p>能否对<code>memory</code>型数据进行位选择和域选择?</p>
+<p>不能直接对memory型数据进行位选择或域选择, 只能先选择memory中的某个元素, 再对该元素进行位选择.</p>
+</li>
+<li>
+<p>Verilog HDL中, 定义参数<code>parameter</code>有什么用?</p>
+<p>提高代码的可读性和可维护性, 方便模块的复用和参数化设计, 在模块实例化时可以重新定义参数值.</p>
+</li>
+<li>
+<p>运算符<code>~</code>和<code>!</code>,<code>&amp;&amp;</code>和<code>&amp;</code>有什么区别?</p>
+<p><code>~</code>按位取反, <code>!</code>逻辑取反<br>
 <code>&amp;</code>按位与, <code>&amp;&amp;</code>逻辑与</p>
-<ol start="13" type="1">
-<li>相等运算符<code>==</code>和全等运算符<code>===</code>有什么区别?
-各在什么场合使用?</li>
-</ol>
-<p><code>==</code>和<code>!=</code>是逻辑等式运算符,其结果是由两个操作数的值决定,由于操作数中某些位可能是不定值<code>x</code>或者高阻态值<code>z</code>,所以结果可能是不定值<code>x</code>.</p>
-<p><code>===</code>和<code>!==</code>对操作数进行按位比较,两个操作数必须完全一样,结果才为1,否则为0.但是,若两个操作数对应位出现<code>x</code>或者<code>z</code>,则可以认为是相同的,常用于<code>case</code>表达式的判别.</p>
-<ol start="14" type="1">
-<li>任意抽象的符合语法的Verilog
-HDL模块是否都可以通过综合工具转变为电路结构?</li>
-</ol>
-<p>不能,
-可综合的Verilog代码需要遵循一定的设计规则，通常要求代码描述的硬件行为在综合后能够映射到目标工艺库（如ASIC或FPGA）的基本逻辑单元上。</p>
-<ol start="15" type="1">
-<li>一般来说,模块由哪些部分组成? 每一部分又由哪些语句构成?</li>
-</ol>
+</li>
+<li>
+<p>相等运算符<code>==</code>和全等运算符<code>===</code>有什么区别? 各在什么场合使用?</p>
+<p><code>==</code>和<code>!=</code>是逻辑等式运算符, 其结果是由两个操作数的值决定, 由于操作数中某些位可能是不定值<code>x</code>或者高阻态值<code>z</code>, 所以结果可能是不定值<code>x</code>.</p>
+<p><code>===</code>和<code>!==</code>对操作数进行按位比较, 两个操作数必须完全一样, 结果才为1, 否则为0. 但是, 若两个操作数对应位出现<code>x</code>或者<code>z</code>, 则可以认为是相同的, 常用于<code>case</code>表达式的判别.</p>
+</li>
+<li>
+<p>任意抽象的符合语法的Verilog HDL模块是否都可以通过综合工具转变为电路结构?</p>
+<p>不能, 可综合的Verilog代码需要遵循一定的设计规则, 通常要求代码描述的硬件行为在综合后能够映射到目标工艺库(如ASIC或FPGA)的基本逻辑单元上.</p>
+</li>
+<li>
+<p>一般来说,模块由哪些部分组成? 每一部分又由哪些语句构成?</p>
 <p>模块包含四个部分</p>
-<ol type="1">
-<li><p>模块的开始和结束:
-<code>module</code>开始，<code>endmodule</code>结束,其中模块开始语句必须以分号结束.开始的部分包括模块名和端口列表（各个端口名用逗号隔开）；</p></li>
-<li><p>模块端口定义：<code>input</code>，<code>output</code>，<code>inout</code>，以及位宽；</p></li>
-<li><p>模块的数据类型：<code>input</code>默认为<code>wire</code>，<code>output</code>可以是<code>wire</code>，也可以是<code>reg</code>（当在<code>always</code>或者<code>initial</code>语句块中被赋值）,<code>inout</code>一般为<code>tri</code>,表示有多个驱动源.</p></li>
-<li><p>模块的逻辑功能描述:产生各种逻辑(主要是组合逻辑和时序逻辑),主要包括<code>initial</code>语句,<code>always</code>语句,其他子模块实例化语句,门实例化语句,用户自定义原语实例化语句,连续赋值语句<code>assign</code>,函数(function)和任务(task).</p></li>
-<li><p>端口有哪几种? 模块的端口是如何描述的?</p></li>
+<ol>
+<li>模块的开始和结束: <code>module</code>开始, <code>endmodule</code>结束, 其中模块开始语句必须以分号结束. 开始的部分包括模块名和端口列表(各个端口名用逗号隔开);</li>
+<li>模块端口定义: <code>input</code>, <code>output</code>, <code>inout</code>, 以及位宽;</li>
+<li>模块的数据类型: <code>input</code>默认为<code>wire</code>, <code>output</code>可以是<code>wire</code>, 也可以是<code>reg</code>(当在<code>always</code>或者<code>initial</code>语句块中被赋值), <code>inout</code>一般为<code>tri</code>, 表示有多个驱动源.</li>
+<li>模块的逻辑功能描述: 产生各种逻辑(主要是组合逻辑和时序逻辑), 主要包括<code>initial</code>语句, <code>always</code>语句, 其他子模块实例化语句, 门实例化语句, 用户自定义原语实例化语句, 连续赋值语句<code>assign</code>, 函数(function)和任务(task).</li>
 </ol>
-<p>端口类型：</p>
-<p><code>input</code>输入端口</p>
-<p><code>output</code>：输出端口</p>
-<p><code>inout</code>：双向端口</p>
-<p>描述方法：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> module_name (</span><br><span class="line">    <span class="keyword">input</span> [msb:lsb] port1,</span><br><span class="line">    <span class="keyword">output</span> [msb:lsb] port2,</span><br><span class="line">    <span class="keyword">inout</span> [msb:lsb] port3</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>端口有哪几种? 模块的端口是如何描述的?</p>
+<p>端口类型:</p>
+<p><code>input</code> 输入端口</p>
+<p><code>output</code> 输出端口</p>
+<p><code>inout</code> 双向端口</p>
+<p>描述方法:</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> module_name (</span><br><span class="line">        <span class="keyword">input</span> [msb:lsb] port1,</span><br><span class="line">        <span class="keyword">output</span> [msb:lsb] port2,</span><br><span class="line">        <span class="keyword">inout</span> [msb:lsb] port3</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
     </div>
 
@@ -587,8 +665,8 @@ HDL模块是否都可以通过综合工具转变为电路结构?</li>
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/SUSY/" rel="next" title="Notes on Supersymmetry">
-                  Notes on Supersymmetry <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%B8%80%E7%AB%A0/" rel="next" title="第一章:Verilog HDL数字集成电路设计方法概述">
+                  第一章:Verilog HDL数字集成电路设计方法概述 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -609,7 +687,7 @@ HDL模块是否都可以通过综合工具转变为电路结构?</li>
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2025</span>
+    <span itemprop="copyrightYear">2026</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
