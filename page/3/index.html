@@ -209,6 +209,259 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/" class="post-title-link" itemprop="url">C语言:数据类型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-08 19:53:58" itemprop="dateModified" datetime="2025-08-08T19:53:58+08:00">2025-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="位运算">位运算</h2>
+<p>整数在计算机中用二进制的位来表示，C语言提供一些运算符可以直接操作整数中的位，称为位运算，这些运算符的操作数都必须是整型的。在以后的学习中你会发现，有些信息利用整数中的某几个位来存储，要访问这些位，仅仅有对整数的操作是不够的，必须借助位运算，例如第
+2 节
+“Unicode和UTF-8”介绍的UTF-8编码就是如此，学完本节之后你应该能自己写出UTF-8的编码和解码程序。本节首先介绍各种位运算符，然后介绍与位运算有关的编程技巧。</p>
+<h3 id="按位与或异或取反运算">按位与、或、异或、取反运算</h3>
+<p>在第 3 节
+“布尔代数”讲过逻辑与、或、非运算，并列出了真值表，对于整数中的位也可以做与、或、非运算，C语言提供了按位与（Bitwise
+AND）运算符<code>&amp;</code>、按位或（Bitwise
+OR）运算符<code>|</code>和按位取反（Bitwise
+NOT）运算符<code>~</code>，此外还有按位异或（Bitwise
+XOR）运算符<code>^</code>，我们在第 1 节
+“为什么计算机用二进制计数”讲过异或运算。</p>
+<p>注意，<code>&amp;</code>、<code>|</code>、<code>^</code>运算符都是要做Usual
+Arithmetic Conversion的（其中有一步是Integer
+Promotion），<code>~</code>运算符也要做Integer
+Promotion，所以在C语言中其实并不存在8位整数的位运算，操作数在做位运算之前都至少被提升为<code>int</code>型了.</p>
+<p>比如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> c = <span class="number">0xfc</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> i = ~c;</span><br></pre></td></tr></table></figure>
+<p>计算过程是这样的：常量<code>0xfc</code>是<code>int</code>型的，赋给c要转成<code>unsigned char</code>，值不变；c的十六进制表示是<code>fc</code>，计算<code>~c</code>时先提升为整型<code>000000fc</code>然后取反，最后结果是<code>ffffff03</code>。注意，如果把<code>~c</code>看成是8位整数的取反，最后结果就得3了，这就错了。为了避免出错，一是尽量避免不同类型之间的赋值，二是每一步计算都要按上一章讲的类型转换规则仔细检查。</p>
+<h3 id="移位运算">移位运算</h3>
+<p>移位运算符（Bitwise
+Shift）包括左移<code>&lt;&lt;</code>和右移<code>&gt;&gt;</code>。左移将一个整数的各二进制位全部左移若干位.</p>
+<p>最高两位的11被移出去了，最低两位又补了两个0，其它位依次左移两位。但要注意，移动的位数必须小于左操作数的总位数，比如上面的例子，左边是<code>unsigned int</code>型，如果左移的位数大于等于32位，则结果是Undefined。移位运算符不同于<code>+ - * / ==</code>等运算符，两边操作数的类型不要求一致，但两边操作数都要做Integer
+Promotion，整个表达式的类型和左操作数提升后的类型相同。</p>
+<p>复习一下第 2 节
+“不同进制之间的换算”讲过的知识可以得出结论，在一定的取值范围内，将一个整数左移1位相当于乘以2。比如二进制11（十进制3）左移一位变成110，就是6，再左移一位变成1100，就是12。读者可以自己验证这条规律对有符号数和无符号数都成立，对负数也成立。当然，如果左移改变了最高位（符号位），那么结果肯定不是乘以2了，所以我加了个前提“在一定的取值范围内”。由于计算机做移位比做乘法快得多，编译器可以利用这一点做优化，比如看到源代码中有<code>i * 8</code>，可以编译成移位指令而不是乘法指令。</p>
+<p>当操作数是无符号数时，右移运算的规则和左移类似，</p>
+<p>比如最低两位的11被移出去了，最高两位又补了两个0，其它位依次右移两位。和左移类似，移动的位数也必须小于左操作数的总位数，否则结果是Undefined。在一定的取值范围内，将一个整数右移1位相当于除以2，小数部分截掉。</p>
+<p>当操作数是有符号数时，右移运算的规则比较复杂：</p>
+<p>如果是正数，那么高位移入0</p>
+<p>如果是负数，那么高位移入1还是0不一定，这是Implementation-defined的。对于x86平台的gcc编译器，最高位移入1，也就是仍保持负数的符号位，这种处理方式对负数仍然保持了“右移1位相当于除以2”的性质。</p>
+<p>综上所述，由于类型转换和移位等问题，用有符号数做位运算是很不方便的，所以，建议只对无符号数做位运算，以减少出错的可能。</p>
+<h3 id="掩码">掩码</h3>
+<p>如果要对一个整数中的某些位进行操作，怎样表示这些位在整数中的位置呢？可以用掩码（Mask）来表示。比如掩码0x0000ff00表示对一个32位整数的8~15位进行操作，举例如下。</p>
+<p>1、取出8~15位。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = (a &amp; mask) &gt;&gt; <span class="number">8</span>; <span class="comment">/* 0x00000056 */</span></span><br></pre></td></tr></table></figure>
+<p>这样也可以达到同样的效果：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = (a &gt;&gt; <span class="number">8</span>) &amp; ~(~<span class="number">0U</span> &lt;&lt; <span class="number">8</span>);</span><br></pre></td></tr></table></figure>
+<p>2、将8~15位清0。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a &amp; ~mask; <span class="comment">/* 0x12340078 */</span></span><br></pre></td></tr></table></figure>
+<p>3、将8~15位置1。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a | mask; <span class="comment">/* 0x1234ff78 */</span></span><br></pre></td></tr></table></figure>
+<h3 id="异或运算的一些特性">异或运算的一些特性</h3>
+<p>1、一个数和自己做异或的结果是0。如果需要一个常数0，x86平台的编译器可能会生成这样的指令：<code>xorl %eax, %eax</code>。不管<code>eax</code>寄存器里的值原来是多少，做异或运算都能得到0，这条指令比同样效果的<code>movl $0, %eax</code>指令快，因为前者只需要在CPU内部计算，而后者需要访问内存，在下一章第
+5 节 “Memory Hierarchy”详细介绍。</p>
+<p>2、从异或的真值表可以看出，不管是0还是1，和0做异或保持原值不变，和1做异或得到原值的相反值。可以利用这个特性配合掩码实现某些位的翻转，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">1U</span> &lt;&lt; <span class="number">6</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a ^ mask; <span class="comment">/* flip the 6th bit */</span></span><br></pre></td></tr></table></figure>
+<p>3、如果<code>a1 ^ a2 ^ a3 ^ ... ^ an</code>的结果是1，则表示<code>a1、a2、a3...an</code>之中1的个数为奇数个，否则为偶数个。这条性质可用于奇偶校验（Parity
+Check），比如在串口通信过程中，每个字节的数据都计算一个校验位，数据和校验位一起发送出去，这样接收方可以根据校验位粗略地判断接收到的数据是否有误。</p>
+<p>4、<code>x ^ x ^ y == y</code>，因为<code>x ^ x == 0</code>，<code>0 ^ y == y</code>。这个性质有什么用呢？我们来看这样一个问题：交换两个变量的值，不得借助额外的存储空间，所以就不能采用<code>temp = a; a = b; b = temp;</code>的办法了。利用位运算可以这样做交换：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = a ^ b;</span><br><span class="line">b = b ^ a;</span><br><span class="line">a = a ^ b;</span><br></pre></td></tr></table></figure>
+<p>分析一下这个过程。为了避免混淆，把<code>a</code>和<code>b</code>的初值分别记为<code>a0</code>和<code>b0</code>。第一行，<code>a = a0 ^ b0；</code>第二行，把<code>a</code>的新值代入，得到<code>b = b0 ^ a0 ^ b0</code>，等号右边的<code>b0</code>相当于上面公式中的<code>x</code>，<code>a0</code>相当于<code>y</code>，所以结果为<code>a0</code>；第三行，把<code>a</code>和<code>b</code>的新值代入，得到<code>a = a0 ^ b0 ^ a0</code>，结果为<code>b0</code>。注意这个过程不能把同一个变量自己跟自己交换，而利用中间变量<code>temp</code>则可以交换。</p>
+<h2 id="其他运算符">其他运算符</h2>
+<h3 id="复合赋值运算符">复合赋值运算符</h3>
+<p>复合赋值运算符（Compound Assignment
+Operator）包括<code>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |=</code>，一边做运算一边赋值。例如<code>a += 1</code>相当于<code>a = a + 1</code>。但有一点细微的差别，前者对表达式<code>a</code>只求值一次，而后者求值两次，如果<code>a</code>是一个复杂的表达式，求值一次和求值两次的效率是不同的，例如<code>a[i+j] += 1</code>和<code>a[i+j] = a[i+j] + 1</code>。那么仅仅是效率上的差别吗？对于没有Side
+Effect的表达式，求值一次和求值两次的结果是一样的，但对于有Side
+Effect的表达式则不一定，例如<code>a[foo()] += 1</code>和<code>a[foo()] = a[foo()] + 1</code>，如果<code>foo()</code>函数调用有Side
+Effect，比如会打印一条消息，那么前者只打印一次，而后者打印两次。</p>
+<p>在第 3 节
+“for语句”讲自增、自减运算符时说<code>++i</code>相当于<code>i = i + 1</code>，其实更准确地说应该是等价于<code>i += 1</code>，表达式<code>i</code>只求值一次，而<code>--i</code>等价于<code>i -= 1</code>。</p>
+<h3 id="条件运算符">条件运算符</h3>
+<p>条件运算符（Conditional
+Operator）是C语言中唯一一个三目运算符（Ternary
+Operator），带三个操作数，它的形式是<code>表达式1 ? 表达式2 : 表达式3</code>，这个运算符所组成的整个表达式的值等于<code>表达式2</code>或<code>表达式3</code>的值，取决于<code>表达式1</code>的值是否为真，可以把它想像成这样的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> 表达式<span class="number">2</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> 表达式<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p><code>表达式1</code>相当于<code>if</code>语句的控制表达式，因此它的值必须是标量类型，而表达式2和3相当于同一个函数在不同情况下的返回值，因此它们的类型要求一致，也要做Usual
+Arithmetic Conversion。</p>
+<p>下面举个例子，定义一个函数求两个参数中较大的一个。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (a &gt; b) ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="逗号运算符">逗号运算符</h3>
+<p>逗号运算符（Comma
+Operator）也是一种双目运算符，它的形式是<code>表达式1, 表达式2</code>，两个表达式不要求类型一致，左边的表达式1先求值，求完了直接把值丢掉，再求右边表达式2的值作为整个表达式的值。逗号运算符是左结合的，类似于<code>+ - * /</code>运算符，根据组合规则可以写出<code>表达式1, 表达式2, 表达式3, ..., 表达式n</code>这种形式，<code>表达式1</code>,
+<code>表达式2</code>可以看作一个子表达式，先求<code>表达式1</code>的值，然后求<code>表达式2</code>的值作为这个子表达式的值，然后这个值再和<code>表达式3</code>组成一个更大的表达式，求<code>表达式3</code>的值作为这个更大的表达式的值，依此类推，整个计算过程就是从左到右依次求值，最后一个表达式的值成为整个表达式的值。</p>
+<p>注意，函数调用时各实参之间也是用逗号隔开，这种逗号是分隔符而不是逗号运算符。但可以这样使用逗号运算符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(a, (t=<span class="number">3</span>, t+<span class="number">2</span>), c)</span><br></pre></td></tr></table></figure>
+<p>传给函数<code>f</code>的参数有三个，其中第二个参数的值是表达式<code>t+2</code>的值。</p>
+<h3
+id="sizeof运算符与typedef类型声明">sizeof运算符与typedef类型声明</h3>
+<p><code>sizeof</code>是一个很特殊的运算符，它有两种形式：“<code>sizeof 表达式</code>”和“<code>sizeof(类型名)</code>”。这个运算符很特殊，“<code>sizeof 表达式</code>”中的子表达式并不求值，而只是根据类型转换规则求得子表达式的类型，然后把这种类型所占的字节数作为整个表达式的值。有些人喜欢写成“<code>sizeof(表达式)</code>”的形式也可以，这里的括号和<code>return(1);</code>的括号一样，不起任何作用。但另外一种形式“<code>sizeof(类型名)</code>”的括号则是必须写的，整个表达式的值也是这种类型所占的字节数。</p>
+<p>比如用<code>sizeof</code>运算符求一个数组的长度：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">12</span>];</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span> a/<span class="keyword">sizeof</span> a[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<p>在上面这个例子中，由于<code>sizeof</code>
+表达式中的子表达式不需要求值，所以不需要到运行时才计算，事实上在编译时就知道<code>sizeof a</code>的值是48，<code>sizeof a[0]</code>的值是4，所以在编译时就已经把<code>sizeof a/sizeof a[0]</code>替换成常量12了，这是一个常量表达式。</p>
+<p><code>sizeof</code>运算符的结果是<code>size_t</code>类型的，这个类型定义在<code>stddef.h</code>头文件中，不过你的代码中只要不出现<code>size_t</code>这个类型名就不用包含这个头文件，比如像上面的例子就不用包含这个头文件。C标准规定<code>size_t</code>是一种无符号整型，编译器可以用<code>typedef</code>做一个类型声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">size_t</span>;</span><br></pre></td></tr></table></figure>
+<p>那么<code>size_t</code>就代表<code>unsigned long</code>型。不同平台的编译器可能会根据自己平台的具体情况定义<code>size_t</code>所代表的类型，比如有的平台定义为<code>unsigned long</code>型，有的平台定义为<code>unsigned long long</code>型，C标准规定<code>size_t</code>这个名字就是为了隐藏这些细节，使代码具有可移植性。所以注意不要把<code>size_t</code>类型和它所代表的真实类型混用，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">long</span> x;</span><br><span class="line"><span class="type">size_t</span> y;</span><br><span class="line">x = y;</span><br></pre></td></tr></table></figure>
+<p>如果在一种ILP32平台上定义<code>size_t</code>代表<code>unsigned long long</code>型，这段代码把<code>y</code>赋给<code>x</code>时就把高位截掉了，结果可能是错的。</p>
+<p><code>typedef</code>这个关键字用于给某种类型起个新名字，比如上面的<code>typedef</code>声明可以这么看：去掉<code>typedef</code>就成了一个变量声明<code>unsigned long size_t;</code>，<code>size_t</code>是一个变量名，类型是<code>unsigned long</code>，那么加上<code>typedef</code>之后，<code>size_t</code>就是一个类型名，就代表<code>unsigned long</code>类型。再举个例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> <span class="type">array_t</span>[<span class="number">10</span>];</span><br><span class="line"><span class="type">array_t</span> a;</span><br></pre></td></tr></table></figure>
+<p>这相当于声明<code>char a[10];</code>。类型名也遵循标识符的命名规则，并且通常加个<code>_t</code>后缀表示Type。</p>
+<h2 id="side-effect和sequence-point">Side Effect和Sequence Point</h2>
+<p>如果你只想规规矩矩地写代码，那么基本用不着看这一节。本节的内容基本上是钻牛角尖儿的，除了Short-circuit比较实用，其它写法都应该避免使用。但没办法，有时候不是你想钻牛角尖儿，而是有人逼你去钻牛角尖儿。这是我们的学员在找工作笔试时碰到的问题：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">0</span>;</span><br><span class="line">a = (++a)+(++a)+(++a)+(++a);</span><br></pre></td></tr></table></figure>
+<p>据我了解，似乎很多公司都有出这种笔试题的恶趣味。答案应该是Undefined，我甚至有些怀疑出题人是否真的知道答案。下面我来解释为什么是Undefined。</p>
+<p>我们知道，调用一个函数可能产生Side
+Effect，使用某些运算符（<code>++ -- =</code> 复合赋值）也会产生Side
+Effect，如果一个表达式中隐含着多个Side
+Effect，究竟哪个先发生哪个后发生呢？C标准规定代码中的某些点是Sequence
+Point，当执行到一个Sequence Point时，在此之前的Side
+Effect必须全部作用完毕，在此之后的Side
+Effect必须一个都没发生。至于两个Sequence Point之间的多个Side
+Effect哪个先发生哪个后发生则没有规定，编译器可以任意选择各Side
+Effect的作用顺序。下面详细解释各种Sequence Point。</p>
+<p>1、调用一个函数时，在所有准备工作做完之后、函数调用开始之前是Sequence
+Point。比如调用<code>foo(f(), g())</code>时，<code>foo</code>、<code>f()</code>、<code>g()</code>这三个表达式哪个先求值哪个后求值是Unspecified，但是必须都求值完了才能做最后的函数调用，所以<code>f()</code>和<code>g()</code>的Side
+Effect按什么顺序发生不一定，但必定在这些Side
+Effect全部作用完之后才开始调用<code>foo</code>函数。</p>
+<p>2、条件运算符<code>?:</code>、逗号运算符、逻辑与<code>&amp;&amp;</code>、逻辑或<code>||</code>的第一个操作数求值之后是Sequence
+Point。我们刚讲过条件运算符和逗号运算符，条件运算符要根据表达式1的值是否为真决定下一步求表达式2还是表达式3的值，如果决定求表达式2的值，表达式3就不会被求值了，反之也一样，逗号运算符也是这样，表达式1求值结束才继续求表达式2的值。</p>
+<p>逻辑与和逻辑或早在第 3 节
+“布尔代数”就讲了，但在初学阶段我一直回避它们的操作数求值顺序问题。这两个运算符和条件运算符类似，先求左操作数的值，然后根据这个值是否为真，右操作数可能被求值，也可能不被求值。比如例
+8.5 “剪刀石头布”这个程序中的这几句：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;man);</span><br><span class="line"><span class="keyword">if</span> (ret != <span class="number">1</span> || man &lt; <span class="number">0</span> || man &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Invalid input! Please input 0, 1 or 2.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实可以写得更简单（类似于[K&amp;R]的简洁风格）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;man) != <span class="number">1</span> || man &lt; <span class="number">0</span> || man &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Invalid input! Please input 0, 1 or 2.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个控制表达式的求值顺序是：先求<code>scanf("%d", &amp;man) = 1</code>的值，如果<code>scanf</code>调用失败，则返回值不等于1成立，<code>||</code>运算有一个操作数为真则整个表达式为真，这时直接执行下一句<code>printf</code>，根本不会再去求<code>man &lt; 0</code>或<code>man &gt; 2</code>的值；如果<code>scanf</code>调用成功，则读入的数保存在变量<code>man</code>中，并且返回值等于1，那么说它不等于1就不成立了，第一个<code>||</code>运算的左操作数为假，就会去求右操作数<code>man &lt; 0</code>的值作为整个表达式的值，这时变量<code>man</code>的值正是<code>scanf</code>读上来的值，我们判断它是否在[0,
+2]之间，如果<code>man &lt; 0</code>不成立，则整个表达式<code>scanf("%d", &amp;man) != 1 || man &lt; 0</code>
+的值为假，也就是第二个<code>||</code>运算的左操作数为假，所以最后求右操作数<code>man &gt; 2</code>的值作为整个表达式的值。</p>
+<p><code>&amp;&amp;</code>运算与此类似，<code>a &amp;&amp; b</code>的计算过程是：首先求表达式a的值，如果a的值是假则整个表达式的值是假，不会再去求b的值；如果a的值是真，则下一步求b的值作为整个表达式的值。所以，<code>a &amp;&amp; b</code>相当于“<code>if a then b</code>”，而<code>a || b</code>相当于“<code>if not a then b</code>”。这种特性称为Short-circuit，很多人喜欢利用Short-circuit特性简化代码。</p>
+<p>3、在一个完整的声明末尾是Sequence
+Point，所谓完整的声明是指这个声明不是另外一个声明的一部分。比如声明<code>int a[10], b[20];</code>，在<code>a[10]</code>末尾是Sequence
+Point，在<code>b[20]</code>末尾也是。</p>
+<p>4、在一个完整的表达式末尾是Sequence
+Point，所谓完整的表达式是指这个表达式不是另外一个表达式的一部分。所以如果有<code>f(); g();</code>这样两条语句，<code>f()</code>和<code>g()</code>是两个完整的表达式，<code>f()</code>的Side
+Effect必定在<code>g()</code>之前发生。</p>
+<p>5、在库函数即将返回时是Sequence
+Point。这条规则似乎可以包含在上一条规则里面，因为函数返回时必然会结束掉一个完整的表达式。而事实上很多库函数是以宏定义的形式实现的（第
+2.1 节 “函数式宏定义”），并不是真正的函数，所以才需要有这条规则。</p>
+<p>还有两种Sequence
+Point和某些C标准库函数的执行过程相关，此处从略，有兴趣的读者可参考[C99]的Annex
+C。</p>
+<p>现在可以分析一下本节开头的例子了。<code>a = (++a)+(++a)+(++a)+(++a);</code>的结果之所以是Undefined，因为在这个表达式中有五个Side
+Effect都在改变<code>a</code>的值，这些Side
+Effect按什么顺序发生不一定，只知道在整个表达式求值结束时一定都发生了。比如现在求第二个<code>++a</code>的值，这时第一个、第三个、第四个<code>++a</code>的Side
+Effect发生了没有，<code>a</code>的值被加过几次了，这些都不确定，所以第二个<code>++a</code>的值也不确定。这行代码用不同平台的不同编译器来编译结果是不同的，甚至在同一平台上用同一编译器的不同版本来编译也可能不同。</p>
+<p>写表达式应遵循的原则一：在两个Sequence
+Point之间，同一个变量的值只允许被改变一次。仅有这一条原则还不够，例如<code>a[i++] = i;</code>的变量<code>i</code>只改变了一次，但结果仍是Undefined，因为等号左边改<code>i</code>的值，等号右边读<code>i</code>的值，到底是先改还是先读？这个读写顺序是不确定的。但为什么<code>i = i + 1;</code>就没有歧义呢？虽然也是等号左边改<code>i</code>的值，等号右边读<code>i</code>的值，但你不读出<code>i</code>的值就没法计算<code>i + 1</code>，那拿什么去改<code>i</code>的值呢？所以这个读写顺序是确定的。写表达式应遵循的原则二：如果在两个Sequence
+Point之间既要读一个变量的值又要改它的值，只有在读写顺序确定的情况下才可以这么写。</p>
+<h2 id="运算符小结">运算符小结</h2>
+<p>到此为止，除了和指针相关的运算符还没讲之外，其它运算符都讲过了，是时候做一个总结了。</p>
+<p>运算符<code>+ - * / % &gt; &lt; &gt;= &lt;= == != &amp; | ^</code>以及各种复合赋值运算符要求两边的操作数类型一致，条件运算符<code>?:</code>要求后两个操作数类型一致，这些运算符在计算之前都需要做Usual
+Arithmetic Conversion。</p>
+<p>下面按优先级从高到低的顺序总结一下C语言的运算符，每一条所列的各运算符具有相同的优先级，对于同一优先级的多个运算符按什么顺序计算也有说明，双目运算符就简单地用“左结合”或“右结合”来说明了。和指针有关的运算符<code>* &amp; -&gt;</code>也在这里列出来了，到第
+23 章 指针再详细解释。</p>
+<p>1、标识符、常量、字符串和用<code>()</code>括号套起来的表达式是组成表达式的最基本单元，在运算中做操作数，优先级最高。</p>
+<p>2、后缀运算符，包括数组取下标<code>[]</code>、函数调用<code>()</code>、结构体取成员<code>“.”</code>、指向结构体的指针取成员<code>-&gt;</code>、后缀自增<code>++</code>、后缀自减<code>--</code>。如果一个操作数后面有多个后缀，按照离操作数从近到远的顺序（也就是从左到右）依次计算，比如<code>a.name++</code>，先算<code>a.name</code>，再<code>++</code>，这里的<code>.name</code>应该看成<code>a</code>的一个后缀，而不是把<code>.</code>看成双目运算符。</p>
+<p>3、单目运算符，包括前缀自增<code>++</code>、前缀自减<code>--</code>、<code>sizeof</code>、类型转换<code>()</code>、取地址运算<code>&amp;</code>、指针间接寻址<code>*</code>、正号<code>+</code>、负号<code>-</code>、按位取反<code>~</code>、逻辑非<code>!</code>。如果一个操作数前面有多个前缀，按照离操作数从近到远的顺序（也就是从右到左）依次计算，比如<code>!~a</code>，先算<code>~a</code>，再求<code>!</code>。</p>
+<p>4、乘<code>*</code>、除<code>/</code>、模<code>%</code>运算符。这三个运算符是左结合的。</p>
+<p>5、加<code>+</code>、减<code>-</code>运算符。左结合。</p>
+<p>6、移位运算符<code>&lt;&lt;</code>和<code>&gt;&gt;</code>。左结合。</p>
+<p>7、关系运算符<code>&lt; &gt; &lt;= &gt;=</code>。左结合。</p>
+<p>8、相等性运算符<code>==</code>和<code>!=</code>。左结合。</p>
+<p>9、按位与<code>&amp;</code>。左结合。</p>
+<p>10、按位异或<code>^</code>。左结合。</p>
+<p>11、按位或<code>|</code>。左结合。</p>
+<p>12、逻辑与<code>&amp;&amp;</code>。左结合。</p>
+<p>13、逻辑或<code>||</code>。左结合。</p>
+<p>14、条件运算符<code>:?</code>。在第 2 节
+“if/else语句”讲过Dangling-else问题，条件运算符也有类似的问题。例如<code>a ? b : c ? d : e</code>是看成<code>(a ? b : c) ? d : e</code>还是<code>a ? b : (c ? d : e)</code>呢？C语言规定是后者。</p>
+<p>15、赋值<code>=</code>和各种复合赋值（<code>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |=</code>）。在双目运算符中只有赋值和复合赋值是右结合的。</p>
+<p>16、逗号运算符。左结合。</p>
+<p>[K&amp;R]第2章也有这样一个列表，但是对于结合性解释得不够清楚。左结合和右结合这两个概念只对双目运算符有意义，对于前缀、后缀和三目运算符我单独做了说明。C语言表达式的详细语法规则可以参考[C99]的Annex
+A.2，其实语法规则并不是用优先级和结合性这两个概念来表述的，有一些细节用优先级和结合性是表达不了的，只有看C99才能了解完整的语法规则。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -543,338 +796,6 @@ integer to signed integer”，如果原值在[-32768,
 integer to signed
 integer”，转换之后应该值不变。那怎么维持值不变呢？是不是在高位补16个0就行了呢？如果原值是-1，十六进制表示就是ffff，要转成<code>int</code>型的-1需要变成ffffffff，因此需要在高位补16个1而不是16个0。换句话说，要维持值不变，在高位补1还是补0取决于原来的符号位，这称为符号扩展（Sign
 Extension）。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/femboy.jpg">
-      <meta itemprop="name" content="SiyuanLei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SiyuanLei's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SiyuanLei's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0/" class="post-title-link" itemprop="url">C语言:计算机中数的表示</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-08-08 19:54:02" itemprop="dateModified" datetime="2025-08-08T19:54:02+08:00">2025-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="为什么计算机使用二进制数">为什么计算机使用二进制数</h2>
-<p>人类的计数方式通常是“逢十进一”，称为十进制（Decimal），大概因为人有十个手指，所以十进制是最自然的计数方式，很多民族的语言文字中都有十个数字，而阿拉伯数字0~9是目前最广泛采用的。</p>
-<p>计算机是用数字电路搭成的，数字电路中只有1和0两种状态，或者可以说计算机只有两个手指，所以对计算机来说二进制（Binary）是最自然的计数方式。根据“逢二进一”的原则，十进制的1、2、3、4分别对应二进制的1、10、11、100。二进制的一位数字称为一个位（Bit），三个bit能够表示的最大的二进制数是111，也就是十进制的7。不管用哪种计数方式，数的大小并没有变，十进制的1+1等于2，二进制的1+1等于10，二进制的10和十进制的2大小是相等的。</p>
-<h2 id="不同进制之间的换算">不同进制之间的换算</h2>
-<p>在十进制中，个位的1代表100=1，十位的1代表101=10，百位的1代表102=100，所以</p>
-<p>123=1×102+2×101+3×100</p>
-<p>同样道理，在二进制中，个位的1代表20=1，十位的1代表21=2，百位的1代表22=4，所以</p>
-<p>(A3A2A1A0)2=A3×23+A2×22+A1×21+A0×20</p>
-<p>如果二进制和十进制数出现在同一个等式中，为了区别我们用(A3A2A1A0)2这种形式表示A3A2A1A0是二进制数，每个数字只能是0或1，其它没有套括号加下标的数仍表示十进制数。对于(A3A2A1A0)2这样一个二进制数，最左边的A3位称为最高位（MSB，Most
-Significant Bit），最右边的A0位称为最低位（LSB，Least Significant
-Bit）。以后我们遵循这样的惯例：LSB称为第0位而不是第1位，所以如果一个数是32位的，则MSB是第31位。上式就是从二进制到十进制的换算公式。作为练习，请读者算一下(1011)2和(1111)2换算成十进制分别是多少。</p>
-<p>下面来看十进制怎么换算成二进制。我们知道</p>
-<p>13=1×23+1×22+0×21+1×20</p>
-<p>所以13换算成二进制应该是(1101)2。问题是怎么把13分解成等号右边的形式呢？注意到等号右边可以写成</p>
-<p>13=(((0×2+13)×2+12)×2+01)×2+10</p>
-<p>我们将13反复除以2取余数就可以提取出上式中的1101四个数字，为了让读者更容易看清楚是哪个1和哪个0，上式和下式中对应的数字都加了下标：</p>
-<p>13÷2=6…10 6÷2=3…01 3÷2=1…12 1÷2=0…13</p>
-<p>把这四步得到的余数按相反的顺序排列就是13的二进制表示，因此这种方法称为除二反序取余法。</p>
-<p>计算机用二进制表示数，程序员也必须习惯使用二进制，但二进制写起来太啰嗦了，所以通常将二进制数分成每三位一组或者每四位一组，每组用一个数字表示。比如把(10110010)2从最低位开始每三位分成一组，10、110、010，然后把每组写成一个十进制数字，就是(262)8，这样每一位数字的取值范围是0<sub>7，逢八进一，称为八进制（Octal）。类似地，把(10110010)2分成每四位一组，1011、0010，然后把每组写成一个数字，这个数的低位是2，高位已经大于9了，我们规定用字母A</sub>F表示10<sub>15，这个数可以写成(B2)16，每一位数字的取值范围是0</sub>F，逢十六进一，称为十六进制（Hexadecimal）。所以，八进制和十六进制是程序员为了书写二进制方便而发明的简便写法，好比草书和正楷的关系一样。</p>
-<h2 id="整数的加减运算">整数的加减运算</h2>
-<p>我们已经了解了计算机中正整数如何表示，加法如何计算，那么负数如何表示，减法又如何计算呢？本节讨论这些问题。为了书写方便，本节举的例子都用8个bit表示一个数，实际计算机做整数加减运算的操作数可以是8位、16位、32位甚至64位的。</p>
-<h3 id="sign-and-magnitude表示法">Sign and Magnitude表示法</h3>
-<p>要用8个bit表示正数和负数，一种简单的想法是把最高位规定为符号位（Sign
-Bit），0表示正1表示负，剩下的7位表示绝对值的大小，这称为Sign and
-Magnitude表示法。例如-1表示成10000001，+1表示成00000001。这样用8个bit表示整数的取值范围是-27-1<sub>27-1，即-127</sub>127。</p>
-<p>采用这种表示法，计算机做加法运算需要处理以下逻辑：</p>
-<p>如果两数符号位相同，就把它们的低7位相加，符号位不变。如果低7位相加时在最高位产生进位，说明结果的绝对值大于127，超出7位所能表示的数值范围，这称为溢出（Overflow）[24]，这时通常把计算机中的一个标志位置1表示当前运算产生了溢出。</p>
-<p>如果两数符号位不同，首先比较它们的低7位谁大，然后用大数减小数，结果的符号位和大数相同。</p>
-<p>那么减法如何计算呢？由于我们规定了负数的表示，可以把减法转换成加法来计算，要计算a-b，可以先把b变号然后和a相加，相当于计算a+(-b)。但如果两个加数的符号位不同就要用大数的绝对值减小数的绝对值，这一步减法计算仍然是免不了的。我们知道加法要进位，减法要借位，计算过程是不同的，所以除了要有第
-1 节
-“为什么计算机用二进制计数”提到的加法器电路之外，还要另外有一套减法器电路。</p>
-<p>如果采用Sign and
-Magnitude表示法，计算机做加减运算需要处理很多逻辑：比较符号位，比较绝对值，加法改减法，减法改加法，小数减大数改成大数减小数……这是非常低效率的。还有一个缺点是0的表示不唯一，既可以表示成10000000也可以表示成00000000，这进一步增加了逻辑的复杂性，所以我们迫切需要重新设计整数的表示方法使计算过程更简单。</p>
-<h3 id="s-complement表示法">1’s Complement表示法</h3>
-<p>本节介绍一种二进制补码表示法，为了便于理解，我们先看一个十进制的例子：</p>
-<p>167-52=167+(-52)=167+(999-52)-1000+1=167+947-1000+1=1114-1000+1=114+1=115
-167-52 → 减法转换成加法 167+(-52) → 负数取9的补码表示 167+947 → 114进1 →
-高位进的1加到低位上去，结果为115</p>
-<p>在这个例子中我们用三位十进制数字表示正数和负数，具体规定如下：</p>
-<p>9’s Complement表示法</p>
-<table>
-<thead>
-<tr>
-<th>数值</th>
-<th>补码表示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-499</td>
-<td>500</td>
-</tr>
-<tr>
-<td>-498</td>
-<td>501</td>
-</tr>
-<tr>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr>
-<td>-1</td>
-<td>998</td>
-</tr>
-<tr>
-<td>0</td>
-<td>999</td>
-</tr>
-<tr>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr>
-<td>498</td>
-<td>498</td>
-</tr>
-<tr>
-<td>499</td>
-<td>499</td>
-</tr>
-</tbody>
-</table>
-<p>首先-52要用999-52表示，就是947，这称为取9的补码（9’s
-Complement）；然后把167和947相加，得到114进1；再把高位进的1加到低位上去，得115，本来应该加1000，结果加了1，少加了999，正好把先前取9的补码多加的999抵消掉了。我们本来要做167-52的减法运算，结果变成做999-52的减法运算，后者显然要容易一些，因为没有借位。这种补码表示法的计算规则用一句话概括就是：负数用9的补码表示，减法转换成加法，计算结果的最高位如果有进位则要加回到最低位上去。要验证这条规则得考虑四种情况：</p>
-<p>两个正数，相加得正</p>
-<p>一正一负，相加得正</p>
-<p>一正一负，相加得负</p>
-<p>两个负数，相加得负</p>
-<p>我们举的例子验证了第二种情况，另外三种情况请读者自己验证，暂时不考虑溢出的问题，稍后会讲到如何判定溢出。</p>
-<p>上述规则也适用于二进制：负数用1的补码（1’s
-Complement）表示，减法转换成加法，计算结果的最高位如果有进位则要加回到最低位上去。取1的补码更简单，连减法都不用做，因为1-1=0，1-0=1，取1的补码就是把每个bit取反，所以1的补码也称为反码。比如：</p>
-<p>00001000-00000100 → 00001000+(-00000100) → 00001000+11111011 →
-00000011进1 → 高位进的1加到低位上去，结果为00000100</p>
-<p>1’s Complement表示法相对于Sign and
-Magnitude表示法的优势是非常明显的：不需要把符号和绝对值分开考虑，正数和负数的加法都一样算，计算逻辑更简单，甚至连减法器电路都省了，只要有一套加法器电路，再有一套把每个bit取反的电路，就可以做加法和减法运算。如果8个bit采用1’s
-Complement表示法，负数的取值范围是从10000000到11111111（-127<sub>0），正数是从00000000到01111111（0</sub>127），仍然可以根据最高位判断一个数是正是负。美中不足的是0的表示仍然不唯一，既可以表示成11111111也可以表示成00000000，为了解决这最后一个问题，我们引入2’s
-Complement表示法。</p>
-<h3 id="s-complement表示法-1">2’s Complement表示法</h3>
-<p>2’s
-Complement表示法规定：正数不变，负数先取反码再加1。如果8个bit采用2’s
-Complement表示法，负数的取值范围是从10000000到11111111（-128<sub>-1），正数是从00000000到01111111（0</sub>127），也可以根据最高位判断一个数是正是负，并且0的表示是唯一的，目前绝大多数计算机都采用这种表示法。为什么称为“2的补码”呢？因为对一位二进制数b取补码就是1-b+1=10-b，相当于从2里面减去b。类似地，要表示-4需要对00000100取补码，11111111-00000100+1=100000000-00000100，相当于从28里面减去4。2’s
-Complement表示法的计算规则有些不同：减法转换成加法，忽略计算结果最高位的进位，不必加回到最低位上去。请读者自己验证上一节提到的四种情况下这条规则都能算出正确结果。</p>
-<p>8个bit采用2’s
-Complement表示法的取值范围是-128~127，如果计算结果超出这个范围就会产生溢出，例如：</p>
-<p>10000010(-126)+11111000(-8)=01111010(122)</p>
-<p>如何判断产生了溢出呢？我们还是分四种情况讨论：如果两个正数相加溢出，结果一定是负数；如果两个负数相加溢出，结果一定是正数；一正一负相加，无论结果是正是负都不可能溢出。在相加过程中最高位产生的进位和次高位产生的进位如果相同则没有溢出，如果不同则表示有溢出。逻辑电路的实现可以把这两个进位连接到一个异或门，把异或门的输出连接到溢出标志位。</p>
-<h3 id="有符号数和无符号数">有符号数和无符号数</h3>
-<p>前面几节我们用8个bit表示正数和负数，讲了三种表示法，每种表示法对应一种计算规则，这称为有符号数（Signed
-Number）；如果8个bit全部表示正数则取值范围是0~255，这称为无符号数（Unsigned
-Number）。其实计算机做加法时并不区分操作数是有符号数还是无符号数，计算过程都一样，比如上面的例子也可以看作无符号数的加法：</p>
-<p>10000010(130)+11111000(248)=01111010(122+256)</p>
-<p>如果把这两个操作数看作有符号数-126和-8相加，计算结果是错的，因为产生了溢出；但如果看作无符号数130和248相加，计算结果是122进1，也就是122+256，这个结果是对的。计算机的加法器在做完计算之后，根据最高位产生的进位设置进位标志，同时根据最高位和次高位产生的进位的异或设置溢出标志。至于这个加法到底是有符号数加法还是无符号数加法则取决于程序怎么理解了，如果程序把它理解成有符号数加法，下一步就要检查溢出标志，如果程序把它理解成无符号数加法，下一步就要检查进位标志。通常计算机在做算术运算之后还可能设置另外两个标志，如果计算结果的所有bit都是零则设置零标志，如果计算结果的最高位是1则设置负数标志，如果程序把计算结果理解成有符号数，也可以检查负数标志判断结果是正是负。</p>
-<h2 id="浮点数">浮点数</h2>
-<p>浮点数在计算机中的表示是基于科学计数法（Scientific
-Notation）的，我们知道32767这个数用科学计数法可以写成3.2767×104，3.2767称为尾数（Mantissa，或者叫Significand），4称为指数（Exponent）。浮点数在计算机中的表示与此类似，只不过基数（Radix）是2而不是10。下面我们用一个简单的模型来解释浮点数的基本概念。我们的模型由三部分组成：符号位、指数部分（表示2的多少次方）和尾数部分（小数点前面是0，尾数部分只表示小数点后的数字）。</p>
-<p>一种浮点数格式</p>
-<table>
-<thead>
-<tr>
-<th>1 bit</th>
-<th>5 bits</th>
-<th>8 bits</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sign bit</td>
-<td>exponent</td>
-<td>significand</td>
-</tr>
-</tbody>
-</table>
-<p>如果要表示17这个数，我们知道17=17.0×100=0.17×102，类似地，17=(10001)2×20=(0.10001)2×25，把尾数的有效数字全部移到小数点后，这样就可以表示为：</p>
-<p>17的浮点数表示</p>
-<table>
-<thead>
-<tr>
-<th>sign bit</th>
-<th>exponent</th>
-<th>significand</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>00101</td>
-<td>10001000</td>
-</tr>
-</tbody>
-</table>
-<p>如果我们要表示0.25就遇到新的困难了，因为0.25=1×2-2=(0.1)2×2-1，而我们的模型中指数部分没有规定如何表示负数。我们可以在指数部分规定一个符号位，然而更广泛采用的办法是使用偏移的指数（Biased
-Exponent）。规定一个偏移值，比如16，实际的指数要加上这个偏移值再填写到指数部分，这样比16大的就表示正指数，比16小的就表示负指数。要表示0.25，指数部分应该填16-1=15：</p>
-<p>0.25的偏移指数浮点数表示</p>
-<table>
-<thead>
-<tr>
-<th>sign bit</th>
-<th>biased exponent</th>
-<th>significand</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>01111</td>
-<td>10000000</td>
-</tr>
-</tbody>
-</table>
-<p>现在还有一个问题需要解决：每个浮点数的表示都不唯一，例如17=(0.10001)2×25=(0.010001)2×26，这样给计算机处理增加了复杂性。为了解决这个问题，我们规定尾数部分的最高位必须是1，也就是说尾数必须以0.1开头，对指数做相应的调整，这称为正规化（Normalize）。由于尾数部分的最高位必须是1，这个1就不必保存了，可以节省出一位来用于提高精度，我们说最高位的1是隐含的（Implied）。这样17就只有一种表示方法了，指数部分应该是16+5=21=(10101)2，尾数部分去掉最高位的1是0001：</p>
-<p>17的正规化尾数浮点数表示</p>
-<table>
-<thead>
-<tr>
-<th>sign bit</th>
-<th>biased exponent</th>
-<th>normalized significand</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>10101</td>
-<td>00010000</td>
-</tr>
-</tbody>
-</table>
-<p>两个浮点数相加，首先把小数点对齐然后相加：</p>
-<table>
-<thead>
-<tr>
-<th>sign bit</th>
-<th>biased exponent</th>
-<th>normalized significand</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>10010</td>
-<td>10010000</td>
-<td>+</td>
-</tr>
-<tr>
-<td>0</td>
-<td>10000</td>
-<td>00110110</td>
-<td>=</td>
-</tr>
-<tr>
-<td>0</td>
-<td>10010</td>
-<td>11011101</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>11.0010000+0.100110110=11.101110110</p>
-<p>由于浮点数表示的精度有限，计算结果末尾的10两位被舍去了。做浮点运算时要注意精度损失（Significance
-Loss）问题，有时计算顺序不同也会导致不同的结果，比如11.0010000+0.00000001+0.00000001=11.0010000+0.00000001=11.0010000，后面加的两个很小的数全被舍去了，没有对计算结果产生任何影响，但如果调一下计算顺序它们就能影响到计算结果了，0.00000001+0.00000001+11.0010000=0.00000010+11.0010000=11.0010001。再比如128.25=(10000000.01)2，需要10个有效位，而我们的模型中尾数部分是8位，算上隐含的最高位1一共有9个有效位，那么128.25的浮点数表示只能舍去末尾的1，表示成(10000000.0)2，其实跟128相等了。在第
-2 节
-“if/else语句”讲过浮点数不能做精确比较，现在读者应该知道为什么不能精确比较了。</p>
-<p>整数运算会产生溢出，浮点运算也会产生溢出，浮点运算的溢出也分上溢和下溢两种，但和整数运算的定义不同。假设整数采用8位2’s
-Complement表示法，取值范围是-128<sub>127，如果计算结果是-130则称为下溢，计算结果是130则称为上溢。假设按本节介绍的浮点数表示法，取值范围是-(0.111111111)2×215</sub>(0.111111111)2×215，如果计算结果超出这个范围则称为上溢；如果计算结果未超出这个范围但绝对值太小了，在-(0.1)2×2-16~(0.1)2×2-16之间，那么也同样无法表示，称为下溢。</p>
-<p>浮点数是一个相当复杂的话题，不同平台的浮点数表示和浮点运算也有较大差异，本节只是通过这个简单的模型介绍一些基本概念而不深入讨论，理解了这些基本概念有助于你理解浮点数标准，目前业界广泛采用的符点数标准是由IEEE（Institute
-of Electrical and Electronics Engineers）制定的IEEE 754。</p>
-<p>最后讨论一个细节问题。我们知道，定义全局变量时如果没有Initializer就用0初始化，定义数组时如果Initializer中提供的元素不够那么剩下的元素也用0初始化。例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i;</span><br><span class="line"><span class="type">double</span> d;</span><br><span class="line"><span class="type">double</span> a[<span class="number">10</span>] = &#123; <span class="number">1.0</span> &#125;;</span><br></pre></td></tr></table></figure>
-<p>“用<code>0</code>初始化”的意思是变量<code>i</code>、变量<code>d</code>和数组元素<code>a[1]~a[9]</code>的所有字节都用<code>0</code>填充，或者说所有bit都是0。无论是用Sign
-and Magnitude表示法、1’s Complement表示法还是2’s
-Complement表示法，一个整数的所有bit是0都表示0值，但一个浮点数的所有bit是0一定表示0值吗？严格来说不一定，某种平台可能会规定一个浮点数的所有bit是0并不表示0值，但[C99
-Rationale]第6.7.8节的条款25提到：As far as the committee knows, all
-machines treat all bits zero as a representation of floating-point zero.
-But, all bits zero might not be the canonical representation of zero.
-因此在绝大多数平台上，一个浮点数的所有bit是0就表示0值。</p>
 
       
     </div>
@@ -1253,6 +1174,338 @@ But, all bits zero might not be the canonical representation of zero.
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0/" class="post-title-link" itemprop="url">C语言:计算机中数的表示</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-08 19:54:02" itemprop="dateModified" datetime="2025-08-08T19:54:02+08:00">2025-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="为什么计算机使用二进制数">为什么计算机使用二进制数</h2>
+<p>人类的计数方式通常是“逢十进一”，称为十进制（Decimal），大概因为人有十个手指，所以十进制是最自然的计数方式，很多民族的语言文字中都有十个数字，而阿拉伯数字0~9是目前最广泛采用的。</p>
+<p>计算机是用数字电路搭成的，数字电路中只有1和0两种状态，或者可以说计算机只有两个手指，所以对计算机来说二进制（Binary）是最自然的计数方式。根据“逢二进一”的原则，十进制的1、2、3、4分别对应二进制的1、10、11、100。二进制的一位数字称为一个位（Bit），三个bit能够表示的最大的二进制数是111，也就是十进制的7。不管用哪种计数方式，数的大小并没有变，十进制的1+1等于2，二进制的1+1等于10，二进制的10和十进制的2大小是相等的。</p>
+<h2 id="不同进制之间的换算">不同进制之间的换算</h2>
+<p>在十进制中，个位的1代表100=1，十位的1代表101=10，百位的1代表102=100，所以</p>
+<p>123=1×102+2×101+3×100</p>
+<p>同样道理，在二进制中，个位的1代表20=1，十位的1代表21=2，百位的1代表22=4，所以</p>
+<p>(A3A2A1A0)2=A3×23+A2×22+A1×21+A0×20</p>
+<p>如果二进制和十进制数出现在同一个等式中，为了区别我们用(A3A2A1A0)2这种形式表示A3A2A1A0是二进制数，每个数字只能是0或1，其它没有套括号加下标的数仍表示十进制数。对于(A3A2A1A0)2这样一个二进制数，最左边的A3位称为最高位（MSB，Most
+Significant Bit），最右边的A0位称为最低位（LSB，Least Significant
+Bit）。以后我们遵循这样的惯例：LSB称为第0位而不是第1位，所以如果一个数是32位的，则MSB是第31位。上式就是从二进制到十进制的换算公式。作为练习，请读者算一下(1011)2和(1111)2换算成十进制分别是多少。</p>
+<p>下面来看十进制怎么换算成二进制。我们知道</p>
+<p>13=1×23+1×22+0×21+1×20</p>
+<p>所以13换算成二进制应该是(1101)2。问题是怎么把13分解成等号右边的形式呢？注意到等号右边可以写成</p>
+<p>13=(((0×2+13)×2+12)×2+01)×2+10</p>
+<p>我们将13反复除以2取余数就可以提取出上式中的1101四个数字，为了让读者更容易看清楚是哪个1和哪个0，上式和下式中对应的数字都加了下标：</p>
+<p>13÷2=6…10 6÷2=3…01 3÷2=1…12 1÷2=0…13</p>
+<p>把这四步得到的余数按相反的顺序排列就是13的二进制表示，因此这种方法称为除二反序取余法。</p>
+<p>计算机用二进制表示数，程序员也必须习惯使用二进制，但二进制写起来太啰嗦了，所以通常将二进制数分成每三位一组或者每四位一组，每组用一个数字表示。比如把(10110010)2从最低位开始每三位分成一组，10、110、010，然后把每组写成一个十进制数字，就是(262)8，这样每一位数字的取值范围是0<sub>7，逢八进一，称为八进制（Octal）。类似地，把(10110010)2分成每四位一组，1011、0010，然后把每组写成一个数字，这个数的低位是2，高位已经大于9了，我们规定用字母A</sub>F表示10<sub>15，这个数可以写成(B2)16，每一位数字的取值范围是0</sub>F，逢十六进一，称为十六进制（Hexadecimal）。所以，八进制和十六进制是程序员为了书写二进制方便而发明的简便写法，好比草书和正楷的关系一样。</p>
+<h2 id="整数的加减运算">整数的加减运算</h2>
+<p>我们已经了解了计算机中正整数如何表示，加法如何计算，那么负数如何表示，减法又如何计算呢？本节讨论这些问题。为了书写方便，本节举的例子都用8个bit表示一个数，实际计算机做整数加减运算的操作数可以是8位、16位、32位甚至64位的。</p>
+<h3 id="sign-and-magnitude表示法">Sign and Magnitude表示法</h3>
+<p>要用8个bit表示正数和负数，一种简单的想法是把最高位规定为符号位（Sign
+Bit），0表示正1表示负，剩下的7位表示绝对值的大小，这称为Sign and
+Magnitude表示法。例如-1表示成10000001，+1表示成00000001。这样用8个bit表示整数的取值范围是-27-1<sub>27-1，即-127</sub>127。</p>
+<p>采用这种表示法，计算机做加法运算需要处理以下逻辑：</p>
+<p>如果两数符号位相同，就把它们的低7位相加，符号位不变。如果低7位相加时在最高位产生进位，说明结果的绝对值大于127，超出7位所能表示的数值范围，这称为溢出（Overflow）[24]，这时通常把计算机中的一个标志位置1表示当前运算产生了溢出。</p>
+<p>如果两数符号位不同，首先比较它们的低7位谁大，然后用大数减小数，结果的符号位和大数相同。</p>
+<p>那么减法如何计算呢？由于我们规定了负数的表示，可以把减法转换成加法来计算，要计算a-b，可以先把b变号然后和a相加，相当于计算a+(-b)。但如果两个加数的符号位不同就要用大数的绝对值减小数的绝对值，这一步减法计算仍然是免不了的。我们知道加法要进位，减法要借位，计算过程是不同的，所以除了要有第
+1 节
+“为什么计算机用二进制计数”提到的加法器电路之外，还要另外有一套减法器电路。</p>
+<p>如果采用Sign and
+Magnitude表示法，计算机做加减运算需要处理很多逻辑：比较符号位，比较绝对值，加法改减法，减法改加法，小数减大数改成大数减小数……这是非常低效率的。还有一个缺点是0的表示不唯一，既可以表示成10000000也可以表示成00000000，这进一步增加了逻辑的复杂性，所以我们迫切需要重新设计整数的表示方法使计算过程更简单。</p>
+<h3 id="s-complement表示法">1’s Complement表示法</h3>
+<p>本节介绍一种二进制补码表示法，为了便于理解，我们先看一个十进制的例子：</p>
+<p>167-52=167+(-52)=167+(999-52)-1000+1=167+947-1000+1=1114-1000+1=114+1=115
+167-52 → 减法转换成加法 167+(-52) → 负数取9的补码表示 167+947 → 114进1 →
+高位进的1加到低位上去，结果为115</p>
+<p>在这个例子中我们用三位十进制数字表示正数和负数，具体规定如下：</p>
+<p>9’s Complement表示法</p>
+<table>
+<thead>
+<tr>
+<th>数值</th>
+<th>补码表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-499</td>
+<td>500</td>
+</tr>
+<tr>
+<td>-498</td>
+<td>501</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>998</td>
+</tr>
+<tr>
+<td>0</td>
+<td>999</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>498</td>
+<td>498</td>
+</tr>
+<tr>
+<td>499</td>
+<td>499</td>
+</tr>
+</tbody>
+</table>
+<p>首先-52要用999-52表示，就是947，这称为取9的补码（9’s
+Complement）；然后把167和947相加，得到114进1；再把高位进的1加到低位上去，得115，本来应该加1000，结果加了1，少加了999，正好把先前取9的补码多加的999抵消掉了。我们本来要做167-52的减法运算，结果变成做999-52的减法运算，后者显然要容易一些，因为没有借位。这种补码表示法的计算规则用一句话概括就是：负数用9的补码表示，减法转换成加法，计算结果的最高位如果有进位则要加回到最低位上去。要验证这条规则得考虑四种情况：</p>
+<p>两个正数，相加得正</p>
+<p>一正一负，相加得正</p>
+<p>一正一负，相加得负</p>
+<p>两个负数，相加得负</p>
+<p>我们举的例子验证了第二种情况，另外三种情况请读者自己验证，暂时不考虑溢出的问题，稍后会讲到如何判定溢出。</p>
+<p>上述规则也适用于二进制：负数用1的补码（1’s
+Complement）表示，减法转换成加法，计算结果的最高位如果有进位则要加回到最低位上去。取1的补码更简单，连减法都不用做，因为1-1=0，1-0=1，取1的补码就是把每个bit取反，所以1的补码也称为反码。比如：</p>
+<p>00001000-00000100 → 00001000+(-00000100) → 00001000+11111011 →
+00000011进1 → 高位进的1加到低位上去，结果为00000100</p>
+<p>1’s Complement表示法相对于Sign and
+Magnitude表示法的优势是非常明显的：不需要把符号和绝对值分开考虑，正数和负数的加法都一样算，计算逻辑更简单，甚至连减法器电路都省了，只要有一套加法器电路，再有一套把每个bit取反的电路，就可以做加法和减法运算。如果8个bit采用1’s
+Complement表示法，负数的取值范围是从10000000到11111111（-127<sub>0），正数是从00000000到01111111（0</sub>127），仍然可以根据最高位判断一个数是正是负。美中不足的是0的表示仍然不唯一，既可以表示成11111111也可以表示成00000000，为了解决这最后一个问题，我们引入2’s
+Complement表示法。</p>
+<h3 id="s-complement表示法-1">2’s Complement表示法</h3>
+<p>2’s
+Complement表示法规定：正数不变，负数先取反码再加1。如果8个bit采用2’s
+Complement表示法，负数的取值范围是从10000000到11111111（-128<sub>-1），正数是从00000000到01111111（0</sub>127），也可以根据最高位判断一个数是正是负，并且0的表示是唯一的，目前绝大多数计算机都采用这种表示法。为什么称为“2的补码”呢？因为对一位二进制数b取补码就是1-b+1=10-b，相当于从2里面减去b。类似地，要表示-4需要对00000100取补码，11111111-00000100+1=100000000-00000100，相当于从28里面减去4。2’s
+Complement表示法的计算规则有些不同：减法转换成加法，忽略计算结果最高位的进位，不必加回到最低位上去。请读者自己验证上一节提到的四种情况下这条规则都能算出正确结果。</p>
+<p>8个bit采用2’s
+Complement表示法的取值范围是-128~127，如果计算结果超出这个范围就会产生溢出，例如：</p>
+<p>10000010(-126)+11111000(-8)=01111010(122)</p>
+<p>如何判断产生了溢出呢？我们还是分四种情况讨论：如果两个正数相加溢出，结果一定是负数；如果两个负数相加溢出，结果一定是正数；一正一负相加，无论结果是正是负都不可能溢出。在相加过程中最高位产生的进位和次高位产生的进位如果相同则没有溢出，如果不同则表示有溢出。逻辑电路的实现可以把这两个进位连接到一个异或门，把异或门的输出连接到溢出标志位。</p>
+<h3 id="有符号数和无符号数">有符号数和无符号数</h3>
+<p>前面几节我们用8个bit表示正数和负数，讲了三种表示法，每种表示法对应一种计算规则，这称为有符号数（Signed
+Number）；如果8个bit全部表示正数则取值范围是0~255，这称为无符号数（Unsigned
+Number）。其实计算机做加法时并不区分操作数是有符号数还是无符号数，计算过程都一样，比如上面的例子也可以看作无符号数的加法：</p>
+<p>10000010(130)+11111000(248)=01111010(122+256)</p>
+<p>如果把这两个操作数看作有符号数-126和-8相加，计算结果是错的，因为产生了溢出；但如果看作无符号数130和248相加，计算结果是122进1，也就是122+256，这个结果是对的。计算机的加法器在做完计算之后，根据最高位产生的进位设置进位标志，同时根据最高位和次高位产生的进位的异或设置溢出标志。至于这个加法到底是有符号数加法还是无符号数加法则取决于程序怎么理解了，如果程序把它理解成有符号数加法，下一步就要检查溢出标志，如果程序把它理解成无符号数加法，下一步就要检查进位标志。通常计算机在做算术运算之后还可能设置另外两个标志，如果计算结果的所有bit都是零则设置零标志，如果计算结果的最高位是1则设置负数标志，如果程序把计算结果理解成有符号数，也可以检查负数标志判断结果是正是负。</p>
+<h2 id="浮点数">浮点数</h2>
+<p>浮点数在计算机中的表示是基于科学计数法（Scientific
+Notation）的，我们知道32767这个数用科学计数法可以写成3.2767×104，3.2767称为尾数（Mantissa，或者叫Significand），4称为指数（Exponent）。浮点数在计算机中的表示与此类似，只不过基数（Radix）是2而不是10。下面我们用一个简单的模型来解释浮点数的基本概念。我们的模型由三部分组成：符号位、指数部分（表示2的多少次方）和尾数部分（小数点前面是0，尾数部分只表示小数点后的数字）。</p>
+<p>一种浮点数格式</p>
+<table>
+<thead>
+<tr>
+<th>1 bit</th>
+<th>5 bits</th>
+<th>8 bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sign bit</td>
+<td>exponent</td>
+<td>significand</td>
+</tr>
+</tbody>
+</table>
+<p>如果要表示17这个数，我们知道17=17.0×100=0.17×102，类似地，17=(10001)2×20=(0.10001)2×25，把尾数的有效数字全部移到小数点后，这样就可以表示为：</p>
+<p>17的浮点数表示</p>
+<table>
+<thead>
+<tr>
+<th>sign bit</th>
+<th>exponent</th>
+<th>significand</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>00101</td>
+<td>10001000</td>
+</tr>
+</tbody>
+</table>
+<p>如果我们要表示0.25就遇到新的困难了，因为0.25=1×2-2=(0.1)2×2-1，而我们的模型中指数部分没有规定如何表示负数。我们可以在指数部分规定一个符号位，然而更广泛采用的办法是使用偏移的指数（Biased
+Exponent）。规定一个偏移值，比如16，实际的指数要加上这个偏移值再填写到指数部分，这样比16大的就表示正指数，比16小的就表示负指数。要表示0.25，指数部分应该填16-1=15：</p>
+<p>0.25的偏移指数浮点数表示</p>
+<table>
+<thead>
+<tr>
+<th>sign bit</th>
+<th>biased exponent</th>
+<th>significand</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>01111</td>
+<td>10000000</td>
+</tr>
+</tbody>
+</table>
+<p>现在还有一个问题需要解决：每个浮点数的表示都不唯一，例如17=(0.10001)2×25=(0.010001)2×26，这样给计算机处理增加了复杂性。为了解决这个问题，我们规定尾数部分的最高位必须是1，也就是说尾数必须以0.1开头，对指数做相应的调整，这称为正规化（Normalize）。由于尾数部分的最高位必须是1，这个1就不必保存了，可以节省出一位来用于提高精度，我们说最高位的1是隐含的（Implied）。这样17就只有一种表示方法了，指数部分应该是16+5=21=(10101)2，尾数部分去掉最高位的1是0001：</p>
+<p>17的正规化尾数浮点数表示</p>
+<table>
+<thead>
+<tr>
+<th>sign bit</th>
+<th>biased exponent</th>
+<th>normalized significand</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10101</td>
+<td>00010000</td>
+</tr>
+</tbody>
+</table>
+<p>两个浮点数相加，首先把小数点对齐然后相加：</p>
+<table>
+<thead>
+<tr>
+<th>sign bit</th>
+<th>biased exponent</th>
+<th>normalized significand</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10010</td>
+<td>10010000</td>
+<td>+</td>
+</tr>
+<tr>
+<td>0</td>
+<td>10000</td>
+<td>00110110</td>
+<td>=</td>
+</tr>
+<tr>
+<td>0</td>
+<td>10010</td>
+<td>11011101</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>11.0010000+0.100110110=11.101110110</p>
+<p>由于浮点数表示的精度有限，计算结果末尾的10两位被舍去了。做浮点运算时要注意精度损失（Significance
+Loss）问题，有时计算顺序不同也会导致不同的结果，比如11.0010000+0.00000001+0.00000001=11.0010000+0.00000001=11.0010000，后面加的两个很小的数全被舍去了，没有对计算结果产生任何影响，但如果调一下计算顺序它们就能影响到计算结果了，0.00000001+0.00000001+11.0010000=0.00000010+11.0010000=11.0010001。再比如128.25=(10000000.01)2，需要10个有效位，而我们的模型中尾数部分是8位，算上隐含的最高位1一共有9个有效位，那么128.25的浮点数表示只能舍去末尾的1，表示成(10000000.0)2，其实跟128相等了。在第
+2 节
+“if/else语句”讲过浮点数不能做精确比较，现在读者应该知道为什么不能精确比较了。</p>
+<p>整数运算会产生溢出，浮点运算也会产生溢出，浮点运算的溢出也分上溢和下溢两种，但和整数运算的定义不同。假设整数采用8位2’s
+Complement表示法，取值范围是-128<sub>127，如果计算结果是-130则称为下溢，计算结果是130则称为上溢。假设按本节介绍的浮点数表示法，取值范围是-(0.111111111)2×215</sub>(0.111111111)2×215，如果计算结果超出这个范围则称为上溢；如果计算结果未超出这个范围但绝对值太小了，在-(0.1)2×2-16~(0.1)2×2-16之间，那么也同样无法表示，称为下溢。</p>
+<p>浮点数是一个相当复杂的话题，不同平台的浮点数表示和浮点运算也有较大差异，本节只是通过这个简单的模型介绍一些基本概念而不深入讨论，理解了这些基本概念有助于你理解浮点数标准，目前业界广泛采用的符点数标准是由IEEE（Institute
+of Electrical and Electronics Engineers）制定的IEEE 754。</p>
+<p>最后讨论一个细节问题。我们知道，定义全局变量时如果没有Initializer就用0初始化，定义数组时如果Initializer中提供的元素不够那么剩下的元素也用0初始化。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i;</span><br><span class="line"><span class="type">double</span> d;</span><br><span class="line"><span class="type">double</span> a[<span class="number">10</span>] = &#123; <span class="number">1.0</span> &#125;;</span><br></pre></td></tr></table></figure>
+<p>“用<code>0</code>初始化”的意思是变量<code>i</code>、变量<code>d</code>和数组元素<code>a[1]~a[9]</code>的所有字节都用<code>0</code>填充，或者说所有bit都是0。无论是用Sign
+and Magnitude表示法、1’s Complement表示法还是2’s
+Complement表示法，一个整数的所有bit是0都表示0值，但一个浮点数的所有bit是0一定表示0值吗？严格来说不一定，某种平台可能会规定一个浮点数的所有bit是0并不表示0值，但[C99
+Rationale]第6.7.8节的条款25提到：As far as the committee knows, all
+machines treat all bits zero as a representation of floating-point zero.
+But, all bits zero might not be the canonical representation of zero.
+因此在绝大多数平台上，一个浮点数的所有bit是0就表示0值。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1533,259 +1786,6 @@ Algebra），以它的创始人布尔命名。在编程语言中表示真和假�
 “if/else语句”讲过浮点型不适合做精确比较，所以C语言规定<code>case</code>后面跟的必须是整型常量表达式。</p>
 <p>进入<code>case</code>后如果没有遇到<code>break</code>语句就会一直往下执行，后面其它<code>case</code>或<code>default</code>分支的语句也会被执行到，直到遇到<code>break</code>，或者执行到整个<code>switch</code>语句块的末尾。通常每个<code>case</code>后面都要加上<code>break</code>语句，但有时会故意不加<code>break</code>来利用这个特性</p>
 <p><code>switch</code>语句不是必不可缺的，显然可以用一组<code>if ... else if ... else if ... else ...</code>代替，但是一方面用<code>switch</code>语句会使代码更清晰，另一方面，有时候编译器会对<code>switch</code>语句进行整体优化，使它比等价的<code>if/else</code>语句所生成的指令效率更高。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/femboy.jpg">
-      <meta itemprop="name" content="SiyuanLei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SiyuanLei's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SiyuanLei's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/" class="post-title-link" itemprop="url">C语言:数据类型</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-08-08 19:53:58" itemprop="dateModified" datetime="2025-08-08T19:53:58+08:00">2025-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="位运算">位运算</h2>
-<p>整数在计算机中用二进制的位来表示，C语言提供一些运算符可以直接操作整数中的位，称为位运算，这些运算符的操作数都必须是整型的。在以后的学习中你会发现，有些信息利用整数中的某几个位来存储，要访问这些位，仅仅有对整数的操作是不够的，必须借助位运算，例如第
-2 节
-“Unicode和UTF-8”介绍的UTF-8编码就是如此，学完本节之后你应该能自己写出UTF-8的编码和解码程序。本节首先介绍各种位运算符，然后介绍与位运算有关的编程技巧。</p>
-<h3 id="按位与或异或取反运算">按位与、或、异或、取反运算</h3>
-<p>在第 3 节
-“布尔代数”讲过逻辑与、或、非运算，并列出了真值表，对于整数中的位也可以做与、或、非运算，C语言提供了按位与（Bitwise
-AND）运算符<code>&amp;</code>、按位或（Bitwise
-OR）运算符<code>|</code>和按位取反（Bitwise
-NOT）运算符<code>~</code>，此外还有按位异或（Bitwise
-XOR）运算符<code>^</code>，我们在第 1 节
-“为什么计算机用二进制计数”讲过异或运算。</p>
-<p>注意，<code>&amp;</code>、<code>|</code>、<code>^</code>运算符都是要做Usual
-Arithmetic Conversion的（其中有一步是Integer
-Promotion），<code>~</code>运算符也要做Integer
-Promotion，所以在C语言中其实并不存在8位整数的位运算，操作数在做位运算之前都至少被提升为<code>int</code>型了.</p>
-<p>比如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> c = <span class="number">0xfc</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> i = ~c;</span><br></pre></td></tr></table></figure>
-<p>计算过程是这样的：常量<code>0xfc</code>是<code>int</code>型的，赋给c要转成<code>unsigned char</code>，值不变；c的十六进制表示是<code>fc</code>，计算<code>~c</code>时先提升为整型<code>000000fc</code>然后取反，最后结果是<code>ffffff03</code>。注意，如果把<code>~c</code>看成是8位整数的取反，最后结果就得3了，这就错了。为了避免出错，一是尽量避免不同类型之间的赋值，二是每一步计算都要按上一章讲的类型转换规则仔细检查。</p>
-<h3 id="移位运算">移位运算</h3>
-<p>移位运算符（Bitwise
-Shift）包括左移<code>&lt;&lt;</code>和右移<code>&gt;&gt;</code>。左移将一个整数的各二进制位全部左移若干位.</p>
-<p>最高两位的11被移出去了，最低两位又补了两个0，其它位依次左移两位。但要注意，移动的位数必须小于左操作数的总位数，比如上面的例子，左边是<code>unsigned int</code>型，如果左移的位数大于等于32位，则结果是Undefined。移位运算符不同于<code>+ - * / ==</code>等运算符，两边操作数的类型不要求一致，但两边操作数都要做Integer
-Promotion，整个表达式的类型和左操作数提升后的类型相同。</p>
-<p>复习一下第 2 节
-“不同进制之间的换算”讲过的知识可以得出结论，在一定的取值范围内，将一个整数左移1位相当于乘以2。比如二进制11（十进制3）左移一位变成110，就是6，再左移一位变成1100，就是12。读者可以自己验证这条规律对有符号数和无符号数都成立，对负数也成立。当然，如果左移改变了最高位（符号位），那么结果肯定不是乘以2了，所以我加了个前提“在一定的取值范围内”。由于计算机做移位比做乘法快得多，编译器可以利用这一点做优化，比如看到源代码中有<code>i * 8</code>，可以编译成移位指令而不是乘法指令。</p>
-<p>当操作数是无符号数时，右移运算的规则和左移类似，</p>
-<p>比如最低两位的11被移出去了，最高两位又补了两个0，其它位依次右移两位。和左移类似，移动的位数也必须小于左操作数的总位数，否则结果是Undefined。在一定的取值范围内，将一个整数右移1位相当于除以2，小数部分截掉。</p>
-<p>当操作数是有符号数时，右移运算的规则比较复杂：</p>
-<p>如果是正数，那么高位移入0</p>
-<p>如果是负数，那么高位移入1还是0不一定，这是Implementation-defined的。对于x86平台的gcc编译器，最高位移入1，也就是仍保持负数的符号位，这种处理方式对负数仍然保持了“右移1位相当于除以2”的性质。</p>
-<p>综上所述，由于类型转换和移位等问题，用有符号数做位运算是很不方便的，所以，建议只对无符号数做位运算，以减少出错的可能。</p>
-<h3 id="掩码">掩码</h3>
-<p>如果要对一个整数中的某些位进行操作，怎样表示这些位在整数中的位置呢？可以用掩码（Mask）来表示。比如掩码0x0000ff00表示对一个32位整数的8~15位进行操作，举例如下。</p>
-<p>1、取出8~15位。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = (a &amp; mask) &gt;&gt; <span class="number">8</span>; <span class="comment">/* 0x00000056 */</span></span><br></pre></td></tr></table></figure>
-<p>这样也可以达到同样的效果：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = (a &gt;&gt; <span class="number">8</span>) &amp; ~(~<span class="number">0U</span> &lt;&lt; <span class="number">8</span>);</span><br></pre></td></tr></table></figure>
-<p>2、将8~15位清0。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a &amp; ~mask; <span class="comment">/* 0x12340078 */</span></span><br></pre></td></tr></table></figure>
-<p>3、将8~15位置1。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a | mask; <span class="comment">/* 0x1234ff78 */</span></span><br></pre></td></tr></table></figure>
-<h3 id="异或运算的一些特性">异或运算的一些特性</h3>
-<p>1、一个数和自己做异或的结果是0。如果需要一个常数0，x86平台的编译器可能会生成这样的指令：<code>xorl %eax, %eax</code>。不管<code>eax</code>寄存器里的值原来是多少，做异或运算都能得到0，这条指令比同样效果的<code>movl $0, %eax</code>指令快，因为前者只需要在CPU内部计算，而后者需要访问内存，在下一章第
-5 节 “Memory Hierarchy”详细介绍。</p>
-<p>2、从异或的真值表可以看出，不管是0还是1，和0做异或保持原值不变，和1做异或得到原值的相反值。可以利用这个特性配合掩码实现某些位的翻转，例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">1U</span> &lt;&lt; <span class="number">6</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a ^ mask; <span class="comment">/* flip the 6th bit */</span></span><br></pre></td></tr></table></figure>
-<p>3、如果<code>a1 ^ a2 ^ a3 ^ ... ^ an</code>的结果是1，则表示<code>a1、a2、a3...an</code>之中1的个数为奇数个，否则为偶数个。这条性质可用于奇偶校验（Parity
-Check），比如在串口通信过程中，每个字节的数据都计算一个校验位，数据和校验位一起发送出去，这样接收方可以根据校验位粗略地判断接收到的数据是否有误。</p>
-<p>4、<code>x ^ x ^ y == y</code>，因为<code>x ^ x == 0</code>，<code>0 ^ y == y</code>。这个性质有什么用呢？我们来看这样一个问题：交换两个变量的值，不得借助额外的存储空间，所以就不能采用<code>temp = a; a = b; b = temp;</code>的办法了。利用位运算可以这样做交换：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = a ^ b;</span><br><span class="line">b = b ^ a;</span><br><span class="line">a = a ^ b;</span><br></pre></td></tr></table></figure>
-<p>分析一下这个过程。为了避免混淆，把<code>a</code>和<code>b</code>的初值分别记为<code>a0</code>和<code>b0</code>。第一行，<code>a = a0 ^ b0；</code>第二行，把<code>a</code>的新值代入，得到<code>b = b0 ^ a0 ^ b0</code>，等号右边的<code>b0</code>相当于上面公式中的<code>x</code>，<code>a0</code>相当于<code>y</code>，所以结果为<code>a0</code>；第三行，把<code>a</code>和<code>b</code>的新值代入，得到<code>a = a0 ^ b0 ^ a0</code>，结果为<code>b0</code>。注意这个过程不能把同一个变量自己跟自己交换，而利用中间变量<code>temp</code>则可以交换。</p>
-<h2 id="其他运算符">其他运算符</h2>
-<h3 id="复合赋值运算符">复合赋值运算符</h3>
-<p>复合赋值运算符（Compound Assignment
-Operator）包括<code>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |=</code>，一边做运算一边赋值。例如<code>a += 1</code>相当于<code>a = a + 1</code>。但有一点细微的差别，前者对表达式<code>a</code>只求值一次，而后者求值两次，如果<code>a</code>是一个复杂的表达式，求值一次和求值两次的效率是不同的，例如<code>a[i+j] += 1</code>和<code>a[i+j] = a[i+j] + 1</code>。那么仅仅是效率上的差别吗？对于没有Side
-Effect的表达式，求值一次和求值两次的结果是一样的，但对于有Side
-Effect的表达式则不一定，例如<code>a[foo()] += 1</code>和<code>a[foo()] = a[foo()] + 1</code>，如果<code>foo()</code>函数调用有Side
-Effect，比如会打印一条消息，那么前者只打印一次，而后者打印两次。</p>
-<p>在第 3 节
-“for语句”讲自增、自减运算符时说<code>++i</code>相当于<code>i = i + 1</code>，其实更准确地说应该是等价于<code>i += 1</code>，表达式<code>i</code>只求值一次，而<code>--i</code>等价于<code>i -= 1</code>。</p>
-<h3 id="条件运算符">条件运算符</h3>
-<p>条件运算符（Conditional
-Operator）是C语言中唯一一个三目运算符（Ternary
-Operator），带三个操作数，它的形式是<code>表达式1 ? 表达式2 : 表达式3</code>，这个运算符所组成的整个表达式的值等于<code>表达式2</code>或<code>表达式3</code>的值，取决于<code>表达式1</code>的值是否为真，可以把它想像成这样的函数：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> 表达式<span class="number">2</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> 表达式<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<p><code>表达式1</code>相当于<code>if</code>语句的控制表达式，因此它的值必须是标量类型，而表达式2和3相当于同一个函数在不同情况下的返回值，因此它们的类型要求一致，也要做Usual
-Arithmetic Conversion。</p>
-<p>下面举个例子，定义一个函数求两个参数中较大的一个。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (a &gt; b) ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="逗号运算符">逗号运算符</h3>
-<p>逗号运算符（Comma
-Operator）也是一种双目运算符，它的形式是<code>表达式1, 表达式2</code>，两个表达式不要求类型一致，左边的表达式1先求值，求完了直接把值丢掉，再求右边表达式2的值作为整个表达式的值。逗号运算符是左结合的，类似于<code>+ - * /</code>运算符，根据组合规则可以写出<code>表达式1, 表达式2, 表达式3, ..., 表达式n</code>这种形式，<code>表达式1</code>,
-<code>表达式2</code>可以看作一个子表达式，先求<code>表达式1</code>的值，然后求<code>表达式2</code>的值作为这个子表达式的值，然后这个值再和<code>表达式3</code>组成一个更大的表达式，求<code>表达式3</code>的值作为这个更大的表达式的值，依此类推，整个计算过程就是从左到右依次求值，最后一个表达式的值成为整个表达式的值。</p>
-<p>注意，函数调用时各实参之间也是用逗号隔开，这种逗号是分隔符而不是逗号运算符。但可以这样使用逗号运算符：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(a, (t=<span class="number">3</span>, t+<span class="number">2</span>), c)</span><br></pre></td></tr></table></figure>
-<p>传给函数<code>f</code>的参数有三个，其中第二个参数的值是表达式<code>t+2</code>的值。</p>
-<h3
-id="sizeof运算符与typedef类型声明">sizeof运算符与typedef类型声明</h3>
-<p><code>sizeof</code>是一个很特殊的运算符，它有两种形式：“<code>sizeof 表达式</code>”和“<code>sizeof(类型名)</code>”。这个运算符很特殊，“<code>sizeof 表达式</code>”中的子表达式并不求值，而只是根据类型转换规则求得子表达式的类型，然后把这种类型所占的字节数作为整个表达式的值。有些人喜欢写成“<code>sizeof(表达式)</code>”的形式也可以，这里的括号和<code>return(1);</code>的括号一样，不起任何作用。但另外一种形式“<code>sizeof(类型名)</code>”的括号则是必须写的，整个表达式的值也是这种类型所占的字节数。</p>
-<p>比如用<code>sizeof</code>运算符求一个数组的长度：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">12</span>];</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span> a/<span class="keyword">sizeof</span> a[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-<p>在上面这个例子中，由于<code>sizeof</code>
-表达式中的子表达式不需要求值，所以不需要到运行时才计算，事实上在编译时就知道<code>sizeof a</code>的值是48，<code>sizeof a[0]</code>的值是4，所以在编译时就已经把<code>sizeof a/sizeof a[0]</code>替换成常量12了，这是一个常量表达式。</p>
-<p><code>sizeof</code>运算符的结果是<code>size_t</code>类型的，这个类型定义在<code>stddef.h</code>头文件中，不过你的代码中只要不出现<code>size_t</code>这个类型名就不用包含这个头文件，比如像上面的例子就不用包含这个头文件。C标准规定<code>size_t</code>是一种无符号整型，编译器可以用<code>typedef</code>做一个类型声明：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">size_t</span>;</span><br></pre></td></tr></table></figure>
-<p>那么<code>size_t</code>就代表<code>unsigned long</code>型。不同平台的编译器可能会根据自己平台的具体情况定义<code>size_t</code>所代表的类型，比如有的平台定义为<code>unsigned long</code>型，有的平台定义为<code>unsigned long long</code>型，C标准规定<code>size_t</code>这个名字就是为了隐藏这些细节，使代码具有可移植性。所以注意不要把<code>size_t</code>类型和它所代表的真实类型混用，例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">long</span> x;</span><br><span class="line"><span class="type">size_t</span> y;</span><br><span class="line">x = y;</span><br></pre></td></tr></table></figure>
-<p>如果在一种ILP32平台上定义<code>size_t</code>代表<code>unsigned long long</code>型，这段代码把<code>y</code>赋给<code>x</code>时就把高位截掉了，结果可能是错的。</p>
-<p><code>typedef</code>这个关键字用于给某种类型起个新名字，比如上面的<code>typedef</code>声明可以这么看：去掉<code>typedef</code>就成了一个变量声明<code>unsigned long size_t;</code>，<code>size_t</code>是一个变量名，类型是<code>unsigned long</code>，那么加上<code>typedef</code>之后，<code>size_t</code>就是一个类型名，就代表<code>unsigned long</code>类型。再举个例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> <span class="type">array_t</span>[<span class="number">10</span>];</span><br><span class="line"><span class="type">array_t</span> a;</span><br></pre></td></tr></table></figure>
-<p>这相当于声明<code>char a[10];</code>。类型名也遵循标识符的命名规则，并且通常加个<code>_t</code>后缀表示Type。</p>
-<h2 id="side-effect和sequence-point">Side Effect和Sequence Point</h2>
-<p>如果你只想规规矩矩地写代码，那么基本用不着看这一节。本节的内容基本上是钻牛角尖儿的，除了Short-circuit比较实用，其它写法都应该避免使用。但没办法，有时候不是你想钻牛角尖儿，而是有人逼你去钻牛角尖儿。这是我们的学员在找工作笔试时碰到的问题：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">0</span>;</span><br><span class="line">a = (++a)+(++a)+(++a)+(++a);</span><br></pre></td></tr></table></figure>
-<p>据我了解，似乎很多公司都有出这种笔试题的恶趣味。答案应该是Undefined，我甚至有些怀疑出题人是否真的知道答案。下面我来解释为什么是Undefined。</p>
-<p>我们知道，调用一个函数可能产生Side
-Effect，使用某些运算符（<code>++ -- =</code> 复合赋值）也会产生Side
-Effect，如果一个表达式中隐含着多个Side
-Effect，究竟哪个先发生哪个后发生呢？C标准规定代码中的某些点是Sequence
-Point，当执行到一个Sequence Point时，在此之前的Side
-Effect必须全部作用完毕，在此之后的Side
-Effect必须一个都没发生。至于两个Sequence Point之间的多个Side
-Effect哪个先发生哪个后发生则没有规定，编译器可以任意选择各Side
-Effect的作用顺序。下面详细解释各种Sequence Point。</p>
-<p>1、调用一个函数时，在所有准备工作做完之后、函数调用开始之前是Sequence
-Point。比如调用<code>foo(f(), g())</code>时，<code>foo</code>、<code>f()</code>、<code>g()</code>这三个表达式哪个先求值哪个后求值是Unspecified，但是必须都求值完了才能做最后的函数调用，所以<code>f()</code>和<code>g()</code>的Side
-Effect按什么顺序发生不一定，但必定在这些Side
-Effect全部作用完之后才开始调用<code>foo</code>函数。</p>
-<p>2、条件运算符<code>?:</code>、逗号运算符、逻辑与<code>&amp;&amp;</code>、逻辑或<code>||</code>的第一个操作数求值之后是Sequence
-Point。我们刚讲过条件运算符和逗号运算符，条件运算符要根据表达式1的值是否为真决定下一步求表达式2还是表达式3的值，如果决定求表达式2的值，表达式3就不会被求值了，反之也一样，逗号运算符也是这样，表达式1求值结束才继续求表达式2的值。</p>
-<p>逻辑与和逻辑或早在第 3 节
-“布尔代数”就讲了，但在初学阶段我一直回避它们的操作数求值顺序问题。这两个运算符和条件运算符类似，先求左操作数的值，然后根据这个值是否为真，右操作数可能被求值，也可能不被求值。比如例
-8.5 “剪刀石头布”这个程序中的这几句：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;man);</span><br><span class="line"><span class="keyword">if</span> (ret != <span class="number">1</span> || man &lt; <span class="number">0</span> || man &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Invalid input! Please input 0, 1 or 2.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其实可以写得更简单（类似于[K&amp;R]的简洁风格）：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;man) != <span class="number">1</span> || man &lt; <span class="number">0</span> || man &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Invalid input! Please input 0, 1 or 2.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个控制表达式的求值顺序是：先求<code>scanf("%d", &amp;man) = 1</code>的值，如果<code>scanf</code>调用失败，则返回值不等于1成立，<code>||</code>运算有一个操作数为真则整个表达式为真，这时直接执行下一句<code>printf</code>，根本不会再去求<code>man &lt; 0</code>或<code>man &gt; 2</code>的值；如果<code>scanf</code>调用成功，则读入的数保存在变量<code>man</code>中，并且返回值等于1，那么说它不等于1就不成立了，第一个<code>||</code>运算的左操作数为假，就会去求右操作数<code>man &lt; 0</code>的值作为整个表达式的值，这时变量<code>man</code>的值正是<code>scanf</code>读上来的值，我们判断它是否在[0,
-2]之间，如果<code>man &lt; 0</code>不成立，则整个表达式<code>scanf("%d", &amp;man) != 1 || man &lt; 0</code>
-的值为假，也就是第二个<code>||</code>运算的左操作数为假，所以最后求右操作数<code>man &gt; 2</code>的值作为整个表达式的值。</p>
-<p><code>&amp;&amp;</code>运算与此类似，<code>a &amp;&amp; b</code>的计算过程是：首先求表达式a的值，如果a的值是假则整个表达式的值是假，不会再去求b的值；如果a的值是真，则下一步求b的值作为整个表达式的值。所以，<code>a &amp;&amp; b</code>相当于“<code>if a then b</code>”，而<code>a || b</code>相当于“<code>if not a then b</code>”。这种特性称为Short-circuit，很多人喜欢利用Short-circuit特性简化代码。</p>
-<p>3、在一个完整的声明末尾是Sequence
-Point，所谓完整的声明是指这个声明不是另外一个声明的一部分。比如声明<code>int a[10], b[20];</code>，在<code>a[10]</code>末尾是Sequence
-Point，在<code>b[20]</code>末尾也是。</p>
-<p>4、在一个完整的表达式末尾是Sequence
-Point，所谓完整的表达式是指这个表达式不是另外一个表达式的一部分。所以如果有<code>f(); g();</code>这样两条语句，<code>f()</code>和<code>g()</code>是两个完整的表达式，<code>f()</code>的Side
-Effect必定在<code>g()</code>之前发生。</p>
-<p>5、在库函数即将返回时是Sequence
-Point。这条规则似乎可以包含在上一条规则里面，因为函数返回时必然会结束掉一个完整的表达式。而事实上很多库函数是以宏定义的形式实现的（第
-2.1 节 “函数式宏定义”），并不是真正的函数，所以才需要有这条规则。</p>
-<p>还有两种Sequence
-Point和某些C标准库函数的执行过程相关，此处从略，有兴趣的读者可参考[C99]的Annex
-C。</p>
-<p>现在可以分析一下本节开头的例子了。<code>a = (++a)+(++a)+(++a)+(++a);</code>的结果之所以是Undefined，因为在这个表达式中有五个Side
-Effect都在改变<code>a</code>的值，这些Side
-Effect按什么顺序发生不一定，只知道在整个表达式求值结束时一定都发生了。比如现在求第二个<code>++a</code>的值，这时第一个、第三个、第四个<code>++a</code>的Side
-Effect发生了没有，<code>a</code>的值被加过几次了，这些都不确定，所以第二个<code>++a</code>的值也不确定。这行代码用不同平台的不同编译器来编译结果是不同的，甚至在同一平台上用同一编译器的不同版本来编译也可能不同。</p>
-<p>写表达式应遵循的原则一：在两个Sequence
-Point之间，同一个变量的值只允许被改变一次。仅有这一条原则还不够，例如<code>a[i++] = i;</code>的变量<code>i</code>只改变了一次，但结果仍是Undefined，因为等号左边改<code>i</code>的值，等号右边读<code>i</code>的值，到底是先改还是先读？这个读写顺序是不确定的。但为什么<code>i = i + 1;</code>就没有歧义呢？虽然也是等号左边改<code>i</code>的值，等号右边读<code>i</code>的值，但你不读出<code>i</code>的值就没法计算<code>i + 1</code>，那拿什么去改<code>i</code>的值呢？所以这个读写顺序是确定的。写表达式应遵循的原则二：如果在两个Sequence
-Point之间既要读一个变量的值又要改它的值，只有在读写顺序确定的情况下才可以这么写。</p>
-<h2 id="运算符小结">运算符小结</h2>
-<p>到此为止，除了和指针相关的运算符还没讲之外，其它运算符都讲过了，是时候做一个总结了。</p>
-<p>运算符<code>+ - * / % &gt; &lt; &gt;= &lt;= == != &amp; | ^</code>以及各种复合赋值运算符要求两边的操作数类型一致，条件运算符<code>?:</code>要求后两个操作数类型一致，这些运算符在计算之前都需要做Usual
-Arithmetic Conversion。</p>
-<p>下面按优先级从高到低的顺序总结一下C语言的运算符，每一条所列的各运算符具有相同的优先级，对于同一优先级的多个运算符按什么顺序计算也有说明，双目运算符就简单地用“左结合”或“右结合”来说明了。和指针有关的运算符<code>* &amp; -&gt;</code>也在这里列出来了，到第
-23 章 指针再详细解释。</p>
-<p>1、标识符、常量、字符串和用<code>()</code>括号套起来的表达式是组成表达式的最基本单元，在运算中做操作数，优先级最高。</p>
-<p>2、后缀运算符，包括数组取下标<code>[]</code>、函数调用<code>()</code>、结构体取成员<code>“.”</code>、指向结构体的指针取成员<code>-&gt;</code>、后缀自增<code>++</code>、后缀自减<code>--</code>。如果一个操作数后面有多个后缀，按照离操作数从近到远的顺序（也就是从左到右）依次计算，比如<code>a.name++</code>，先算<code>a.name</code>，再<code>++</code>，这里的<code>.name</code>应该看成<code>a</code>的一个后缀，而不是把<code>.</code>看成双目运算符。</p>
-<p>3、单目运算符，包括前缀自增<code>++</code>、前缀自减<code>--</code>、<code>sizeof</code>、类型转换<code>()</code>、取地址运算<code>&amp;</code>、指针间接寻址<code>*</code>、正号<code>+</code>、负号<code>-</code>、按位取反<code>~</code>、逻辑非<code>!</code>。如果一个操作数前面有多个前缀，按照离操作数从近到远的顺序（也就是从右到左）依次计算，比如<code>!~a</code>，先算<code>~a</code>，再求<code>!</code>。</p>
-<p>4、乘<code>*</code>、除<code>/</code>、模<code>%</code>运算符。这三个运算符是左结合的。</p>
-<p>5、加<code>+</code>、减<code>-</code>运算符。左结合。</p>
-<p>6、移位运算符<code>&lt;&lt;</code>和<code>&gt;&gt;</code>。左结合。</p>
-<p>7、关系运算符<code>&lt; &gt; &lt;= &gt;=</code>。左结合。</p>
-<p>8、相等性运算符<code>==</code>和<code>!=</code>。左结合。</p>
-<p>9、按位与<code>&amp;</code>。左结合。</p>
-<p>10、按位异或<code>^</code>。左结合。</p>
-<p>11、按位或<code>|</code>。左结合。</p>
-<p>12、逻辑与<code>&amp;&amp;</code>。左结合。</p>
-<p>13、逻辑或<code>||</code>。左结合。</p>
-<p>14、条件运算符<code>:?</code>。在第 2 节
-“if/else语句”讲过Dangling-else问题，条件运算符也有类似的问题。例如<code>a ? b : c ? d : e</code>是看成<code>(a ? b : c) ? d : e</code>还是<code>a ? b : (c ? d : e)</code>呢？C语言规定是后者。</p>
-<p>15、赋值<code>=</code>和各种复合赋值（<code>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |=</code>）。在双目运算符中只有赋值和复合赋值是右结合的。</p>
-<p>16、逗号运算符。左结合。</p>
-<p>[K&amp;R]第2章也有这样一个列表，但是对于结合性解释得不够清楚。左结合和右结合这两个概念只对双目运算符有意义，对于前缀、后缀和三目运算符我单独做了说明。C语言表达式的详细语法规则可以参考[C99]的Annex
-A.2，其实语法规则并不是用优先级和结合性这两个概念来表述的，有一些细节用优先级和结合性是表达不了的，只有看C99才能了解完整的语法规则。</p>
 
       
     </div>
