@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
 <meta property="og:description" content="课程实验报告 第一次实验 习题1 比较R2和R3的内容, 并将最大值放入R1寄存器, 如果两个数相同, 则要求R1等于0. 要求程序起始地址为x3000, 程序完成后正常结束. 实验步骤与实验思路: 首先写好起始地址.ORIG x3000和结束语句.END. 比较两个寄存器的内容的大小可以用减法, 但是LC-3指令集没有提供减法运算, 所以具体做法是, 先对R3取反再加一, 放">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/source/images/LC-3/mermaid/pic1.png">
+<meta property="og:image" content="http://example.com/images/LC-3/mermaid/pic1.png">
 <meta property="og:image" content="http://example.com/source/images/LC-3/experiment1/step1.png">
 <meta property="og:image" content="http://example.com/source/images/LC-3/experiment1/step2.png">
 <meta property="og:image" content="http://example.com/source/images/LC-3/experiment1/step3.png">
@@ -83,10 +83,10 @@
 <meta property="og:image" content="http://example.com/source/images/LC-3/experiment6/step3.png">
 <meta property="og:image" content="http://example.com/source/images/LC-3/experiment6/step4.png">
 <meta property="article:published_time" content="2025-11-09T07:27:55.479Z">
-<meta property="article:modified_time" content="2025-11-16T12:54:48.416Z">
+<meta property="article:modified_time" content="2026-02-28T05:14:43.014Z">
 <meta property="article:author" content="SiyuanLei">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/source/images/LC-3/mermaid/pic1.png">
+<meta name="twitter:image" content="http://example.com/images/LC-3/mermaid/pic1.png">
 
 
 <link rel="canonical" href="http://example.com/2025/11/09/22009101435%E9%9B%B7%E6%80%9D%E6%BA%90%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">
@@ -308,7 +308,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-16 20:54:48" itemprop="dateModified" datetime="2025-11-16T20:54:48+08:00">2025-11-16</time>
+      <time title="Modified: 2026-02-28 13:14:43" itemprop="dateModified" datetime="2026-02-28T13:14:43+08:00">2026-02-28</time>
     </span>
 
   
@@ -339,7 +339,7 @@
 就把<code>R3</code>的值放入<code>R1</code>里面.</p>
 <h4 id="具体实现">具体实现</h4>
 <p>流程图如下:</p>
-<p><img src="/source/images/LC-3/mermaid/pic1.png" /></p>
+<p><img src="/images/LC-3/mermaid/pic1.png" /></p>
 <p>具体的实现代码如下:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.ORIG x3000</span><br><span class="line"></span><br><span class="line">    NOT R0, R3</span><br><span class="line">    ADD R0, R0, #1  ;取R3的补码, 放到R0里面</span><br><span class="line">    ADD R0, R2, R0  ;计算R2-R0, 结果放到R0里面</span><br><span class="line">    </span><br><span class="line">    BRz ZERO        ;如果结果为0, 则跳转到ZERO, 把R0的内容放到R1里面</span><br><span class="line">    BRp POSITIVE    ;如果结果为正, 则跳转到POSITIVE, 把R2放到R1里面</span><br><span class="line">    BRn NEGATIVE    ;如果结果为负, 则跳转到NEGATIVE, 把R3放到R1里面</span><br><span class="line"></span><br><span class="line">ZERO:</span><br><span class="line">    AND R1, R0, #0  ;把R1清零</span><br><span class="line">    BRnzp FINISH    ;跳转到FINISH</span><br><span class="line"></span><br><span class="line">POSITIVE:</span><br><span class="line">    ADD R1, R2, #0  ;把R2放到R1里面</span><br><span class="line">    BRnzp FINISH    ;跳转到FINISH</span><br><span class="line"></span><br><span class="line">NEGATIVE:</span><br><span class="line">    ADD R1, R3, #0  ;把R3放到R1里面</span><br><span class="line"></span><br><span class="line">FINISH:</span><br><span class="line">    HALT</span><br><span class="line">.END</span><br></pre></td></tr></table></figure>
 <h4 id="运行过程">运行过程</h4>
