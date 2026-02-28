@@ -901,259 +901,6 @@ But, all bits zero might not be the canonical representation of zero.
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/femboy.jpg">
-      <meta itemprop="name" content="SiyuanLei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SiyuanLei's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SiyuanLei's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/" class="post-title-link" itemprop="url">C语言:数据类型</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-08-08 19:53:58" itemprop="dateModified" datetime="2025-08-08T19:53:58+08:00">2025-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="位运算">位运算</h2>
-<p>整数在计算机中用二进制的位来表示，C语言提供一些运算符可以直接操作整数中的位，称为位运算，这些运算符的操作数都必须是整型的。在以后的学习中你会发现，有些信息利用整数中的某几个位来存储，要访问这些位，仅仅有对整数的操作是不够的，必须借助位运算，例如第
-2 节
-“Unicode和UTF-8”介绍的UTF-8编码就是如此，学完本节之后你应该能自己写出UTF-8的编码和解码程序。本节首先介绍各种位运算符，然后介绍与位运算有关的编程技巧。</p>
-<h3 id="按位与或异或取反运算">按位与、或、异或、取反运算</h3>
-<p>在第 3 节
-“布尔代数”讲过逻辑与、或、非运算，并列出了真值表，对于整数中的位也可以做与、或、非运算，C语言提供了按位与（Bitwise
-AND）运算符<code>&amp;</code>、按位或（Bitwise
-OR）运算符<code>|</code>和按位取反（Bitwise
-NOT）运算符<code>~</code>，此外还有按位异或（Bitwise
-XOR）运算符<code>^</code>，我们在第 1 节
-“为什么计算机用二进制计数”讲过异或运算。</p>
-<p>注意，<code>&amp;</code>、<code>|</code>、<code>^</code>运算符都是要做Usual
-Arithmetic Conversion的（其中有一步是Integer
-Promotion），<code>~</code>运算符也要做Integer
-Promotion，所以在C语言中其实并不存在8位整数的位运算，操作数在做位运算之前都至少被提升为<code>int</code>型了.</p>
-<p>比如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> c = <span class="number">0xfc</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> i = ~c;</span><br></pre></td></tr></table></figure>
-<p>计算过程是这样的：常量<code>0xfc</code>是<code>int</code>型的，赋给c要转成<code>unsigned char</code>，值不变；c的十六进制表示是<code>fc</code>，计算<code>~c</code>时先提升为整型<code>000000fc</code>然后取反，最后结果是<code>ffffff03</code>。注意，如果把<code>~c</code>看成是8位整数的取反，最后结果就得3了，这就错了。为了避免出错，一是尽量避免不同类型之间的赋值，二是每一步计算都要按上一章讲的类型转换规则仔细检查。</p>
-<h3 id="移位运算">移位运算</h3>
-<p>移位运算符（Bitwise
-Shift）包括左移<code>&lt;&lt;</code>和右移<code>&gt;&gt;</code>。左移将一个整数的各二进制位全部左移若干位.</p>
-<p>最高两位的11被移出去了，最低两位又补了两个0，其它位依次左移两位。但要注意，移动的位数必须小于左操作数的总位数，比如上面的例子，左边是<code>unsigned int</code>型，如果左移的位数大于等于32位，则结果是Undefined。移位运算符不同于<code>+ - * / ==</code>等运算符，两边操作数的类型不要求一致，但两边操作数都要做Integer
-Promotion，整个表达式的类型和左操作数提升后的类型相同。</p>
-<p>复习一下第 2 节
-“不同进制之间的换算”讲过的知识可以得出结论，在一定的取值范围内，将一个整数左移1位相当于乘以2。比如二进制11（十进制3）左移一位变成110，就是6，再左移一位变成1100，就是12。读者可以自己验证这条规律对有符号数和无符号数都成立，对负数也成立。当然，如果左移改变了最高位（符号位），那么结果肯定不是乘以2了，所以我加了个前提“在一定的取值范围内”。由于计算机做移位比做乘法快得多，编译器可以利用这一点做优化，比如看到源代码中有<code>i * 8</code>，可以编译成移位指令而不是乘法指令。</p>
-<p>当操作数是无符号数时，右移运算的规则和左移类似，</p>
-<p>比如最低两位的11被移出去了，最高两位又补了两个0，其它位依次右移两位。和左移类似，移动的位数也必须小于左操作数的总位数，否则结果是Undefined。在一定的取值范围内，将一个整数右移1位相当于除以2，小数部分截掉。</p>
-<p>当操作数是有符号数时，右移运算的规则比较复杂：</p>
-<p>如果是正数，那么高位移入0</p>
-<p>如果是负数，那么高位移入1还是0不一定，这是Implementation-defined的。对于x86平台的gcc编译器，最高位移入1，也就是仍保持负数的符号位，这种处理方式对负数仍然保持了“右移1位相当于除以2”的性质。</p>
-<p>综上所述，由于类型转换和移位等问题，用有符号数做位运算是很不方便的，所以，建议只对无符号数做位运算，以减少出错的可能。</p>
-<h3 id="掩码">掩码</h3>
-<p>如果要对一个整数中的某些位进行操作，怎样表示这些位在整数中的位置呢？可以用掩码（Mask）来表示。比如掩码0x0000ff00表示对一个32位整数的8~15位进行操作，举例如下。</p>
-<p>1、取出8~15位。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = (a &amp; mask) &gt;&gt; <span class="number">8</span>; <span class="comment">/* 0x00000056 */</span></span><br></pre></td></tr></table></figure>
-<p>这样也可以达到同样的效果：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = (a &gt;&gt; <span class="number">8</span>) &amp; ~(~<span class="number">0U</span> &lt;&lt; <span class="number">8</span>);</span><br></pre></td></tr></table></figure>
-<p>2、将8~15位清0。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a &amp; ~mask; <span class="comment">/* 0x12340078 */</span></span><br></pre></td></tr></table></figure>
-<p>3、将8~15位置1。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a | mask; <span class="comment">/* 0x1234ff78 */</span></span><br></pre></td></tr></table></figure>
-<h3 id="异或运算的一些特性">异或运算的一些特性</h3>
-<p>1、一个数和自己做异或的结果是0。如果需要一个常数0，x86平台的编译器可能会生成这样的指令：<code>xorl %eax, %eax</code>。不管<code>eax</code>寄存器里的值原来是多少，做异或运算都能得到0，这条指令比同样效果的<code>movl $0, %eax</code>指令快，因为前者只需要在CPU内部计算，而后者需要访问内存，在下一章第
-5 节 “Memory Hierarchy”详细介绍。</p>
-<p>2、从异或的真值表可以看出，不管是0还是1，和0做异或保持原值不变，和1做异或得到原值的相反值。可以利用这个特性配合掩码实现某些位的翻转，例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">1U</span> &lt;&lt; <span class="number">6</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a ^ mask; <span class="comment">/* flip the 6th bit */</span></span><br></pre></td></tr></table></figure>
-<p>3、如果<code>a1 ^ a2 ^ a3 ^ ... ^ an</code>的结果是1，则表示<code>a1、a2、a3...an</code>之中1的个数为奇数个，否则为偶数个。这条性质可用于奇偶校验（Parity
-Check），比如在串口通信过程中，每个字节的数据都计算一个校验位，数据和校验位一起发送出去，这样接收方可以根据校验位粗略地判断接收到的数据是否有误。</p>
-<p>4、<code>x ^ x ^ y == y</code>，因为<code>x ^ x == 0</code>，<code>0 ^ y == y</code>。这个性质有什么用呢？我们来看这样一个问题：交换两个变量的值，不得借助额外的存储空间，所以就不能采用<code>temp = a; a = b; b = temp;</code>的办法了。利用位运算可以这样做交换：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = a ^ b;</span><br><span class="line">b = b ^ a;</span><br><span class="line">a = a ^ b;</span><br></pre></td></tr></table></figure>
-<p>分析一下这个过程。为了避免混淆，把<code>a</code>和<code>b</code>的初值分别记为<code>a0</code>和<code>b0</code>。第一行，<code>a = a0 ^ b0；</code>第二行，把<code>a</code>的新值代入，得到<code>b = b0 ^ a0 ^ b0</code>，等号右边的<code>b0</code>相当于上面公式中的<code>x</code>，<code>a0</code>相当于<code>y</code>，所以结果为<code>a0</code>；第三行，把<code>a</code>和<code>b</code>的新值代入，得到<code>a = a0 ^ b0 ^ a0</code>，结果为<code>b0</code>。注意这个过程不能把同一个变量自己跟自己交换，而利用中间变量<code>temp</code>则可以交换。</p>
-<h2 id="其他运算符">其他运算符</h2>
-<h3 id="复合赋值运算符">复合赋值运算符</h3>
-<p>复合赋值运算符（Compound Assignment
-Operator）包括<code>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |=</code>，一边做运算一边赋值。例如<code>a += 1</code>相当于<code>a = a + 1</code>。但有一点细微的差别，前者对表达式<code>a</code>只求值一次，而后者求值两次，如果<code>a</code>是一个复杂的表达式，求值一次和求值两次的效率是不同的，例如<code>a[i+j] += 1</code>和<code>a[i+j] = a[i+j] + 1</code>。那么仅仅是效率上的差别吗？对于没有Side
-Effect的表达式，求值一次和求值两次的结果是一样的，但对于有Side
-Effect的表达式则不一定，例如<code>a[foo()] += 1</code>和<code>a[foo()] = a[foo()] + 1</code>，如果<code>foo()</code>函数调用有Side
-Effect，比如会打印一条消息，那么前者只打印一次，而后者打印两次。</p>
-<p>在第 3 节
-“for语句”讲自增、自减运算符时说<code>++i</code>相当于<code>i = i + 1</code>，其实更准确地说应该是等价于<code>i += 1</code>，表达式<code>i</code>只求值一次，而<code>--i</code>等价于<code>i -= 1</code>。</p>
-<h3 id="条件运算符">条件运算符</h3>
-<p>条件运算符（Conditional
-Operator）是C语言中唯一一个三目运算符（Ternary
-Operator），带三个操作数，它的形式是<code>表达式1 ? 表达式2 : 表达式3</code>，这个运算符所组成的整个表达式的值等于<code>表达式2</code>或<code>表达式3</code>的值，取决于<code>表达式1</code>的值是否为真，可以把它想像成这样的函数：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> 表达式<span class="number">2</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> 表达式<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<p><code>表达式1</code>相当于<code>if</code>语句的控制表达式，因此它的值必须是标量类型，而表达式2和3相当于同一个函数在不同情况下的返回值，因此它们的类型要求一致，也要做Usual
-Arithmetic Conversion。</p>
-<p>下面举个例子，定义一个函数求两个参数中较大的一个。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (a &gt; b) ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="逗号运算符">逗号运算符</h3>
-<p>逗号运算符（Comma
-Operator）也是一种双目运算符，它的形式是<code>表达式1, 表达式2</code>，两个表达式不要求类型一致，左边的表达式1先求值，求完了直接把值丢掉，再求右边表达式2的值作为整个表达式的值。逗号运算符是左结合的，类似于<code>+ - * /</code>运算符，根据组合规则可以写出<code>表达式1, 表达式2, 表达式3, ..., 表达式n</code>这种形式，<code>表达式1</code>,
-<code>表达式2</code>可以看作一个子表达式，先求<code>表达式1</code>的值，然后求<code>表达式2</code>的值作为这个子表达式的值，然后这个值再和<code>表达式3</code>组成一个更大的表达式，求<code>表达式3</code>的值作为这个更大的表达式的值，依此类推，整个计算过程就是从左到右依次求值，最后一个表达式的值成为整个表达式的值。</p>
-<p>注意，函数调用时各实参之间也是用逗号隔开，这种逗号是分隔符而不是逗号运算符。但可以这样使用逗号运算符：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(a, (t=<span class="number">3</span>, t+<span class="number">2</span>), c)</span><br></pre></td></tr></table></figure>
-<p>传给函数<code>f</code>的参数有三个，其中第二个参数的值是表达式<code>t+2</code>的值。</p>
-<h3
-id="sizeof运算符与typedef类型声明">sizeof运算符与typedef类型声明</h3>
-<p><code>sizeof</code>是一个很特殊的运算符，它有两种形式：“<code>sizeof 表达式</code>”和“<code>sizeof(类型名)</code>”。这个运算符很特殊，“<code>sizeof 表达式</code>”中的子表达式并不求值，而只是根据类型转换规则求得子表达式的类型，然后把这种类型所占的字节数作为整个表达式的值。有些人喜欢写成“<code>sizeof(表达式)</code>”的形式也可以，这里的括号和<code>return(1);</code>的括号一样，不起任何作用。但另外一种形式“<code>sizeof(类型名)</code>”的括号则是必须写的，整个表达式的值也是这种类型所占的字节数。</p>
-<p>比如用<code>sizeof</code>运算符求一个数组的长度：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">12</span>];</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span> a/<span class="keyword">sizeof</span> a[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-<p>在上面这个例子中，由于<code>sizeof</code>
-表达式中的子表达式不需要求值，所以不需要到运行时才计算，事实上在编译时就知道<code>sizeof a</code>的值是48，<code>sizeof a[0]</code>的值是4，所以在编译时就已经把<code>sizeof a/sizeof a[0]</code>替换成常量12了，这是一个常量表达式。</p>
-<p><code>sizeof</code>运算符的结果是<code>size_t</code>类型的，这个类型定义在<code>stddef.h</code>头文件中，不过你的代码中只要不出现<code>size_t</code>这个类型名就不用包含这个头文件，比如像上面的例子就不用包含这个头文件。C标准规定<code>size_t</code>是一种无符号整型，编译器可以用<code>typedef</code>做一个类型声明：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">size_t</span>;</span><br></pre></td></tr></table></figure>
-<p>那么<code>size_t</code>就代表<code>unsigned long</code>型。不同平台的编译器可能会根据自己平台的具体情况定义<code>size_t</code>所代表的类型，比如有的平台定义为<code>unsigned long</code>型，有的平台定义为<code>unsigned long long</code>型，C标准规定<code>size_t</code>这个名字就是为了隐藏这些细节，使代码具有可移植性。所以注意不要把<code>size_t</code>类型和它所代表的真实类型混用，例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">long</span> x;</span><br><span class="line"><span class="type">size_t</span> y;</span><br><span class="line">x = y;</span><br></pre></td></tr></table></figure>
-<p>如果在一种ILP32平台上定义<code>size_t</code>代表<code>unsigned long long</code>型，这段代码把<code>y</code>赋给<code>x</code>时就把高位截掉了，结果可能是错的。</p>
-<p><code>typedef</code>这个关键字用于给某种类型起个新名字，比如上面的<code>typedef</code>声明可以这么看：去掉<code>typedef</code>就成了一个变量声明<code>unsigned long size_t;</code>，<code>size_t</code>是一个变量名，类型是<code>unsigned long</code>，那么加上<code>typedef</code>之后，<code>size_t</code>就是一个类型名，就代表<code>unsigned long</code>类型。再举个例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> <span class="type">array_t</span>[<span class="number">10</span>];</span><br><span class="line"><span class="type">array_t</span> a;</span><br></pre></td></tr></table></figure>
-<p>这相当于声明<code>char a[10];</code>。类型名也遵循标识符的命名规则，并且通常加个<code>_t</code>后缀表示Type。</p>
-<h2 id="side-effect和sequence-point">Side Effect和Sequence Point</h2>
-<p>如果你只想规规矩矩地写代码，那么基本用不着看这一节。本节的内容基本上是钻牛角尖儿的，除了Short-circuit比较实用，其它写法都应该避免使用。但没办法，有时候不是你想钻牛角尖儿，而是有人逼你去钻牛角尖儿。这是我们的学员在找工作笔试时碰到的问题：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">0</span>;</span><br><span class="line">a = (++a)+(++a)+(++a)+(++a);</span><br></pre></td></tr></table></figure>
-<p>据我了解，似乎很多公司都有出这种笔试题的恶趣味。答案应该是Undefined，我甚至有些怀疑出题人是否真的知道答案。下面我来解释为什么是Undefined。</p>
-<p>我们知道，调用一个函数可能产生Side
-Effect，使用某些运算符（<code>++ -- =</code> 复合赋值）也会产生Side
-Effect，如果一个表达式中隐含着多个Side
-Effect，究竟哪个先发生哪个后发生呢？C标准规定代码中的某些点是Sequence
-Point，当执行到一个Sequence Point时，在此之前的Side
-Effect必须全部作用完毕，在此之后的Side
-Effect必须一个都没发生。至于两个Sequence Point之间的多个Side
-Effect哪个先发生哪个后发生则没有规定，编译器可以任意选择各Side
-Effect的作用顺序。下面详细解释各种Sequence Point。</p>
-<p>1、调用一个函数时，在所有准备工作做完之后、函数调用开始之前是Sequence
-Point。比如调用<code>foo(f(), g())</code>时，<code>foo</code>、<code>f()</code>、<code>g()</code>这三个表达式哪个先求值哪个后求值是Unspecified，但是必须都求值完了才能做最后的函数调用，所以<code>f()</code>和<code>g()</code>的Side
-Effect按什么顺序发生不一定，但必定在这些Side
-Effect全部作用完之后才开始调用<code>foo</code>函数。</p>
-<p>2、条件运算符<code>?:</code>、逗号运算符、逻辑与<code>&amp;&amp;</code>、逻辑或<code>||</code>的第一个操作数求值之后是Sequence
-Point。我们刚讲过条件运算符和逗号运算符，条件运算符要根据表达式1的值是否为真决定下一步求表达式2还是表达式3的值，如果决定求表达式2的值，表达式3就不会被求值了，反之也一样，逗号运算符也是这样，表达式1求值结束才继续求表达式2的值。</p>
-<p>逻辑与和逻辑或早在第 3 节
-“布尔代数”就讲了，但在初学阶段我一直回避它们的操作数求值顺序问题。这两个运算符和条件运算符类似，先求左操作数的值，然后根据这个值是否为真，右操作数可能被求值，也可能不被求值。比如例
-8.5 “剪刀石头布”这个程序中的这几句：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;man);</span><br><span class="line"><span class="keyword">if</span> (ret != <span class="number">1</span> || man &lt; <span class="number">0</span> || man &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Invalid input! Please input 0, 1 or 2.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其实可以写得更简单（类似于[K&amp;R]的简洁风格）：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;man) != <span class="number">1</span> || man &lt; <span class="number">0</span> || man &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Invalid input! Please input 0, 1 or 2.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个控制表达式的求值顺序是：先求<code>scanf("%d", &amp;man) = 1</code>的值，如果<code>scanf</code>调用失败，则返回值不等于1成立，<code>||</code>运算有一个操作数为真则整个表达式为真，这时直接执行下一句<code>printf</code>，根本不会再去求<code>man &lt; 0</code>或<code>man &gt; 2</code>的值；如果<code>scanf</code>调用成功，则读入的数保存在变量<code>man</code>中，并且返回值等于1，那么说它不等于1就不成立了，第一个<code>||</code>运算的左操作数为假，就会去求右操作数<code>man &lt; 0</code>的值作为整个表达式的值，这时变量<code>man</code>的值正是<code>scanf</code>读上来的值，我们判断它是否在[0,
-2]之间，如果<code>man &lt; 0</code>不成立，则整个表达式<code>scanf("%d", &amp;man) != 1 || man &lt; 0</code>
-的值为假，也就是第二个<code>||</code>运算的左操作数为假，所以最后求右操作数<code>man &gt; 2</code>的值作为整个表达式的值。</p>
-<p><code>&amp;&amp;</code>运算与此类似，<code>a &amp;&amp; b</code>的计算过程是：首先求表达式a的值，如果a的值是假则整个表达式的值是假，不会再去求b的值；如果a的值是真，则下一步求b的值作为整个表达式的值。所以，<code>a &amp;&amp; b</code>相当于“<code>if a then b</code>”，而<code>a || b</code>相当于“<code>if not a then b</code>”。这种特性称为Short-circuit，很多人喜欢利用Short-circuit特性简化代码。</p>
-<p>3、在一个完整的声明末尾是Sequence
-Point，所谓完整的声明是指这个声明不是另外一个声明的一部分。比如声明<code>int a[10], b[20];</code>，在<code>a[10]</code>末尾是Sequence
-Point，在<code>b[20]</code>末尾也是。</p>
-<p>4、在一个完整的表达式末尾是Sequence
-Point，所谓完整的表达式是指这个表达式不是另外一个表达式的一部分。所以如果有<code>f(); g();</code>这样两条语句，<code>f()</code>和<code>g()</code>是两个完整的表达式，<code>f()</code>的Side
-Effect必定在<code>g()</code>之前发生。</p>
-<p>5、在库函数即将返回时是Sequence
-Point。这条规则似乎可以包含在上一条规则里面，因为函数返回时必然会结束掉一个完整的表达式。而事实上很多库函数是以宏定义的形式实现的（第
-2.1 节 “函数式宏定义”），并不是真正的函数，所以才需要有这条规则。</p>
-<p>还有两种Sequence
-Point和某些C标准库函数的执行过程相关，此处从略，有兴趣的读者可参考[C99]的Annex
-C。</p>
-<p>现在可以分析一下本节开头的例子了。<code>a = (++a)+(++a)+(++a)+(++a);</code>的结果之所以是Undefined，因为在这个表达式中有五个Side
-Effect都在改变<code>a</code>的值，这些Side
-Effect按什么顺序发生不一定，只知道在整个表达式求值结束时一定都发生了。比如现在求第二个<code>++a</code>的值，这时第一个、第三个、第四个<code>++a</code>的Side
-Effect发生了没有，<code>a</code>的值被加过几次了，这些都不确定，所以第二个<code>++a</code>的值也不确定。这行代码用不同平台的不同编译器来编译结果是不同的，甚至在同一平台上用同一编译器的不同版本来编译也可能不同。</p>
-<p>写表达式应遵循的原则一：在两个Sequence
-Point之间，同一个变量的值只允许被改变一次。仅有这一条原则还不够，例如<code>a[i++] = i;</code>的变量<code>i</code>只改变了一次，但结果仍是Undefined，因为等号左边改<code>i</code>的值，等号右边读<code>i</code>的值，到底是先改还是先读？这个读写顺序是不确定的。但为什么<code>i = i + 1;</code>就没有歧义呢？虽然也是等号左边改<code>i</code>的值，等号右边读<code>i</code>的值，但你不读出<code>i</code>的值就没法计算<code>i + 1</code>，那拿什么去改<code>i</code>的值呢？所以这个读写顺序是确定的。写表达式应遵循的原则二：如果在两个Sequence
-Point之间既要读一个变量的值又要改它的值，只有在读写顺序确定的情况下才可以这么写。</p>
-<h2 id="运算符小结">运算符小结</h2>
-<p>到此为止，除了和指针相关的运算符还没讲之外，其它运算符都讲过了，是时候做一个总结了。</p>
-<p>运算符<code>+ - * / % &gt; &lt; &gt;= &lt;= == != &amp; | ^</code>以及各种复合赋值运算符要求两边的操作数类型一致，条件运算符<code>?:</code>要求后两个操作数类型一致，这些运算符在计算之前都需要做Usual
-Arithmetic Conversion。</p>
-<p>下面按优先级从高到低的顺序总结一下C语言的运算符，每一条所列的各运算符具有相同的优先级，对于同一优先级的多个运算符按什么顺序计算也有说明，双目运算符就简单地用“左结合”或“右结合”来说明了。和指针有关的运算符<code>* &amp; -&gt;</code>也在这里列出来了，到第
-23 章 指针再详细解释。</p>
-<p>1、标识符、常量、字符串和用<code>()</code>括号套起来的表达式是组成表达式的最基本单元，在运算中做操作数，优先级最高。</p>
-<p>2、后缀运算符，包括数组取下标<code>[]</code>、函数调用<code>()</code>、结构体取成员<code>“.”</code>、指向结构体的指针取成员<code>-&gt;</code>、后缀自增<code>++</code>、后缀自减<code>--</code>。如果一个操作数后面有多个后缀，按照离操作数从近到远的顺序（也就是从左到右）依次计算，比如<code>a.name++</code>，先算<code>a.name</code>，再<code>++</code>，这里的<code>.name</code>应该看成<code>a</code>的一个后缀，而不是把<code>.</code>看成双目运算符。</p>
-<p>3、单目运算符，包括前缀自增<code>++</code>、前缀自减<code>--</code>、<code>sizeof</code>、类型转换<code>()</code>、取地址运算<code>&amp;</code>、指针间接寻址<code>*</code>、正号<code>+</code>、负号<code>-</code>、按位取反<code>~</code>、逻辑非<code>!</code>。如果一个操作数前面有多个前缀，按照离操作数从近到远的顺序（也就是从右到左）依次计算，比如<code>!~a</code>，先算<code>~a</code>，再求<code>!</code>。</p>
-<p>4、乘<code>*</code>、除<code>/</code>、模<code>%</code>运算符。这三个运算符是左结合的。</p>
-<p>5、加<code>+</code>、减<code>-</code>运算符。左结合。</p>
-<p>6、移位运算符<code>&lt;&lt;</code>和<code>&gt;&gt;</code>。左结合。</p>
-<p>7、关系运算符<code>&lt; &gt; &lt;= &gt;=</code>。左结合。</p>
-<p>8、相等性运算符<code>==</code>和<code>!=</code>。左结合。</p>
-<p>9、按位与<code>&amp;</code>。左结合。</p>
-<p>10、按位异或<code>^</code>。左结合。</p>
-<p>11、按位或<code>|</code>。左结合。</p>
-<p>12、逻辑与<code>&amp;&amp;</code>。左结合。</p>
-<p>13、逻辑或<code>||</code>。左结合。</p>
-<p>14、条件运算符<code>:?</code>。在第 2 节
-“if/else语句”讲过Dangling-else问题，条件运算符也有类似的问题。例如<code>a ? b : c ? d : e</code>是看成<code>(a ? b : c) ? d : e</code>还是<code>a ? b : (c ? d : e)</code>呢？C语言规定是后者。</p>
-<p>15、赋值<code>=</code>和各种复合赋值（<code>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |=</code>）。在双目运算符中只有赋值和复合赋值是右结合的。</p>
-<p>16、逗号运算符。左结合。</p>
-<p>[K&amp;R]第2章也有这样一个列表，但是对于结合性解释得不够清楚。左结合和右结合这两个概念只对双目运算符有意义，对于前缀、后缀和三目运算符我单独做了说明。C语言表达式的详细语法规则可以参考[C99]的Annex
-A.2，其实语法规则并不是用优先级和结合性这两个概念来表述的，有一些细节用优先级和结合性是表达不了的，只有看C99才能了解完整的语法规则。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1812,6 +1559,259 @@ Algebra），以它的创始人布尔命名。在编程语言中表示真和假�
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0/" class="post-title-link" itemprop="url">C语言:数据类型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-08 19:53:58" itemprop="dateModified" datetime="2025-08-08T19:53:58+08:00">2025-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="位运算">位运算</h2>
+<p>整数在计算机中用二进制的位来表示，C语言提供一些运算符可以直接操作整数中的位，称为位运算，这些运算符的操作数都必须是整型的。在以后的学习中你会发现，有些信息利用整数中的某几个位来存储，要访问这些位，仅仅有对整数的操作是不够的，必须借助位运算，例如第
+2 节
+“Unicode和UTF-8”介绍的UTF-8编码就是如此，学完本节之后你应该能自己写出UTF-8的编码和解码程序。本节首先介绍各种位运算符，然后介绍与位运算有关的编程技巧。</p>
+<h3 id="按位与或异或取反运算">按位与、或、异或、取反运算</h3>
+<p>在第 3 节
+“布尔代数”讲过逻辑与、或、非运算，并列出了真值表，对于整数中的位也可以做与、或、非运算，C语言提供了按位与（Bitwise
+AND）运算符<code>&amp;</code>、按位或（Bitwise
+OR）运算符<code>|</code>和按位取反（Bitwise
+NOT）运算符<code>~</code>，此外还有按位异或（Bitwise
+XOR）运算符<code>^</code>，我们在第 1 节
+“为什么计算机用二进制计数”讲过异或运算。</p>
+<p>注意，<code>&amp;</code>、<code>|</code>、<code>^</code>运算符都是要做Usual
+Arithmetic Conversion的（其中有一步是Integer
+Promotion），<code>~</code>运算符也要做Integer
+Promotion，所以在C语言中其实并不存在8位整数的位运算，操作数在做位运算之前都至少被提升为<code>int</code>型了.</p>
+<p>比如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> c = <span class="number">0xfc</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> i = ~c;</span><br></pre></td></tr></table></figure>
+<p>计算过程是这样的：常量<code>0xfc</code>是<code>int</code>型的，赋给c要转成<code>unsigned char</code>，值不变；c的十六进制表示是<code>fc</code>，计算<code>~c</code>时先提升为整型<code>000000fc</code>然后取反，最后结果是<code>ffffff03</code>。注意，如果把<code>~c</code>看成是8位整数的取反，最后结果就得3了，这就错了。为了避免出错，一是尽量避免不同类型之间的赋值，二是每一步计算都要按上一章讲的类型转换规则仔细检查。</p>
+<h3 id="移位运算">移位运算</h3>
+<p>移位运算符（Bitwise
+Shift）包括左移<code>&lt;&lt;</code>和右移<code>&gt;&gt;</code>。左移将一个整数的各二进制位全部左移若干位.</p>
+<p>最高两位的11被移出去了，最低两位又补了两个0，其它位依次左移两位。但要注意，移动的位数必须小于左操作数的总位数，比如上面的例子，左边是<code>unsigned int</code>型，如果左移的位数大于等于32位，则结果是Undefined。移位运算符不同于<code>+ - * / ==</code>等运算符，两边操作数的类型不要求一致，但两边操作数都要做Integer
+Promotion，整个表达式的类型和左操作数提升后的类型相同。</p>
+<p>复习一下第 2 节
+“不同进制之间的换算”讲过的知识可以得出结论，在一定的取值范围内，将一个整数左移1位相当于乘以2。比如二进制11（十进制3）左移一位变成110，就是6，再左移一位变成1100，就是12。读者可以自己验证这条规律对有符号数和无符号数都成立，对负数也成立。当然，如果左移改变了最高位（符号位），那么结果肯定不是乘以2了，所以我加了个前提“在一定的取值范围内”。由于计算机做移位比做乘法快得多，编译器可以利用这一点做优化，比如看到源代码中有<code>i * 8</code>，可以编译成移位指令而不是乘法指令。</p>
+<p>当操作数是无符号数时，右移运算的规则和左移类似，</p>
+<p>比如最低两位的11被移出去了，最高两位又补了两个0，其它位依次右移两位。和左移类似，移动的位数也必须小于左操作数的总位数，否则结果是Undefined。在一定的取值范围内，将一个整数右移1位相当于除以2，小数部分截掉。</p>
+<p>当操作数是有符号数时，右移运算的规则比较复杂：</p>
+<p>如果是正数，那么高位移入0</p>
+<p>如果是负数，那么高位移入1还是0不一定，这是Implementation-defined的。对于x86平台的gcc编译器，最高位移入1，也就是仍保持负数的符号位，这种处理方式对负数仍然保持了“右移1位相当于除以2”的性质。</p>
+<p>综上所述，由于类型转换和移位等问题，用有符号数做位运算是很不方便的，所以，建议只对无符号数做位运算，以减少出错的可能。</p>
+<h3 id="掩码">掩码</h3>
+<p>如果要对一个整数中的某些位进行操作，怎样表示这些位在整数中的位置呢？可以用掩码（Mask）来表示。比如掩码0x0000ff00表示对一个32位整数的8~15位进行操作，举例如下。</p>
+<p>1、取出8~15位。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = (a &amp; mask) &gt;&gt; <span class="number">8</span>; <span class="comment">/* 0x00000056 */</span></span><br></pre></td></tr></table></figure>
+<p>这样也可以达到同样的效果：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = (a &gt;&gt; <span class="number">8</span>) &amp; ~(~<span class="number">0U</span> &lt;&lt; <span class="number">8</span>);</span><br></pre></td></tr></table></figure>
+<p>2、将8~15位清0。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a &amp; ~mask; <span class="comment">/* 0x12340078 */</span></span><br></pre></td></tr></table></figure>
+<p>3、将8~15位置1。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">0x0000ff00</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a | mask; <span class="comment">/* 0x1234ff78 */</span></span><br></pre></td></tr></table></figure>
+<h3 id="异或运算的一些特性">异或运算的一些特性</h3>
+<p>1、一个数和自己做异或的结果是0。如果需要一个常数0，x86平台的编译器可能会生成这样的指令：<code>xorl %eax, %eax</code>。不管<code>eax</code>寄存器里的值原来是多少，做异或运算都能得到0，这条指令比同样效果的<code>movl $0, %eax</code>指令快，因为前者只需要在CPU内部计算，而后者需要访问内存，在下一章第
+5 节 “Memory Hierarchy”详细介绍。</p>
+<p>2、从异或的真值表可以看出，不管是0还是1，和0做异或保持原值不变，和1做异或得到原值的相反值。可以利用这个特性配合掩码实现某些位的翻转，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a, b, mask = <span class="number">1U</span> &lt;&lt; <span class="number">6</span>;</span><br><span class="line">a = <span class="number">0x12345678</span>;</span><br><span class="line">b = a ^ mask; <span class="comment">/* flip the 6th bit */</span></span><br></pre></td></tr></table></figure>
+<p>3、如果<code>a1 ^ a2 ^ a3 ^ ... ^ an</code>的结果是1，则表示<code>a1、a2、a3...an</code>之中1的个数为奇数个，否则为偶数个。这条性质可用于奇偶校验（Parity
+Check），比如在串口通信过程中，每个字节的数据都计算一个校验位，数据和校验位一起发送出去，这样接收方可以根据校验位粗略地判断接收到的数据是否有误。</p>
+<p>4、<code>x ^ x ^ y == y</code>，因为<code>x ^ x == 0</code>，<code>0 ^ y == y</code>。这个性质有什么用呢？我们来看这样一个问题：交换两个变量的值，不得借助额外的存储空间，所以就不能采用<code>temp = a; a = b; b = temp;</code>的办法了。利用位运算可以这样做交换：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = a ^ b;</span><br><span class="line">b = b ^ a;</span><br><span class="line">a = a ^ b;</span><br></pre></td></tr></table></figure>
+<p>分析一下这个过程。为了避免混淆，把<code>a</code>和<code>b</code>的初值分别记为<code>a0</code>和<code>b0</code>。第一行，<code>a = a0 ^ b0；</code>第二行，把<code>a</code>的新值代入，得到<code>b = b0 ^ a0 ^ b0</code>，等号右边的<code>b0</code>相当于上面公式中的<code>x</code>，<code>a0</code>相当于<code>y</code>，所以结果为<code>a0</code>；第三行，把<code>a</code>和<code>b</code>的新值代入，得到<code>a = a0 ^ b0 ^ a0</code>，结果为<code>b0</code>。注意这个过程不能把同一个变量自己跟自己交换，而利用中间变量<code>temp</code>则可以交换。</p>
+<h2 id="其他运算符">其他运算符</h2>
+<h3 id="复合赋值运算符">复合赋值运算符</h3>
+<p>复合赋值运算符（Compound Assignment
+Operator）包括<code>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |=</code>，一边做运算一边赋值。例如<code>a += 1</code>相当于<code>a = a + 1</code>。但有一点细微的差别，前者对表达式<code>a</code>只求值一次，而后者求值两次，如果<code>a</code>是一个复杂的表达式，求值一次和求值两次的效率是不同的，例如<code>a[i+j] += 1</code>和<code>a[i+j] = a[i+j] + 1</code>。那么仅仅是效率上的差别吗？对于没有Side
+Effect的表达式，求值一次和求值两次的结果是一样的，但对于有Side
+Effect的表达式则不一定，例如<code>a[foo()] += 1</code>和<code>a[foo()] = a[foo()] + 1</code>，如果<code>foo()</code>函数调用有Side
+Effect，比如会打印一条消息，那么前者只打印一次，而后者打印两次。</p>
+<p>在第 3 节
+“for语句”讲自增、自减运算符时说<code>++i</code>相当于<code>i = i + 1</code>，其实更准确地说应该是等价于<code>i += 1</code>，表达式<code>i</code>只求值一次，而<code>--i</code>等价于<code>i -= 1</code>。</p>
+<h3 id="条件运算符">条件运算符</h3>
+<p>条件运算符（Conditional
+Operator）是C语言中唯一一个三目运算符（Ternary
+Operator），带三个操作数，它的形式是<code>表达式1 ? 表达式2 : 表达式3</code>，这个运算符所组成的整个表达式的值等于<code>表达式2</code>或<code>表达式3</code>的值，取决于<code>表达式1</code>的值是否为真，可以把它想像成这样的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> 表达式<span class="number">2</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> 表达式<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p><code>表达式1</code>相当于<code>if</code>语句的控制表达式，因此它的值必须是标量类型，而表达式2和3相当于同一个函数在不同情况下的返回值，因此它们的类型要求一致，也要做Usual
+Arithmetic Conversion。</p>
+<p>下面举个例子，定义一个函数求两个参数中较大的一个。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (a &gt; b) ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="逗号运算符">逗号运算符</h3>
+<p>逗号运算符（Comma
+Operator）也是一种双目运算符，它的形式是<code>表达式1, 表达式2</code>，两个表达式不要求类型一致，左边的表达式1先求值，求完了直接把值丢掉，再求右边表达式2的值作为整个表达式的值。逗号运算符是左结合的，类似于<code>+ - * /</code>运算符，根据组合规则可以写出<code>表达式1, 表达式2, 表达式3, ..., 表达式n</code>这种形式，<code>表达式1</code>,
+<code>表达式2</code>可以看作一个子表达式，先求<code>表达式1</code>的值，然后求<code>表达式2</code>的值作为这个子表达式的值，然后这个值再和<code>表达式3</code>组成一个更大的表达式，求<code>表达式3</code>的值作为这个更大的表达式的值，依此类推，整个计算过程就是从左到右依次求值，最后一个表达式的值成为整个表达式的值。</p>
+<p>注意，函数调用时各实参之间也是用逗号隔开，这种逗号是分隔符而不是逗号运算符。但可以这样使用逗号运算符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(a, (t=<span class="number">3</span>, t+<span class="number">2</span>), c)</span><br></pre></td></tr></table></figure>
+<p>传给函数<code>f</code>的参数有三个，其中第二个参数的值是表达式<code>t+2</code>的值。</p>
+<h3
+id="sizeof运算符与typedef类型声明">sizeof运算符与typedef类型声明</h3>
+<p><code>sizeof</code>是一个很特殊的运算符，它有两种形式：“<code>sizeof 表达式</code>”和“<code>sizeof(类型名)</code>”。这个运算符很特殊，“<code>sizeof 表达式</code>”中的子表达式并不求值，而只是根据类型转换规则求得子表达式的类型，然后把这种类型所占的字节数作为整个表达式的值。有些人喜欢写成“<code>sizeof(表达式)</code>”的形式也可以，这里的括号和<code>return(1);</code>的括号一样，不起任何作用。但另外一种形式“<code>sizeof(类型名)</code>”的括号则是必须写的，整个表达式的值也是这种类型所占的字节数。</p>
+<p>比如用<code>sizeof</code>运算符求一个数组的长度：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">12</span>];</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span> a/<span class="keyword">sizeof</span> a[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<p>在上面这个例子中，由于<code>sizeof</code>
+表达式中的子表达式不需要求值，所以不需要到运行时才计算，事实上在编译时就知道<code>sizeof a</code>的值是48，<code>sizeof a[0]</code>的值是4，所以在编译时就已经把<code>sizeof a/sizeof a[0]</code>替换成常量12了，这是一个常量表达式。</p>
+<p><code>sizeof</code>运算符的结果是<code>size_t</code>类型的，这个类型定义在<code>stddef.h</code>头文件中，不过你的代码中只要不出现<code>size_t</code>这个类型名就不用包含这个头文件，比如像上面的例子就不用包含这个头文件。C标准规定<code>size_t</code>是一种无符号整型，编译器可以用<code>typedef</code>做一个类型声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">size_t</span>;</span><br></pre></td></tr></table></figure>
+<p>那么<code>size_t</code>就代表<code>unsigned long</code>型。不同平台的编译器可能会根据自己平台的具体情况定义<code>size_t</code>所代表的类型，比如有的平台定义为<code>unsigned long</code>型，有的平台定义为<code>unsigned long long</code>型，C标准规定<code>size_t</code>这个名字就是为了隐藏这些细节，使代码具有可移植性。所以注意不要把<code>size_t</code>类型和它所代表的真实类型混用，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">long</span> x;</span><br><span class="line"><span class="type">size_t</span> y;</span><br><span class="line">x = y;</span><br></pre></td></tr></table></figure>
+<p>如果在一种ILP32平台上定义<code>size_t</code>代表<code>unsigned long long</code>型，这段代码把<code>y</code>赋给<code>x</code>时就把高位截掉了，结果可能是错的。</p>
+<p><code>typedef</code>这个关键字用于给某种类型起个新名字，比如上面的<code>typedef</code>声明可以这么看：去掉<code>typedef</code>就成了一个变量声明<code>unsigned long size_t;</code>，<code>size_t</code>是一个变量名，类型是<code>unsigned long</code>，那么加上<code>typedef</code>之后，<code>size_t</code>就是一个类型名，就代表<code>unsigned long</code>类型。再举个例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> <span class="type">array_t</span>[<span class="number">10</span>];</span><br><span class="line"><span class="type">array_t</span> a;</span><br></pre></td></tr></table></figure>
+<p>这相当于声明<code>char a[10];</code>。类型名也遵循标识符的命名规则，并且通常加个<code>_t</code>后缀表示Type。</p>
+<h2 id="side-effect和sequence-point">Side Effect和Sequence Point</h2>
+<p>如果你只想规规矩矩地写代码，那么基本用不着看这一节。本节的内容基本上是钻牛角尖儿的，除了Short-circuit比较实用，其它写法都应该避免使用。但没办法，有时候不是你想钻牛角尖儿，而是有人逼你去钻牛角尖儿。这是我们的学员在找工作笔试时碰到的问题：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">0</span>;</span><br><span class="line">a = (++a)+(++a)+(++a)+(++a);</span><br></pre></td></tr></table></figure>
+<p>据我了解，似乎很多公司都有出这种笔试题的恶趣味。答案应该是Undefined，我甚至有些怀疑出题人是否真的知道答案。下面我来解释为什么是Undefined。</p>
+<p>我们知道，调用一个函数可能产生Side
+Effect，使用某些运算符（<code>++ -- =</code> 复合赋值）也会产生Side
+Effect，如果一个表达式中隐含着多个Side
+Effect，究竟哪个先发生哪个后发生呢？C标准规定代码中的某些点是Sequence
+Point，当执行到一个Sequence Point时，在此之前的Side
+Effect必须全部作用完毕，在此之后的Side
+Effect必须一个都没发生。至于两个Sequence Point之间的多个Side
+Effect哪个先发生哪个后发生则没有规定，编译器可以任意选择各Side
+Effect的作用顺序。下面详细解释各种Sequence Point。</p>
+<p>1、调用一个函数时，在所有准备工作做完之后、函数调用开始之前是Sequence
+Point。比如调用<code>foo(f(), g())</code>时，<code>foo</code>、<code>f()</code>、<code>g()</code>这三个表达式哪个先求值哪个后求值是Unspecified，但是必须都求值完了才能做最后的函数调用，所以<code>f()</code>和<code>g()</code>的Side
+Effect按什么顺序发生不一定，但必定在这些Side
+Effect全部作用完之后才开始调用<code>foo</code>函数。</p>
+<p>2、条件运算符<code>?:</code>、逗号运算符、逻辑与<code>&amp;&amp;</code>、逻辑或<code>||</code>的第一个操作数求值之后是Sequence
+Point。我们刚讲过条件运算符和逗号运算符，条件运算符要根据表达式1的值是否为真决定下一步求表达式2还是表达式3的值，如果决定求表达式2的值，表达式3就不会被求值了，反之也一样，逗号运算符也是这样，表达式1求值结束才继续求表达式2的值。</p>
+<p>逻辑与和逻辑或早在第 3 节
+“布尔代数”就讲了，但在初学阶段我一直回避它们的操作数求值顺序问题。这两个运算符和条件运算符类似，先求左操作数的值，然后根据这个值是否为真，右操作数可能被求值，也可能不被求值。比如例
+8.5 “剪刀石头布”这个程序中的这几句：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;man);</span><br><span class="line"><span class="keyword">if</span> (ret != <span class="number">1</span> || man &lt; <span class="number">0</span> || man &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Invalid input! Please input 0, 1 or 2.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实可以写得更简单（类似于[K&amp;R]的简洁风格）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;man) != <span class="number">1</span> || man &lt; <span class="number">0</span> || man &gt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Invalid input! Please input 0, 1 or 2.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个控制表达式的求值顺序是：先求<code>scanf("%d", &amp;man) = 1</code>的值，如果<code>scanf</code>调用失败，则返回值不等于1成立，<code>||</code>运算有一个操作数为真则整个表达式为真，这时直接执行下一句<code>printf</code>，根本不会再去求<code>man &lt; 0</code>或<code>man &gt; 2</code>的值；如果<code>scanf</code>调用成功，则读入的数保存在变量<code>man</code>中，并且返回值等于1，那么说它不等于1就不成立了，第一个<code>||</code>运算的左操作数为假，就会去求右操作数<code>man &lt; 0</code>的值作为整个表达式的值，这时变量<code>man</code>的值正是<code>scanf</code>读上来的值，我们判断它是否在[0,
+2]之间，如果<code>man &lt; 0</code>不成立，则整个表达式<code>scanf("%d", &amp;man) != 1 || man &lt; 0</code>
+的值为假，也就是第二个<code>||</code>运算的左操作数为假，所以最后求右操作数<code>man &gt; 2</code>的值作为整个表达式的值。</p>
+<p><code>&amp;&amp;</code>运算与此类似，<code>a &amp;&amp; b</code>的计算过程是：首先求表达式a的值，如果a的值是假则整个表达式的值是假，不会再去求b的值；如果a的值是真，则下一步求b的值作为整个表达式的值。所以，<code>a &amp;&amp; b</code>相当于“<code>if a then b</code>”，而<code>a || b</code>相当于“<code>if not a then b</code>”。这种特性称为Short-circuit，很多人喜欢利用Short-circuit特性简化代码。</p>
+<p>3、在一个完整的声明末尾是Sequence
+Point，所谓完整的声明是指这个声明不是另外一个声明的一部分。比如声明<code>int a[10], b[20];</code>，在<code>a[10]</code>末尾是Sequence
+Point，在<code>b[20]</code>末尾也是。</p>
+<p>4、在一个完整的表达式末尾是Sequence
+Point，所谓完整的表达式是指这个表达式不是另外一个表达式的一部分。所以如果有<code>f(); g();</code>这样两条语句，<code>f()</code>和<code>g()</code>是两个完整的表达式，<code>f()</code>的Side
+Effect必定在<code>g()</code>之前发生。</p>
+<p>5、在库函数即将返回时是Sequence
+Point。这条规则似乎可以包含在上一条规则里面，因为函数返回时必然会结束掉一个完整的表达式。而事实上很多库函数是以宏定义的形式实现的（第
+2.1 节 “函数式宏定义”），并不是真正的函数，所以才需要有这条规则。</p>
+<p>还有两种Sequence
+Point和某些C标准库函数的执行过程相关，此处从略，有兴趣的读者可参考[C99]的Annex
+C。</p>
+<p>现在可以分析一下本节开头的例子了。<code>a = (++a)+(++a)+(++a)+(++a);</code>的结果之所以是Undefined，因为在这个表达式中有五个Side
+Effect都在改变<code>a</code>的值，这些Side
+Effect按什么顺序发生不一定，只知道在整个表达式求值结束时一定都发生了。比如现在求第二个<code>++a</code>的值，这时第一个、第三个、第四个<code>++a</code>的Side
+Effect发生了没有，<code>a</code>的值被加过几次了，这些都不确定，所以第二个<code>++a</code>的值也不确定。这行代码用不同平台的不同编译器来编译结果是不同的，甚至在同一平台上用同一编译器的不同版本来编译也可能不同。</p>
+<p>写表达式应遵循的原则一：在两个Sequence
+Point之间，同一个变量的值只允许被改变一次。仅有这一条原则还不够，例如<code>a[i++] = i;</code>的变量<code>i</code>只改变了一次，但结果仍是Undefined，因为等号左边改<code>i</code>的值，等号右边读<code>i</code>的值，到底是先改还是先读？这个读写顺序是不确定的。但为什么<code>i = i + 1;</code>就没有歧义呢？虽然也是等号左边改<code>i</code>的值，等号右边读<code>i</code>的值，但你不读出<code>i</code>的值就没法计算<code>i + 1</code>，那拿什么去改<code>i</code>的值呢？所以这个读写顺序是确定的。写表达式应遵循的原则二：如果在两个Sequence
+Point之间既要读一个变量的值又要改它的值，只有在读写顺序确定的情况下才可以这么写。</p>
+<h2 id="运算符小结">运算符小结</h2>
+<p>到此为止，除了和指针相关的运算符还没讲之外，其它运算符都讲过了，是时候做一个总结了。</p>
+<p>运算符<code>+ - * / % &gt; &lt; &gt;= &lt;= == != &amp; | ^</code>以及各种复合赋值运算符要求两边的操作数类型一致，条件运算符<code>?:</code>要求后两个操作数类型一致，这些运算符在计算之前都需要做Usual
+Arithmetic Conversion。</p>
+<p>下面按优先级从高到低的顺序总结一下C语言的运算符，每一条所列的各运算符具有相同的优先级，对于同一优先级的多个运算符按什么顺序计算也有说明，双目运算符就简单地用“左结合”或“右结合”来说明了。和指针有关的运算符<code>* &amp; -&gt;</code>也在这里列出来了，到第
+23 章 指针再详细解释。</p>
+<p>1、标识符、常量、字符串和用<code>()</code>括号套起来的表达式是组成表达式的最基本单元，在运算中做操作数，优先级最高。</p>
+<p>2、后缀运算符，包括数组取下标<code>[]</code>、函数调用<code>()</code>、结构体取成员<code>“.”</code>、指向结构体的指针取成员<code>-&gt;</code>、后缀自增<code>++</code>、后缀自减<code>--</code>。如果一个操作数后面有多个后缀，按照离操作数从近到远的顺序（也就是从左到右）依次计算，比如<code>a.name++</code>，先算<code>a.name</code>，再<code>++</code>，这里的<code>.name</code>应该看成<code>a</code>的一个后缀，而不是把<code>.</code>看成双目运算符。</p>
+<p>3、单目运算符，包括前缀自增<code>++</code>、前缀自减<code>--</code>、<code>sizeof</code>、类型转换<code>()</code>、取地址运算<code>&amp;</code>、指针间接寻址<code>*</code>、正号<code>+</code>、负号<code>-</code>、按位取反<code>~</code>、逻辑非<code>!</code>。如果一个操作数前面有多个前缀，按照离操作数从近到远的顺序（也就是从右到左）依次计算，比如<code>!~a</code>，先算<code>~a</code>，再求<code>!</code>。</p>
+<p>4、乘<code>*</code>、除<code>/</code>、模<code>%</code>运算符。这三个运算符是左结合的。</p>
+<p>5、加<code>+</code>、减<code>-</code>运算符。左结合。</p>
+<p>6、移位运算符<code>&lt;&lt;</code>和<code>&gt;&gt;</code>。左结合。</p>
+<p>7、关系运算符<code>&lt; &gt; &lt;= &gt;=</code>。左结合。</p>
+<p>8、相等性运算符<code>==</code>和<code>!=</code>。左结合。</p>
+<p>9、按位与<code>&amp;</code>。左结合。</p>
+<p>10、按位异或<code>^</code>。左结合。</p>
+<p>11、按位或<code>|</code>。左结合。</p>
+<p>12、逻辑与<code>&amp;&amp;</code>。左结合。</p>
+<p>13、逻辑或<code>||</code>。左结合。</p>
+<p>14、条件运算符<code>:?</code>。在第 2 节
+“if/else语句”讲过Dangling-else问题，条件运算符也有类似的问题。例如<code>a ? b : c ? d : e</code>是看成<code>(a ? b : c) ? d : e</code>还是<code>a ? b : (c ? d : e)</code>呢？C语言规定是后者。</p>
+<p>15、赋值<code>=</code>和各种复合赋值（<code>*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |=</code>）。在双目运算符中只有赋值和复合赋值是右结合的。</p>
+<p>16、逗号运算符。左结合。</p>
+<p>[K&amp;R]第2章也有这样一个列表，但是对于结合性解释得不够清楚。左结合和右结合这两个概念只对双目运算符有意义，对于前缀、后缀和三目运算符我单独做了说明。C语言表达式的详细语法规则可以参考[C99]的Annex
+A.2，其实语法规则并不是用优先级和结合性这两个概念来表述的，有一些细节用优先级和结合性是表达不了的，只有看C99才能了解完整的语法规则。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/FPGA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2125,6 +2125,212 @@ receiver-transmitter),它在发送数据时将并行数据转化成串行数据�
 </ol>
 <p>UART通信过程中的数据格式和传输速率是可以设置的,为了正确的通信,收发双方应该约定好同样的设置.数据位可以选择5,6,7,8位,其中8位数据最常用.校验位可以选择奇校验,偶校验或者无校验位.停止位可以选择1位(默认),1.5位,2位.串口通信的速率用波特率表示,它表示每秒传输二进制数据的位数,单位是bps(位/秒),常用的波特率有9600,19200,38400,57600,115200等.</p>
 <p>设置好数据格式和传输速率之后,UART负责完成串并数据的转换,而信号的传输则由外部驱动电路实现.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/Hexo%E5%BB%BA%E7%AB%8B%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/femboy.jpg">
+      <meta itemprop="name" content="SiyuanLei">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SiyuanLei's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/05/04/Hexo%E5%BB%BA%E7%AB%8B%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">Hexo+GitHub搭建博客教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-02-28 12:59:43" itemprop="dateModified" datetime="2026-02-28T12:59:43+08:00">2026-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">网站制作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="安装">安装</h2>
+<h3 id="github的注册及创建域名">GitHub的注册及创建域名</h3>
+<p>注册这一步就不说了. 注册完成后点击New创建一个新的repository,
+在Owner填自己的<code>username</code>, 在Repository
+name里面填<code>username.github.io</code> 这样就成功建立了一个域名.</p>
+<h3 id="git的安装">Git的安装</h3>
+<p>在搜索引擎中直接搜索Git进入官方网站, 点击Download for Windows,
+在Standalone Installer下点击64-bit Git for Windows Setup,
+下载好之后一直点击next(可以自己设置下载路径)就可以下载完成了.
+最后可以按<code>win+R</code>输入cmd, 然后输入<code>git --version</code>,
+如果出现git的版本, 说明安装完成.</p>
+<p>在git的安装目录下打开git bash, 输入命令</p>
+<p><code>ssh-keygen -t rsa -C "你自己的邮箱的地址"</code></p>
+<p>然后回车, 遇到Enter file in which to save the
+key时输入一个路径,生成的ssh文件就放在那里, 在遇到Enter
+passphrase时回车两次(或者输入你自己的密码两次)即可.</p>
+<p>打开GitHub网页,在Setting界面点开SSH and GPG keys, 点击New SSH,
+title随便输一个名字, 然后打开刚刚生成的id_rsa.pub, 复制里面的内容,
+粘贴到key这一栏下面, 然后点击Add SSH key即可.</p>
+<h3 id="node.js的安装">Node.js的安装</h3>
+<p>在搜索引擎中直接搜索Node js进入官方网站, 点击Recommended For Most
+Users的下载按钮, 下载好之后打开, 一直点next 就可以下载完成了.
+最后可以按<code>win+R</code>输入cmd,
+然后输入<code>node --version</code>, 如果出现node的版本,
+说明安装完成.</p>
+<h3 id="hexo的安装">Hexo的安装</h3>
+<p>在搜索引擎中直接搜索Hexo进入官方网站, 在网站上直接复制下面的代码</p>
+<p><code>npm install hexo-cli -g</code></p>
+<p>在C盘中创建一个新的文件夹blog,
+在其中右键打开git的bash(这里需要安装git才能看见这个选项,
+还需要安装node.js)窗口, 将代码粘贴进去回车, 等待下载, 下载好之后,
+输入</p>
+<p><code>hexo init Blog</code></p>
+<p>然后就会发现blog文件夹下面有一个新的Blog文件夹,
+在这个文件夹里面打开git bash, 输入</p>
+<p><code>npm install</code></p>
+<p>安装完成后输入</p>
+<p><code>hexo s</code></p>
+<p>就会出现一个localhost的网址, 复制之后在浏览器中打开,
+就可以看见Hexo的默认界面了.</p>
+<h2 id="主题的设置">主题的设置</h2>
+<h3 id="next主题">Next主题</h3>
+<h4 id="next主题的启用">Next主题的启用</h4>
+<p>在C盘Blog文件夹下找到_config.yml文件, 用VScode打开,
+在<code>theme</code>后面的东西改成<code>next</code>, Blog里面打开git
+bash, 输入<code>hexo s</code>, 复制网站在浏览器打开,
+就可以看见Next主题的默认界面了.</p>
+<h4 id="语言的更改">语言的更改</h4>
+<p>在C盘Blog/themes/next文件夹下找到_config.yml文件, 用VScode打开,
+将<code>language</code>选项改成<code>zh-Hans</code>保存好之后,
+输入<code>hexo clean</code>清理, <code>hexo g</code>生成,
+<code>hexo s</code>得到的网站就会变成中文了.</p>
+<h4 id="标签页和分类页">标签页和分类页</h4>
+<p>在C盘Blog/themes/next文件夹下找到_config.yml文件, 用VScode打开,
+将<code>menu</code>下面的默认的<code>categories</code>和<code>tags</code>取消注释,
+并保存, 输入<code>hexo clean</code>清理, <code>hexo g</code>生成,
+<code>hexo s</code>得到的网站就会有标签页和分类页了,
+但是点进去会出现空白页面.</p>
+<p>在C盘Blog文件夹下找到source文件夹, 在Blog文件夹下面打开git bash,
+输入<code>hexo n page tags</code>回车之后,
+source文件里面就会多出来一个tags文件夹，
+打开tags文件夹里面的index.md文件,
+可以把<code>title</code>设置成中文<code>标签</code>,
+然后增加一行<code>type: "tags"</code>;
+同样地输入<code>hexo n page categories</code>回车之后,
+source文件里面就会多出来一个categories文件夹，
+打开categories文件夹里面的index.md文件,
+可以把<code>title</code>设置成中文<code>分类</code>,
+然后增加一行<code>type: "categories"</code>,
+保存之后就可以看见标签和分类页了.</p>
+<h4 id="主题样式的更改">主题样式的更改</h4>
+<p>在C盘Blog/themes/next文件夹下找到_config.yml文件,
+找到<code>scheme</code>, 把默认的<code>scheme: Muse</code>注释掉,
+然后把<code>scheme: Pisces</code>取消注释, 保存即可.</p>
+<p>下面来设置Pisces.</p>
+<p>头像: 把<code>avatar: /images/avatar.gif</code>取消注释,
+在Blog/themes/next/source/images文件夹下面删除默认的avatar.gif,
+替换成你自己的femboy.jpg,
+然后修改url为<code>url: /images/femboy.jpg</code>然后保存即可.</p>
+<p>网站标题: 在C盘Blog文件夹下找到_config.yml文件,
+作如下修改<code>title: SiyuanLei'blog</code>,
+<code>author: SiyuanLei</code></p>
+<p>侧边栏: 在C盘Blog/themes/next文件夹下找到_config.yml文件,
+把<code>social</code>一栏取消注释,
+在对应的社交网站后面改成自己的社交平台链接即可.</p>
+<p>友情链接: 在C盘Blog/themes/next文件夹下找到_config.yml文件,
+把<code>links</code>一栏取消注释, 然后加上一些连接, 比如Arxiv,
+Libgen之类的.</p>
+<h2 id="文章">文章</h2>
+<p>我自己常用的方式是, 在C: _posts下面直接加入一个markdown文件,
+但是文件开头一定要是下面的格式:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 第四章:Verilog HDL数字逻辑电路设计方法</span><br><span class="line">date: 2025-05-04</span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">-</span> [EE,数字设计,Verilog]</span><br><span class="line">tags:</span><br><span class="line"><span class="section">- Verilog</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+<h2 id="博客的发布">博客的发布</h2>
+<p>在<code>C:\blog\Blog</code>下打开终端, 然后依次输入以下指令即可:</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo cl</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h2 id="一些意外">一些意外</h2>
+<h3
+id="在博客根目录下的终端无法使用hexo命令">在博客根目录下的终端无法使用hexo命令</h3>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PS C:\blog\Blog&gt; hexo d</span><br><span class="line">hexo : 无法将“hexo”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确</span><br><span class="line">，然后再试一次。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">+ hexo</span><br><span class="line">+ ~~~~</span><br><span class="line">    + CategoryInfo          : ObjectNotFound: (hexo:String) [], CommandNotFoundException</span><br><span class="line">    + FullyQualifiedErrorId : CommandNotFoundException</span><br></pre></td></tr></table></figure>
+<p>但是在命令行窗口输入<code>npm -v</code>, <code>node -v</code>都正常.
+这说明环境变量出了问题.</p>
+<p>首先需要配置环境变量,
+在Windows上，通过npm全局安装的包（比如hexo），其可执行文件通常位于一个特定的目录。你需要确保这个目录被添加到了系统的PATH环境变量中。查找路径：全局安装的包默认在
+C:。</p>
+<p>修改环境变量：在Windows搜索框输入“环境变量”，选择“编辑系统环境变量”。在弹出窗口中，点击右下角的“环境变量”按钮。在“用户变量”或“系统变量”区域，找到名为
+Path
+的变量，双击它。点击“新建”，然后将上述的npm路径（例如C:）添加进去。逐一点击“确定”保存所有更改。重启终端：非常重要的一步！
+完全关闭你当前的PowerShell或命令提示符窗口，然后重新打开，再尝试输入
+hexo 命令。</p>
+<p>然后出现了如下报错</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PS C:\blog\Blog&gt; hexo cl</span><br><span class="line">hexo : 无法加载文件 C:\Users\XQ\AppData\Roaming\npm\hexo.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅 https:/g</span><br><span class="line">o.microsoft.com/fwlink/?LinkID=<span class="number">135170</span> 中的 about_Execution_Policies。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">+ hexo cl</span><br><span class="line">+ ~~~~</span><br><span class="line">    + CategoryInfo          : SecurityError: (:) []，PSSecurityException</span><br><span class="line">    + FullyQualifiedErrorId : UnauthorizedAccess</span><br></pre></td></tr></table></figure>
+<p>这个错误是因为Windows PowerShell的执行策略（Execution
+Policy）限制了脚本运行。不过别担心，这个问题很常见，很容易解决。简单来说，Windows为了防止恶意脚本自动执行，默认禁止运行任何PowerShell脚本。你刚才配置好环境变量，系统找到了hexo.ps1脚本，但这个“安全门”却把它拦住了。</p>
+<p>为了永久取消这个限制, 先右键点击“开始”菜单或按 Win + X，然后选择
+“Windows PowerShell（管理员）”或
+“终端（管理员）”。在打开的窗口中，输入<code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code>.
+完成此操作后，关闭当前的PowerShell窗口（包括之前报错的那个），重新打开一个新的终端，再进入你的博客目录
+C:，尝试执行<code>hexo cl, hexo g, hexo d</code>就可以正常工作了.</p>
 
       
     </div>
@@ -3151,212 +3357,6 @@ HSpice会自动计算此类噪声。 *
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/Hexo%E5%BB%BA%E7%AB%8B%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/femboy.jpg">
-      <meta itemprop="name" content="SiyuanLei">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SiyuanLei's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | SiyuanLei's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/05/04/Hexo%E5%BB%BA%E7%AB%8B%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">Hexo+GitHub搭建博客教程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T00:00:00+08:00">2025-05-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-02-28 12:59:43" itemprop="dateModified" datetime="2026-02-28T12:59:43+08:00">2026-02-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CS/%E7%BD%91%E7%AB%99%E5%88%B6%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">网站制作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="安装">安装</h2>
-<h3 id="github的注册及创建域名">GitHub的注册及创建域名</h3>
-<p>注册这一步就不说了. 注册完成后点击New创建一个新的repository,
-在Owner填自己的<code>username</code>, 在Repository
-name里面填<code>username.github.io</code> 这样就成功建立了一个域名.</p>
-<h3 id="git的安装">Git的安装</h3>
-<p>在搜索引擎中直接搜索Git进入官方网站, 点击Download for Windows,
-在Standalone Installer下点击64-bit Git for Windows Setup,
-下载好之后一直点击next(可以自己设置下载路径)就可以下载完成了.
-最后可以按<code>win+R</code>输入cmd, 然后输入<code>git --version</code>,
-如果出现git的版本, 说明安装完成.</p>
-<p>在git的安装目录下打开git bash, 输入命令</p>
-<p><code>ssh-keygen -t rsa -C "你自己的邮箱的地址"</code></p>
-<p>然后回车, 遇到Enter file in which to save the
-key时输入一个路径,生成的ssh文件就放在那里, 在遇到Enter
-passphrase时回车两次(或者输入你自己的密码两次)即可.</p>
-<p>打开GitHub网页,在Setting界面点开SSH and GPG keys, 点击New SSH,
-title随便输一个名字, 然后打开刚刚生成的id_rsa.pub, 复制里面的内容,
-粘贴到key这一栏下面, 然后点击Add SSH key即可.</p>
-<h3 id="node.js的安装">Node.js的安装</h3>
-<p>在搜索引擎中直接搜索Node js进入官方网站, 点击Recommended For Most
-Users的下载按钮, 下载好之后打开, 一直点next 就可以下载完成了.
-最后可以按<code>win+R</code>输入cmd,
-然后输入<code>node --version</code>, 如果出现node的版本,
-说明安装完成.</p>
-<h3 id="hexo的安装">Hexo的安装</h3>
-<p>在搜索引擎中直接搜索Hexo进入官方网站, 在网站上直接复制下面的代码</p>
-<p><code>npm install hexo-cli -g</code></p>
-<p>在C盘中创建一个新的文件夹blog,
-在其中右键打开git的bash(这里需要安装git才能看见这个选项,
-还需要安装node.js)窗口, 将代码粘贴进去回车, 等待下载, 下载好之后,
-输入</p>
-<p><code>hexo init Blog</code></p>
-<p>然后就会发现blog文件夹下面有一个新的Blog文件夹,
-在这个文件夹里面打开git bash, 输入</p>
-<p><code>npm install</code></p>
-<p>安装完成后输入</p>
-<p><code>hexo s</code></p>
-<p>就会出现一个localhost的网址, 复制之后在浏览器中打开,
-就可以看见Hexo的默认界面了.</p>
-<h2 id="主题的设置">主题的设置</h2>
-<h3 id="next主题">Next主题</h3>
-<h4 id="next主题的启用">Next主题的启用</h4>
-<p>在C盘Blog文件夹下找到_config.yml文件, 用VScode打开,
-在<code>theme</code>后面的东西改成<code>next</code>, Blog里面打开git
-bash, 输入<code>hexo s</code>, 复制网站在浏览器打开,
-就可以看见Next主题的默认界面了.</p>
-<h4 id="语言的更改">语言的更改</h4>
-<p>在C盘Blog/themes/next文件夹下找到_config.yml文件, 用VScode打开,
-将<code>language</code>选项改成<code>zh-Hans</code>保存好之后,
-输入<code>hexo clean</code>清理, <code>hexo g</code>生成,
-<code>hexo s</code>得到的网站就会变成中文了.</p>
-<h4 id="标签页和分类页">标签页和分类页</h4>
-<p>在C盘Blog/themes/next文件夹下找到_config.yml文件, 用VScode打开,
-将<code>menu</code>下面的默认的<code>categories</code>和<code>tags</code>取消注释,
-并保存, 输入<code>hexo clean</code>清理, <code>hexo g</code>生成,
-<code>hexo s</code>得到的网站就会有标签页和分类页了,
-但是点进去会出现空白页面.</p>
-<p>在C盘Blog文件夹下找到source文件夹, 在Blog文件夹下面打开git bash,
-输入<code>hexo n page tags</code>回车之后,
-source文件里面就会多出来一个tags文件夹，
-打开tags文件夹里面的index.md文件,
-可以把<code>title</code>设置成中文<code>标签</code>,
-然后增加一行<code>type: "tags"</code>;
-同样地输入<code>hexo n page categories</code>回车之后,
-source文件里面就会多出来一个categories文件夹，
-打开categories文件夹里面的index.md文件,
-可以把<code>title</code>设置成中文<code>分类</code>,
-然后增加一行<code>type: "categories"</code>,
-保存之后就可以看见标签和分类页了.</p>
-<h4 id="主题样式的更改">主题样式的更改</h4>
-<p>在C盘Blog/themes/next文件夹下找到_config.yml文件,
-找到<code>scheme</code>, 把默认的<code>scheme: Muse</code>注释掉,
-然后把<code>scheme: Pisces</code>取消注释, 保存即可.</p>
-<p>下面来设置Pisces.</p>
-<p>头像: 把<code>avatar: /images/avatar.gif</code>取消注释,
-在Blog/themes/next/source/images文件夹下面删除默认的avatar.gif,
-替换成你自己的femboy.jpg,
-然后修改url为<code>url: /images/femboy.jpg</code>然后保存即可.</p>
-<p>网站标题: 在C盘Blog文件夹下找到_config.yml文件,
-作如下修改<code>title: SiyuanLei'blog</code>,
-<code>author: SiyuanLei</code></p>
-<p>侧边栏: 在C盘Blog/themes/next文件夹下找到_config.yml文件,
-把<code>social</code>一栏取消注释,
-在对应的社交网站后面改成自己的社交平台链接即可.</p>
-<p>友情链接: 在C盘Blog/themes/next文件夹下找到_config.yml文件,
-把<code>links</code>一栏取消注释, 然后加上一些连接, 比如Arxiv,
-Libgen之类的.</p>
-<h2 id="文章">文章</h2>
-<p>我自己常用的方式是, 在C: _posts下面直接加入一个markdown文件,
-但是文件开头一定要是下面的格式:</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 第四章:Verilog HDL数字逻辑电路设计方法</span><br><span class="line">date: 2025-05-04</span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">-</span> [EE,数字设计,Verilog]</span><br><span class="line">tags:</span><br><span class="line"><span class="section">- Verilog</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
-<h2 id="博客的发布">博客的发布</h2>
-<p>在<code>C:\blog\Blog</code>下打开终端, 然后依次输入以下指令即可:</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo cl</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<h2 id="一些意外">一些意外</h2>
-<h3
-id="在博客根目录下的终端无法使用hexo命令">在博客根目录下的终端无法使用hexo命令</h3>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PS C:\blog\Blog&gt; hexo d</span><br><span class="line">hexo : 无法将“hexo”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确</span><br><span class="line">，然后再试一次。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">+ hexo</span><br><span class="line">+ ~~~~</span><br><span class="line">    + CategoryInfo          : ObjectNotFound: (hexo:String) [], CommandNotFoundException</span><br><span class="line">    + FullyQualifiedErrorId : CommandNotFoundException</span><br></pre></td></tr></table></figure>
-<p>但是在命令行窗口输入<code>npm -v</code>, <code>node -v</code>都正常.
-这说明环境变量出了问题.</p>
-<p>首先需要配置环境变量,
-在Windows上，通过npm全局安装的包（比如hexo），其可执行文件通常位于一个特定的目录。你需要确保这个目录被添加到了系统的PATH环境变量中。查找路径：全局安装的包默认在
-C:。</p>
-<p>修改环境变量：在Windows搜索框输入“环境变量”，选择“编辑系统环境变量”。在弹出窗口中，点击右下角的“环境变量”按钮。在“用户变量”或“系统变量”区域，找到名为
-Path
-的变量，双击它。点击“新建”，然后将上述的npm路径（例如C:）添加进去。逐一点击“确定”保存所有更改。重启终端：非常重要的一步！
-完全关闭你当前的PowerShell或命令提示符窗口，然后重新打开，再尝试输入
-hexo 命令。</p>
-<p>然后出现了如下报错</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PS C:\blog\Blog&gt; hexo cl</span><br><span class="line">hexo : 无法加载文件 C:\Users\XQ\AppData\Roaming\npm\hexo.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅 https:/g</span><br><span class="line">o.microsoft.com/fwlink/?LinkID=<span class="number">135170</span> 中的 about_Execution_Policies。</span><br><span class="line">所在位置 行:<span class="number">1</span> 字符: <span class="number">1</span></span><br><span class="line">+ hexo cl</span><br><span class="line">+ ~~~~</span><br><span class="line">    + CategoryInfo          : SecurityError: (:) []，PSSecurityException</span><br><span class="line">    + FullyQualifiedErrorId : UnauthorizedAccess</span><br></pre></td></tr></table></figure>
-<p>这个错误是因为Windows PowerShell的执行策略（Execution
-Policy）限制了脚本运行。不过别担心，这个问题很常见，很容易解决。简单来说，Windows为了防止恶意脚本自动执行，默认禁止运行任何PowerShell脚本。你刚才配置好环境变量，系统找到了hexo.ps1脚本，但这个“安全门”却把它拦住了。</p>
-<p>为了永久取消这个限制, 先右键点击“开始”菜单或按 Win + X，然后选择
-“Windows PowerShell（管理员）”或
-“终端（管理员）”。在打开的窗口中，输入<code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code>.
-完成此操作后，关闭当前的PowerShell窗口（包括之前报错的那个），重新打开一个新的终端，再进入你的博客目录
-C:，尝试执行<code>hexo cl, hexo g, hexo d</code>就可以正常工作了.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/LC-3%E5%A4%84%E7%90%86%E5%99%A8%E8%AE%BE%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3455,7 +3455,7 @@ C:，尝试执行<code>hexo cl, hexo g, hexo d</code>就可以正常工作了.</
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/Minecraft/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/Matlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/femboy.jpg">
@@ -3473,7 +3473,7 @@ C:，尝试执行<code>hexo cl, hexo g, hexo d</code>就可以正常工作了.</
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/05/04/Minecraft/" class="post-title-link" itemprop="url">Minecraft</a>
+          <a href="/2025/05/04/Matlab/" class="post-title-link" itemprop="url">MATLAB基础</a>
         </h2>
 
         <div class="post-meta-container">
@@ -3491,7 +3491,7 @@ C:，尝试执行<code>hexo cl, hexo g, hexo d</code>就可以正常工作了.</
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-19 19:50:11" itemprop="dateModified" datetime="2026-01-19T19:50:11+08:00">2026-01-19</time>
+      <time title="Modified: 2025-05-21 17:07:44" itemprop="dateModified" datetime="2025-05-21T17:07:44+08:00">2025-05-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -3499,7 +3499,11 @@ C:，尝试执行<code>hexo cl, hexo g, hexo d</code>就可以正常工作了.</
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Game/" itemprop="url" rel="index"><span itemprop="name">Game</span></a>
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/MATLAB/" itemprop="url" rel="index"><span itemprop="name">MATLAB</span></a>
         </span>
     </span>
 
@@ -3513,10 +3517,62 @@ C:，尝试执行<code>hexo cl, hexo g, hexo d</code>就可以正常工作了.</
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="光影">光影</h2>
-<p>下载对应版本的Optifine, 下载完成后打开java文件,
-然后直接安装到<code>C:\Users\XQ\AppData\Roaming\.minecraft</code>文件夹下面,
-然后打开游戏, 就可以看见光影的选项了.</p>
+          <h2 id="基本指令">基本指令</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">1</span>;b=<span class="number">2</span>;c=<span class="number">3</span>;                  <span class="comment">%%命令行</span></span><br><span class="line">sum=<span class="number">1</span>+<span class="number">1</span>/<span class="number">2</span>+<span class="number">1</span>/<span class="number">3</span>+<span class="number">1</span>/<span class="number">4</span>+<span class="number">1</span>/<span class="number">5</span>+<span class="number">1</span>/<span class="number">6</span>+...</span><br><span class="line">    <span class="number">1</span>/<span class="number">7</span>+<span class="number">1</span>/<span class="number">8</span>+<span class="number">1</span>/<span class="number">9</span>;              <span class="comment">%%...是续行符，可以写多行命令</span></span><br><span class="line">clc                           <span class="comment">%%清除命令</span></span><br><span class="line">clear                         <span class="comment">%%清除变量</span></span><br><span class="line">clear 变量名                  <span class="comment">%%清除某个变量</span></span><br><span class="line">format short\long\bank（保留小数点后两位）\shortE\longE\hex(<span class="number">16</span>进制)\<span class="built_in">rat</span>（分数）</span><br></pre></td></tr></table></figure>
+<h2 id="数据类型">数据类型</h2>
+<h3 id="字符和数字">字符和数字</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">s=<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="built_in">abs</span>(s);                       <span class="comment">%%输出s对应字符的ASCII码</span></span><br><span class="line">char(<span class="number">65</span>);                     <span class="comment">%%输出ASCII码为65对应的字符</span></span><br><span class="line">num2str(<span class="number">65</span>);                  <span class="comment">%%输出字符‘65’</span></span><br><span class="line">str=<span class="string">&#x27;I love U&#x27;</span>;</span><br><span class="line"><span class="built_in">length</span>(str);                  <span class="comment">%%输出str的长度</span></span><br><span class="line">a=<span class="number">6</span>+<span class="number">5</span><span class="built_in">i</span>;b=<span class="number">6</span>+<span class="number">6</span><span class="built_in">j</span>                 <span class="comment">%%a，b都是复数</span></span><br><span class="line">x=<span class="number">4</span>;</span><br><span class="line"><span class="built_in">complex</span>(<span class="number">2</span>,x)                  <span class="comment">%%生成实部为2，虚部为x的复数</span></span><br><span class="line"><span class="built_in">real</span>(a);                      <span class="comment">%%求复数的实部</span></span><br><span class="line"><span class="built_in">imag</span>(a);                      <span class="comment">%%求复数的虚部</span></span><br><span class="line"><span class="built_in">abs</span>(a);                       <span class="comment">%%求复数的模</span></span><br><span class="line"><span class="built_in">angle</span>(a);                     <span class="comment">%%求复数的辐角</span></span><br><span class="line"><span class="built_in">conj</span>(a);                      <span class="comment">%%求共轭复数</span></span><br></pre></td></tr></table></figure>
+<h3 id="矩阵">矩阵</h3>
+<h4 id="矩阵基本运算">矩阵基本运算</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">A=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>;<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line">B=A.&#x27;;                        <span class="comment">%%A的转置</span></span><br><span class="line">B=A&#x27;;                         <span class="comment">%%A的共轭转置</span></span><br><span class="line">C=A(:);                       <span class="comment">%%把A中的所有元素排成一列</span></span><br><span class="line">D=inv(A);                     <span class="comment">%%A的逆矩阵</span></span><br><span class="line">E=[A,A;A,A];                  <span class="comment">%%把矩阵A拼接</span></span><br><span class="line">F=<span class="built_in">rot90</span>(A,k);                 <span class="comment">%%将A矩阵逆时针旋转90°的k倍</span></span><br><span class="line">G=<span class="built_in">fliplr</span>(A);                  <span class="comment">%%左右翻转</span></span><br><span class="line">H=<span class="built_in">flipud</span>(A);                  <span class="comment">%%上下翻转</span></span><br><span class="line">A*D;                          <span class="comment">%%矩阵乘法</span></span><br><span class="line">A.*D;                         <span class="comment">%%矩阵对应元素相乘</span></span><br><span class="line">A/D;                          <span class="comment">%%相当于A*inv（D）</span></span><br><span class="line">A./D;                         <span class="comment">%%矩阵对应元素相除</span></span><br><span class="line">A+D;                          <span class="comment">%%矩阵对应元素相加</span></span><br><span class="line">A-D;                          <span class="comment">%%矩阵对应元素相减</span></span><br><span class="line">det(A);                       <span class="comment">%%计算A的行列式</span></span><br><span class="line">adj(A);                       <span class="comment">%%计算A的伴随矩阵</span></span><br><span class="line">cond(A);                      <span class="comment">%%计算A的条件数condition，数值越小越正常</span></span><br><span class="line">rank(A);                      <span class="comment">%%计算A的秩</span></span><br><span class="line">trace(A);                     <span class="comment">%%计算A的迹</span></span><br><span class="line">eig(A);                       <span class="comment">%%计算A的特征值</span></span><br><span class="line">A=[<span class="number">1</span>:<span class="number">3</span>;<span class="number">4</span>:<span class="number">6</span>];</span><br><span class="line">B=<span class="built_in">reshape</span>(A,<span class="number">3</span>,<span class="number">2</span>);             <span class="comment">%%把A按顺序变成三行两列的矩阵</span></span><br></pre></td></tr></table></figure>
+<h4 id="矩阵生成">矩阵生成</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">E=zero(<span class="number">10</span>,<span class="number">5</span>,<span class="number">3</span>);               <span class="comment">%%生成10行5列3层矩阵</span></span><br><span class="line">E=zero(<span class="number">10</span>,<span class="number">5</span>);                 <span class="comment">%%生成10行5列矩阵</span></span><br><span class="line">E=<span class="built_in">rand</span>(<span class="number">2</span>,<span class="number">3</span>);                  <span class="comment">%%生成0~1之间的随机数</span></span><br><span class="line">E=<span class="built_in">randn</span>(<span class="number">3</span>,<span class="number">2</span>);                 <span class="comment">%%生成均值为0，方差为1的随机数</span></span><br><span class="line">E=randi([<span class="built_in">min</span>,<span class="built_in">max</span>],m,n);       <span class="comment">%%生成在开区间[min，max]之间随机整数的m行n列矩阵</span></span><br><span class="line">A=<span class="number">1</span>:<span class="number">2</span>:<span class="number">9</span>;                      <span class="comment">%%A=[1,3,5,7,9]</span></span><br><span class="line">str=<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>:<span class="string">&#x27;z&#x27;</span>;                <span class="comment">%%str=[a,b,...,z]</span></span><br><span class="line">B=<span class="built_in">repmat</span>(A,<span class="number">3</span>,<span class="number">2</span>);              <span class="comment">%%把A先竖着重复3次，再横着重复2次</span></span><br><span class="line">C=<span class="built_in">ones</span>(<span class="number">2</span>,<span class="number">4</span>);                  <span class="comment">%%生成2行4列的元素全部为1的矩阵</span></span><br><span class="line">D=<span class="built_in">eye</span>(<span class="number">5</span>);                     <span class="comment">%%生成5阶单位阵</span></span><br><span class="line">E=<span class="built_in">magic</span>(<span class="number">3</span>);                   <span class="comment">%%生成3阶幻方（就是每行，每列，对角线元素之和相等的方阵）</span></span><br><span class="line">F=<span class="built_in">vander</span>([<span class="number">1</span>;<span class="number">3</span>;<span class="number">5</span>;<span class="number">8</span>]);          <span class="comment">%%生成范德蒙德矩阵，其中a1=1,a2=3,a3=5,a4=8</span></span><br></pre></td></tr></table></figure>
+<h4 id="矩阵分析">矩阵分析</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">A=<span class="built_in">magic</span>(<span class="number">5</span>);</span><br><span class="line">B=A(<span class="number">2</span>,<span class="number">3</span>);                     <span class="comment">%%取A的第2行第3列的元素</span></span><br><span class="line">C=A(<span class="number">8</span>);                       <span class="comment">%%取A的第8个元素</span></span><br><span class="line">D=A([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>]);                 <span class="comment">%%取A的第1,3,5个元素作为一个行向量</span></span><br><span class="line">E=A([<span class="number">1</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">3</span>]);             <span class="comment">%%取A的第1,3行与第2,3列相交处的元素,相当于取子式！！！</span></span><br><span class="line">F=A([<span class="number">1</span>,<span class="number">3</span>;<span class="number">2</span>,<span class="number">3</span>]);               <span class="comment">%%取A的第1,3个元素作为第一行，第2,3个元素作为第二行（与D类似）</span></span><br><span class="line">G=A(<span class="number">3</span>,:);G=A(:;<span class="number">2</span>:<span class="number">4</span>);G=A(<span class="number">2</span>:<span class="number">3</span>;<span class="number">1</span>:<span class="number">2</span>:<span class="number">5</span>)            <span class="comment">%%取A的第三行;取A的2,3,4列;取A的第2,3行和第1,2,5,列交叉处的元素</span></span><br><span class="line">A(<span class="number">3</span>,:)=[];A(:,[<span class="number">2</span>,<span class="number">4</span>])=[];      <span class="comment">%%删去A的第三行;删去A的第2,4列元素</span></span><br><span class="line">H=A(:,<span class="number">4</span>);                     <span class="comment">%%取A的第四列</span></span><br><span class="line">I=<span class="built_in">sub2ind</span>(<span class="built_in">size</span>(A),[<span class="number">1</span>,<span class="number">2</span>;<span class="number">2</span>,<span class="number">2</span>],[<span class="number">1</span>,<span class="number">1</span>;<span class="number">3</span>,<span class="number">2</span>]);       <span class="comment">%%将A中的A(1,1),A(2,1);A(2,3),A(2,2)的序号组成一个2×2的矩阵</span></span><br><span class="line">[<span class="built_in">i</span>,<span class="built_in">j</span>]=<span class="built_in">ind2sub</span>(<span class="built_in">size</span>(A),[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>]);               <span class="comment">%%将矩阵A的第1,3,5个元素的下标输出</span></span><br><span class="line">J=A(<span class="keyword">end</span>,:)/J=A([<span class="number">1</span>,<span class="number">4</span>],<span class="number">3</span>:<span class="keyword">end</span>);                  <span class="comment">%%取A的最后一行的元素、取A的第1,4行与从第3~最后一列交叉处的元素</span></span><br><span class="line">K=<span class="built_in">diag</span>(A);                    <span class="comment">%%取A的主对角线上的元素</span></span><br><span class="line">L=<span class="built_in">diag</span>([<span class="number">1</span>,<span class="number">-3</span>,<span class="number">4</span>,<span class="number">5</span>]);           <span class="comment">%%将1，-2,4,5排成对角阵</span></span><br><span class="line">[m,n]=<span class="built_in">find</span>(A&gt;<span class="number">20</span>);             <span class="comment">%%找出A中大于20的元素的行标（即m）和列标（即对应于m的n）</span></span><br><span class="line">I=<span class="built_in">find</span>(A==<span class="number">5</span>);                 <span class="comment">%%找出A中等于5的元素的序号</span></span><br><span class="line"><span class="built_in">max</span>(A);                       <span class="comment">%%找出A中每列的最大的元素</span></span><br><span class="line"><span class="built_in">max</span>(<span class="built_in">max</span>(A));                  <span class="comment">%%找出A中最大的元素，min同理</span></span><br><span class="line">sum(A);                       <span class="comment">%%求A每列元素之和</span></span><br><span class="line">sum(sum(A));                  <span class="comment">%%求A所有元素之和</span></span><br><span class="line"><span class="built_in">mean</span>(A);                      <span class="comment">%%求A每列元素的平均数</span></span><br><span class="line"><span class="built_in">mean</span>(<span class="built_in">mean</span>(A));                <span class="comment">%%求A所有元素的平均数</span></span><br><span class="line"><span class="built_in">sort</span>(A);                      <span class="comment">%%每列元素按照从小到大顺序排列</span></span><br><span class="line">sortrow(A);                   <span class="comment">%%按第一列元素从小到大排列</span></span><br><span class="line"><span class="built_in">size</span>(A);                      <span class="comment">%%输出A的行数和列数</span></span><br><span class="line"><span class="built_in">length</span>(A);                    <span class="comment">%%输出A的最长维的维数</span></span><br><span class="line"><span class="built_in">numel</span>(A);                     <span class="comment">%%输出A的元素的个数</span></span><br></pre></td></tr></table></figure>
+<h2 id="数学运算">数学运算</h2>
+<h3 id="一般函数">一般函数</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sin</span>/<span class="built_in">cos</span>/<span class="built_in">tan</span>/<span class="built_in">asin</span>/<span class="built_in">acos</span>/<span class="built_in">atan</span>/<span class="built_in">sinh</span>/<span class="built_in">cosh</span>/<span class="built_in">tanh</span>;    <span class="comment">%%三角函数</span></span><br><span class="line"><span class="built_in">sqrt</span>(<span class="number">9</span>);                       <span class="comment">%%9的平方根</span></span><br><span class="line"><span class="built_in">log</span>()/<span class="built_in">log10</span>()/<span class="built_in">log2</span>;            <span class="comment">%%自然对数、常用对数、以2为底的对数函数</span></span><br><span class="line"><span class="built_in">exp</span>();                         <span class="comment">%%不解释</span></span><br><span class="line"><span class="built_in">pow2</span>;                          <span class="comment">%%2的幂,相当于平方</span></span><br><span class="line"><span class="built_in">abs</span>();                         <span class="comment">%%绝对值</span></span><br><span class="line"><span class="built_in">rem</span>(<span class="number">10</span>,<span class="number">3</span>);                     <span class="comment">%%求余数</span></span><br><span class="line"><span class="built_in">mod</span>(<span class="number">10</span>,<span class="number">3</span>);                     <span class="comment">%%求模</span></span><br><span class="line"><span class="built_in">gcd</span>(<span class="number">150</span>,<span class="number">95</span>);                   <span class="comment">%%最大公约数</span></span><br><span class="line"><span class="built_in">lcm</span>(<span class="number">10</span>,<span class="number">3</span>);                     <span class="comment">%%最小公倍数</span></span><br><span class="line"><span class="built_in">factorial</span>(<span class="number">5</span>);                  <span class="comment">%%5的阶乘</span></span><br><span class="line"><span class="built_in">isprime</span>(<span class="number">6</span>);                    <span class="comment">%%判断6是不是素数，如果是输出1，否则输出0</span></span><br><span class="line"><span class="built_in">primes</span>(<span class="number">9</span>);                     <span class="comment">%%生成1~9内所有的素数</span></span><br><span class="line"><span class="built_in">perms</span>(A);                      <span class="comment">%%生成A的所有的排列，A为行向量</span></span><br><span class="line">randperm(<span class="number">10</span>);                  <span class="comment">%%生成1~10的随机排列</span></span><br></pre></td></tr></table></figure>
+<h3 id="矩阵函数">矩阵函数</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqrtm(A);                     <span class="comment">%%对矩阵中所有元素开方</span></span><br><span class="line">logm(A);                      <span class="comment">%%对矩阵中所有元素取自然对数</span></span><br><span class="line">expm(A);                      <span class="comment">%%对矩阵中所有元素取指数</span></span><br></pre></td></tr></table></figure>
+<h3 id="逻辑运算">逻辑运算</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;/&lt;=;                         <span class="comment">%%小于、小于等于</span></span><br><span class="line">&gt;/&gt;=;                         <span class="comment">%%大于、大于等于</span></span><br><span class="line">==/~=;                        <span class="comment">%%等于、不等于</span></span><br><span class="line">eq(a,b);                      <span class="comment">%%判断a、b是否相等，相等输出1，不相等输出0</span></span><br><span class="line">a&amp;b/and(a,b);                 <span class="comment">%%“与”，a、b全部非0时，输出1；a、b只要有一个为0，输出0</span></span><br><span class="line">a|b;or(a,b);                  <span class="comment">%%a、b只要有一个不为0，输出1；a、b全为0时，输出0</span></span><br><span class="line">~a/not(a);                    <span class="comment">%%a是0时，输出1；a不为0时，输出0</span></span><br><span class="line">xor(a,b);                     <span class="comment">%%a、b值不同时，输出1；a、b值相同时，输出0</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串运算">字符串运算</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">&#x27;Xidian University&#x27;</span>;</span><br><span class="line">str=<span class="string">&#x27;I&#x27;&#x27;m a student&#x27;</span>;             <span class="comment">%%当字符串中含有&#x27;时，打两个&#x27;&#x27;</span></span><br><span class="line">ch=[<span class="string">&#x27;abcdef&#x27;</span>;<span class="string">&#x27;123456&#x27;</span>];           <span class="comment">%%字符串矩阵</span></span><br><span class="line">ch=<span class="string">&#x27;ABc123d4e56Fg9&#x27;</span>;</span><br><span class="line">str=ch(<span class="number">1</span>:<span class="number">5</span>);                      <span class="comment">%%取ch的前5个元素</span></span><br><span class="line">str=ch(<span class="keyword">end</span>:<span class="number">-1</span>:<span class="number">1</span>);                 <span class="comment">%%将ch倒着排列</span></span><br><span class="line">place=<span class="built_in">find</span>(ch&gt;=<span class="string">&#x27;a&#x27;</span>&amp;ch&lt;=<span class="string">&#x27;z&#x27;</span>);      <span class="comment">%%找到小写字母的位置</span></span><br><span class="line">ch(place)=ch(place)-<span class="string">&#x27;a&#x27;</span>+<span class="string">&#x27;A&#x27;</span>;      <span class="comment">%%将小写字母换成大写字母</span></span><br><span class="line"><span class="built_in">length</span>(place);                    <span class="comment">%%计算小写字母的数量</span></span><br><span class="line"></span><br><span class="line">str=<span class="string">&#x27;MATLAB&#x27;</span>;</span><br><span class="line">a=<span class="built_in">abs</span>(str);                       <span class="comment">%%将str里面的字符转化成ASCII码</span></span><br><span class="line">b=char(a+<span class="number">32</span>);                     <span class="comment">%%将ASCII码加32后再转化成对应的字符</span></span><br><span class="line"></span><br><span class="line">ch=[str1,str2,str3];</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;www0&#x27;</span>&gt;=<span class="string">&#x27;w123&#x27;</span>;                   <span class="comment">%%比较这两个字符串中各个元素的大小，输出1110</span></span><br><span class="line">strcmp(str1,str2);                <span class="comment">%%比较两个字符串是否相等，相等输出1，否则输出0</span></span><br><span class="line">strncmp(str1,str2,n);             <span class="comment">%%比较两个字符串的前n个元素是否相等</span></span><br><span class="line">strcmpi(str1,str2);               <span class="comment">%%忽略大小写，比较两个字符串是否相等</span></span><br><span class="line">strncmpi(str1,str2,n);            <span class="comment">%%忽略大小写,比较两个字符串的前n个元素是否相等</span></span><br><span class="line"></span><br><span class="line">findstr(str1,str2);               <span class="comment">%%输出str2在str1中开始的位置</span></span><br><span class="line">strrep(str1,str2,str3);           <span class="comment">%%将str1中的str2替换为str3</span></span><br></pre></td></tr></table></figure>
+<h2 id="结构体">结构体</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">A=cell(<span class="number">1</span>,<span class="number">6</span>);                      <span class="comment">%%生成A=[][][][][][]</span></span><br><span class="line">A&#123;<span class="number">2</span>&#125;=<span class="built_in">eye</span>(<span class="number">3</span>);                      <span class="comment">%%A=[][eye(3)][][][][]</span></span><br><span class="line">A&#123;<span class="number">6</span>&#125;=<span class="built_in">magic</span>(<span class="number">5</span>);                    <span class="comment">%%A=[][eye(3)][][][][magic(5)]</span></span><br><span class="line">B=A&#123;<span class="number">6</span>&#125;;                           <span class="comment">%%取出A中第六个元素，即magic（5）</span></span><br><span class="line">   </span><br><span class="line">A=cell(<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">A(<span class="number">1</span>,<span class="number">1</span>)=&#123;[<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>;<span class="number">0</span>,<span class="number">5</span>,<span class="number">8</span>;<span class="number">7</span>,<span class="number">2</span>,<span class="number">9</span>]&#125;;</span><br><span class="line">A(<span class="number">1</span>,<span class="number">2</span>)=&#123;<span class="string">&#x27;Fourier&#x27;</span>&#125;;</span><br><span class="line">A(<span class="number">2</span>,<span class="number">1</span>)=&#123;<span class="number">3</span>+<span class="number">7</span><span class="built_in">i</span>&#125;;</span><br><span class="line">A(<span class="number">2</span>,<span class="number">2</span>)=&#123;<span class="number">1</span>:<span class="number">2</span>:<span class="number">9</span>&#125;;</span><br><span class="line">A&#123;<span class="number">1</span>,<span class="number">1</span>&#125;;                           <span class="comment">%%输出[1,4,3;0,5,8;7,2,9]</span></span><br><span class="line">A&#123;<span class="number">1</span>,<span class="number">1</span>&#125;(<span class="number">2</span>,<span class="number">3</span>);                      <span class="comment">%%取出A&#123;1,1&#125;矩阵中的第二行第三列的元素</span></span><br><span class="line">A(<span class="number">1</span>,<span class="number">1</span>);                           <span class="comment">%%输出[3x3double]</span></span><br><span class="line">A&#123;<span class="number">2</span>,<span class="number">2</span>&#125;;                           <span class="comment">%%输出[1,3,5,7,9]</span></span><br><span class="line"></span><br><span class="line">books=struct(<span class="string">&#x27;name&#x27;</span>,&#123;&#123;<span class="string">&#x27;fourier&#x27;</span>,<span class="string">&#x27;laplace&#x27;</span>&#125;&#125;,<span class="string">&#x27;price&#x27;</span>,[<span class="number">30</span>,<span class="number">40</span>]);</span><br><span class="line">books.name(<span class="number">1</span>);                    <span class="comment">%%输出‘fourier’</span></span><br><span class="line">books.name&#123;<span class="number">1</span>&#125;;                    <span class="comment">%%输出fourier</span></span><br><span class="line"></span><br><span class="line">A=struct(<span class="string">&#x27;data&#x27;</span>,[<span class="number">3</span>,<span class="number">4</span>,<span class="number">7</span>;<span class="number">8</span>,<span class="number">0</span>,<span class="number">1</span>],<span class="string">&#x27;nest&#x27;</span>,struct(<span class="string">&#x27;testnum&#x27;</span>,<span class="string">&#x27;test1&#x27;</span>,<span class="string">&#x27;xdata&#x27;</span>,[<span class="number">4</span>,<span class="number">2</span>,<span class="number">8</span>],<span class="string">&#x27;ydata&#x27;</span>,[<span class="number">7</span>,<span class="number">1</span>,<span class="number">6</span>]));</span><br><span class="line">A(<span class="number">2</span>).data=[<span class="number">9</span>,<span class="number">2</span>,<span class="number">6</span>;<span class="number">7</span>,<span class="number">6</span>,<span class="number">5</span>];</span><br><span class="line">A(<span class="number">2</span>).nest.testnum=<span class="string">&#x27;test2&#x27;</span>;</span><br><span class="line">A(<span class="number">2</span>).nest.xdata=[<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>];</span><br><span class="line">A(<span class="number">2</span>).nest.ydata=[<span class="number">5</span>,<span class="number">0</span>,<span class="number">9</span>];</span><br><span class="line">A.nest;</span><br><span class="line">A(<span class="number">1</span>).nest.testnum;</span><br><span class="line">A(<span class="number">1</span>).nest.xdata;</span><br><span class="line">A(<span class="number">2</span>).nest.ydata;</span><br></pre></td></tr></table></figure>
+<h2 id="程序设计">程序设计</h2>
+<h3 id="顺序结构">顺序结构</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">A=input(<span class="string">&#x27;请输入A矩阵：&#x27;</span>);</span><br><span class="line">A=input(<span class="string">&#x27;what&#x27;&#x27;s your name?&#x27;</span>);            <span class="comment">%%输入字符的时候要加上&#x27;&#x27;</span></span><br><span class="line">A=input(<span class="string">&#x27;what&#x27;&#x27;s your name?&#x27;</span>,<span class="string">&#x27;s&#x27;</span>);        <span class="comment">%%输入字符的时候不用加&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">A=<span class="string">&#x27;Hello World!&#x27;</span>;</span><br><span class="line"><span class="built_in">disp</span>(A);                                  <span class="comment">%%输出项只能是字符串或者是矩阵，如果要输出数字的话要用num2str()将数字转化成数字字符</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%%例题：解方程a*x^2+b*x+c=0</span></span><br><span class="line">a=input(<span class="string">&#x27;请输入a的值&#x27;</span>);</span><br><span class="line">b=input(<span class="string">&#x27;请输入b的值&#x27;</span>);</span><br><span class="line">c=input(<span class="string">&#x27;请输入c的值&#x27;</span>);</span><br><span class="line">delta=b*b<span class="number">-4</span>*a*c;</span><br><span class="line">x=[(-b+<span class="built_in">sqrt</span>(delta))/(<span class="number">2</span>*a),(-b-<span class="built_in">sqrt</span>(delta))/(<span class="number">2</span>*a)];</span><br><span class="line"><span class="built_in">disp</span>([<span class="string">&#x27;x1=&#x27;</span>,num2str(x(<span class="number">1</span>)),<span class="string">&#x27;，x2=&#x27;</span>,num2str(x(<span class="number">2</span>))]);</span><br></pre></td></tr></table></figure>
+<h3 id="选择结构">选择结构</h3>
+<h4 id="if语句">if语句</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">x=input(<span class="string">&#x27;请输入x的值&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> x==<span class="number">10</span></span><br><span class="line">    y=<span class="built_in">cos</span>(x+<span class="number">1</span>)+<span class="built_in">sqrt</span>(x*x+<span class="number">1</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    y=x*<span class="built_in">sqrt</span>(x+<span class="built_in">sqrt</span>(x));</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c=input(<span class="string">&#x27;请输入一个字符&#x27;</span>,<span class="string">&#x27;s&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> c&gt;=<span class="string">&#x27;A&#x27;</span>&amp;&amp;c&lt;=<span class="string">&#x27;Z&#x27;</span></span><br><span class="line">    <span class="built_in">disp</span>(lower(c));</span><br><span class="line"><span class="keyword">elseif</span> c&gt;=<span class="string">&#x27;a&#x27;</span>&amp;&amp;c&lt;=<span class="string">&#x27;z&#x27;</span></span><br><span class="line">    <span class="built_in">disp</span>(upper(c));</span><br><span class="line"><span class="keyword">elseif</span> c&gt;=<span class="string">&#x27;0&#x27;</span>&amp;&amp;c&lt;=<span class="string">&#x27;9&#x27;</span></span><br><span class="line">    <span class="built_in">disp</span>(str2num(c)^<span class="number">2</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">disp</span>(c);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="switch语句">switch语句</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">price=input(<span class="string">&#x27;请输入商品价格&#x27;</span>);</span><br><span class="line">  <span class="keyword">switch</span> <span class="built_in">fix</span>(price/<span class="number">100</span>)             <span class="comment">%%fix函数是将数字向0的方向取整</span></span><br><span class="line">      <span class="keyword">case</span> &#123;<span class="number">0</span>,<span class="number">1</span>&#125;</span><br><span class="line">          rate=<span class="number">0</span>;</span><br><span class="line">      <span class="keyword">case</span> &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">          rate=<span class="number">3</span>/<span class="number">100</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="built_in">num2cell</span>(<span class="number">5</span>:<span class="number">9</span>)            <span class="comment">%%num2cell函数是将数值矩阵转化成单元矩阵&#123;5,6,7,8,9&#125;</span></span><br><span class="line">          rate=<span class="number">5</span>/<span class="number">100</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="built_in">num2cell</span>(<span class="number">10</span>:<span class="number">24</span>)</span><br><span class="line">          rate=<span class="number">8</span>/<span class="number">100</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="built_in">num2cell</span>(<span class="number">24</span>:<span class="number">49</span>)</span><br><span class="line">          rate=<span class="number">10</span>/<span class="number">100</span>;</span><br><span class="line">      <span class="keyword">otherwise</span></span><br><span class="line">          rate=<span class="number">14</span>/<span class="number">100</span>;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  price=price*(<span class="number">1</span>-rate)</span><br></pre></td></tr></table></figure>
+<h3 id="循环结构">循环结构</h3>
+<h4 id="for语句">for语句</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">flower=[];                      <span class="comment">%%判断水仙花数，这是开一个空矩阵</span></span><br><span class="line">    <span class="keyword">for</span> m=<span class="number">100</span>:<span class="number">999</span>;</span><br><span class="line">        m1=<span class="built_in">fix</span>(m/<span class="number">100</span>);          <span class="comment">%%取百位</span></span><br><span class="line">        m2=<span class="built_in">rem</span>(<span class="built_in">fix</span>(m/<span class="number">10</span>),<span class="number">10</span>);   <span class="comment">%%取十位</span></span><br><span class="line">        m3=<span class="built_in">rem</span>(m,<span class="number">10</span>);           <span class="comment">%%取个位</span></span><br><span class="line">        <span class="keyword">if</span> m==m1^<span class="number">3</span>+m2^<span class="number">3</span>+m3^<span class="number">3</span></span><br><span class="line">            flower=[flower,m];  <span class="comment">%%这个语句的意思是将m添加到flower中</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">disp</span>(flower)</span><br><span class="line">  </span><br><span class="line">sum=<span class="number">0</span>;</span><br><span class="line">n=<span class="number">100</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:n</span><br><span class="line">    sum=sum+<span class="number">1</span>/(<span class="built_in">i</span>*<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="while语句">while语句</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sum=<span class="number">0</span>;</span><br><span class="line">n=<span class="number">0</span>;</span><br><span class="line">x=input(<span class="string">&#x27;输入一个数（直到输入0时结束循环）&#x27;</span>);</span><br><span class="line"><span class="keyword">while</span> x~=<span class="number">0</span></span><br><span class="line">    sum=sum+x;</span><br><span class="line">    n=n+<span class="number">1</span>;</span><br><span class="line">    x=input(<span class="string">&#x27;输入一个数（直到输入0时结束循环）&#x27;</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> n&gt;<span class="number">0</span></span><br><span class="line">    sum</span><br><span class="line">    <span class="built_in">mean</span>=sum/n</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="break和continue语句">break和continue语句</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n=<span class="number">100</span>:<span class="number">200</span><span class="comment">%%求100~200之间第一个能被21整除的数</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">rem</span>(n,<span class="number">21</span>)~=<span class="number">0</span></span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    n</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="循环的嵌套">循环的嵌套</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 循环变量=初值:步长:终值</span><br><span class="line">    执行语句<span class="number">1</span>；</span><br><span class="line">    执行语句<span class="number">2</span>；</span><br><span class="line">    ...</span><br><span class="line">    执行语句n；</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> 条件表达式<span class="comment">%%(1为真，0为假)</span></span><br><span class="line">    执行语句<span class="number">1</span>；</span><br><span class="line">    执行语句<span class="number">2</span>；</span><br><span class="line">    ...</span><br><span class="line">    执行语句n；</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> 条件表达式<span class="comment">%%(1为真，0为假)</span></span><br><span class="line">    执行语句<span class="number">1</span>；</span><br><span class="line">    执行语句<span class="number">2</span>；</span><br><span class="line">    ...</span><br><span class="line">    执行语句n；</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> 条件表达式<span class="comment">%%(1为真，0为假)</span></span><br><span class="line">    执行语句<span class="number">1</span>；</span><br><span class="line">    执行语句<span class="number">2</span>；</span><br><span class="line">    ...</span><br><span class="line">    执行语句n；</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    执行语句<span class="number">1</span>；</span><br><span class="line">    执行语句<span class="number">2</span>；</span><br><span class="line">    ...</span><br><span class="line">    执行语句n；</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> 表达式(数值或字符串)</span><br><span class="line">    <span class="keyword">case</span> 数值或字符串<span class="number">1</span></span><br><span class="line">        语句<span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> 数值或字符串<span class="number">2</span></span><br><span class="line">        语句<span class="number">2</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">case</span> 数值或字符串n</span><br><span class="line">        语句n</span><br><span class="line">    <span class="keyword">otherwise</span>(可省略)</span><br><span class="line">        语句</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数">函数</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sum=<span class="number">0</span>;</span><br><span class="line">n=input(<span class="string">&#x27;请输入n的值&#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:n</span><br><span class="line">    sum=sum+<span class="built_in">factor</span>(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>([<span class="string">&#x27;1到&#x27;</span>,num2str(n),<span class="string">&#x27;的阶乘的和为&#x27;</span>,num2str(sum)]);</span><br></pre></td></tr></table></figure>
+<h2 id="绘图">绘图</h2>
+<h3 id="二维图像">二维图像</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">100</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x).*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*x);<span class="comment">%%2是标量，exp和sin是矩阵，所以2和exp是数量乘法，exp和sin是点乘</span></span><br><span class="line"><span class="built_in">plot</span>(x,y);</span><br><span class="line">xlim([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>]);</span><br><span class="line"></span><br><span class="line">t=-<span class="built_in">pi</span>:<span class="built_in">pi</span>/<span class="number">100</span>:<span class="built_in">pi</span>;</span><br><span class="line">x=t.*<span class="built_in">cos</span>(<span class="number">3</span>*t);</span><br><span class="line">y=t.*<span class="built_in">sin</span>(t).*<span class="built_in">sin</span>(t);</span><br><span class="line"><span class="built_in">plot</span>(x,y);<span class="comment">%%参数方程</span></span><br><span class="line"></span><br><span class="line">x=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">100</span>);<span class="comment">%%生成0~2*pi，元素个数为100的行向量</span></span><br><span class="line">y=[<span class="built_in">sin</span>(x);<span class="built_in">cos</span>(x)];</span><br><span class="line"><span class="built_in">plot</span>(x,y);</span><br><span class="line">xlim([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>]);</span><br><span class="line"></span><br><span class="line">t=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">100</span>);</span><br><span class="line">x=[t;t]&#x27;;</span><br><span class="line">y=[<span class="built_in">sin</span>(t);<span class="built_in">cos</span>(t)]&#x27;;</span><br><span class="line"><span class="built_in">plot</span>(x,y);</span><br><span class="line"></span><br><span class="line">t=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">100</span>);</span><br><span class="line">x=[t;t];</span><br><span class="line">y=[<span class="built_in">sin</span>(t);<span class="built_in">cos</span>(t)];</span><br><span class="line"><span class="built_in">plot</span>(x,y);<span class="comment">%%这是个什么玩意儿？？？</span></span><br><span class="line"></span><br><span class="line">x=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">100</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,<span class="built_in">sin</span>(x),x,<span class="number">2</span>*<span class="built_in">sin</span>(x),x,<span class="number">3</span>*<span class="built_in">sin</span>(x));</span><br><span class="line">xlim([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>]);</span><br><span class="line"></span><br><span class="line">x=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">100</span>);</span><br><span class="line">y1=<span class="built_in">sin</span>(x);</span><br><span class="line">y2=<span class="number">2</span>*<span class="built_in">sin</span>(x);</span><br><span class="line">y3=<span class="number">3</span>*<span class="built_in">sin</span>(x);</span><br><span class="line">x=[x;x;x]&#x27;;<span class="comment">%%注意变成行向量</span></span><br><span class="line">y=[y1;y2;y3]&#x27;;</span><br><span class="line"><span class="built_in">plot</span>(x,y,x,<span class="built_in">cos</span>(x));</span><br><span class="line">xlim([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>]);</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">200</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y1=<span class="built_in">exp</span>(<span class="number">-0.5</span>*x).*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*x);</span><br><span class="line">y2=<span class="built_in">sin</span>(x);</span><br><span class="line">plotyy(x,y1,x,y2);<span class="comment">%%双纵坐标，左边是y1，右边是y2</span></span><br><span class="line"></span><br><span class="line">x=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">10</span>,<span class="number">100</span>);<span class="comment">%%产生自变量向量x</span></span><br><span class="line">y=[];<span class="comment">%%y的初始值为空</span></span><br><span class="line"><span class="keyword">for</span> x0=x<span class="comment">%%将函数值追加到y中</span></span><br><span class="line">    <span class="keyword">if</span> x0&gt;=<span class="number">8</span></span><br><span class="line">        y=[y,<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">elseif</span> x0&gt;=<span class="number">6</span>&amp;&amp;x0&lt;<span class="number">8</span></span><br><span class="line">        y=[y,<span class="number">5</span>-x0/<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">elseif</span> x0&gt;=<span class="number">4</span>&amp;&amp;x0&lt;<span class="number">6</span></span><br><span class="line">        y=[y,<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">elseif</span> x0&gt;=<span class="number">0</span>&amp;&amp;x0&lt;<span class="number">4</span></span><br><span class="line">        y=[y,<span class="built_in">sqrt</span>(x0)];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">plot</span>(x,y);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">10</span>,<span class="number">0</span>,<span class="number">2.5</span>]);<span class="comment">%%设置坐标轴，x坐标轴是[0，10]，y坐标轴是[0,2.5]</span></span><br><span class="line">title(<span class="string">&#x27;分段函数曲线&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Variable X&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;Variable Y&#x27;</span>);</span><br><span class="line">text(<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="string">&#x27;y=x^&#123;1/2&#125;&#x27;</span>);<span class="comment">%%在指定位置处添加图形说明</span></span><br><span class="line">text(<span class="number">4.5</span>,<span class="number">1.9</span>,<span class="string">&#x27;y=2&#x27;</span>);</span><br><span class="line">text(<span class="number">7.3</span>,<span class="number">1.5</span>,<span class="string">&#x27;y=5-x/2&#x27;</span>);</span><br><span class="line">text(<span class="number">8.5</span>,<span class="number">0.9</span>,<span class="string">&#x27;y=1&#x27;</span>);</span><br><span class="line"></span><br><span class="line">x=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">60</span>);</span><br><span class="line">y=<span class="built_in">sin</span>(x);</span><br><span class="line">z=<span class="built_in">cos</span>(x);</span><br><span class="line">t=<span class="built_in">tan</span>(x);</span><br><span class="line">ct=<span class="built_in">cot</span>(x);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);<span class="comment">%%将当前图形窗口分割成2×2，并选中1号区</span></span><br><span class="line"><span class="built_in">plot</span>(x,y);</span><br><span class="line">title(<span class="string">&#x27;sinx&#x27;</span>);axis([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">-1</span>,<span class="number">1</span>]);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,z);</span><br><span class="line">title(<span class="string">&#x27;cosx&#x27;</span>);axis([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">-1</span>,<span class="number">1</span>]);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,t);</span><br><span class="line">title(<span class="string">&#x27;tanx&#x27;</span>);axis([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">-40</span>,<span class="number">40</span>]);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,ct);</span><br><span class="line">title(<span class="string">&#x27;cotx&#x27;</span>);axis([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">-40</span>,<span class="number">40</span>]);</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">10</span>;</span><br><span class="line">y=<span class="number">10</span>*x.*x;</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,y);title(<span class="string">&#x27;直角坐标曲线&#x27;</span>);grid;</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">semilogx(x,y);title(<span class="string">&#x27;x半对数坐标曲线&#x27;</span>);grid;</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">semilogy(x,y);title(<span class="string">&#x27;y半对数坐标曲线&#x27;</span>);grid;</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line">loglog(x,y);title(<span class="string">&#x27;全对数坐标曲线&#x27;</span>);grid;</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y=<span class="built_in">sin</span>(x);</span><br><span class="line"><span class="built_in">figure</span>;<span class="comment">%%建立一个幕布，可以不写</span></span><br><span class="line"><span class="built_in">plot</span>(x,y);</span><br><span class="line">title(<span class="string">&#x27;y=sin(x)&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;x&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;y&#x27;</span>);</span><br><span class="line">xlim([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>]);<span class="comment">%%右端对齐</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">hold</span> on<span class="comment">%%图形保持</span></span><br><span class="line"><span class="built_in">plot</span>(<span class="built_in">cos</span>(<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">20</span>:<span class="number">2</span>*<span class="built_in">pi</span>));</span><br><span class="line"><span class="built_in">plot</span>(<span class="built_in">sin</span>(<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">20</span>:<span class="number">2</span>*<span class="built_in">pi</span>));</span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"></span><br><span class="line">x=(<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">100</span>:<span class="number">2</span>*<span class="built_in">pi</span>)&#x27;;</span><br><span class="line">y1=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x)*[<span class="number">1</span>,<span class="number">-1</span>];<span class="comment">%%这是包络线</span></span><br><span class="line"><span class="built_in">plot</span>(x,y1,<span class="string">&#x27;b:&#x27;</span>);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">-2</span>,<span class="number">2</span>]);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">y2=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x).*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*x);</span><br><span class="line"><span class="built_in">plot</span>(x,y2,<span class="string">&#x27;k&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;包络线&#x27;</span>,<span class="string">&#x27;包络线&#x27;</span>,<span class="string">&#x27;包络线&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line">grid;</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">0.01</span>:<span class="number">20</span>;</span><br><span class="line">y1=<span class="number">200</span>*<span class="built_in">exp</span>(<span class="number">-0.05</span>*x).*<span class="built_in">sin</span>(x);</span><br><span class="line">y2=<span class="number">0.8</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x).*<span class="built_in">sin</span>(<span class="number">10</span>*x);</span><br><span class="line"><span class="built_in">figure</span></span><br><span class="line">[AX,H1,H2]=plotyy(x,y1,x,y2,<span class="string">&#x27;plot&#x27;</span>);</span><br><span class="line">set(get(AX(<span class="number">1</span>),<span class="string">&#x27;Ylabel&#x27;</span>),<span class="string">&#x27;String&#x27;</span>,<span class="string">&#x27;slow decay&#x27;</span>);</span><br><span class="line">set(get(AX(<span class="number">2</span>),<span class="string">&#x27;Ylabel&#x27;</span>),<span class="string">&#x27;String&#x27;</span>,<span class="string">&#x27;fast decay&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Time(\musec)&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;multiple decay rates&#x27;</span>);</span><br><span class="line">set(H1,<span class="string">&#x27;linestyle&#x27;</span>,<span class="string">&#x27;--&#x27;</span>);</span><br><span class="line">set(H2,<span class="string">&#x27;linestyle&#x27;</span>,<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line"></span><br><span class="line">x=(<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">100</span>:<span class="number">2</span>*<span class="built_in">pi</span>)&#x27;;</span><br><span class="line">y1=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x)*[<span class="number">1</span>,<span class="number">-1</span>];<span class="comment">%%这是包络线</span></span><br><span class="line">y2=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x).*<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*x);</span><br><span class="line"><span class="built_in">plot</span>(x,y1,<span class="string">&#x27;k:&#x27;</span>,x,y2,<span class="string">&#x27;b--&#x27;</span>);<span class="comment">%%控制图像的颜色和线形</span></span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">0.5</span>:<span class="number">4</span>*<span class="built_in">pi</span>;</span><br><span class="line">y=<span class="built_in">sin</span>(x);h=<span class="built_in">cos</span>(x);w=<span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-x));</span><br><span class="line">g=(<span class="number">1.</span>/<span class="number">2</span>*(<span class="number">2</span>*<span class="built_in">pi</span>)^<span class="number">0.5</span>).*<span class="built_in">exp</span>((<span class="number">-1.</span>*(x<span class="number">-2</span>*<span class="built_in">pi</span>).^<span class="number">2</span>)./<span class="number">4</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;bd-&#x27;</span>,x,h,<span class="string">&#x27;gp:&#x27;</span>,x,w,<span class="string">&#x27;rp-&#x27;</span>,x,g,<span class="string">&#x27;c^-&#x27;</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;sin(x)&#x27;</span>,<span class="string">&#x27;cos(x)&#x27;</span>,<span class="string">&#x27;sigmoid&#x27;</span>,<span class="string">&#x27;gauss function&#x27;</span>);</span><br><span class="line"></span><br><span class="line">t=<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">50</span>:<span class="number">20</span>*<span class="built_in">pi</span>;</span><br><span class="line">r1=<span class="built_in">exp</span>(<span class="built_in">cos</span>(t))<span class="number">-2</span>*<span class="built_in">cos</span>(<span class="number">4</span>*t)+<span class="built_in">sin</span>(t/<span class="number">12</span>).^<span class="number">5</span>;</span><br><span class="line">r2=<span class="built_in">exp</span>(<span class="built_in">cos</span>(t-<span class="built_in">pi</span>/<span class="number">2</span>))<span class="number">-2</span>*<span class="built_in">cos</span>(<span class="number">4</span>*(t-<span class="built_in">pi</span>/<span class="number">2</span>))+<span class="built_in">sin</span>(t/<span class="number">12</span>).^<span class="number">5</span>;<span class="comment">%%旋转90°</span></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>);</span><br><span class="line">polar(t,r1);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">polar(t,r2);</span><br></pre></td></tr></table></figure>
+<h3 id="三维图像">三维图像</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">t=<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">50</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">x=<span class="number">8</span>*<span class="built_in">cos</span>(t);</span><br><span class="line">y=<span class="number">4</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*<span class="built_in">sin</span>(t);</span><br><span class="line">z=<span class="number">-4</span>*<span class="built_in">sqrt</span>(<span class="number">2</span>)*<span class="built_in">sin</span>(t);</span><br><span class="line"><span class="built_in">plot3</span>(x,y,z,<span class="string">&#x27;p&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;line in 3D space&#x27;</span>);</span><br><span class="line">text(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="string">&#x27;origin&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;X&#x27;</span>);ylabel(<span class="string">&#x27;Y&#x27;</span>);zlabel(<span class="string">&#x27;Z&#x27;</span>);</span><br><span class="line">grid;</span><br><span class="line"></span><br><span class="line">x=<span class="number">7</span>:<span class="number">29</span>;y=<span class="number">16</span>:<span class="number">35</span>;</span><br><span class="line">[x,y]=<span class="built_in">meshgrid</span>(x,y);<span class="comment">%%在[7,29]×[16,35]区域内生成网格坐标</span></span><br><span class="line">z=<span class="number">2</span>*x+<span class="number">5</span>*y;</span><br><span class="line">k=<span class="built_in">find</span>(z==<span class="number">126</span>);<span class="comment">%%找到z=126的位置，就是求不定方程的解</span></span><br><span class="line">x(k)&#x27;,y(k)&#x27;;</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y=<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">[x,y]=<span class="built_in">meshgrid</span>(x,y);</span><br><span class="line">z=<span class="built_in">sin</span>(y).*<span class="built_in">cos</span>(x);</span><br><span class="line">mesh(x,y,z);</span><br><span class="line">xlabel(<span class="string">&#x27;x-axis&#x27;</span>);ylabel(<span class="string">&#x27;y-axis&#x27;</span>);zlabel(<span class="string">&#x27;z-axis&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;三维网格图&#x27;</span>);</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y=<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">[x,y]=<span class="built_in">meshgrid</span>(x,y);</span><br><span class="line">z=<span class="built_in">sin</span>(y).*<span class="built_in">cos</span>(x);</span><br><span class="line">surf(x,y,z);</span><br><span class="line">xlabel(<span class="string">&#x27;x-axis&#x27;</span>);ylabel(<span class="string">&#x27;y-axis&#x27;</span>);zlabel(<span class="string">&#x27;z-axis&#x27;</span>);</span><br><span class="line">title(<span class="string">&#x27;三维曲面图&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="高级应用">高级应用</h2>
+<h3 id="多项式计算">多项式计算</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%多项式加减</span></span><br><span class="line">a=[<span class="number">1</span>,<span class="number">-2</span>,<span class="number">5</span>,<span class="number">3</span>];</span><br><span class="line">b=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">6</span>,<span class="number">-1</span>];</span><br><span class="line">c=a+b;</span><br><span class="line"><span class="comment">%%多项式乘除</span></span><br><span class="line">a=[<span class="number">1</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">-10</span>];</span><br><span class="line">b=[<span class="number">2</span>,<span class="number">-1</span>,<span class="number">3</span>];</span><br><span class="line">c=conv(a,b);            <span class="comment">%%多项式乘法</span></span><br><span class="line">d=deconv(a,b);          <span class="comment">%%多项式除法</span></span><br><span class="line"><span class="comment">%%多项式求导</span></span><br><span class="line">p=polyder(P);           <span class="comment">%%对P求导</span></span><br><span class="line">p=polyder(P,Q);         <span class="comment">%%对P,Q求导</span></span><br><span class="line">[p,q]=polyder(P,Q);     <span class="comment">%%对P/Q求导，分子储存在p，分母储存在q</span></span><br><span class="line"><span class="comment">%%多项式求值</span></span><br><span class="line">Y=polyval(A,x);         <span class="comment">%%A是多项式，x可以是数字，向量，矩阵</span></span><br><span class="line"><span class="comment">%%多项式求根</span></span><br><span class="line">roots(P);               <span class="comment">%%求多项式的根</span></span><br></pre></td></tr></table></figure>
+<h3 id="数值微分">数值微分</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DX=diff(X);             <span class="comment">%%计算X的向前差分，即DX(i)=X(i+1)-X(i)</span></span><br><span class="line">DX=diff(X);             <span class="comment">%%计算X的n阶向前差分，即DX(i)=X(i+n)-X(i)</span></span><br></pre></td></tr></table></figure>
+<h3 id="插值">插值</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">4</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">y=<span class="built_in">sin</span>(x);</span><br><span class="line">xq=<span class="number">0</span>:<span class="built_in">pi</span>/<span class="number">16</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">yp1=interp1(x,y,xq);            <span class="comment">%%对x线性插值,并作出xq对应的值</span></span><br><span class="line">subplot(<span class="number">211</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;o&#x27;</span>,xq,yp1,<span class="string">&#x27;:.&#x27;</span>);</span><br><span class="line">xlim([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>]);</span><br><span class="line">subplot(<span class="number">212</span>);</span><br><span class="line">yq2=interp1(x,y,xq,<span class="string">&#x27;spline&#x27;</span>);   <span class="comment">%%对x样条插值,并作出xq对应的值</span></span><br><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;o&#x27;</span>,xq,yq2,<span class="string">&#x27;:.&#x27;</span>);</span><br><span class="line">xlim([<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>]);</span><br><span class="line"></span><br><span class="line"> x=<span class="number">1</span>:<span class="number">100</span>;</span><br><span class="line">y=<span class="built_in">randn</span>(<span class="number">1</span>,<span class="number">100</span>);</span><br><span class="line">xq=<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">100</span>;</span><br><span class="line">yp1=interp1(x,y,xq);            <span class="comment">%%对x线性插值,并作出xq对应的值</span></span><br><span class="line">subplot(<span class="number">211</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;o&#x27;</span>,xq,yp1,<span class="string">&#x27;:.&#x27;</span>);</span><br><span class="line">xlim([<span class="number">1</span>,<span class="number">100</span>]);</span><br><span class="line">subplot(<span class="number">212</span>);</span><br><span class="line">yq2=interp1(x,y,xq,<span class="string">&#x27;spline&#x27;</span>);   <span class="comment">%%对x样条插值,并作出xq对应的值</span></span><br><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;o&#x27;</span>,xq,yq2,<span class="string">&#x27;:.&#x27;</span>);</span><br><span class="line">xlim([<span class="number">1</span>,<span class="number">100</span>]);                  <span class="comment">%%这种方法噪音太大了</span></span><br><span class="line"></span><br><span class="line">x=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">y=[<span class="number">12</span>,<span class="number">16</span>,<span class="number">31</span>,<span class="number">10</span>,<span class="number">6</span>];</span><br><span class="line">xq=[<span class="number">0</span>,<span class="number">0.5</span>,<span class="number">1.5</span>,<span class="number">5.5</span>,<span class="number">6</span>];</span><br><span class="line">yq1=interp1(x,y,xq,<span class="string">&#x27;pchip&#x27;</span>);           <span class="comment">%%高阶外插</span></span><br><span class="line">yq2=interp1(x,y,xq,<span class="string">&#x27;liner&#x27;</span>,<span class="string">&#x27;extrap&#x27;</span>);  <span class="comment">%%低阶线性外插（数据少）</span></span><br><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;o&#x27;</span>,xq,yq1,xq,yq2);</span><br></pre></td></tr></table></figure>
+<h3 id="拟合">拟合</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">X=[<span class="number">-1</span>,<span class="number">-0.75</span>,<span class="number">-0.50</span>,<span class="number">-0.25</span>,<span class="number">0</span>,<span class="number">0.25</span>,<span class="number">0.50</span>,<span class="number">0.75</span>,<span class="number">1.00</span>];</span><br><span class="line">X2=[<span class="number">-1</span>:<span class="number">0.01</span>:<span class="number">1</span>];</span><br><span class="line">Y=[<span class="number">-0.2209</span>,<span class="number">0.3295</span>,<span class="number">0.8826</span>,<span class="number">1.4392</span>,<span class="number">2.0003</span>,<span class="number">2.5645</span>,<span class="number">3.1334</span>,<span class="number">3.7061</span>,<span class="number">4.2836</span>];</span><br><span class="line">P1=polyfit(X,Y,<span class="number">1</span>);</span><br><span class="line">P2=polyfit(X,Y,<span class="number">2</span>);</span><br><span class="line">Y1=polyval(P1,X2);</span><br><span class="line">Y2=polyval(P2,X2);</span><br><span class="line"><span class="built_in">plot</span>(X,Y,<span class="string">&#x27;bx&#x27;</span>,X2,Y1,<span class="string">&#x27;r&#x27;</span>,X2,Y2,<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">xlim([<span class="number">-1.2</span>,<span class="number">1.2</span>]);</span><br><span class="line">ylim([<span class="number">-0.5</span>,<span class="number">4.5</span>]);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;数据点&#x27;</span>,<span class="string">&#x27;一次拟合多项式&#x27;</span>,<span class="string">&#x27;二次拟合多项式&#x27;</span>);</span><br><span class="line">grid;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"> xdata=[<span class="number">0.9</span>,<span class="number">1.5</span>,<span class="number">13.8</span>,<span class="number">19.8</span>,<span class="number">24.1</span>,<span class="number">28.2</span>,<span class="number">35.2</span>,<span class="number">60.3</span>,<span class="number">74.6</span>,<span class="number">81.3</span>];</span><br><span class="line"> ydata=[<span class="number">455.2</span>,<span class="number">428.6</span>,<span class="number">124.1</span>,<span class="number">67.3</span>,<span class="number">43.2</span>,<span class="number">28.1</span>,<span class="number">13.1</span>,<span class="number">-0.4</span>,<span class="number">-1.3</span>,<span class="number">-1.5</span>];</span><br><span class="line"> fun=@(x,xdata)x(<span class="number">1</span>)*<span class="built_in">exp</span>(x(<span class="number">2</span>)*xdata);</span><br><span class="line"> x0=[<span class="number">100</span>,<span class="number">-1</span>];</span><br><span class="line"> options=optimoptions(<span class="string">&#x27;lsqcurvefit&#x27;</span>,<span class="string">&#x27;Algorithm&#x27;</span>,<span class="string">&#x27;trust-region-reflective&#x27;</span>);</span><br><span class="line"> lb=[<span class="number">-500</span>,<span class="number">-500</span>];</span><br><span class="line"> ub=[<span class="number">500</span>,<span class="number">500</span>];</span><br><span class="line"> x=lsqcurvefit(fun,x0,xdata,ydata,lb,ub,options);</span><br><span class="line"> times=<span class="built_in">linspace</span>(xdata(<span class="number">1</span>),xdata(<span class="keyword">end</span>));</span><br><span class="line"> <span class="built_in">plot</span>(xdata.ydata,<span class="string">&#x27;ko&#x27;</span>,times,fun(x,times),<span class="string">&#x27;b-&#x27;</span>);</span><br><span class="line"> <span class="built_in">legend</span>(<span class="string">&#x27;data&#x27;</span>,<span class="string">&#x27;fitted exponential&#x27;</span>);?????</span><br><span class="line"> </span><br><span class="line">xdata=[<span class="number">0.9</span> <span class="number">1.5</span> <span class="number">13.8</span> <span class="number">19.8</span> <span class="number">24.1</span> <span class="number">28.2</span> <span class="number">35.2</span> <span class="number">60.3</span> <span class="number">74.6</span> <span class="number">81.3</span>];</span><br><span class="line">ydata=[<span class="number">455.2</span> <span class="number">428.6</span> <span class="number">124.1</span> <span class="number">67.3</span> <span class="number">43.2</span> <span class="number">28.1</span> <span class="number">13.1</span> <span class="number">-0.4</span> <span class="number">-1.3</span> <span class="number">-1.5</span>];</span><br><span class="line">fun=@(x,xdata)x(<span class="number">1</span>)*<span class="built_in">exp</span>(x(<span class="number">2</span>)*xdata);</span><br><span class="line">x0=[<span class="number">100</span>,<span class="number">-1</span>];</span><br><span class="line">x=lsqcurvefit(fun,x0,xdata,ydata);</span><br><span class="line">times = <span class="built_in">linspace</span>(xdata(<span class="number">1</span>),xdata(<span class="keyword">end</span>));</span><br><span class="line"><span class="built_in">plot</span>(xdata,ydata,<span class="string">&#x27;ko&#x27;</span>,times,fun(x,times),<span class="string">&#x27;b-&#x27;</span>)</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Data&#x27;</span>,<span class="string">&#x27;Fitted exponential&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;Data and Fitted Curve&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
       
     </div>
