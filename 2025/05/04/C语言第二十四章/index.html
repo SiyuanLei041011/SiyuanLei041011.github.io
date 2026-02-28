@@ -19,26 +19,26 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="我们在第 6 节 “折半查找”讲过，函数的调用者和函数的实现者之间订立了一个契约，在调用函数之前，调用者要为实现者提供某些条件，在函数返回时，实现者要对调用者尽到某些义务。如何描述这个契约呢？首先靠函数接口来描述，即函数名，参数，返回值，只要函数和参数的名字起得合理，参数和返回值的类型定得准确，至于这个函数怎么用，调用者单看函数接口就能猜出八九分了。函数接口并不能表达函数的全部语义，这时文档就起">
+    <meta name="description" content="我们在第 6 节 “折半查找”讲过，函数的调用者和函数的实现者之间订立了一个契约，在调用函数之前，调用者要为实现者提供某些条件，在函数返回时，实现者要对调用者尽到某些义务。如何描述这个契约呢？首先靠函数接口来描述，即函数名，参数，返回值，只要函数和参数的名字起得合理，参数和返回值的类型定得准确，至于这个函数怎么用，调用者单看函数接口就能猜出八九分了。函数接口并不能表达函数的全部语义，这时文档就起了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言:函数接口">
 <meta property="og:url" content="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E7%AB%A0/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="我们在第 6 节 “折半查找”讲过，函数的调用者和函数的实现者之间订立了一个契约，在调用函数之前，调用者要为实现者提供某些条件，在函数返回时，实现者要对调用者尽到某些义务。如何描述这个契约呢？首先靠函数接口来描述，即函数名，参数，返回值，只要函数和参数的名字起得合理，参数和返回值的类型定得准确，至于这个函数怎么用，调用者单看函数接口就能猜出八九分了。函数接口并不能表达函数的全部语义，这时文档就起">
+<meta property="og:description" content="我们在第 6 节 “折半查找”讲过，函数的调用者和函数的实现者之间订立了一个契约，在调用函数之前，调用者要为实现者提供某些条件，在函数返回时，实现者要对调用者尽到某些义务。如何描述这个契约呢？首先靠函数接口来描述，即函数名，参数，返回值，只要函数和参数的名字起得合理，参数和返回值的类型定得准确，至于这个函数怎么用，调用者单看函数接口就能猜出八九分了。函数接口并不能表达函数的全部语义，这时文档就起了">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:\blog\Blog\images\C\interface.synopsis.png">
-<meta property="og:image" content="c:\blog\Blog\images\C\interface.description.png">
-<meta property="og:image" content="c:\blog\Blog\images\C\interface.return.png">
-<meta property="og:image" content="c:\blog\Blog\images\C\interface.bugs.png">
-<meta property="og:image" content="c:\blog\Blog\images\C\interface.malloc.png">
-<meta property="og:image" content="c:\blog\Blog\images\C\interface.vaarg.png">
+<meta property="og:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.synopsis.png">
+<meta property="og:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.description.png">
+<meta property="og:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.return.png">
+<meta property="og:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.bugs.png">
+<meta property="og:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.malloc.png">
+<meta property="og:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.vaarg.png">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
 <meta property="article:modified_time" content="2025-08-09T09:20:36.970Z">
 <meta property="article:author" content="SiyuanLei">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:\blog\Blog\images\C\interface.synopsis.png">
+<meta name="twitter:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.synopsis.png">
 
 
 <link rel="canonical" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E7%AB%A0/">
@@ -285,48 +285,22 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>我们在第 6 节
-“折半查找”讲过，函数的调用者和函数的实现者之间订立了一个契约，在调用函数之前，调用者要为实现者提供某些条件，在函数返回时，实现者要对调用者尽到某些义务。如何描述这个契约呢？首先靠函数接口来描述，即函数名，参数，返回值，只要函数和参数的名字起得合理，参数和返回值的类型定得准确，至于这个函数怎么用，调用者单看函数接口就能猜出八九分了。函数接口并不能表达函数的全部语义，这时文档就起了重要的补充作用，函数的文档该写什么，怎么写，Man
-Page为我们做了很好的榜样。</p>
-<p>函数接口一旦和指针结合起来就变得异常灵活，有五花八门的用法，但是万变不离其宗，只要像图
-23.1
-“指针的基本概念”那样画图分析，指针的任何用法都能分析清楚，所以，如果上一章你真正学明白了，本章不用学也能自己领悟出来，之所以写这一章是为了照顾悟性不高的读者。本章把函数接口总结成几类常见的模式，对于每种模式，一方面讲函数接口怎么写，另一方面讲函数的文档怎么写。</p>
+    <div class="post-body" itemprop="articleBody"><p>我们在第 6 节 “折半查找”讲过，函数的调用者和函数的实现者之间订立了一个契约，在调用函数之前，调用者要为实现者提供某些条件，在函数返回时，实现者要对调用者尽到某些义务。如何描述这个契约呢？首先靠函数接口来描述，即函数名，参数，返回值，只要函数和参数的名字起得合理，参数和返回值的类型定得准确，至于这个函数怎么用，调用者单看函数接口就能猜出八九分了。函数接口并不能表达函数的全部语义，这时文档就起了重要的补充作用，函数的文档该写什么，怎么写，Man Page为我们做了很好的榜样。</p>
+<p>函数接口一旦和指针结合起来就变得异常灵活，有五花八门的用法，但是万变不离其宗，只要像图 23.1 “指针的基本概念”那样画图分析，指针的任何用法都能分析清楚，所以，如果上一章你真正学明白了，本章不用学也能自己领悟出来，之所以写这一章是为了照顾悟性不高的读者。本章把函数接口总结成几类常见的模式，对于每种模式，一方面讲函数接口怎么写，另一方面讲函数的文档怎么写。</p>
 <h2 id="本章预备知识">本章预备知识</h2>
-<p>这一节介绍本章的范例代码要用的几个C标准库函数。我们先体会一下这几个函数的接口是怎么设计的，Man
-Page是怎么写的。其它常用的C标准库函数将在下一章介绍。</p>
+<p>这一节介绍本章的范例代码要用的几个C标准库函数。我们先体会一下这几个函数的接口是怎么设计的，Man Page是怎么写的。其它常用的C标准库函数将在下一章介绍。</p>
 <h3 id="strcpy和strncpy">strcpy和strncpy</h3>
-<p>从现在开始我们要用到很多库函数，在学习每个库函数时一定要看Man
-Page。Man
-Page随时都在我们手边，想查什么只要敲一个命令就行，然而很多初学者就是不喜欢看Man
-Page，宁可满世界去查书、查资料，也不愿意看Man
-Page。据我分析原因有三：</p>
+<p>从现在开始我们要用到很多库函数，在学习每个库函数时一定要看Man Page。Man Page随时都在我们手边，想查什么只要敲一个命令就行，然而很多初学者就是不喜欢看Man Page，宁可满世界去查书、查资料，也不愿意看Man Page。据我分析原因有三：</p>
 <p>英文不好。那还是先学好了英文再学编程吧，否则即使你把这本书都学透了也一样无法胜任开发工作，因为你没有进一步学习的能力。</p>
-<p>Man Page的语言不够友好。Man
-Page不像本书这样由浅入深地讲解，而是平铺直叙，不过看习惯了就好了，每个Man
-Page都不长，多看几遍自然可以抓住重点，理清头绪。本节分析一个例子，帮助读者把握Man
-Page的语言特点。</p>
-<p>Man
-Page通常没有例子。描述一个函数怎么用，一靠接口，二靠文档，而不是靠例子。函数的用法无非是本章所总结的几种模式，只要把本章学透了，你就不需要每个函数都得有个例子教你怎么用了。</p>
-<p>总之，Man
-Page是一定要看的，一开始看不懂硬着头皮也要看，为了鼓励读者看Man
-Page，本书不会像[K&amp;R]那样把库函数总结成一个附录附在书后面。现在我们来分析strcpy(3)。</p>
-<figure>
-<img src="C:\blog\Blog\images\C\interface.synopsis.png"
-alt="strcpy(3)" />
-<figcaption aria-hidden="true">strcpy(3)</figcaption>
-</figure>
-<p>这个Man
-Page描述了两个函数，<code>strcpy</code>和<code>strncpy</code>，敲命令<code>man strcpy</code>或者<code>man strncpy</code>都可以看到这个Man
-Page。这两个函数的作用是把一个字符串拷贝给另一个字符串。SYNOPSIS部分给出了这两个函数的原型，以及要用这些函数需要包含哪些头文件。参数<code>dest</code>、<code>src</code>和<code>n</code>都加了下划线，有时候并不想从头到尾阅读整个Man
-Page，而是想查一下某个参数的含义，通过下划线和参数名就能很快找到你关心的部分。</p>
+<p>Man Page的语言不够友好。Man Page不像本书这样由浅入深地讲解，而是平铺直叙，不过看习惯了就好了，每个Man Page都不长，多看几遍自然可以抓住重点，理清头绪。本节分析一个例子，帮助读者把握Man Page的语言特点。</p>
+<p>Man Page通常没有例子。描述一个函数怎么用，一靠接口，二靠文档，而不是靠例子。函数的用法无非是本章所总结的几种模式，只要把本章学透了，你就不需要每个函数都得有个例子教你怎么用了。</p>
+<p>总之，Man Page是一定要看的，一开始看不懂硬着头皮也要看，为了鼓励读者看Man Page，本书不会像[K&amp;R]那样把库函数总结成一个附录附在书后面。现在我们来分析strcpy(3)。</p>
+<p><img src="C:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.synopsis.png" alt="strcpy(3)"></p>
+<p>这个Man Page描述了两个函数，<code>strcpy</code>和<code>strncpy</code>，敲命令<code>man strcpy</code>或者<code>man strncpy</code>都可以看到这个Man Page。这两个函数的作用是把一个字符串拷贝给另一个字符串。SYNOPSIS部分给出了这两个函数的原型，以及要用这些函数需要包含哪些头文件。参数<code>dest</code>、<code>src</code>和<code>n</code>都加了下划线，有时候并不想从头到尾阅读整个Man Page，而是想查一下某个参数的含义，通过下划线和参数名就能很快找到你关心的部分。</p>
 <p><code>dest</code>表示Destination，<code>src</code>表示Source，看名字就能猜到是把<code>src</code>所指向的字符串拷贝到<code>dest</code>所指向的内存空间。这一点从两个参数的类型也能看出来，<code>dest</code>是<code>char *</code>型的，而<code>src</code>是<code>const char *</code>型的，说明<code>src</code>所指向的内存空间在函数中只能读不能改写，而<code>dest</code>所指向的内存空间在函数中是要改写的，显然改写的目的是当函数返回后调用者可以读取改写的结果。因此可以猜到<code>strcpy</code>函数是这样用的：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buf[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">strcpy</span>(buf, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="built_in">printf</span>(buf);</span><br></pre></td></tr></table></figure>
 <p>至于<code>strncpy</code>的参数<code>n</code>是干什么用的，单从函数接口猜不出来，就需要看下面的文档。</p>
-<figure>
-<img src="C:\blog\Blog\images\C\interface.description.png"
-alt="strcpy(3)" />
-<figcaption aria-hidden="true">strcpy(3)</figcaption>
-</figure>
+<p><img src="C:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.description.png" alt="strcpy(3)"></p>
 <p>在文档中强调了<code>strcpy</code>在拷贝字符串时会把结尾的<code>'\0'</code>也拷到<code>dest</code>中，因此保证了<code>dest</code>中是以<code>'\0'</code>结尾的字符串。但另外一个要注意的问题是，<code>strcpy</code>只知道<code>src</code>字符串的首地址，不知道长度，它会一直拷贝到<code>'\0'</code>为止，所以<code>dest</code>所指向的内存空间要足够大，否则有可能写越界，例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buf[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">strcpy</span>(buf, <span class="string">&quot;hello world&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p>如果没有保证<code>src</code>所指向的内存空间以<code>'\0'</code>结尾，也有可能读越界，例如：</p>
@@ -336,36 +310,22 @@ alt="strcpy(3)" />
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buf[<span class="number">10</span>] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="built_in">strcpy</span>(buf, buf+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 <p><code>strncpy</code>的参数<code>n</code>指定最多从<code>src</code>中拷贝<code>n</code>个字节到<code>dest</code>中，换句话说，如果拷贝到<code>'\0'</code>就结束，如果拷贝到<code>n</code>个字节还没有碰到<code>'\0'</code>，那么也结束，调用者负责提供适当的<code>n</code>值，以确保读写不会越界，比如让<code>n</code>的值等于<code>dest</code>所指向的内存空间的大小：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buf[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">strncpy</span>(buf, <span class="string">&quot;hello world&quot;</span>, <span class="keyword">sizeof</span>(buf));</span><br></pre></td></tr></table></figure>
-<p>然而这意味着什么呢？文档中特别用了Warning指出，这意味着<code>dest</code>有可能不是以<code>'\0'</code>结尾的。例如上面的调用，虽然把<code>"hello world"</code>截断到10个字符拷贝至<code>buf</code>中，但<code>buf</code>不是以<code>'\0'</code>结尾的，如果再<code>printf(buf)</code>就会读越界。如果你需要确保<code>dest</code>以<code>'\0'</code>结束，可以这么调用：</p>
+<p>然而这意味着什么呢？文档中特别用了Warning指出，这意味着<code>dest</code>有可能不是以<code>'\0'</code>结尾的。例如上面的调用，虽然把<code>&quot;hello world&quot;</code>截断到10个字符拷贝至<code>buf</code>中，但<code>buf</code>不是以<code>'\0'</code>结尾的，如果再<code>printf(buf)</code>就会读越界。如果你需要确保<code>dest</code>以<code>'\0'</code>结束，可以这么调用：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buf[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">strncpy</span>(buf, <span class="string">&quot;hello world&quot;</span>, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">buf[<span class="keyword">sizeof</span>(buf)<span class="number">-1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p><code>strncpy</code>还有一个特性，如果<code>src</code>字符串全部拷完了不足<code>n</code>个字节，那么还差多少个字节就补多少个<code>'\0'</code>，但是正如上面所述，这并不保证<code>dest</code>一定以<code>'\0'</code>结束，当<code>src</code>字符串的长度大于<code>n</code>时，不但不补多余的<code>'\0'</code>，连字符串的结尾<code>'\0'</code>也不拷贝。<code>strcpy(3)</code>的文档已经相当友好了，为了帮助理解，还给出一个<code>strncpy</code>的简单实现。</p>
-<figure>
-<img src="C:\blog\Blog\images\C\interface.return.png" alt="strcpy(3)" />
-<figcaption aria-hidden="true">strcpy(3)</figcaption>
-</figure>
-<p>函数的Man
-Page都有一部分专门讲返回值的。这两个函数的返回值都是<code>dest</code>指针。可是为什么要返回<code>dest</code>指针呢？<code>dest</code>指针本来就是调用者传过去的，再返回一遍<code>dest</code>指针并没有提供任何有用的信息。之所以这么规定是为了把函数调用当作一个指针类型的表达式使用，比如<code>printf("%s\n", strcpy(buf, "hello"))</code>，一举两得，如果<code>strcpy</code>的返回值是<code>void</code>就没有这么方便了。</p>
-<p>CONFORMING
-TO部分描述了这个函数是遵照哪些标准实现的。<code>strcpy</code>和<code>strncpy</code>是C标准库函数，当然遵照C99标准。以后我们还会看到<code>libc</code>中有些函数属于POSIX标准但并不属于C标准，例如<code>write(2)</code>。</p>
+<p><img src="C:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.return.png" alt="strcpy(3)"></p>
+<p>函数的Man Page都有一部分专门讲返回值的。这两个函数的返回值都是<code>dest</code>指针。可是为什么要返回<code>dest</code>指针呢？<code>dest</code>指针本来就是调用者传过去的，再返回一遍<code>dest</code>指针并没有提供任何有用的信息。之所以这么规定是为了把函数调用当作一个指针类型的表达式使用，比如<code>printf(&quot;%s\n&quot;, strcpy(buf, &quot;hello&quot;))</code>，一举两得，如果<code>strcpy</code>的返回值是<code>void</code>就没有这么方便了。</p>
+<p>CONFORMING TO部分描述了这个函数是遵照哪些标准实现的。<code>strcpy</code>和<code>strncpy</code>是C标准库函数，当然遵照C99标准。以后我们还会看到<code>libc</code>中有些函数属于POSIX标准但并不属于C标准，例如<code>write(2)</code>。</p>
 <p>NOTES部分给出一些提示信息。这里指出如何确保<code>strncpy</code>的<code>dest</code>以<code>'\0'</code>结尾，和我们上面给出的代码类似，但由于<code>n</code>是个变量，在执行<code>buf[n - 1]= '\0';</code>之前先检查一下<code>n</code>是否大于0，如果<code>n</code>不大于0，<code>buf[n - 1]</code>就访问越界了，所以要避免。</p>
-<figure>
-<img src="C:\blog\Blog\images\C\interface.bugs.png" alt="strcpy(3)" />
-<figcaption aria-hidden="true">strcpy(3)</figcaption>
-</figure>
+<p><img src="C:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.bugs.png" alt="strcpy(3)"></p>
 <p>BUGS部分说明了使用这些函数可能引起的Bug，这部分一定要仔细看。用<code>strcpy</code>比用<code>strncpy</code>更加不安全，如果在调用<code>strcpy</code>之前不仔细检查<code>src</code>字符串的长度就有可能写越界，这是一个很常见的错误，例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">char</span> *str)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(buf, str);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>str</code>所指向的字符串有可能超过10个字符而导致写越界，在第 4
-节
-“段错误”我们看到过，这种写越界可能当时不出错，而在函数返回时出现段错误，原因是写越界覆盖了保存在栈帧上的返回地址，函数返回时跳转到非法地址，因而出错。像buf这种由调用者分配并传给函数读或写的一段内存通常称为缓冲区（Buffer），缓冲区写越界的错误称为缓冲区溢出（Buffer
-Overflow）。如果只是出现段错误那还不算严重，更严重的是缓冲区溢出Bug经常被恶意用户利用，使函数返回时跳转到一个事先设好的地址，执行事先设好的指令，如果设计得巧妙甚至可以启动一个Shell，然后随心所欲执行任何命令，可想而知，如果一个用root权限执行的程序存在这样的Bug，被攻陷了，后果将很严重。至于怎样巧妙设计和攻陷一个有缓冲区溢出Bug的程序，有兴趣的读者可以参考[SmashStack]。</p>
+<p><code>str</code>所指向的字符串有可能超过10个字符而导致写越界，在第 4 节 “段错误”我们看到过，这种写越界可能当时不出错，而在函数返回时出现段错误，原因是写越界覆盖了保存在栈帧上的返回地址，函数返回时跳转到非法地址，因而出错。像buf这种由调用者分配并传给函数读或写的一段内存通常称为缓冲区（Buffer），缓冲区写越界的错误称为缓冲区溢出（Buffer Overflow）。如果只是出现段错误那还不算严重，更严重的是缓冲区溢出Bug经常被恶意用户利用，使函数返回时跳转到一个事先设好的地址，执行事先设好的指令，如果设计得巧妙甚至可以启动一个Shell，然后随心所欲执行任何命令，可想而知，如果一个用root权限执行的程序存在这样的Bug，被攻陷了，后果将很严重。至于怎样巧妙设计和攻陷一个有缓冲区溢出Bug的程序，有兴趣的读者可以参考[SmashStack]。</p>
 <h3 id="malloc和free">malloc和free</h3>
 <p>程序中需要动态分配一块内存时怎么办呢？可以像上一节那样定义一个缓冲区数组。这种方法不够灵活，C89要求定义的数组是固定长度的，而程序往往在运行时才知道要动态分配多大的内存，例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">char</span> *str, <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[?];</span><br><span class="line">    <span class="built_in">strncpy</span>(buf, str, n);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>n</code>是由参数传进来的，事先不知道是多少，那么<code>buf</code>该定义多大呢？在第
-1 节
-“数组的基本概念”讲过C99引入VLA特性，可以定义<code>char buf[n+1] = &#123;&#125;;</code>，这样可确保<code>buf</code>是以<code>'\0'</code>结尾的。但即使用VLA仍然不够灵活，VLA是在栈上动态分配的，函数返回时就要释放，如果我们希望动态分配一块全局的内存空间，在各函数中都可以访问呢？由于全局数组无法定义成VLA，所以仍然不能满足要求。</p>
-<p>其实在第 5 节
-“虚拟内存管理”提过，进程有一个堆空间，C标准库函数<code>malloc</code>可以在堆空间动态分配内存，它的底层通过<code>brk</code>系统调用向操作系统申请内存。动态分配的内存用完之后可以用<code>free</code>释放，更准确地说是归还给<code>malloc</code>，这样下次调用<code>malloc</code>时这块内存可以再次被分配。本节学习这两个函数的用法和工作原理。</p>
+<p><code>n</code>是由参数传进来的，事先不知道是多少，那么<code>buf</code>该定义多大呢？在第 1 节 “数组的基本概念”讲过C99引入VLA特性，可以定义<code>char buf[n+1] = &#123;&#125;;</code>，这样可确保<code>buf</code>是以<code>'\0'</code>结尾的。但即使用VLA仍然不够灵活，VLA是在栈上动态分配的，函数返回时就要释放，如果我们希望动态分配一块全局的内存空间，在各函数中都可以访问呢？由于全局数组无法定义成VLA，所以仍然不能满足要求。</p>
+<p>其实在第 5 节 “虚拟内存管理”提过，进程有一个堆空间，C标准库函数<code>malloc</code>可以在堆空间动态分配内存，它的底层通过<code>brk</code>系统调用向操作系统申请内存。动态分配的内存用完之后可以用<code>free</code>释放，更准确地说是归还给<code>malloc</code>，这样下次调用<code>malloc</code>时这块内存可以再次被分配。本节学习这两个函数的用法和工作原理。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">malloc</span><span class="params">(<span class="type">size_t</span> size)</span>;</span><br></pre></td></tr></table></figure>
 <p>返回值：成功返回所分配内存空间的首地址，出错返回<code>NULL</code></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span> *ptr)</span>;</span><br></pre></td></tr></table></figure>
@@ -378,17 +338,12 @@ Overflow）。如果只是出现段错误那还不算严重，更严重的是缓
 <p>虽然内存耗尽是很不常见的错误，但写程序要规范，<code>malloc</code>之后应该判断是否成功。以后要学习的大部分系统函数都有成功的返回值和失败的返回值，每次调用系统函数都应该判断是否成功。</p>
 <p><code>free(p);</code>之后，<code>p</code>所指的内存空间是归还了，但是<code>p</code>的值并没有变，因为从<code>free</code>的函数接口来看根本就没法改变<code>p</code>的值，<code>p</code>现在指向的内存空间已经不属于用户，换句话说，<code>p</code>成了野指针，为避免出现野指针，我们应该在<code>free(p);</code>之后手动置<code>p = NULL;</code>。</p>
 <p>应该先<code>free(p-&gt;msg)</code>，再<code>free(p)</code>。如果先<code>free(p)</code>，<code>p</code>成了野指针，就不能再通过<code>p-&gt;msg</code>访问内存了。</p>
-<p>上面的例子只有一个简单的顺序控制流程，分配内存，赋值，打印，释放内存，退出程序。这种情况下即使不用<code>free</code>释放内存也可以，因为程序退出时整个进程地址空间都会释放，包括堆空间，该进程占用的所有内存都会归还给操作系统。但如果一个程序长年累月运行（例如网络服务器程序），并且在循环或递归中调用<code>malloc</code>分配内存，则必须有<code>free</code>与之配对，分配一次就要释放一次，否则每次循环都分配内存，分配完了又不释放，就会慢慢耗尽系统内存，这种错误称为内存泄漏（Memory
-Leak）。另外，<code>malloc</code>返回的指针一定要保存好，只有把它传给free才能释放这块内存，如果这个指针丢失了，就没有办法<code>free</code>这块内存了，也会造成内存泄漏。例如：</p>
+<p>上面的例子只有一个简单的顺序控制流程，分配内存，赋值，打印，释放内存，退出程序。这种情况下即使不用<code>free</code>释放内存也可以，因为程序退出时整个进程地址空间都会释放，包括堆空间，该进程占用的所有内存都会归还给操作系统。但如果一个程序长年累月运行（例如网络服务器程序），并且在循环或递归中调用<code>malloc</code>分配内存，则必须有<code>free</code>与之配对，分配一次就要释放一次，否则每次循环都分配内存，分配完了又不释放，就会慢慢耗尽系统内存，这种错误称为内存泄漏（Memory Leak）。另外，<code>malloc</code>返回的指针一定要保存好，只有把它传给free才能释放这块内存，如果这个指针丢失了，就没有办法<code>free</code>这块内存了，也会造成内存泄漏。例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *p = <span class="built_in">malloc</span>(<span class="number">10</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>foo</code>函数返回时要释放局部变量<code>p</code>的内存空间，它所指向的内存地址就丢失了，这10个字节也就没法释放了。内存泄漏的Bug很难找到，因为它不会像访问越界一样导致程序运行错误，少量内存泄漏并不影响程序的正确运行，大量的内存泄漏会使系统内存紧缺，导致频繁换页，不仅影响当前进程，而且把整个系统都拖得很慢。</p>
 <p>关于<code>malloc</code>和<code>free</code>还有一些特殊情况。<code>malloc(0)</code>这种调用也是合法的，也会返回一个非<code>NULL</code>的指针，这个指针也可以传给<code>free</code>释放，但是不能通过这个指针访问内存。<code>free(NULL)</code>也是合法的，不做任何事情，但是<code>free</code>一个野指针是不合法的，例如先调用<code>malloc</code>返回一个指针<code>p</code>，然后连着调用两次<code>free(p);</code>，则后一次调用会产生运行时错误。</p>
 <p>[K&amp;R]的8.7节给出了<code>malloc</code>和<code>free</code>的简单实现，基于环形链表。目前读者还没有学习链表，看那段代码会有点困难，我再做一些简化，图示如下，目的是让读者理解<code>malloc</code>和<code>free</code>的工作原理。<code>libc</code>的实现比这要复杂得多，但基本工作原理也是如此。读者只要理解了基本工作原理，就很容易分析在使用<code>malloc</code>和<code>free</code>时遇到的各种Bug了。</p>
-<figure>
-<img src="C:\blog\Blog\images\C\interface.malloc.png"
-alt="简单的malloc和free实现" />
-<figcaption aria-hidden="true">简单的malloc和free实现</figcaption>
-</figure>
+<p><img src="C:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.malloc.png" alt="简单的malloc和free实现"></p>
 <p>图中白色背景的框表示<code>malloc</code>管理的空闲内存块，深色背景的框不归<code>malloc</code>管，可能是已经分配给用户的内存块，也可能不属于当前进程，Break之上的地址不属于当前进程，需要通过<code>brk</code>系统调用向内核申请。每个内存块开头都有一个头节点，里面有一个指针字段和一个长度字段，指针字段把所有空闲块的头节点串在一起，组成一个环形链表，长度字段记录着头节点和后面的内存块加起来一共有多长，以8字节为单位（也就是以头节点的长度为单位）。</p>
 <p>一开始堆空间由一个空闲块组成，长度为7×8=56字节，除头节点之外的长度为48字节。</p>
 <p>调用<code>malloc</code>分配8个字节，要在这个空闲块的末尾截出16个字节，其中新的头节点占了8个字节，另外8个字节返回给用户使用，注意返回的指针<code>p1</code>指向头节点后面的内存块。</p>
@@ -402,10 +357,6 @@ alt="简单的malloc和free实现" />
 <p>如果函数接口有指针参数，既可以把指针所指向的数据传给函数使用（称为传入参数），也可以由函数填充指针所指的内存空间，传回给调用者使用（称为传出参数），例如<code>strcpy</code>的<code>src</code>参数是传入参数，<code>dest</code>参数是传出参数。有些函数的指针参数同时担当了这两种角色，如<code>select(2)</code>的<code>fd_set *</code>参数，既是传入参数又是传出参数，这称为Value-result参数。</p>
 <p>传入参数示例：<code>void func(const unit_t *p);</code></p>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th>调用者</th>
@@ -422,10 +373,6 @@ alt="简单的malloc和free实现" />
 <p>想一想，如果有函数接口<code>void func(const int p);</code>这里的<code>const</code>有意义吗？</p>
 <p>传出参数示例：<code>void func(unit_t *p);</code></p>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th>调用者</th>
@@ -441,10 +388,6 @@ alt="简单的malloc和free实现" />
 </table>
 <p>Value-result参数示例：<code>void func(unit_t *p);</code></p>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th>调用者</th>
@@ -454,8 +397,7 @@ alt="简单的malloc和free实现" />
 <tbody>
 <tr>
 <td>分配p所指的内存空间<br>在p所指的内存空间保存数据<br>调用函数<br>读取p所指的内存空间<br></td>
-<td>规定指针参数的类型unit_t
-*<br>读取p所指的内存空间<br>改写p所指的内存空间<br></td>
+<td>规定指针参数的类型unit_t *<br>读取p所指的内存空间<br>改写p所指的内存空间<br></td>
 </tr>
 </tbody>
 </table>
@@ -476,10 +418,6 @@ alt="简单的malloc和free实现" />
 <p>两层指针作为传出参数还有一种特别的用法，可以在函数中分配内存，调用者通过传出参数取得指向该内存的指针，比如<code>getaddrinfo(3)</code>的<code>struct addrinfo **</code>参数。一般来说，实现一个分配内存的函数就要实现一个释放内存的函数，所以<code>getaddrinfo(3)</code>有一个对应的<code>freeaddrinfo(3)</code>函数。</p>
 <p>通过参数分配内存示例：<code>void alloc_unit(unit_t **pp); void free_unit(unit_t *p);</code></p>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th>调用者</th>
@@ -489,8 +427,7 @@ alt="简单的malloc和free实现" />
 <tbody>
 <tr>
 <td>分配pp所指的指针变量的空间<br>调用alloc_unit分配内存<br>读取pp所指的指针变量，通过后者使用alloc_unit分配的内存<br>调用free_unit释放内存<br></td>
-<td>规定指针参数的类型unit_t
-**<br>alloc_unit分配unit_t的内存并初始化，为pp所指的指针变量赋值<br>free_unit释放在alloc_unit中分配的内存<br></td>
+<td>规定指针参数的类型unit_t **<br>alloc_unit分配unit_t的内存并初始化，为pp所指的指针变量赋值<br>free_unit释放在alloc_unit中分配的内存<br></td>
 </tr>
 </tbody>
 </table>
@@ -502,13 +439,8 @@ alt="简单的malloc和free实现" />
 <p>总结一下，两层指针参数如果是传出的，可以有两种情况：第一种情况，传出的指针指向静态内存（比如上面的例子），或者指向已分配的动态内存（比如指向某个链表的节点）；第二种情况是在函数中动态分配内存，然后传出的指针指向这块内存空间，这种情况下调用者应该在使用内存之后调用释放内存的函数，调用者的责任是请求分配和请求释放内存，实现者的责任是完成分配内存和释放内存的操作。由于这两种情况的函数接口相同，应该在文档中说明是哪一种情况。</p>
 <h2 id="返回值是指针的情况">返回值是指针的情况</h2>
 <p>返回值显然是传出的而不是传入的，如果返回值传出的是指针，和上一节通过参数传出指针类似，也分为两种情况：第一种是传出指向静态内存或已分配的动态内存的指针，例如<code>localtime(3)</code>和<code>inet_ntoa(3)</code>，第二种是在函数中动态分配内存并传出指向这块内存的指针，例如<code>malloc(3)</code>，这种情况通常还要实现一个释放内存的函数，所以有和<code>malloc(3)</code>对应的<code>free(3)</code>。由于这两种情况的函数接口相同，应该在文档中说明是哪一种情况。</p>
-<p>表 24.5.
-返回指向已分配内存的指针示例：<code>unit_t *func(void);</code></p>
+<p>表 24.5. 返回指向已分配内存的指针示例：<code>unit_t *func(void);</code></p>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th>调用者</th>
@@ -530,10 +462,6 @@ alt="简单的malloc和free实现" />
 <p>这个程序的运行结果是<code>Sunday Monday</code>吗？请读者自己分析一下。</p>
 <p>动态分配内存并返回指针示例：<code>unit_t *alloc_unit(void); void free_unit(unit_t *p);</code></p>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th>调用者</th>
@@ -543,8 +471,7 @@ alt="简单的malloc和free实现" />
 <tbody>
 <tr>
 <td>调用alloc_unit分配内存<br>将返回值保存下来以备后用<br>调用free_unit释放内存<br></td>
-<td>规定返回值指针的类型unit_t
-*<br>alloc_unit分配内存并返回指向该内存的指针<br>free_unit释放由alloc_unit分配的内存<br></td>
+<td>规定返回值指针的类型unit_t *<br>alloc_unit分配内存并返回指向该内存的指针<br>free_unit释放由alloc_unit分配的内存<br></td>
 </tr>
 </tbody>
 </table>
@@ -555,14 +482,9 @@ alt="简单的malloc和free实现" />
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* main.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ret_allocator.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="type">unit_t</span> *p = alloc_unit();</span><br><span class="line"></span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;number: %d\nmsg: %s\n&quot;</span>, p-&gt;number, p-&gt;msg);</span><br><span class="line">     free_unit(p);</span><br><span class="line">     p = <span class="literal">NULL</span>;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>思考一下，通过参数分配内存需要两层的指针，而通过返回值分配内存就只需要返回一层的指针，为什么？</p>
 <h2 id="回调函数">回调函数</h2>
-<p>如果参数是一个函数指针，调用者可以传递一个函数的地址给实现者，让实现者去调用它，这称为回调函数（Callback
-Function）。例如<code>qsort(3)</code>和<code>bsearch(3)</code>。</p>
+<p>如果参数是一个函数指针，调用者可以传递一个函数的地址给实现者，让实现者去调用它，这称为回调函数（Callback Function）。例如<code>qsort(3)</code>和<code>bsearch(3)</code>。</p>
 <p>回调函数示例：<code>void func(void (*f)(void *), void *p);</code></p>
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
 <tr>
 <th>调用者</th>
@@ -571,8 +493,7 @@ Function）。例如<code>qsort(3)</code>和<code>bsearch(3)</code>。</p>
 </thead>
 <tbody>
 <tr>
-<td>提供一个回调函数，再提供一个准备传给回调函数的参数。<br>把回调函数传给参数f，把准备传给回调函数的参数按void
-*类型传给参数p<br></td>
+<td>提供一个回调函数，再提供一个准备传给回调函数的参数。<br>把回调函数传给参数f，把准备传给回调函数的参数按void *类型传给参数p<br></td>
 <td>在适当的时候根据调用者传来的函数指针f调用回调函数，将调用者传来的参数p转交给回调函数，即调用f(p);</td>
 </tr>
 </tbody>
@@ -583,8 +504,7 @@ Function）。例如<code>qsort(3)</code>和<code>bsearch(3)</code>。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* para_callback.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;para_callback.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">repeat_three_times</span><span class="params">(<span class="type">callback_t</span> f, <span class="type">void</span> *para)</span></span><br><span class="line">&#123;</span><br><span class="line">     f(para);</span><br><span class="line">     f(para);</span><br><span class="line">     f(para);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* main.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;para_callback.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">say_hello</span><span class="params">(<span class="type">void</span> *str)</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Hello %s\n&quot;</span>, (<span class="type">const</span> <span class="type">char</span> *)str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">count_numbers</span><span class="params">(<span class="type">void</span> *num)</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="type">int</span> i;</span><br><span class="line">     <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=(<span class="type">int</span>)num; i++)</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);</span><br><span class="line">     <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">     repeat_three_times(say_hello, <span class="string">&quot;Guys&quot;</span>);</span><br><span class="line">     repeat_three_times(count_numbers, (<span class="type">void</span> *)<span class="number">4</span>);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>回顾一下前面几节的例子，参数类型都是由实现者规定的。而本例中回调函数的参数按什么类型解释由调用者规定，对于实现者来说就是一个<code>void *</code>指针，实现者只负责将这个指针转交给回调函数，而不关心它到底指向什么数据类型。调用者知道自己传的参数是<code>char *</code>型的，那么在自己提供的回调函数中就应该知道参数要转换成<code>char *</code>型来解释。</p>
-<p>回调函数的一个典型应用就是实现类似C++的泛型算法（Generics
-Algorithm）。下面实现的<code>max</code>函数可以在任意一组对象中找出最大值，可以是一组<code>int</code>、一组<code>char</code>或者一组结构体，但是实现者并不知道怎样去比较两个对象的大小，调用者需要提供一个做比较操作的回调函数。</p>
+<p>回调函数的一个典型应用就是实现类似C++的泛型算法（Generics Algorithm）。下面实现的<code>max</code>函数可以在任意一组对象中找出最大值，可以是一组<code>int</code>、一组<code>char</code>或者一组结构体，但是实现者并不知道怎样去比较两个对象的大小，调用者需要提供一个做比较操作的回调函数。</p>
 <p>例 泛型算法</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* generics.h */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> GENERICS_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GENERICS_H</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">int</span> <span class="params">(*<span class="type">cmp_t</span>)</span><span class="params">(<span class="type">void</span> *, <span class="type">void</span> *)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> *<span class="title function_">max</span><span class="params">(<span class="type">void</span> *data[], <span class="type">int</span> num, <span class="type">cmp_t</span> cmp)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* generics.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;generics.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">max</span><span class="params">(<span class="type">void</span> *data[], <span class="type">int</span> num, <span class="type">cmp_t</span> cmp)</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="type">int</span> i;</span><br><span class="line">     <span class="type">void</span> *temp = data[<span class="number">0</span>];</span><br><span class="line">     <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;num; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(cmp(temp, data[i])&lt;<span class="number">0</span>)</span><br><span class="line">           temp = data[i];</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -594,8 +514,7 @@ Algorithm）。下面实现的<code>max</code>函数可以在任意一组对象�
 <p>以下是一个代码框架。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* registry.h */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> REGISTRY_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> REGISTRY_H</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*<span class="type">registry_t</span>)</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">register_func</span><span class="params">(<span class="type">registry_t</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* registry.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;registry.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">registry_t</span> func;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">register_func</span><span class="params">(<span class="type">registry_t</span> f)</span></span><br><span class="line">&#123;</span><br><span class="line">     func = f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">on_some_event</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">     ...</span><br><span class="line">     func();</span><br><span class="line">     ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>既然参数可以是函数指针，返回值同样也可以是函数指针，因此可以有<code>func()();</code>这样的调用。返回函数的函数在C语言中很少见，在一些函数式编程语言（例如LISP）中则很常见，基本思想是把函数也当作一种数据来操作，输入、输出和参与运算，操作函数的函数称为高阶函数（High-order
-Function）。</p>
+<p>既然参数可以是函数指针，返回值同样也可以是函数指针，因此可以有<code>func()();</code>这样的调用。返回函数的函数在C语言中很少见，在一些函数式编程语言（例如LISP）中则很常见，基本思想是把函数也当作一种数据来操作，输入、输出和参与运算，操作函数的函数称为高阶函数（High-order Function）。</p>
 <h2 id="可变参数">可变参数</h2>
 <p>到目前为止我们只见过一个带有可变参数的函数<code>printf</code>：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">printf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br></pre></td></tr></table></figure>
@@ -604,22 +523,15 @@ Function）。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">myprintf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span></span><br><span class="line">&#123;</span><br><span class="line">     va_list ap;</span><br><span class="line">     <span class="type">char</span> c;</span><br><span class="line"></span><br><span class="line">     va_start(ap, format);</span><br><span class="line">     <span class="keyword">while</span> (c = *format++) &#123;</span><br><span class="line">      <span class="keyword">switch</span>(c) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;c&#x27;</span>: &#123;</span><br><span class="line">           <span class="comment">/* char is promoted to int when passed through &#x27;...&#x27; */</span></span><br><span class="line">           <span class="type">char</span> ch = va_arg(ap, <span class="type">int</span>);</span><br><span class="line">           <span class="built_in">putchar</span>(ch);</span><br><span class="line">           <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;s&#x27;</span>: &#123;</span><br><span class="line">           <span class="type">char</span> *p = va_arg(ap, <span class="type">char</span> *);</span><br><span class="line">           <span class="built_in">fputs</span>(p, <span class="built_in">stdout</span>);</span><br><span class="line">           <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">           <span class="built_in">putchar</span>(c);</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     va_end(ap);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">     myprintf(<span class="string">&quot;c\ts\n&quot;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>要处理可变参数，需要用C到标准库的<code>va_list</code>类型和<code>va_start</code>、<code>va_arg</code>、<code>va_end</code>宏，这些定义在<code>stdarg.h</code>头文件中。这些宏是如何取出可变参数的呢？我们首先对照反汇编分析在调用<code>myprintf</code>函数时这些参数的内存布局。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    myprintf(&quot;c\ts\n&quot;, &#x27;1&#x27;, &quot;hello&quot;);</span><br><span class="line">80484c5:   c7 44 24 08 b0 85 04    movl   $0x80485b0,0x8(%esp)</span><br><span class="line">80484cc:   08 </span><br><span class="line">80484cd:   c7 44 24 04 31 00 00    movl   $0x31,0x4(%esp)</span><br><span class="line">80484d4:   00 </span><br><span class="line">80484d5:   c7 04 24 b6 85 04 08    movl   $0x80485b6,(%esp)</span><br><span class="line">80484dc:   e8 43 ff ff ff          call   8048424 &lt;myprintf&gt;</span><br></pre></td></tr></table></figure>
-<figure>
-<img src="C:\blog\Blog\images\C\interface.vaarg.png"
-alt="myprintf函数的参数布局" />
-<figcaption aria-hidden="true">myprintf函数的参数布局</figcaption>
-</figure>
-<p>这些参数是从右向左依次压栈的，所以第一个参数靠近栈顶，第三个参数靠近栈底。这些参数在内存中是连续存放的，每个参数都对齐到4字节边界。第一个和第三个参数都是指针类型，各占4个字节，虽然第二个参数只占一个字节，但为了使第三个参数对齐到4字节边界，所以第二个参数也占4个字节。现在给出一个<code>stdarg.h</code>的简单实现，这个实现出自[Standard
-C Library]：</p>
+<p><img src="C:%5Cblog%5CBlog%5Cimages%5CC%5Cinterface.vaarg.png" alt="myprintf函数的参数布局"></p>
+<p>这些参数是从右向左依次压栈的，所以第一个参数靠近栈顶，第三个参数靠近栈底。这些参数在内存中是连续存放的，每个参数都对齐到4字节边界。第一个和第三个参数都是指针类型，各占4个字节，虽然第二个参数只占一个字节，但为了使第三个参数对齐到4字节边界，所以第二个参数也占4个字节。现在给出一个<code>stdarg.h</code>的简单实现，这个实现出自[Standard C Library]：</p>
 <p>例 <code>stdarg.h</code>的一种实现</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* stdarg.h standard header */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _STDARG</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _STDARG</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* type definitions */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> *va_list;</span><br><span class="line"><span class="comment">/* macros */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> va_arg(ap, T) \</span></span><br><span class="line"><span class="meta">    (* (T *)(((ap) += _Bnd(T, 3U)) - _Bnd(T, 3U)))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> va_end(ap) (void)0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> va_start(ap, A) \</span></span><br><span class="line"><span class="meta">    (void)((ap) = (char *)&amp;(A) + _Bnd(A, 3U))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _Bnd(X, bnd) (sizeof (X) + (bnd) &amp; ~(bnd))</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 <p>这个头文件中的内部宏定义<code>_Bnd(X, bnd)</code>将类型或变量X的长度对齐到<code>bnd+1</code>字节的整数倍，例如<code>_Bnd(char, 3U)</code>的值是4，<code>_Bnd(int, 3U)</code>也是4。</p>
 <p>在<code>myprintf</code>中定义的<code>va_list ap;</code>其实是一个指针，<code>va_start(ap, format)</code>使<code>ap</code>指向<code>format</code>参数的下一个参数，也就是指向上图中<code>esp+4</code>的位置。然后<code>va_arg(ap, int)</code>把第二个参数的值按<code>int</code>型取出来，同时使<code>ap</code>指向第三个参数，也就是指向上图中<code>esp+8</code>的位置。然后<code>va_arg(ap, char *)</code>把第三个参数的值按<code>char *</code>型取出来，同时使<code>ap</code>指向更高的地址。<code>va_end(ap)</code>在我们的简单实现中不起任何作用，在有些实现中可能会把<code>ap</code>改写成无效值，C标准要求在函数返回前调用<code>va_end</code>。</p>
 <p>如果把<code>myprintf</code>中的<code>char ch = va_arg(ap, int);</code>改成<code>char ch = va_arg(ap, char);</code>，用我们这个<code>stdarg.h</code>的简单实现是没有问题的。但如果改用<code>libc</code>提供的<code>stdarg.h</code>，在编译时会报错：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.c</span></span><br><span class="line">main.c: In function ‘myprintf’:</span><br><span class="line">main.c:33: warning: ‘char’ is promoted to ‘int’ when passed through ‘...’</span><br><span class="line">main.c:33: note: (so you should pass ‘int’ not ‘char’ to ‘va_arg’)</span><br><span class="line">main.c:33: note: if this code is reached, the program will abort</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./a.out</span></span><br><span class="line">Illegal instruction</span><br></pre></td></tr></table></figure>
-<p>因此要求<code>char</code>型的可变参数必须按<code>int</code>型来取，这是为了与C标准一致，我们在第
-3.1 节 “Integer Promotion”讲过Default Argument
-Promotion规则，传递<code>char</code>型的可变参数时要提升为<code>int</code>型。</p>
+<p>因此要求<code>char</code>型的可变参数必须按<code>int</code>型来取，这是为了与C标准一致，我们在第 3.1 节 “Integer Promotion”讲过Default Argument Promotion规则，传递<code>char</code>型的可变参数时要提升为<code>int</code>型。</p>
 <p>从<code>myprintf</code>的例子可以理解<code>printf</code>的实现原理，<code>printf</code>函数根据第一个参数（格式化字符串）来确定后面有几个参数，分别是什么类型。保证参数的类型、个数与格式化字符串的描述相匹配是调用者的责任，实现者只管按格式化字符串的描述从栈上取数据，如果调用者传递的参数类型或个数不正确，实现者是没有办法避免错误的。</p>
 <p>还有一种方法可以确定可变参数的个数，就是在参数列表的末尾传一个Sentinel，例如<code>NULL</code>。<code>execl(3)</code>就采用这种方法确定参数的个数。下面实现一个<code>printlist</code>函数，可以打印若干个传入的字符串。</p>
 <p>例 根据Sentinel判断可变参数的个数</p>
@@ -642,13 +554,13 @@ Promotion规则，传递<code>char</code>型的可变参数时要提升为<code>
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E7%AB%A0/" rel="prev" title="C语言:常量,变量和表达式">
-                  <i class="fa fa-angle-left"></i> C语言:常量,变量和表达式
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/" rel="prev" title="C语言:深入立即函数">
+                  <i class="fa fa-angle-left"></i> C语言:深入立即函数
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E7%AB%A0/" rel="next" title="C语言:Makefile基础">
-                  C语言:Makefile基础 <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E7%AB%A0/" rel="next" title="C语言:链表,二叉树和哈希表">
+                  C语言:链表,二叉树和哈希表 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

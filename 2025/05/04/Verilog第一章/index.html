@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="数字集成电路的发展和设计方法的演变 几十个逻辑门的小规模集成电路(Small Scale Integrated, SSI)–&gt;单芯片数千万个逻辑门的极大规模集成电路(Ultra Large Scale Integrated, ULSI), 单芯片可以集成几十亿只晶体管. 集成电路的发展 第一次变革时期 20世纪70年代, 是以加工制造为主导的IC(Integrated Circ">
+    <meta name="description" content="数字集成电路的发展和设计方法的演变 几十个逻辑门的小规模集成电路(Small Scale Integrated, SSI)–&gt;单芯片数千万个逻辑门的极大规模集成电路(Ultra Large Scale Integrated, ULSI), 单芯片可以集成几十亿只晶体管. 集成电路的发展 第一次变革时期 20世纪70年代, 是以加工制造为主导的IC(Integrated Circuit)产业发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一章:Verilog HDL数字集成电路设计方法概述">
 <meta property="og:url" content="http://example.com/2025/05/04/Verilog%E7%AC%AC%E4%B8%80%E7%AB%A0/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="数字集成电路的发展和设计方法的演变 几十个逻辑门的小规模集成电路(Small Scale Integrated, SSI)–&gt;单芯片数千万个逻辑门的极大规模集成电路(Ultra Large Scale Integrated, ULSI), 单芯片可以集成几十亿只晶体管. 集成电路的发展 第一次变革时期 20世纪70年代, 是以加工制造为主导的IC(Integrated Circ">
+<meta property="og:description" content="数字集成电路的发展和设计方法的演变 几十个逻辑门的小规模集成电路(Small Scale Integrated, SSI)–&gt;单芯片数千万个逻辑门的极大规模集成电路(Ultra Large Scale Integrated, ULSI), 单芯片可以集成几十亿只晶体管. 集成电路的发展 第一次变革时期 20世纪70年代, 是以加工制造为主导的IC(Integrated Circuit)产业发">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
 <meta property="article:modified_time" content="2026-01-14T21:46:54.526Z">
@@ -134,8 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%9A%84%E5%8F%91%E5%B1%95%E5%92%8C%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E7%9A%84%E6%BC%94%E5%8F%98"><span class="nav-number">1.</span> <span class="nav-text">数字集成电路的发展和设计方法的演变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%9A%84%E5%8F%91%E5%B1%95"><span class="nav-number">2.</span> <span class="nav-text">集成电路的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8F%98%E9%9D%A9%E6%97%B6%E6%9C%9F"><span class="nav-number">2.1.</span> <span class="nav-text">第一次变革时期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E5%8F%98%E9%9D%A9%E6%97%B6%E6%9C%9F"><span class="nav-number">2.2.</span> <span class="nav-text">第二次变革时期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%8F%98%E9%9D%A9%E6%97%B6%E6%9C%9F"><span class="nav-number">2.3.</span> <span class="nav-text">第三次变革时期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip%E6%A0%B8"><span class="nav-number">3.</span> <span class="nav-text">IP核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#verilog-hdl%E5%9C%A8%E6%95%B0%E5%AD%97%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Verilog
-HDL在数字集成电路设计流程中的作用</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%9A%84%E5%8F%91%E5%B1%95%E5%92%8C%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E7%9A%84%E6%BC%94%E5%8F%98"><span class="nav-number">1.</span> <span class="nav-text">数字集成电路的发展和设计方法的演变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%9A%84%E5%8F%91%E5%B1%95"><span class="nav-number">2.</span> <span class="nav-text">集成电路的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8F%98%E9%9D%A9%E6%97%B6%E6%9C%9F"><span class="nav-number">2.1.</span> <span class="nav-text">第一次变革时期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E5%8F%98%E9%9D%A9%E6%97%B6%E6%9C%9F"><span class="nav-number">2.2.</span> <span class="nav-text">第二次变革时期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%8F%98%E9%9D%A9%E6%97%B6%E6%9C%9F"><span class="nav-number">2.3.</span> <span class="nav-text">第三次变革时期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP%E6%A0%B8"><span class="nav-number">3.</span> <span class="nav-text">IP核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog-HDL%E5%9C%A8%E6%95%B0%E5%AD%97%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Verilog HDL在数字集成电路设计流程中的作用</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -282,77 +281,39 @@ HDL在数字集成电路设计流程中的作用</span></a></li></ol></div>
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2
-id="数字集成电路的发展和设计方法的演变">数字集成电路的发展和设计方法的演变</h2>
-<p>几十个逻辑门的小规模集成电路(Small Scale Integrated,
-SSI)–&gt;单芯片数千万个逻辑门的极大规模集成电路(Ultra Large Scale
-Integrated, ULSI), 单芯片可以集成几十亿只晶体管.</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="数字集成电路的发展和设计方法的演变">数字集成电路的发展和设计方法的演变</h2>
+<p>几十个逻辑门的小规模集成电路(Small Scale Integrated, SSI)–&gt;单芯片数千万个逻辑门的极大规模集成电路(Ultra Large Scale Integrated, ULSI), 单芯片可以集成几十亿只晶体管.</p>
 <h2 id="集成电路的发展">集成电路的发展</h2>
 <h3 id="第一次变革时期">第一次变革时期</h3>
-<p>20世纪70年代, 是以加工制造为主导的IC(Integrated
-Circuit)产业发展的初级阶段, 主流产品是微处理器(Micro Processor Unit,
-MPU), 存储器以及标准通用逻辑电路. 这一时期, IC整合原件厂(Integrated
-Device Manufacturer, IDM)在IC市场中充当主要角色,
-设计只作为附属部门而存在. 芯片设计和半导体工艺密切相关, 设计以人工为主,
-计算机辅助为辅(Computer Aided Design,
-CAD)系统只作为数据处理和图形编程。</p>
+<p>20世纪70年代, 是以加工制造为主导的IC(Integrated Circuit)产业发展的初级阶段, 主流产品是微处理器(Micro Processor Unit, MPU), 存储器以及标准通用逻辑电路. 这一时期, IC整合原件厂(Integrated Device Manufacturer, IDM)在IC市场中充当主要角色, 设计只作为附属部门而存在. 芯片设计和半导体工艺密切相关, 设计以人工为主, 计算机辅助为辅(Computer Aided Design, CAD)系统只作为数据处理和图形编程。</p>
 <h3 id="第二次变革时期">第二次变革时期</h3>
-<p>20世纪80年代, 标准工艺加工线(Foundry)公司和IC设计公司共同发展,
-主流产品是MPU, 微控制器(Micro Control Unit,
-MCU)以及专用IC(Application-Specific IC, ASIC).
-这时Foundry和IC设计公司相结合的方式开始成为集成电路产业发展的新模式.
-IC产业开始进入以客户为 导向的阶段. 超大规模集成电路(Very Large Scale
-Integrated, VLSI)开始成为主流芯片; 电子设计自动化(Eletronic Design
-Automation, EDA) 快速发展, 设计过程和生产工艺可以各自独立存在,
-没有生产线的IC设计公司(Fabless)和设计部门纷纷建立并快速发展,
-同时以制造业为主的Foundry 工厂也迅速发展. 1987年,
-全球第一个Foundry工厂————台积电成立,
-其创始人张忠谋被誉为”芯片加工之父”.</p>
+<p>20世纪80年代, 标准工艺加工线(Foundry)公司和IC设计公司共同发展, 主流产品是MPU, 微控制器(Micro Control Unit, MCU)以及专用IC(Application-Specific IC, ASIC). 这时Foundry和IC设计公司相结合的方式开始成为集成电路产业发展的新模式. IC产业开始进入以客户为<br>
+导向的阶段. 超大规模集成电路(Very Large Scale Integrated, VLSI)开始成为主流芯片; 电子设计自动化(Eletronic Design Automation, EDA)<br>
+快速发展, 设计过程和生产工艺可以各自独立存在, 没有生产线的IC设计公司(Fabless)和设计部门纷纷建立并快速发展, 同时以制造业为主的Foundry<br>
+工厂也迅速发展. 1987年, 全球第一个Foundry工厂————台积电成立, 其创始人张忠谋被誉为&quot;芯片加工之父&quot;.</p>
 <h3 id="第三次变革时期">第三次变革时期</h3>
-<p>20世纪90年代, IC产业的”四业”(设计业, 制造业, 封装业, 测试业)开始分离,
-功能强大的通用性中央处理器(Central Processing Unit,
-CPU)和信号处理器(Digital Signal Processing, DSP)成为产业新的增长点.</p>
-<p>进入21世纪, 首先CMOS模拟技术的发展使得数模混合单芯片集成技术迅速发展,
-在设计和成本方面体现了巨大优势. 其次, 应用需求使得储存器在USLI
-芯片中的作业越来越明显, 高密度存储器及其SoC设计成为设计的焦点. 再次,
-大规模多内核处理器结构成为通用型芯片和SoC芯片的主流设计方式.</p>
-<p>在设计方法方面, 采用功能复用的IP(Intelligent Property)的设计方式,
-成为IC设计和商业化的一种主要方式, 极大提高了ULSI芯片的设计效率和
+<p>20世纪90年代, IC产业的&quot;四业&quot;(设计业, 制造业, 封装业, 测试业)开始分离, 功能强大的通用性中央处理器(Central Processing Unit, CPU)和信号处理器(Digital Signal Processing, DSP)成为产业新的增长点.</p>
+<p>进入21世纪, 首先CMOS模拟技术的发展使得数模混合单芯片集成技术迅速发展, 在设计和成本方面体现了巨大优势. 其次, 应用需求使得储存器在USLI<br>
+芯片中的作业越来越明显, 高密度存储器及其SoC设计成为设计的焦点. 再次, 大规模多内核处理器结构成为通用型芯片和SoC芯片的主流设计方式.</p>
+<p>在设计方法方面, 采用功能复用的IP(Intelligent Property)的设计方式, 成为IC设计和商业化的一种主要方式, 极大提高了ULSI芯片的设计效率和<br>
 可扩展性.</p>
-<h2 id="ip核">IP核</h2>
-<p>IP核是具有知识产权核的集成电路芯核总称, 是经过反复验证的,
-具有特定功能的宏模块, 与芯片制作工艺无关,
-可以移植到不同的半导体工艺中.</p>
-<p>到了SoC阶段,
-向用户提供IP核服务已经成为可编程逻辑器件提供商的重要任务.
-在SoC芯片的设计生产过程中, 芯片的生产厂家只需根据设计需要购入
-相应功能的IP核, 再将这些IP核按照设计需要进行组合,
-即可完成所需功能的设计.</p>
-<p><strong>软核</strong>经过功能验证, 5000门以上的可综合Verilog
-HDL或VHDL模型. 软核通常与设计方法和电路所采用的工艺无关,
-具有很强的可综合性和可重用性. 由软核构成的器件称为虚拟器件,
-通过EDA综合工具可以把它和其他数字逻辑电路结合起来, 构成新的功能电路;</p>
-<p><strong>固核</strong>在FPGA器件上, 经过综合验证,
-大于5000门的电路网表文件;</p>
-<p><strong>硬核</strong>在ASIC器件上, 经过验证正确的,
-大于5000门的电路结构版图掩模.</p>
-<p>其中软核是可读性较高的可综合HDL实现, 因此其可维护性和可重用性较高,
-更加灵活和简便. 固核和硬核是针对不同平台的功能单元, 性能稳定,
-不易修改.</p>
-<h2 id="verilog-hdl在数字集成电路设计流程中的作用">Verilog
-HDL在数字集成电路设计流程中的作用</h2>
+<h2 id="IP核">IP核</h2>
+<p>IP核是具有知识产权核的集成电路芯核总称, 是经过反复验证的, 具有特定功能的宏模块, 与芯片制作工艺无关, 可以移植到不同的半导体工艺中.</p>
+<p>到了SoC阶段, 向用户提供IP核服务已经成为可编程逻辑器件提供商的重要任务. 在SoC芯片的设计生产过程中, 芯片的生产厂家只需根据设计需要购入<br>
+相应功能的IP核, 再将这些IP核按照设计需要进行组合, 即可完成所需功能的设计.</p>
+<p><strong>软核</strong>经过功能验证, 5000门以上的可综合Verilog HDL或VHDL模型. 软核通常与设计方法和电路所采用的工艺无关, 具有很强的可综合性和可重用性.<br>
+由软核构成的器件称为虚拟器件, 通过EDA综合工具可以把它和其他数字逻辑电路结合起来, 构成新的功能电路;</p>
+<p><strong>固核</strong>在FPGA器件上, 经过综合验证, 大于5000门的电路网表文件;</p>
+<p><strong>硬核</strong>在ASIC器件上, 经过验证正确的, 大于5000门的电路结构版图掩模.</p>
+<p>其中软核是可读性较高的可综合HDL实现, 因此其可维护性和可重用性较高, 更加灵活和简便. 固核和硬核是针对不同平台的功能单元, 性能稳定, 不易修改.</p>
+<h2 id="Verilog-HDL在数字集成电路设计流程中的作用">Verilog HDL在数字集成电路设计流程中的作用</h2>
 <p>一般的数字集成电路设计流程如下:</p>
 <p>总体方案————&gt;系统建模————&gt;RTL编码————&gt;功能验证————&gt;综合————&gt;时序验证————&gt;物理综合/布局布线————&gt;物理验证————&gt;原型建立和测试————&gt;工艺实现</p>
 <p>数字集成电路和FPGA设计过程总体可以分成4个阶段</p>
-<p><strong>第一阶段</strong>是<strong>系统设计阶段</strong>,
-包括总体方案和系统建模.
-<strong>第二阶段</strong>是<strong>数字电路设计和代码编写阶段</strong>,
-即RTL代码编写阶段.
-<strong>第三阶段</strong>是<strong>电路验证阶段</strong>,
-包括对硬件描述语言的程序代码的功能验证和经过EDA综合工具之后的时序验证两个部分.
-<strong>第四阶段</strong>是集成电路的<strong>后端设计阶段</strong>,
-主要通过EDA工具和进行物理综合, 布局布线, 物理验证, 原型建立和测试,
-最终交付工艺实现.</p>
+<p><strong>第一阶段</strong>是<strong>系统设计阶段</strong>, 包括总体方案和系统建模.<br>
+<strong>第二阶段</strong>是<strong>数字电路设计和代码编写阶段</strong>, 即RTL代码编写阶段.<br>
+<strong>第三阶段</strong>是<strong>电路验证阶段</strong>, 包括对硬件描述语言的程序代码的功能验证和经过EDA综合工具之后的时序验证两个部分.<br>
+<strong>第四阶段</strong>是集成电路的<strong>后端设计阶段</strong>, 主要通过EDA工具和进行物理综合, 布局布线, 物理验证, 原型建立和测试, 最终交付工艺实现.</p>
 
     </div>
 
@@ -369,13 +330,13 @@ HDL在数字集成电路设计流程中的作用</h2>
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%B8%89%E7%AB%A0/" rel="prev" title="第三章:Verilog HDL程序设计语句和描述方式">
-                  <i class="fa fa-angle-left"></i> 第三章:Verilog HDL程序设计语句和描述方式
+                <a href="/2025/05/04/Verilog%E7%AC%AC%E4%BA%8C%E7%AB%A0/" rel="prev" title="第二章:Verilog HDL基础知识">
+                  <i class="fa fa-angle-left"></i> 第二章:Verilog HDL基础知识
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/SUSY/" rel="next" title="Notes on Supersymmetry">
-                  Notes on Supersymmetry <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/VMware/" rel="next" title="VMware">
+                  VMware <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

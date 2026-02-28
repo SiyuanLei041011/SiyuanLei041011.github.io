@@ -19,22 +19,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="复合类型与结构体 在编程语言中，最基本的、不可再分的数据类型称为基本类型（Primitive Type），例如整型、浮点型；根据语法规则由基本类型组合而成的类型称为复合类型（Compound Type），例如字符串是由很多字符组成的。有些场合下要把复合类型当作一个整体来用，而另外一些场合下需要分解组成这个复合类型的各种基本类型，复合类型的这种两面性为数据抽象（Data Abstractio">
+    <meta name="description" content="复合类型与结构体 在编程语言中，最基本的、不可再分的数据类型称为基本类型（Primitive Type），例如整型、浮点型；根据语法规则由基本类型组合而成的类型称为复合类型（Compound Type），例如字符串是由很多字符组成的。有些场合下要把复合类型当作一个整体来用，而另外一些场合下需要分解组成这个复合类型的各种基本类型，复合类型的这种两面性为数据抽象（Data Abstraction）奠定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言:结构体">
 <meta property="og:url" content="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%83%E7%AB%A0/index.html">
 <meta property="og:site_name" content="SiyuanLei&#39;s Blog">
-<meta property="og:description" content="复合类型与结构体 在编程语言中，最基本的、不可再分的数据类型称为基本类型（Primitive Type），例如整型、浮点型；根据语法规则由基本类型组合而成的类型称为复合类型（Compound Type），例如字符串是由很多字符组成的。有些场合下要把复合类型当作一个整体来用，而另外一些场合下需要分解组成这个复合类型的各种基本类型，复合类型的这种两面性为数据抽象（Data Abstractio">
+<meta property="og:description" content="复合类型与结构体 在编程语言中，最基本的、不可再分的数据类型称为基本类型（Primitive Type），例如整型、浮点型；根据语法规则由基本类型组合而成的类型称为复合类型（Compound Type），例如字符串是由很多字符组成的。有些场合下要把复合类型当作一个整体来用，而另外一些场合下需要分解组成这个复合类型的各种基本类型，复合类型的这种两面性为数据抽象（Data Abstraction）奠定">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:\blog\Blog\images\C\struct.parameter.png">
-<meta property="og:image" content="c:\blog\Blog\images\C\struct.abstraction.png">
+<meta property="og:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cstruct.parameter.png">
+<meta property="og:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cstruct.abstraction.png">
 <meta property="article:published_time" content="2025-05-03T16:00:00.000Z">
 <meta property="article:modified_time" content="2025-08-06T12:13:54.866Z">
 <meta property="article:author" content="SiyuanLei">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:\blog\Blog\images\C\struct.parameter.png">
+<meta name="twitter:image" content="c:%5Cblog%5CBlog%5Cimages%5CC%5Cstruct.parameter.png">
 
 
 <link rel="canonical" href="http://example.com/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%83%E7%AB%A0/">
@@ -282,17 +282,11 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="复合类型与结构体">复合类型与结构体</h2>
-<p>在编程语言中，最基本的、不可再分的数据类型称为基本类型（Primitive
-Type），例如整型、浮点型；根据语法规则由基本类型组合而成的类型称为复合类型（Compound
-Type），例如字符串是由很多字符组成的。有些场合下要把复合类型当作一个整体来用，而另外一些场合下需要分解组成这个复合类型的各种基本类型，复合类型的这种两面性为数据抽象（Data
-Abstraction）奠定了基础。[SICP]指出，在学习一门编程语言时要特别注意以下三个方面：</p>
+<p>在编程语言中，最基本的、不可再分的数据类型称为基本类型（Primitive Type），例如整型、浮点型；根据语法规则由基本类型组合而成的类型称为复合类型（Compound Type），例如字符串是由很多字符组成的。有些场合下要把复合类型当作一个整体来用，而另外一些场合下需要分解组成这个复合类型的各种基本类型，复合类型的这种两面性为数据抽象（Data Abstraction）奠定了基础。[SICP]指出，在学习一门编程语言时要特别注意以下三个方面：</p>
 <p>这门语言提供了哪些Primitive，比如基本类型，比如基本运算符、表达式和语句。</p>
 <p>这门语言提供了哪些组合规则，比如基本类型如何组成复合类型，比如简单的表达式和语句如何组成复杂的表达式和语句。</p>
-<p>这门语言提供了哪些抽象机制，包括数据抽象和过程抽象（Procedure
-Abstraction）。</p>
-<p>本章以结构体为例讲解数据类型的组合和数据抽象。至于过程抽象，我们在第
-2 节
-“if/else语句”已经见过最简单的形式，就是把一组语句用一个函数名封装起来，当作一个整体使用，本章将介绍更复杂的过程抽象。</p>
+<p>这门语言提供了哪些抽象机制，包括数据抽象和过程抽象（Procedure Abstraction）。</p>
+<p>本章以结构体为例讲解数据类型的组合和数据抽象。至于过程抽象，我们在第 2 节 “if/else语句”已经见过最简单的形式，就是把一组语句用一个函数名封装起来，当作一个整体使用，本章将介绍更复杂的过程抽象。</p>
 <p>现在我们用C语言表示一个复数。从直角座标系来看，复数由实部和虚部组成，从极座标系来看，复数由模和辐角组成，两种座标系可以相互转换.</p>
 <p>如果用实部和虚部表示一个复数，我们可以写成由两个<code>double</code>型组成的结构体：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> &#123;</span></span><br><span class="line">    <span class="type">double</span> x, y;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -305,9 +299,7 @@ Abstraction）。</p>
 <p>但这样就没办法再次引用这个结构体类型了，因为它没有名字。每个复数变量都有两个成员（Member）<code>x</code>和<code>y</code>，可以用.运算符（<code>.</code>号，Period）来访问，这两个成员的存储空间是相邻的[13]，合在一起组成复数变量的存储空间。看下面的例子：</p>
 <p>例 定义和访问结构体</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> &#123;</span> <span class="type">double</span> x, y; &#125; z;</span><br><span class="line">    <span class="type">double</span> x = <span class="number">3.0</span>;	</span><br><span class="line">    z.x = x;</span><br><span class="line">    z.y = <span class="number">4.0</span>;</span><br><span class="line">    <span class="keyword">if</span> (z.y &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;z=%f%fi\n&quot;</span>, z.x, z.y);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;z=%f+%fi\n&quot;</span>, z.x, z.y);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意上例中变量<code>x</code>和变量<code>z</code>的成员<code>x</code>的名字并不冲突，因为变量<code>z</code>的成员<code>x</code>只能通过表达式<code>z.x</code>来访问，编译器可以从语法上区分哪个<code>x</code>是变量<code>x</code>，哪个<code>x</code>是变量<code>z</code>的成员<code>x</code>，第
-3 节
-“变量的存储布局”会讲到这两个标识符<code>x</code>属于不同的命名空间。结构体<code>Tag</code>也可以定义在全局作用域中，这样定义的<code>Tag</code>在其定义之后的各函数中都可以使用。例如：</p>
+<p>注意上例中变量<code>x</code>和变量<code>z</code>的成员<code>x</code>的名字并不冲突，因为变量<code>z</code>的成员<code>x</code>只能通过表达式<code>z.x</code>来访问，编译器可以从语法上区分哪个<code>x</code>是变量<code>x</code>，哪个<code>x</code>是变量<code>z</code>的成员<code>x</code>，第 3 节 “变量的存储布局”会讲到这两个标识符<code>x</code>属于不同的命名空间。结构体<code>Tag</code>也可以定义在全局作用域中，这样定义的<code>Tag</code>在其定义之后的各函数中都可以使用。例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> &#123;</span> <span class="type">double</span> x, y; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z</span>;</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>结构体变量也可以在定义时初始化，例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z</span> =</span> &#123; <span class="number">3.0</span>, <span class="number">4.0</span> &#125;;</span><br></pre></td></tr></table></figure>
@@ -318,15 +310,10 @@ Abstraction）。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z1</span>;</span></span><br><span class="line">z1 = &#123; <span class="number">3.0</span>, <span class="number">4.0</span> &#125;;</span><br></pre></td></tr></table></figure>
 <p>以前我们初始化基本类型的变量所使用的Initializer都是表达式，表达式当然也可以用来赋值，但现在这种由<code>&#123;&#125;</code>括起来的Initializer并不是表达式，所以不能用来赋值[14]。Initializer的语法总结如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Initializer → 表达式</span><br><span class="line">Initializer → &#123; 初始化列表 &#125; </span><br><span class="line">初始化列表 → Designated-Initializer, Designated-Initializer, ...</span><br><span class="line">（最后一个Designated-Initializer末尾可以有一个多余的,号）</span><br><span class="line">Designated-Initializer → Initializer</span><br><span class="line">Designated-Initializer → .标识符 = Initializer</span><br><span class="line">Designated-Initializer → [常量表达式] = Initializer</span><br></pre></td></tr></table></figure>
-<p>Designated
-Initializer是C99引入的新特性，用于初始化稀疏（Sparse）结构体和稀疏数组很方便。有些时候结构体或数组中只有某一个或某几个成员需要初始化，其它成员都用0初始化即可，用Designated
-Initializer语法可以针对每个成员做初始化（Memberwise
-Initialization），很方便。例如：</p>
+<p>Designated Initializer是C99引入的新特性，用于初始化稀疏（Sparse）结构体和稀疏数组很方便。有些时候结构体或数组中只有某一个或某几个成员需要初始化，其它成员都用0初始化即可，用Designated Initializer语法可以针对每个成员做初始化（Memberwise Initialization），很方便。例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z1</span> =</span> &#123; .y = <span class="number">4.0</span> &#125;; <span class="comment">/* z1.x=0.0, z1.y=4.0 */</span></span><br></pre></td></tr></table></figure>
 <p>数组的Memberwise Initialization语法将在下一章介绍。</p>
-<p>结构体类型用在表达式中有很多限制，不像基本类型那么自由，比如<code>+ - * /</code>等算术运算符和<code>&amp;&amp; || !</code>等逻辑运算符都不能作用于结构体类型，<code>if</code>语句、<code>while</code>语句中的控制表达式的值也不能是结构体类型。严格来说，可以做算术运算的类型称为算术类型<code>（Arithmetic Type）</code>，算术类型包括整型和浮点型。可以表示零和非零，可以参与逻辑与、或、非运算或者做控制表达式的类型称为标量类型（Scalar
-Type），标量类型包括算术类型和以后要讲的指针类型，详见图 23.5
-“C语言类型总结”。</p>
+<p>结构体类型用在表达式中有很多限制，不像基本类型那么自由，比如<code>+ - * /</code>等算术运算符和<code>&amp;&amp; || !</code>等逻辑运算符都不能作用于结构体类型，<code>if</code>语句、<code>while</code>语句中的控制表达式的值也不能是结构体类型。严格来说，可以做算术运算的类型称为算术类型<code>（Arithmetic Type）</code>，算术类型包括整型和浮点型。可以表示零和非零，可以参与逻辑与、或、非运算或者做控制表达式的类型称为标量类型（Scalar Type），标量类型包括算术类型和以后要讲的指针类型，详见图 23.5 “C语言类型总结”。</p>
 <p>结构体变量之间使用赋值运算符是允许的，用一个结构体变量初始化另一个结构体变量也是允许的，例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z1</span> =</span> &#123; <span class="number">3.0</span>, <span class="number">4.0</span> &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z2</span> =</span> z1;</span><br><span class="line">z1 = z2;</span><br></pre></td></tr></table></figure>
 <p>同样地，<code>z2</code>必须是局部变量才能用变量<code>z1</code>的值来初始化。既然结构体变量之间可以相互赋值和初始化，也就可以当作函数的参数和返回值来传递：</p>
@@ -334,11 +321,7 @@ Type），标量类型包括算术类型和以后要讲的指针类型，详见�
 <p>这个函数实现了两个复数相加，如果在<code>main</code>函数中这样调用：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z</span> =</span> &#123; <span class="number">3.0</span>, <span class="number">4.0</span> &#125;;</span><br><span class="line">z = add_complex(z, z);</span><br></pre></td></tr></table></figure>
 <p>那么调用传参的过程如下图所示：</p>
-<figure>
-<img src="C:\blog\Blog\images\C\struct.parameter.png"
-alt="结构体传参" />
-<figcaption aria-hidden="true">结构体传参</figcaption>
-</figure>
+<p><img src="C:%5Cblog%5CBlog%5Cimages%5CC%5Cstruct.parameter.png" alt="结构体传参"></p>
 <p>变量<code>z</code>在<code>main</code>函数的栈帧上，参数<code>z1</code>和<code>z2</code>在<code>add_complex</code>函数的栈帧上，<code>z</code>的值分别赋给<code>z1</code>和<code>z2</code>。在这个函数里，<code>z2</code>的实部和虚部被累加到<code>z1</code>中，然后<code>return z1;</code>可以看成是：</p>
 <p>用z1初始化一个临时变量。</p>
 <p>函数返回并释放栈帧。</p>
@@ -354,13 +337,10 @@ alt="结构体传参" />
 <p>可以看出，复数加减乘除运算的实现并没有直接访问结构体complex_struct的成员x和y，而是把它看成一个整体，通过调用相关函数来取它的直角座标和极座标。这样就可以非常方便地替换掉结构体complex_struct的存储表示，例如改为用极座标来存储：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> &#123;</span></span><br><span class="line">    <span class="type">double</span> r, A;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">real_part</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> z.r * <span class="built_in">cos</span>(z.A);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">img_part</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> z.r * <span class="built_in">sin</span>(z.A);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">magnitude</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> z.r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">angle</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> z.A;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> complex_struct <span class="title function_">make_from_real_img</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z</span>;</span></span><br><span class="line">    z.A = <span class="built_in">atan2</span>(y, x);</span><br><span class="line">    z.r = <span class="built_in">sqrt</span>(x * x + y * y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> complex_struct <span class="title function_">make_from_mag_ang</span><span class="params">(<span class="type">double</span> r, <span class="type">double</span> A)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">z</span>;</span></span><br><span class="line">    z.r = r;</span><br><span class="line">    z.A = A;</span><br><span class="line">    <span class="keyword">return</span> z;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>虽然结构体<code>complex_struct</code>的存储表示做了这样的改动，<code>add_complex</code>、<code>sub_complex</code>、<code>mul_complex</code>、<code>div_complex</code>这几个复数运算的函数却不需要做任何改动，仍然可以用，原因在于这几个函数只把结构体<code>complex_struct</code>当作一个整体来使用，而没有直接访问它的成员，因此也不依赖于它有哪些成员。我们结合下图具体分析一下。</p>
-<p><img src="C:\blog\Blog\images\C\struct.abstraction.png" /></p>
+<p><img src="C:%5Cblog%5CBlog%5Cimages%5CC%5Cstruct.abstraction.png" alt=""></p>
 <p>这里是一种抽象的思想。其实“抽象”这个概念并没有那么抽象，简单地说就是“提取公因式”：ab+ac=a(b+c)。如果a变了，ab和ac这两项都需要改，但如果写成a(b+c)的形式就只需要改其中一个因子。</p>
 <p>在我们的复数运算程序中，复数有可能用直角座标或极座标来表示，我们把这个有可能变动的因素提取出来组成复数存储表示层：<code>real_part</code>、<code>img_part</code>、<code>magnitude</code>、<code>angle</code>、<code>make_from_real_img</code>、<code>make_from_mag_ang</code>。这一层看到的数据是结构体的两个成员x和y，或者r和A，如果改变了结构体的实现就要改变这一层函数的实现，但函数接口不改变，因此调用这一层函数接口的复数运算层也不需要改变。复数运算层看到的数据只是一个抽象的“复数”的概念，知道它有直角座标和极座标，可以调用复数存储表示层的函数得到这些座标。再往上看，其它使用复数运算的程序看到的数据是一个更为抽象的“复数”的概念，只知道它是一个数，像整数、小数一样可以加减乘除，甚至连它有直角座标和极座标也不需要知道。</p>
-<p>这里的复数存储表示层和复数运算层称为抽象层（Abstraction
-Layer），从底层往上层来看，复数越来越抽象了，把所有这些层组合在一起就是一个完整的系统。组合使得系统可以任意复杂，而抽象使得系统的复杂性是可以控制的，任何改动都只局限在某一层，而不会波及整个系统。著名的计算机科学家Butler
-Lampson说过：“All problems in computer science can be solved by another
-level of indirection.”这里的indirection其实就是abstraction的意思。</p>
+<p>这里的复数存储表示层和复数运算层称为抽象层（Abstraction Layer），从底层往上层来看，复数越来越抽象了，把所有这些层组合在一起就是一个完整的系统。组合使得系统可以任意复杂，而抽象使得系统的复杂性是可以控制的，任何改动都只局限在某一层，而不会波及整个系统。著名的计算机科学家Butler Lampson说过：“All problems in computer science can be solved by another level of indirection.”这里的indirection其实就是abstraction的意思。</p>
 <h2 id="数据类型标志">数据类型标志</h2>
 <p>在上一节中，我们通过一个复数存储表示抽象层把<code>complex_struct</code>结构体的存储格式和上层的复数运算函数隔开，<code>complex_struct</code>结构体既可以采用直角座标也可以采用极座标存储。但有时候需要同时支持两种存储格式，比如先前已经采集了一些数据存在计算机中，有些数据是以极座标存储的，有些数据是以直角座标存储的，如果要把这些数据都存到<code>complex_struct</code>结构体中怎么办？一种办法是规定<code>complex_struct</code>结构体采用直角座标格式，直角座标的数据可以直接存入<code>complex_struct</code>结构体，而极座标的数据先转成直角座标再存，但由于浮点数的精度有限，转换总是会损失精度的。这里介绍另一种办法，<code>complex_struct</code>结构体由一个数据类型标志和两个浮点数组成，如果数据类型标志为<code>0</code>，那么两个浮点数就表示直角座标，如果数据类型标志为<code>1</code>，那么两个浮点数就表示极座标。这样，直角座标和极座标的数据都可以适配（Adapt）到<code>complex_struct</code>结构体中，无需转换和损失精度：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">coordinate_type</span> &#123;</span> RECTANGULAR, POLAR &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">coordinate_type</span> <span class="title">t</span>;</span></span><br><span class="line">    <span class="type">double</span> a, b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -374,8 +354,7 @@ level of indirection.”这里的indirection其实就是abstraction的意思。<
 <h2 id="嵌套结构体">嵌套结构体</h2>
 <p>结构体也是一种递归定义：结构体的成员具有某种数据类型，而结构体本身也是一种数据类型。换句话说，结构体的成员可以是另一个结构体，即结构体可以嵌套定义。例如我们在复数的基础上定义复平面上的线段：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">segment</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">start</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span> <span class="title">end</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>从第 1 节
-“复合类型与结构体”讲的Initializer的语法可以看出，Initializer也可以嵌套，因此嵌套结构体可以嵌套地初始化，例如：</p>
+<p>从第 1 节 “复合类型与结构体”讲的Initializer的语法可以看出，Initializer也可以嵌套，因此嵌套结构体可以嵌套地初始化，例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">segment</span> <span class="title">s</span> =</span> &#123;&#123; <span class="number">1.0</span>, <span class="number">2.0</span> &#125;, &#123; <span class="number">4.0</span>, <span class="number">6.0</span> &#125;&#125;;</span><br></pre></td></tr></table></figure>
 <p>也可以平坦（Flat）地初始化。例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">segment</span> <span class="title">s</span> =</span> &#123; <span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">4.0</span>, <span class="number">6.0</span> &#125;;</span><br></pre></td></tr></table></figure>
@@ -402,13 +381,13 @@ level of indirection.”这里的indirection其实就是abstraction的意思。<
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B9%9D%E7%AB%A0/" rel="prev" title="C语言:编码风格">
-                  <i class="fa fa-angle-left"></i> C语言:编码风格
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E7%AB%A0/" rel="prev" title="C语言:预处理">
+                  <i class="fa fa-angle-left"></i> C语言:预处理
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/04/Cadence%E6%93%8D%E4%BD%9C/" rel="next" title="Cadence">
-                  Cadence <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/C%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%89%E7%AB%A0/" rel="next" title="C语言:简单函数">
+                  C语言:简单函数 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
